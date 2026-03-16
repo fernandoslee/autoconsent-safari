@@ -1,5 +1,6 @@
 {
     "name": "theinfatuation",
+    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
