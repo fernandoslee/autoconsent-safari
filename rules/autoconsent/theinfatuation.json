@@ -1,6 +1,5 @@
 {
     "name": "theinfatuation",
-    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
@@ -10,6 +9,6 @@
     "detectCmp": [{ "exists": "#consent-banner, #onetrust-consent-sdk" }],
     "detectPopup": [{ "waitForVisible": "#consent-banner", "timeout": 10000 }],
     "optIn": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
-    "optOut": [{ "hide": "#consent-banner" }],
+    "optOut": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
     "test": [{ "visible": "#consent-banner", "check": "none" }]
 }
