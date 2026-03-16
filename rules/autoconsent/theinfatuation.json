@@ -10,6 +10,6 @@
     "detectCmp": [{ "exists": "#consent-banner, #onetrust-consent-sdk" }],
     "detectPopup": [{ "waitForVisible": "#consent-banner", "timeout": 10000 }],
     "optIn": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
-    "optOut": [{ "waitForThenClick": "#consent-banner button[data-testid='close-button']" }],
+    "optOut": [{ "hide": "#consent-banner" }],
     "test": [{ "visible": "#consent-banner", "check": "none" }]
 }
