@@ -1,0 +1,27 @@
+{
+    "name": "trybe",
+    "vendorUrl": "https://try.be",
+    "cosmetic": false,
+    "prehideSelectors": [".react-cookie-policy"],
+    "detectCmp": [{ "exists": ".react-cookie-policy" }],
+    "detectPopup": [{ "visible": ".react-cookie-policy #cookie-policy" }],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///div[@class='react-cookie-policy']//button[contains(., 'Accept all')]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "xpath///div[@class='react-cookie-policy']//button[contains(., 'Cookie settings')]"
+        },
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Save and close')]"
+        }
+    ],
+    "test": [
+        {
+            "visible": ".react-cookie-policy #cookie-policy",
+            "check": "none"
+        }
+    ]
+}
