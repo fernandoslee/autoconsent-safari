@@ -19,9 +19,10 @@
         }
     ],
     "test": [
+        { "wait": 500 },
         {
-            "visible": ".react-cookie-policy #cookie-policy",
-            "check": "none"
+            "exists": "#cookie-policy",
+            "negated": true
         }
     ]
 }
