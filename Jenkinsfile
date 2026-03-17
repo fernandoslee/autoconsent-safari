@@ -31,69 +31,15 @@ def getModifiedFiles() {
     }
 }
 
-def getTestsForCodeRule(cmpFile) {
-    def cmpName = sh(
-        script: "awk -F\"'\" '/^[[:space:]]*name[[:space:]]*=[[:space:]]*/ {print \$2; exit}' '${cmpFile}'",
-        returnStdout: true,
-    ).trim()
-    if (!cmpName) {
-        return []
-    }
-    def matchingTests = sh(
-        script: "grep -Firl \"'${cmpName}'\" tests/ --include='*.spec.ts' || true",
-        returnStdout: true,
-    ).trim()
-    if (!matchingTests) {
-        return []
-    }
-    return matchingTests.split("\n").collect { it.trim() }.findAll { it }
-}
-
 def getTestsToRun(modifiedFiles) {
-    def testsToRun = []
-
-    for (file in modifiedFiles) {
-        // Run any modified test files
-        if (file.startsWith("tests/") && file.endsWith(".spec.ts")) {
-            testsToRun.add(file)
-        }
-
-        // Run the corresponding test file for any modified declarative rule file
-        if (file.startsWith("rules/autoconsent/") && file.endsWith(".json")) {
-            def fileName = file.substring("rules/autoconsent/".length())
-            def baseName = fileName.substring(0, fileName.lastIndexOf(".json"))
-            def testFile = "tests/${baseName}.spec.ts"
-
-            if (fileExists(testFile) && !testsToRun.contains(testFile)) {
-                testsToRun.add(testFile)
-            }
-        }
-
-        // Run the corresponding test file for any modified generated rule file
-        if (file.startsWith("rules/generated/") && file.endsWith(".json")) {
-            def fileName = file.substring("rules/generated/".length())
-            def baseName = fileName.substring(0, fileName.lastIndexOf(".json"))
-            def testFile = "tests/generated/${baseName}.spec.ts"
-
-            if (fileExists(testFile) && !testsToRun.contains(testFile)) {
-                testsToRun.add(testFile)
-            }
-        }
-
-        // Run the corresponding test files for any modified code-based CMP rule
-        if (file.startsWith("lib/cmps/") && file.endsWith(".ts")) {
-            def fileName = file.substring("lib/cmps/".length())
-            if (!(fileName in ['base.ts', 'all.ts', 'consentomatic.ts'])) {
-                for (testFile in getTestsForCodeRule(file)) {
-                    if (!testsToRun.contains(testFile)) {
-                        testsToRun.add(testFile)
-                    }
-                }
-            }
-        }
+    if (modifiedFiles.isEmpty()) {
+        return []
     }
-
-    return testsToRun
+    def result = sh(
+        script: "node scripts/get-tests-to-run.js ${modifiedFiles.join(' ')}",
+        returnStdout: true,
+    ).trim()
+    return result ? result.split("\n").collect { it.trim() }.findAll { it } : []
 }
 
 pipeline {
