@@ -32,11 +32,12 @@ def getModifiedFiles() {
 }
 
 def getTestsToRun(modifiedFiles) {
-    if (modifiedFiles.isEmpty()) {
+    def filesArg = modifiedFiles.findAll { it }.join(' ')
+    if (!filesArg) {
         return []
     }
     def result = sh(
-        script: "node scripts/get-tests-to-run.js ${modifiedFiles.join(' ')}",
+        script: "node scripts/get-tests-to-run.js ${filesArg}",
         returnStdout: true,
     ).trim()
     return result ? result.split("\n").collect { it.trim() }.findAll { it } : []
