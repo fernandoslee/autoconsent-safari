@@ -557,7 +557,7 @@ export default class AutoConsent {
         const logsConfig = this.config.logs;
         logsConfig.lifecycle && console.log('checking if popup is open...', cmp.name);
 
-        const mutationObserver = this.domActions.waitForMutation('html');
+        const mutationObserver = this.domActions.waitForMutation('html', 10000);
         mutationObserver.catch(() => {});
 
         const isOpen = await cmp.detectPopup().catch((e) => {
