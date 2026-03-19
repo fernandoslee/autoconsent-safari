@@ -2,18 +2,12 @@
     "name": "bet365",
     "cosmetic": false,
     "_metadata": {
-        "vendorUrl": "https://bet365.com/",
-        "deduplicatedFrom": [
-            "auto_CA_bet365.com_8fu",
-            "auto_CA_bet365.bet.br_kkx",
-            "auto_AU_bet365.com.au_njh",
-            "auto_GB_news.bet365.com_0"
-        ]
+        "vendorUrl": "https://bet365.com/"
     },
     "runContext": {
         "main": true,
         "frame": false,
-        "urlPattern": "^https?://(www\\.)?bet365\\.com/|^https?://(www\\.)?bet365\\.bet\\.br/|^https?://(www\\.)?bet365\\.com\\.au/|^https?://(www\\.)?news\\.bet365\\.com/"
+        "urlPattern": "^https?://(www\\.)?(bet365\\.com(\\.au)?|bet365\\.bet\\.br|news\\.bet365\\.com)/"
     },
     "prehideSelectors": [],
     "detectCmp": [
