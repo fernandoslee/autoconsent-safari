@@ -114,4 +114,32 @@ describe('elementVisible', () => {
             expect(domActions.elementVisible('#hidden-by-ancestor-content-visibility', 'any')).to.be.false;
         });
     });
+
+    describe('prehide interaction', () => {
+        afterEach(() => {
+            const prehideStyle = document.querySelector('style#autoconsent-prehide');
+            if (prehideStyle) {
+                prehideStyle.remove();
+            }
+        });
+
+        it('should report a prehidden visible element as still visible', () => {
+            expect(domActions.elementVisible('#prehide-target-visible', 'any')).to.be.true;
+            domActions.prehide('#prehide-target-visible');
+            expect(domActions.elementVisible('#prehide-target-visible', 'any')).to.be.true;
+        });
+
+        it('should report an already-hidden element as not visible even after prehide', () => {
+            expect(domActions.elementVisible('#prehide-target-hidden', 'any')).to.be.false;
+            domActions.prehide('#prehide-target-hidden');
+            expect(domActions.elementVisible('#prehide-target-hidden', 'any')).to.be.false;
+        });
+
+        it('should report a visible element as visible after undoPrehide', () => {
+            domActions.prehide('#prehide-target-visible');
+            expect(domActions.elementVisible('#prehide-target-visible', 'any')).to.be.true;
+            domActions.undoPrehide();
+            expect(domActions.elementVisible('#prehide-target-visible', 'any')).to.be.true;
+        });
+    });
 });
