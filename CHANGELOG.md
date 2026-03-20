@@ -1,3 +1,16 @@
+# v14.62.0 (Fri Mar 20 2026)
+
+#### 🚀 Enhancement
+
+- Add bandcamp.com cookie consent rule [#1200](https://github.com/duckduckgo/autoconsent/pull/1200) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.61.0 (Thu Mar 19 2026)
 
 #### 🚀 Enhancement
