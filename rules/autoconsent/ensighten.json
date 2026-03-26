@@ -1,7 +1,11 @@
 {
     "name": "Ensighten",
     "prehideSelectors": ["#ensNotifyBanner", ".ensModal"],
-    "detectCmp": [{ "exists": "#ensNotifyBanner, .ensModal" }],
+    "detectCmp": [
+        {
+            "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
+        }
+    ],
     "detectPopup": [
         {
             "any": [{ "visible": "#ensNotifyBanner[style*=block]" }, { "visible": "#ensModalWrapper[style*=block]" }]
