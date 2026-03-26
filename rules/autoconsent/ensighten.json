@@ -18,7 +18,7 @@
             "if": { "exists": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll,#bannerRejectButton,#ensCloseBanner" },
             "then": [{ "waitForThenClick": "#ensRejectAll,#rejectAll,#ensRejectBanner,.rejectAll,#bannerRejectButton,#ensCloseBanner" }],
             "else": [
-                { "waitForThenClick": "#ensOpenModal,#modalOpenButton,#bannerOpenModal" },
+                { "waitForThenClick": "#ensOpenModal,#modalOpenButton,#bannerOpenModal", "optional": true },
                 { "waitFor": "#ensModalWrapper[style*=block]", "timeout": 1000 },
                 { "click": ".ensCheckbox:checked", "all": true },
                 { "waitForThenClick": "#ensSave,#modalSaveButton,#bannerSave" }
