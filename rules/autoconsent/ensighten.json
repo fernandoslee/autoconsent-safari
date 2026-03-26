@@ -29,7 +29,7 @@
                     ],
                     "else": [
                         {
-                            "if": { "visible": "#ensOpenModal,#modalOpenButton,#bannerOpenModal" },
+                            "if": { "visible": "#ensOpenModal,#modalOpenButton,#bannerOpenModal", "check": "any" },
                             "then": [
                                 { "waitForThenClick": "#ensOpenModal,#modalOpenButton,#bannerOpenModal" },
                                 { "waitFor": "#ensModalWrapper[style*=block]", "timeout": 1000 },
