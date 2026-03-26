@@ -8,7 +8,10 @@
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
-        "module": "NodeNext"
+        "module": "NodeNext",
+        "types": ["node", "chrome", "mocha", "sinon", "chai"],
+        "skipLibCheck": true,
+        "noUncheckedSideEffectImports": false
     },
     "exclude": ["node_modules/*", "dist/*"]
 }
