@@ -42,9 +42,13 @@ async function getTabReports(tabId: number): Promise<Record<number, ReportMessag
     return ((await chrome.storage.session.get(storageKey))[storageKey] || {}) as Record<number, ReportMessage>;
 }
 
-async function updateTabReports(tabId: number, frameId: number, msg: ReportMessage) {
+async function updateTabReports(tabId: number, frameId: number, msg: ReportMessage | undefined) {
     const reportsForTab = await getTabReports(tabId);
-    reportsForTab[frameId] = msg;
+    if (msg === undefined) {
+        delete reportsForTab[frameId];
+    } else {
+        reportsForTab[frameId] = msg;
+    }
     await chrome.storage.session.set({ [`reports-${tabId}`]: reportsForTab });
 }
 
@@ -198,7 +202,7 @@ chrome.runtime.onConnect.addListener(function (devToolsConnection) {
                     });
                 }
                 // remove stored frame data
-                updateTabReports(tabId, devToolsConnection.sender!.frameId!, undefined as unknown as ReportMessage);
+                updateTabReports(tabId, devToolsConnection.sender!.frameId!, undefined);
             });
         }
     } else if (devToolsConnection.name === 'devtools-panel') {
