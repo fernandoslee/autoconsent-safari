@@ -1,3 +1,30 @@
+# v14.64.0 (Tue Mar 24 2026)
+
+#### 🚀 Enhancement
+
+- add a Spanish reject pattern [#1211](https://github.com/duckduckgo/autoconsent/pull/1211) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
+# v14.63.0 (Sat Mar 21 2026)
+
+#### 🚀 Enhancement
+
+- Sirdata rule cookie handling [#1187](https://github.com/duckduckgo/autoconsent/pull/1187) ([@cursoragent](https://github.com/cursoragent) [@sammacbeth](https://github.com/sammacbeth))
+- cosmetic rule for schoolhouse.com [#1140](https://github.com/duckduckgo/autoconsent/pull/1140) ([@muodov](https://github.com/muodov) [@cursoragent](https://github.com/cursoragent))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Sam Macbeth ([@sammacbeth](https://github.com/sammacbeth))
+
+---
+
 # v14.62.0 (Fri Mar 20 2026)
 
 #### 🚀 Enhancement
