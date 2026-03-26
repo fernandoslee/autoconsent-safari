@@ -168,7 +168,7 @@ describe('AutoConsent.updateState', () => {
     });
 
     describe('lifecycle transitions', () => {
-        it('should allow valid lifecycle transitions', () => {
+        it('should update lifecycle to each specified value', () => {
             const transitions: Array<ConsentState['lifecycle']> = [
                 'loading',
                 'initialized',
