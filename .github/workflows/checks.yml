@@ -10,7 +10,10 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               with:
-                  ref: ${{ github.head_ref || github.ref }}
+                  # Same-repo PRs: use branch name so the auto-fix step can push back.
+                  # Fork PRs: use the PR head SHA (branch name only exists in the fork).
+                  # Push events: fall through to github.ref.
+                  ref: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref) || github.event.pull_request.head.sha || github.ref }}
 
             - uses: actions/setup-node@v3
               with:
