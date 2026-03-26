@@ -91,7 +91,7 @@ describe('filterCMPs', () => {
             const result = filterCMPs(testCMPs, config);
 
             expect(result).to.have.lengthOf(5);
-            expect(result.map(c => c.name)).to.not.include('cookiebot');
+            expect(result.map((c) => c.name)).to.not.include('cookiebot');
         });
 
         it('should filter out multiple disabled CMPs', () => {
@@ -104,9 +104,9 @@ describe('filterCMPs', () => {
             const result = filterCMPs(testCMPs, config);
 
             expect(result).to.have.lengthOf(3);
-            expect(result.map(c => c.name)).to.not.include('cookiebot');
-            expect(result.map(c => c.name)).to.not.include('onetrust');
-            expect(result.map(c => c.name)).to.not.include('didomi');
+            expect(result.map((c) => c.name)).to.not.include('cookiebot');
+            expect(result.map((c) => c.name)).to.not.include('onetrust');
+            expect(result.map((c) => c.name)).to.not.include('didomi');
         });
 
         it('should ignore non-existent CMP names in disabledCmps', () => {
@@ -130,11 +130,11 @@ describe('filterCMPs', () => {
             });
 
             const result = filterCMPs(testCMPs, config);
-            const cosmeticCmps = result.filter(c => c.isCosmetic);
+            const cosmeticCmps = result.filter((c) => c.isCosmetic);
 
             expect(cosmeticCmps).to.have.lengthOf(2);
-            expect(cosmeticCmps.map(c => c.name)).to.include('didomi');
-            expect(cosmeticCmps.map(c => c.name)).to.include('cosmetic-banner');
+            expect(cosmeticCmps.map((c) => c.name)).to.include('didomi');
+            expect(cosmeticCmps.map((c) => c.name)).to.include('cosmetic-banner');
         });
 
         it('should exclude cosmetic CMPs when enableCosmeticRules is false', () => {
@@ -146,7 +146,7 @@ describe('filterCMPs', () => {
             const result = filterCMPs(testCMPs, config);
 
             expect(result).to.have.lengthOf(4);
-            expect(result.every(c => !c.isCosmetic)).to.be.true;
+            expect(result.every((c) => !c.isCosmetic)).to.be.true;
         });
 
         it('should keep non-cosmetic CMPs regardless of enableCosmeticRules', () => {
@@ -157,8 +157,8 @@ describe('filterCMPs', () => {
 
             const result = filterCMPs(testCMPs, config);
 
-            expect(result.map(c => c.name)).to.include('cookiebot');
-            expect(result.map(c => c.name)).to.include('onetrust');
+            expect(result.map((c) => c.name)).to.include('cookiebot');
+            expect(result.map((c) => c.name)).to.include('onetrust');
         });
     });
 
@@ -170,7 +170,7 @@ describe('filterCMPs', () => {
             });
 
             const result = filterCMPs(testCMPs, config);
-            const generatedCmps = result.filter(c => c.name.startsWith('auto_'));
+            const generatedCmps = result.filter((c) => c.name.startsWith('auto_'));
 
             expect(generatedCmps).to.have.lengthOf(2);
         });
@@ -184,7 +184,7 @@ describe('filterCMPs', () => {
             const result = filterCMPs(testCMPs, config);
 
             expect(result).to.have.lengthOf(4);
-            expect(result.every(c => !c.name.startsWith('auto_'))).to.be.true;
+            expect(result.every((c) => !c.name.startsWith('auto_'))).to.be.true;
         });
 
         it('should not affect CMPs that do not start with auto_', () => {
@@ -195,8 +195,8 @@ describe('filterCMPs', () => {
 
             const result = filterCMPs(testCMPs, config);
 
-            expect(result.map(c => c.name)).to.include('cookiebot');
-            expect(result.map(c => c.name)).to.include('onetrust');
+            expect(result.map((c) => c.name)).to.include('cookiebot');
+            expect(result.map((c) => c.name)).to.include('onetrust');
         });
     });
 
@@ -239,8 +239,8 @@ describe('filterCMPs', () => {
 
             const result = filterCMPs(testCMPs, config);
 
-            expect(result.map(c => c.name)).to.not.include('didomi');
-            expect(result.map(c => c.name)).to.include('cosmetic-banner');
+            expect(result.map((c) => c.name)).to.not.include('didomi');
+            expect(result.map((c) => c.name)).to.include('cosmetic-banner');
         });
 
         it('should handle generated CMP that is also disabled', () => {
@@ -252,8 +252,8 @@ describe('filterCMPs', () => {
 
             const result = filterCMPs(testCMPs, config);
 
-            expect(result.map(c => c.name)).to.not.include('auto_generated_rule');
-            expect(result.map(c => c.name)).to.include('auto_another_rule');
+            expect(result.map((c) => c.name)).to.not.include('auto_generated_rule');
+            expect(result.map((c) => c.name)).to.include('auto_another_rule');
         });
     });
 
@@ -279,7 +279,7 @@ describe('filterCMPs', () => {
             const result = filterCMPs(testCMPs, config);
 
             // 'cookiebot' (lowercase) should NOT be filtered
-            expect(result.map(c => c.name)).to.include('cookiebot');
+            expect(result.map((c) => c.name)).to.include('cookiebot');
         });
 
         it('should be case-sensitive for auto_ prefix', () => {
@@ -297,8 +297,8 @@ describe('filterCMPs', () => {
 
             // Only 'auto_lowercase' should be filtered
             expect(result).to.have.lengthOf(2);
-            expect(result.map(c => c.name)).to.include('Auto_uppercase');
-            expect(result.map(c => c.name)).to.include('AUTO_allcaps');
+            expect(result.map((c) => c.name)).to.include('Auto_uppercase');
+            expect(result.map((c) => c.name)).to.include('AUTO_allcaps');
         });
 
         it('should preserve original array order', () => {

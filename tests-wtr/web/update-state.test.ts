@@ -97,7 +97,7 @@ describe('AutoConsent.updateState', () => {
             autoconsent.updateState({
                 clicks: 10,
                 startTime: 1234567890,
-                endTime: 1234567900
+                endTime: 1234567900,
             });
 
             expect(autoconsent.state.clicks).to.equal(10);
@@ -176,10 +176,10 @@ describe('AutoConsent.updateState', () => {
                 'cmpDetected',
                 'openPopupDetected',
                 'runningOptOut',
-                'done'
+                'done',
             ];
 
-            transitions.forEach(lifecycle => {
+            transitions.forEach((lifecycle) => {
                 autoconsent.updateState({ lifecycle });
                 expect(autoconsent.state.lifecycle).to.equal(lifecycle);
             });
@@ -188,7 +188,7 @@ describe('AutoConsent.updateState', () => {
         it('should track heuristic patterns', () => {
             autoconsent.updateState({
                 heuristicPatterns: ['cookie', 'consent'],
-                heuristicSnippets: ['We use cookies', 'Consent required']
+                heuristicSnippets: ['We use cookies', 'Consent required'],
             });
 
             expect(autoconsent.state.heuristicPatterns).to.deep.equal(['cookie', 'consent']);

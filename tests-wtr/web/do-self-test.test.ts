@@ -90,9 +90,7 @@ describe('AutoConsent.doSelfTest', () => {
         it('should send selfTestResult message with cmp "none"', async () => {
             await autoconsent.doSelfTest();
 
-            const testMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'selfTestResult'
-            );
+            const testMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'selfTestResult');
             expect(testMessage).to.exist;
             expect(testMessage!.args[0].cmp).to.equal('none');
             expect(testMessage!.args[0].result).to.be.false;
@@ -154,9 +152,7 @@ describe('AutoConsent.doSelfTest', () => {
 
             await autoconsent.doSelfTest();
 
-            const testMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'selfTestResult'
-            );
+            const testMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'selfTestResult');
             expect(testMessage!.args[0].cmp).to.equal('didomi');
         });
 
@@ -166,9 +162,7 @@ describe('AutoConsent.doSelfTest', () => {
 
             await autoconsent.doSelfTest();
 
-            const testMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'selfTestResult'
-            );
+            const testMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'selfTestResult');
             expect(testMessage!.args[0].result).to.be.true;
         });
 
@@ -178,9 +172,7 @@ describe('AutoConsent.doSelfTest', () => {
 
             await autoconsent.doSelfTest();
 
-            const testMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'selfTestResult'
-            );
+            const testMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'selfTestResult');
             expect(testMessage!.args[0].url).to.be.a('string');
         });
     });
@@ -200,7 +192,7 @@ describe('AutoConsent.doSelfTest', () => {
         it('should update state on each selfTest run', async () => {
             let testResult = true;
             const mockCmp = createMockCMP({
-                test: async () => testResult
+                test: async () => testResult,
             });
             autoconsent.foundCmp = mockCmp;
 

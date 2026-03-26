@@ -90,9 +90,7 @@ describe('AutoConsent.doOptIn', () => {
         it('should send optInResult message with cmp "none"', async () => {
             await autoconsent.doOptIn();
 
-            const optInMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'optInResult'
-            );
+            const optInMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'optInResult');
             expect(optInMessage).to.exist;
             expect(optInMessage!.args[0].cmp).to.equal('none');
             expect(optInMessage!.args[0].result).to.be.false;
@@ -134,9 +132,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const optInMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'optInResult'
-            );
+            const optInMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'optInResult');
             expect(optInMessage!.args[0].cmp).to.equal('onetrust');
         });
 
@@ -146,9 +142,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const optInMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'optInResult'
-            );
+            const optInMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'optInResult');
             // selfTest is only for optOut
             expect(optInMessage!.args[0].scheduleSelfTest).to.be.false;
         });
@@ -161,9 +155,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage).to.exist;
         });
 
@@ -173,9 +165,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage).to.be.undefined;
         });
 
@@ -185,9 +175,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage).to.be.undefined;
         });
 
@@ -198,9 +186,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage!.args[0].duration).to.be.a('number');
         });
 
@@ -211,9 +197,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage!.args[0].totalClicks).to.equal(3);
         });
 
@@ -223,9 +207,7 @@ describe('AutoConsent.doOptIn', () => {
 
             await autoconsent.doOptIn();
 
-            const doneMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'autoconsentDone'
-            );
+            const doneMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'autoconsentDone');
             expect(doneMessage!.args[0].isCosmetic).to.be.false;
         });
     });
@@ -236,7 +218,7 @@ describe('AutoConsent.doOptIn', () => {
                 optIn: async () => {
                     expect(autoconsent.state.lifecycle).to.equal('runningOptIn');
                     return true;
-                }
+                },
             });
             autoconsent.foundCmp = mockCmp;
 

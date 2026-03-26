@@ -102,9 +102,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
         it('should send selfTestResult message', async () => {
             await autoconsent.receiveMessageCallback({ type: 'selfTest' });
 
-            const selfTestMessage = sendMessageStub.getCalls().find(
-                call => call.args[0].type === 'selfTestResult'
-            );
+            const selfTestMessage = sendMessageStub.getCalls().find((call) => call.args[0].type === 'selfTestResult');
             expect(selfTestMessage).to.exist;
             expect(selfTestMessage!.args[0].result).to.be.false;
             expect(selfTestMessage!.args[0].cmp).to.equal('none');
@@ -119,7 +117,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
             await autoconsent.receiveMessageCallback({
                 type: 'initResp',
                 config: newConfig,
-                rules: null
+                rules: null,
             });
 
             expect(initializeSpy.calledOnce).to.be.true;
@@ -133,7 +131,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
             await autoconsent.receiveMessageCallback({
                 type: 'initResp',
                 config: createTestConfig(),
-                rules
+                rules,
             });
 
             expect(initializeSpy.firstCall.args[1]).to.deep.equal(rules);
@@ -146,9 +144,7 @@ describe('AutoConsent.receiveMessageCallback', () => {
 
             await autoconsent.receiveMessageCallback({ type: 'optOut' });
 
-            const loggedMessage = consoleSpy.getCalls().find(
-                call => call.args[0] === 'received from background'
-            );
+            const loggedMessage = consoleSpy.getCalls().find((call) => call.args[0] === 'received from background');
             expect(loggedMessage).to.be.undefined;
         });
 
@@ -163,15 +159,13 @@ describe('AutoConsent.receiveMessageCallback', () => {
                     errors: false,
                     messages: true,
                     waits: false,
-                }
+                },
             });
             autoconsent = new AutoConsent(sendMessageStub, config, null);
 
             await autoconsent.receiveMessageCallback({ type: 'optOut' });
 
-            const loggedMessage = consoleSpy.getCalls().find(
-                call => call.args[0] === 'received from background'
-            );
+            const loggedMessage = consoleSpy.getCalls().find((call) => call.args[0] === 'received from background');
             expect(loggedMessage).to.exist;
         });
     });
