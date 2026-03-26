@@ -10,8 +10,7 @@
         "strict": true,
         "module": "NodeNext",
         "types": ["node", "chrome", "mocha", "sinon", "chai"],
-        "skipLibCheck": true,
-        "noUncheckedSideEffectImports": false
+        "skipLibCheck": true
     },
     "exclude": ["node_modules/*", "dist/*"]
 }
