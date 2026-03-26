@@ -35,7 +35,6 @@ export type CompactCMPRule = [
     CompactCMPRuleStep[], // optOut
     CompactCMPRuleStep[], // test
     Pick<AutoConsentCMPRule, 'intermediate'>, // extra
-    CompactCMPRuleStep[]?, // optIn (optional for backward compat)
 ];
 
 export type CompactCMPRuleset = {
@@ -122,7 +121,6 @@ export function buildStrings(existingStrings: string[], rules: AutoConsentCMPRul
         rule.detectCmp.forEach(collectStrings);
         rule.detectPopup.forEach(collectStrings);
         rule.optOut.forEach(collectStrings);
-        (rule.optIn || []).forEach(collectStrings);
         (rule.test || []).forEach(collectStrings);
     });
 
@@ -243,7 +241,6 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
     }
 
     const compactRules: CompactCMPRule[] = rules.map((r) => {
-        const optInSteps = (r.optIn || []).map(encodeRuleStep);
         return [
             r.minimumRuleStepVersion || 1,
             r.name,
@@ -256,8 +253,7 @@ export function encodeRules(rules: AutoConsentCMPRule[], existingCompactRules: C
             r.optOut.map(encodeRuleStep),
             (r.test || []).map(encodeRuleStep),
             r.intermediate !== undefined ? { intermediate: r.intermediate } : {},
-            ...(optInSteps.length > 0 ? [optInSteps] : []),
-        ] as CompactCMPRule;
+        ];
     });
 
     return {
@@ -285,6 +281,7 @@ class CompactedCMPRule implements AutoConsentCMPRule {
     r: CompactCMPRule;
     s: string[];
     intermediate = false;
+    optIn = [];
 
     constructor(rule: CompactCMPRule, strings: string[]) {
         this.r = rule;
@@ -360,10 +357,6 @@ class CompactedCMPRule implements AutoConsentCMPRule {
 
     get optOut() {
         return this.r[8].map(this._decodeRuleStep.bind(this));
-    }
-
-    get optIn() {
-        return (this.r[11] || []).map(this._decodeRuleStep.bind(this));
     }
 
     get test() {
@@ -457,9 +450,6 @@ function clearUnusedStrings(ruleset: CompactCMPRuleset, ignoreBeforeIndex = 0) {
         addStringIdsFromRuleSteps(rule[7]);
         addStringIdsFromRuleSteps(rule[8]);
         addStringIdsFromRuleSteps(rule[9]);
-        if (rule[11]) {
-            addStringIdsFromRuleSteps(rule[11]);
-        }
         rule[5].forEach((id) => usedStringIds.add(id));
     });
     return {
