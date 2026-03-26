@@ -35,6 +35,9 @@
                                 { "waitFor": "#ensModalWrapper[style*=block]", "timeout": 1000 },
                                 { "click": ".ensCheckbox:checked:not(:disabled)", "all": true, "optional": true },
                                 { "waitForThenClick": "#ensSave,#modalSaveButton,#bannerSave" }
+                            ],
+                            "else": [
+                                { "waitForThenClick": "#ensCloseBanner" }
                             ]
                         }
                     ]
