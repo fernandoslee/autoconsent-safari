@@ -330,3 +330,30 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 | Unit tests | `npm run test:lib` |
 | Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts --project webkit` |
 | Full E2E suite | `npm run test` |
+
+## Cursor Cloud specific instructions
+
+### Environment
+
+Node.js 22 and npm are pre-installed. The project uses `package-lock.json` so use `npm ci` for dependency installation (the update script handles this). Playwright browsers are installed system-wide via `npx playwright install --with-deps`.
+
+### Services
+
+This is a client-side library with no backend services. There are no databases, Docker containers, or servers to start. The build output goes to `dist/`.
+
+### Build
+
+`npm run prepublish` is the full build (compile filterlist, build rules, bundle). It runs automatically during `npm ci` via the `prepublish` lifecycle hook, so a separate build step is usually not needed after a fresh install.
+
+### Key commands
+
+All commands are documented in the Quick Start / table above. Key ones:
+- **Lint:** `npm run lint` (ESLint + Prettier + JSON schema validation)
+- **Unit tests:** `npm run test:lib` (Web Test Runner, runs in headless Chrome)
+- **E2E tests:** `npx playwright test tests/<cmp>.spec.ts --project webkit` (hit live websites, inherently flaky)
+
+### Gotchas
+
+- E2E tests visit live external websites and are inherently flaky. Region-dependent CMPs may not show popups without `PROXY_SERVER` set to a geographic proxy. The `REGION` env var only filters test URL selection — it does not route traffic.
+- The `prepublish` npm lifecycle script runs automatically on `npm ci`, so `dist/` is built after install.
+- `npm run test:lib` uses `@web/test-runner` with Playwright's Chromium — Playwright browsers must be installed first.
