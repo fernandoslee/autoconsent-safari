@@ -1,3 +1,22 @@
+# v14.67.0 (Tue Mar 31 2026)
+
+#### 🚀 Enhancement
+
+- Merge ensighten rules [#1124](https://github.com/duckduckgo/autoconsent/pull/1124) ([@muodov](https://github.com/muodov))
+
+#### 🐛 Bug Fix
+
+- Fix optIn in test extension and Playwright runner by using full rules [#1219](https://github.com/duckduckgo/autoconsent/pull/1219) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+- Add CLAUDE.md as symlink to AGENTS.md [#1220](https://github.com/duckduckgo/autoconsent/pull/1220) ([@cursoragent](https://github.com/cursoragent) [@noisysocks](https://github.com/noisysocks))
+
+#### Authors: 3
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+- Robert Anderson ([@noisysocks](https://github.com/noisysocks))
+
+---
+
 # v14.66.0 (Sat Mar 28 2026)
 
 #### 🚀 Enhancement
