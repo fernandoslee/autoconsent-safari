@@ -25,7 +25,7 @@
     ],
     "optOut": [
         {
-            "hide": ".cookie-banner-mount-point"
+            "waitForThenClick": ".cookie-banner-mount-point button.decline"
         }
     ]
 }
