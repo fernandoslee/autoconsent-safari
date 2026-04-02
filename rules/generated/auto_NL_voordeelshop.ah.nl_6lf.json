@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "[data-testid=cookie-popup]"
+            "exists": "body:nth-child(2).dope-shop > div:nth-child(44):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1)#_r_0_[data-testid=\"cookie-popup\"].dialogContainer-suaRbP.designTokens-kw0ll5.modal-dfcGnP.index-HhB67F > div:nth-child(3):not([id]).root-OgNFx2.footer-JImgFg > div:nth-child(1):not([id]).root-OgNFx2.buttonGroup-QuqiSP.button-Hung_h > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-jZIcMI.secondary-nRjK1r.button-Lfnimv.button-Hung_h > span:nth-child(1):not([id]).typography-UlytGP.button-f9G1Ss.align-center-Hdl6jH.text-G23vv3"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-testid=cookie-popup]"
+            "visible": "body:nth-child(2).dope-shop > div:nth-child(44):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1)#_r_0_[data-testid=\"cookie-popup\"].dialogContainer-suaRbP.designTokens-kw0ll5.modal-dfcGnP.index-HhB67F > div:nth-child(3):not([id]).root-OgNFx2.footer-JImgFg > div:nth-child(1):not([id]).root-OgNFx2.buttonGroup-QuqiSP.button-Hung_h > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-jZIcMI.secondary-nRjK1r.button-Lfnimv.button-Hung_h > span:nth-child(1):not([id]).typography-UlytGP.button-f9G1Ss.align-center-Hdl6jH.text-G23vv3"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "[data-testid=decline-cookies]",
+            "waitForThenClick": "body:nth-child(2).dope-shop > div:nth-child(44):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1)#_r_0_[data-testid=\"cookie-popup\"].dialogContainer-suaRbP.designTokens-kw0ll5.modal-dfcGnP.index-HhB67F > div:nth-child(3):not([id]).root-OgNFx2.footer-JImgFg > div:nth-child(1):not([id]).root-OgNFx2.buttonGroup-QuqiSP.button-Hung_h > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-jZIcMI.secondary-nRjK1r.button-Lfnimv.button-Hung_h > span:nth-child(1):not([id]).typography-UlytGP.button-f9G1Ss.align-center-Hdl6jH.text-G23vv3",
             "comment": "Weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "[data-testid=cookiepopup]",
+            "waitForVisible": "body:nth-child(2).dope-shop > div:nth-child(44):not([id])[data-brand=\"ah\"][data-theme=\"light\"][data-testid=\"cookie-overlay\"] > dialog:nth-child(1)#_r_0_[data-testid=\"cookie-popup\"].dialogContainer-suaRbP.designTokens-kw0ll5.modal-dfcGnP.index-HhB67F > div:nth-child(3):not([id]).root-OgNFx2.footer-JImgFg > div:nth-child(1):not([id]).root-OgNFx2.buttonGroup-QuqiSP.button-Hung_h > button:nth-child(2):not([id])[data-testid=\"decline-cookies\"].root-jZIcMI.secondary-nRjK1r.button-Lfnimv.button-Hung_h > span:nth-child(1):not([id]).typography-UlytGP.button-f9G1Ss.align-center-Hdl6jH.text-G23vv3",
             "timeout": 1000,
             "check": "none"
         }
