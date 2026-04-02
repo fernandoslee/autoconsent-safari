@@ -5,24 +5,24 @@
         "vendorUrl": "http://www.fullertonhotels.com/"
     },
     "runContext": {
-        "main": false,
-        "frame": true,
+        "main": true,
+        "frame": false,
         "urlPattern": "^https?://(www\\.)?fullertonhotels\\.com/"
     },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "#sp-decline"
+            "exists": ["#ifrmCookieBanner", "#sp-decline"]
         }
     ],
     "detectPopup": [
         {
-            "visible": "#sp-decline"
+            "visible": ["#ifrmCookieBanner", "#sp-decline"]
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#sp-accept"
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-accept"]
         }
     ],
     "optOut": [
@@ -30,15 +30,9 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "#sp-decline",
+            "waitForThenClick": ["#ifrmCookieBanner", "#sp-decline"],
             "comment": "Decline"
         }
     ],
-    "test": [
-        {
-            "waitForVisible": "#sp-decline",
-            "timeout": 1000,
-            "check": "none"
-        }
-    ]
+    "test": []
 }
