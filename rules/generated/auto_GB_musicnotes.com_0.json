@@ -1,7 +1,7 @@
 {
     "name": "auto_GB_musicnotes.com_0",
     "vendorUrl": "https://www.musicnotes.com/",
-    "cosmetic": false,
+    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
@@ -10,19 +10,34 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+            "exists": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+            "visible": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": ["#polaris-css-lockdown-container", ".polaris-consent-widget button.polaris-button"]
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#cookie-consent > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies",
-            "comment": "Reject"
+            "if": {
+                "exists": ["#polaris-css-lockdown-container", "[data-testid='oneClickOptOutLink']"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["#polaris-css-lockdown-container", "[data-testid='oneClickOptOutLink']"]
+                }
+            ],
+            "else": [
+                {
+                    "hide": ["#polaris-css-lockdown-container", ".polaris-consent-widget"]
+                }
+            ]
         }
     ]
 }
