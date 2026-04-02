@@ -9,12 +9,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]"
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]"
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]"
         }
     ],
     "optIn": [],
@@ -23,13 +23,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]",
             "comment": "Reject analytics cookies"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > header#header > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-button[data-testid=\"reject-button\"]",
             "timeout": 1000,
             "check": "none"
         }
