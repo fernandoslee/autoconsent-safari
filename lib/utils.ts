@@ -159,35 +159,6 @@ export function unhighlightNode(node: HTMLElement) {
     }
 }
 
-/**
- * Polyfill-safe replacement for Promise.any(). In production (DuckDuckGo browser, Chrome
- * extension), content scripts run in an isolated world with a pristine Promise. However,
- * the Playwright test harness injects via page.evaluate() into the main world, where some
- * sites (e.g., Squarespace with older core-js) override Promise without .any() support.
- */
-export function promiseAny<T>(promises: Promise<T>[]): Promise<T> {
-    if (typeof Promise.any === 'function') {
-        return Promise.any(promises);
-    }
-    return new Promise<T>((resolve, reject) => {
-        if (promises.length === 0) {
-            reject(new Error('All promises were rejected'));
-            return;
-        }
-        let rejectCount = 0;
-        const errors: unknown[] = new Array(promises.length);
-        promises.forEach((promise, i) => {
-            Promise.resolve(promise).then(resolve, (err) => {
-                errors[i] = err;
-                rejectCount++;
-                if (rejectCount === promises.length) {
-                    reject(errors);
-                }
-            });
-        });
-    });
-}
-
 export function isTopFrame(): boolean {
     return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
 }

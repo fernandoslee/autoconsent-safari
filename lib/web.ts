@@ -7,7 +7,7 @@ import { getRandomID } from './random';
 import { dynamicCMPs } from './cmps/all';
 import { AutoConsentCMP, AutoConsentHeuristicCMP } from './cmps/base';
 import { DomActions } from './dom-actions';
-import { isTopFrame, normalizeConfig, promiseAny, scheduleWhenIdle } from './utils';
+import { isTopFrame, normalizeConfig, scheduleWhenIdle } from './utils';
 import { FiltersEngine } from '@ghostery/adblocker';
 import { checkHeuristicPatterns } from './heuristics';
 import { decodeRules } from './encoding';
@@ -390,7 +390,7 @@ export default class AutoConsent {
     async detectPopups(cmps: AutoCMP[], onFirstPopupAppears: (cmp: AutoCMP) => Promise<unknown>) {
         const tasks = cmps.map((cmp) => this.detectPopup(cmp));
 
-        await promiseAny(tasks)
+        await Promise.any(tasks)
             .then((cmp) => {
                 this.detectHeuristics();
                 onFirstPopupAppears(cmp);
