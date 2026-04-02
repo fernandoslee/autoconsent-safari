@@ -162,3 +162,31 @@ export function unhighlightNode(node: HTMLElement) {
 export function isTopFrame(): boolean {
     return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
 }
+
+/**
+ * Polyfill-safe replacement for Promise.any(). Some websites override the global Promise
+ * with a polyfill (e.g., older core-js) that lacks Promise.any, breaking content scripts
+ * that run in the page's main world.
+ */
+export function promiseAny<T>(promises: Promise<T>[]): Promise<T> {
+    if (typeof Promise.any === 'function') {
+        return Promise.any(promises);
+    }
+    return new Promise<T>((resolve, reject) => {
+        if (promises.length === 0) {
+            reject(new Error('All promises were rejected'));
+            return;
+        }
+        let rejectCount = 0;
+        const errors: unknown[] = new Array(promises.length);
+        promises.forEach((promise, i) => {
+            Promise.resolve(promise).then(resolve, (err) => {
+                errors[i] = err;
+                rejectCount++;
+                if (rejectCount === promises.length) {
+                    reject(errors);
+                }
+            });
+        });
+    });
+}
