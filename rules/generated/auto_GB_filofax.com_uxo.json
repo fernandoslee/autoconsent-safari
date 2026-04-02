@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": ["csm-cookie-consent", ".csm-wrapper"]
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": ["csm-cookie-consent", ".csm-wrapper"]
         }
     ],
     "optIn": [],
@@ -26,13 +26,36 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "REJECT"
+            "if": {
+                "exists": ["csm-cookie-consent", ".csm-wrapper .cc-btn-reject"]
+            },
+            "then": [
+                {
+                    "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .cc-btn-reject"]
+                }
+            ],
+            "else": [
+                {
+                    "if": {
+                        "exists": ["csm-cookie-consent", ".csm-wrapper .reject-container button"]
+                    },
+                    "then": [
+                        {
+                            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper .reject-container button"]
+                        }
+                    ],
+                    "else": [
+                        {
+                            "waitForThenClick": ["csm-cookie-consent", ".csm-wrapper button:nth-child(2)"]
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div#csm-wrapper > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "waitForVisible": ["csm-cookie-consent", ".csm-wrapper"],
             "timeout": 1000,
             "check": "none"
         }
