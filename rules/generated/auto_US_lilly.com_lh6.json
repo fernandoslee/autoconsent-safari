@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(3)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner"
+            "exists": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(4)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(3)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner"
+            "visible": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(4)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(3)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner",
+            "waitForThenClick": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(4)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner",
             "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(3)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner",
+            "waitForVisible": "body > div#cassie-widget > div:nth-child(4)#cassie_cookie_module > div:nth-child(2)#cassie_pre_banner > div:nth-child(4)#cassie_pre_banner__footer > button:nth-child(2)#cassie_reject_all_pre_banner",
             "timeout": 1000,
             "check": "none"
         }
