@@ -159,14 +159,11 @@ export function unhighlightNode(node: HTMLElement) {
     }
 }
 
-export function isTopFrame(): boolean {
-    return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
-}
-
 /**
- * Polyfill-safe replacement for Promise.any(). Some websites override the global Promise
- * with a polyfill (e.g., older core-js) that lacks Promise.any, breaking content scripts
- * that run in the page's main world.
+ * Polyfill-safe replacement for Promise.any(). In production (DuckDuckGo browser, Chrome
+ * extension), content scripts run in an isolated world with a pristine Promise. However,
+ * the Playwright test harness injects via page.evaluate() into the main world, where some
+ * sites (e.g., Squarespace with older core-js) override Promise without .any() support.
  */
 export function promiseAny<T>(promises: Promise<T>[]): Promise<T> {
     if (typeof Promise.any === 'function') {
@@ -189,4 +186,8 @@ export function promiseAny<T>(promises: Promise<T>[]): Promise<T> {
             });
         });
     });
+}
+
+export function isTopFrame(): boolean {
+    return window.top === window && (!globalThis.location.ancestorOrigins || globalThis.location.ancestorOrigins.length === 0);
 }
