@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_tubexo.com_2x9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tubexo.com/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?best\\.aliexpress\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#voyager-gdpr-2025 > div:not([id]) > div#gdpr-new-container > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#voyager-gdpr-2025 > div:not([id]) > div#gdpr-new-container > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#voyager-gdpr-2025 > div:not([id]) > div#gdpr-new-container > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#voyager-gdpr-2025 > div:not([id]) > div#gdpr-new-container > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
