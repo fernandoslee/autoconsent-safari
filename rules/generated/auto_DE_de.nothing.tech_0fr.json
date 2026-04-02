@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline"
+            "exists": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline"
+            "visible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline",
-            "comment": "Decline"
+            "waitForThenClick": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])",
+            "comment": "Continue without agreeing →"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > section#shopify-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#shopify-pc__banner__btn-decline",
+            "waitForVisible": "body > div#didomi-host > div:not([id]) > div#didomi-popup > div:nth-child(2):not([id]) > div:not([id])[data-testid=\"notice\"] > div:nth-child(2):not([id]) > span:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
