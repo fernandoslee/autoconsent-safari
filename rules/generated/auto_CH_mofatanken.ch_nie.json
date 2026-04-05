@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mofatanken.ch_nie",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mofatanken.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mofatanken\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookiesBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookiesBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookiesBtn",
+            "comment": "✗ Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookiesBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
