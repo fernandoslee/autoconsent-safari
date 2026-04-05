@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_lingoace.com_ju5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lingoace.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lingoace\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#kaamelRoot > div:nth-child(5)#kaamelAlertBig > div:nth-child(3)#mainBtnDiv > button:nth-child(1)#mainBarKaamelAllDeniedSetting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#kaamelRoot > div:nth-child(5)#kaamelAlertBig > div:nth-child(3)#mainBtnDiv > button:nth-child(1)#mainBarKaamelAllDeniedSetting"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#kaamelRoot > div:nth-child(5)#kaamelAlertBig > div:nth-child(3)#mainBtnDiv > button:nth-child(1)#mainBarKaamelAllDeniedSetting",
+            "comment": "Disable all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#kaamelRoot > div:nth-child(5)#kaamelAlertBig > div:nth-child(3)#mainBtnDiv > button:nth-child(1)#mainBarKaamelAllDeniedSetting",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
