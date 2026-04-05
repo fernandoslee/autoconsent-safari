@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_swissmountainclinic.com_jhb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.swissmountainclinic.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?swissmountainclinic\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(5):not([id])",
+            "comment": "Reject optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
