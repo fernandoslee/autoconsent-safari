@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_necfanshop.nl_l6w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://necfanshop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?necfanshop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#CNID_15f6d4d3-6a09-4650-93c8-841f7c80973a > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#CNID_15f6d4d3-6a09-4650-93c8-841f7c80973a > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#CNID_15f6d4d3-6a09-4650-93c8-841f7c80973a > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuseAll",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#CNID_15f6d4d3-6a09-4650-93c8-841f7c80973a > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#refuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
