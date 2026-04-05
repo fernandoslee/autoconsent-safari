@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_dsm.museum_fjl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dsm.museum/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dsm\\.museum/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > div:not([id]) > div:nth-child(2)#dsmcookieconsentwrap > div:nth-child(2)#dsmcookiecontrols > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > div:not([id]) > div:nth-child(2)#dsmcookieconsentwrap > div:nth-child(2)#dsmcookiecontrols > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:not([id]) > div:nth-child(2)#dsmcookieconsentwrap > div:nth-child(2)#dsmcookiecontrols > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:not([id]) > div:nth-child(2)#dsmcookieconsentwrap > div:nth-child(2)#dsmcookiecontrols > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
