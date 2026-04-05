@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hammer-energie.de_diy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hammer-energie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hammer-energie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#uo_cookie_banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#uo_cookie_banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#uo_cookie_banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Verweigern"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#uo_cookie_banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
