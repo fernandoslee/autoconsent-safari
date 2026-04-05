@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_leggett-immo.com_8yc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.leggett-immo.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?leggett-immo\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#freeprivacypolicy-com---nb > div:not([id]) > div:nth-child(2):not([id]) > p#cc-nb-text > a:nth-child(2)#I-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
