@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_grensetjansten.com_wqu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.grensetjansten.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?grensetjansten\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sv_XDVmPbPFC7nO0ckxwYdkA > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sv_XDVmPbPFC7nO0ckxwYdkA > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sv_XDVmPbPFC7nO0ckxwYdkA > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Godkänn nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sv_XDVmPbPFC7nO0ckxwYdkA > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
