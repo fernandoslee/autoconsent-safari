@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_erotikam.de_5g3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://erotikam.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?erotikam\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside:not([id]) > div:nth-child(2)#cookieNotice > main:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside:not([id]) > div:nth-child(2)#cookieNotice > main:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside:not([id]) > div:nth-child(2)#cookieNotice > main:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside:not([id]) > div:nth-child(2)#cookieNotice > main:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
