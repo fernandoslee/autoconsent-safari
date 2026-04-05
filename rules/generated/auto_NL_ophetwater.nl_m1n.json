@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ophetwater.nl_m1n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ophetwater.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ophetwater\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
