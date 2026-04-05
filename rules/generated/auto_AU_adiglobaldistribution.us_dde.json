@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_adiglobaldistribution.us_dde",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.adiglobaldistribution.us/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adiglobaldistribution\\.us/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#react-app > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#snippet-wrapper_38bb67a1-d516-4d84-8ddf-0a5d5b0af792 > div:nth-child(2)#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#react-app > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#snippet-wrapper_38bb67a1-d516-4d84-8ddf-0a5d5b0af792 > div:nth-child(2)#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#react-app > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#snippet-wrapper_38bb67a1-d516-4d84-8ddf-0a5d5b0af792 > div:nth-child(2)#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#react-app > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#snippet-wrapper_38bb67a1-d516-4d84-8ddf-0a5d5b0af792 > div:nth-child(2)#consent_blackbar > div:nth-child(3)#truste-consent-track > div#truste-consent-content > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
