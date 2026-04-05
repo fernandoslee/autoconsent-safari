@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_curasol.de_2mn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.curasol.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?curasol\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > ui-modal-overflow:not([id]) > ui-modal:not([id]) > ui-view:nth-child(3):not([id]) > ui-view:nth-child(2):not([id]) > ui-button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > ui-modal-overflow:not([id]) > ui-modal:not([id]) > ui-view:nth-child(3):not([id]) > ui-view:nth-child(2):not([id]) > ui-button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > ui-modal-overflow:not([id]) > ui-modal:not([id]) > ui-view:nth-child(3):not([id]) > ui-view:nth-child(2):not([id]) > ui-button:nth-child(1):not([id])",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > ui-modal-overflow:not([id]) > ui-modal:not([id]) > ui-view:nth-child(3):not([id]) > ui-view:nth-child(2):not([id]) > ui-button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
