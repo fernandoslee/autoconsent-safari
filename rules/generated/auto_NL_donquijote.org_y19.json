@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_donquijote.org_y19",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.donquijote.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?donquijote\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(3)#b-cookies > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(3)#b-cookies > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(3)#b-cookies > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-reject-all",
+            "comment": "REJECT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > section:nth-child(3)#b-cookies > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
