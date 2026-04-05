@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)"
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria1270850917-_r_3n_"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)"
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria1270850917-_r_3n_"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)",
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria1270850917-_r_3n_",
             "comment": "Only necessary"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)",
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(4)#button-react-aria1270850917-_r_3n_",
             "timeout": 1000,
             "check": "none"
         }
