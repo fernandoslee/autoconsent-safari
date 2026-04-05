@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kvjs.de_t2p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kvjs.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kvjs\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookie-warning > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#dismiss-cookie-warning"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookie-warning > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#dismiss-cookie-warning"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookie-warning > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#dismiss-cookie-warning",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookie-warning > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#dismiss-cookie-warning",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
