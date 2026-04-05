@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_eoi.es_e3v",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.eoi.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eoi\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layout-builder-site > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > main:nth-child(2)#main-content > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layout-builder-site > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > main:nth-child(2)#main-content > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layout-builder-site > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > main:nth-child(2)#main-content > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "RECHAZAR"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layout-builder-site > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > main:nth-child(2)#main-content > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div#cookiesjsr > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
