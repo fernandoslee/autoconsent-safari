@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_naturitas.es_pns",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.naturitas.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?naturitas\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Rechazar todas"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1):not([id]) > div:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
