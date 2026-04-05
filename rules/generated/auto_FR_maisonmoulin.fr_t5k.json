@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_maisonmoulin.fr_t5k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://maisonmoulin.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?maisonmoulin\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
