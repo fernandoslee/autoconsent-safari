@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vergleichen-und-sparen.de_7i6",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vergleichen-und-sparen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vergleichen-und-sparen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header:not([id]) > div:nth-child(1)#vs-cookiehinweis > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header:not([id]) > div:nth-child(1)#vs-cookiehinweis > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header:not([id]) > div:nth-child(1)#vs-cookiehinweis > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header:not([id]) > div:nth-child(1)#vs-cookiehinweis > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
