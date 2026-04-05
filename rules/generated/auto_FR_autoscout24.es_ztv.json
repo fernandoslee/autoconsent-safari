@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_autoscout24.es_ztv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.autoscout24.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autoscout24\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#as24-cmp-popup > div:not([id])[data-testid=\"as24-cmp-container\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])[data-testid=\"as24-cmp-decline-all-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#as24-cmp-popup > div:not([id])[data-testid=\"as24-cmp-container\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])[data-testid=\"as24-cmp-decline-all-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#as24-cmp-popup > div:not([id])[data-testid=\"as24-cmp-container\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])[data-testid=\"as24-cmp-decline-all-button\"]",
+            "comment": "Rechazar y cerrar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#as24-cmp-popup > div:not([id])[data-testid=\"as24-cmp-container\"] > div:nth-child(3):not([id]) > button:nth-child(3):not([id])[data-testid=\"as24-cmp-decline-all-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
