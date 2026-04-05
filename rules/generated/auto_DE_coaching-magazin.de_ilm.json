@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_coaching-magazin.de_ilm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.coaching-magazin.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?coaching-magazin\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary > span:not([id])",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#gdpr-cc-btn-accept-necessary > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
