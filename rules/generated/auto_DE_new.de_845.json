@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_new.de_845",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.new.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?new\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#login-new-dialog-privacy-holder > div:nth-child(2)#login-new-dialog-privacy-small > div:nth-child(4):not([id]) > button:nth-child(1)#login-new-dialog-privacy-btn-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#login-new-dialog-privacy-holder > div:nth-child(2)#login-new-dialog-privacy-small > div:nth-child(4):not([id]) > button:nth-child(1)#login-new-dialog-privacy-btn-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#login-new-dialog-privacy-holder > div:nth-child(2)#login-new-dialog-privacy-small > div:nth-child(4):not([id]) > button:nth-child(1)#login-new-dialog-privacy-btn-deny",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#login-new-dialog-privacy-holder > div:nth-child(2)#login-new-dialog-privacy-small > div:nth-child(4):not([id]) > button:nth-child(1)#login-new-dialog-privacy-btn-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
