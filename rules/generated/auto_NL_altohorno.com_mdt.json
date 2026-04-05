@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_altohorno.com_mdt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://altohorno.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?altohorno\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(6)#cookie-notice > button:nth-child(3)#deny-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(6)#cookie-notice > button:nth-child(3)#deny-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(6)#cookie-notice > button:nth-child(3)#deny-cookies",
+            "comment": "Denegar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(6)#cookie-notice > button:nth-child(3)#deny-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
