@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_esun3d.com_x4q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.esun3d.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?esun3d\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#denyButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#denyButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#denyButton",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cmplz-cookiebanner-container > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#denyButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
