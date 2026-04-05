@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_khealth.com_ldm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://khealth.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?khealth\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#modal-gcp > div:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#modal-gcp > div:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#modal-gcp > div:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#modal-gcp > div:not([id]) > div:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
