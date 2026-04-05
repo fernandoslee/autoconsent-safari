@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_procedimento.com.br_0v4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://procedimento.com.br/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?procedimento\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies",
+            "comment": "Recusar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
