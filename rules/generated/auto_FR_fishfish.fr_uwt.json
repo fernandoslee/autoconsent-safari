@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_fishfish.fr_uwt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fishfish.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fishfish\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ff-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ff-cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ff-cookie-reject",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#ff-cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
