@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_nottinghamcontemporary.org_yez",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nottinghamcontemporary.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nottinghamcontemporary\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div#__layout > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
