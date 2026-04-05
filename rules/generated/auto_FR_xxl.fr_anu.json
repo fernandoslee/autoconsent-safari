@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_xxl.fr_anu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.xxl.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?xxl\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bcb-modal > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bcb-buttonDoNotAgree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bcb-modal > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bcb-buttonDoNotAgree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bcb-modal > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bcb-buttonDoNotAgree",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bcb-modal > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bcb-buttonDoNotAgree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
