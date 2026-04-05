@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_barrabes.com_8yr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.barrabes.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?barrabes\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#capaAvisoPoliticaCookies > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#capaAvisoPoliticaCookies > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#capaAvisoPoliticaCookies > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Rechazar todas las Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#capaAvisoPoliticaCookies > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
