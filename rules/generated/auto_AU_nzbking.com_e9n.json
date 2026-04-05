@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_nzbking.com_e9n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.nzbking.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?nzbking\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
