@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_clickbus.com.br_ofs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.clickbus.com.br/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clickbus\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(1):not([id])[data-testid=\"home-page-box\"] > div:nth-child(10):not([id]) > footer:not([id])[data-testid=\"footer\"] > section:nth-child(1):not([id])[data-testid=\"card\"] > div:not([id])[data-testid=\"privacy-policy\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"no-accept-policy\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(1):not([id])[data-testid=\"home-page-box\"] > div:nth-child(10):not([id]) > footer:not([id])[data-testid=\"footer\"] > section:nth-child(1):not([id])[data-testid=\"card\"] > div:not([id])[data-testid=\"privacy-policy\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"no-accept-policy\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(1):not([id])[data-testid=\"home-page-box\"] > div:nth-child(10):not([id]) > footer:not([id])[data-testid=\"footer\"] > section:nth-child(1):not([id])[data-testid=\"card\"] > div:not([id])[data-testid=\"privacy-policy\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"no-accept-policy\"]",
+            "comment": "Não aceitar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(1):not([id])[data-testid=\"home-page-box\"] > div:nth-child(10):not([id]) > footer:not([id])[data-testid=\"footer\"] > section:nth-child(1):not([id])[data-testid=\"card\"] > div:not([id])[data-testid=\"privacy-policy\"] > div:nth-child(2):not([id]) > button:nth-child(1):not([id])[data-testid=\"no-accept-policy\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
