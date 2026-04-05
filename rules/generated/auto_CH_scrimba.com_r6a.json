@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_scrimba.com_r6a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://scrimba.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?scrimba\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-tag:not([id]) > consent-banner:nth-child(4):not([id]) > div:nth-child(2):not([id]) > op-button:nth-child(2)#Deny > div:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-tag:not([id]) > consent-banner:nth-child(4):not([id]) > div:nth-child(2):not([id]) > op-button:nth-child(2)#Deny > div:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-tag:not([id]) > consent-banner:nth-child(4):not([id]) > div:nth-child(2):not([id]) > op-button:nth-child(2)#Deny > div:nth-child(1):not([id])",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-tag:not([id]) > consent-banner:nth-child(4):not([id]) > div:nth-child(2):not([id]) > op-button:nth-child(2)#Deny > div:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
