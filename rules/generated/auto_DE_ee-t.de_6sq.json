@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ee-t.de_6sq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ee-t.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ee-t\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ywpp-cookiebar > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ywpp-cookiebar-deny-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ywpp-cookiebar > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ywpp-cookiebar-deny-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ywpp-cookiebar > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ywpp-cookiebar-deny-all",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ywpp-cookiebar > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#ywpp-cookiebar-deny-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
