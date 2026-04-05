@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_turismoregiondemurcia.es_1gl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.turismoregiondemurcia.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?turismoregiondemurcia\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookie",
+            "comment": "Rechazar cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rejectCookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
