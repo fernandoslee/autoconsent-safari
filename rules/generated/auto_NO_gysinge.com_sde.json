@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_gysinge.com_sde",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gysinge.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gysinge\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#hcm > div#hcmBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#hcm > div#hcmBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#hcm > div#hcmBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "AVVISA"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#hcm > div#hcmBanner > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
