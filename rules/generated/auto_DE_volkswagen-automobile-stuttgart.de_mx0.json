@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_volkswagen-automobile-stuttgart.de_mx0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.volkswagen-automobile-stuttgart.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?volkswagen-automobile-stuttgart\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#kick-kcm-content-overlay > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#kick-kcm-content-overlay > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#kick-kcm-content-overlay > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Notwendige Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#kick-kcm-content-overlay > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
