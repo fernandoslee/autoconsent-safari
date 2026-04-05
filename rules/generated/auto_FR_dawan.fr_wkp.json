@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_dawan.fr_wkp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dawan.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dawan\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-consent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-consent-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-consent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-consent-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-consent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-consent-deny",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-consent > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-consent-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
