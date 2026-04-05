@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_karmabistrojax.com_m7g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.karmabistrojax.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?karmabistrojax\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
