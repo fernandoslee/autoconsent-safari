@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_medicum-wiesbaden.de_gkb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.medicum-wiesbaden.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?medicum-wiesbaden\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(1)#page-content > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > a#consent-btn-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(1)#page-content > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > a#consent-btn-secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(1)#page-content > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > a#consent-btn-secondary",
+            "comment": "Nur notwendige Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(1)#page-content > div:nth-child(9):not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(3):not([id]) > li:nth-child(1):not([id]) > a#consent-btn-secondary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
