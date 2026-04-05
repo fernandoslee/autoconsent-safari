@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_octopuslegacy.com_2kr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://octopuslegacy.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?octopuslegacy\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookies-policy > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookies-policy > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookies-policy > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Essential Only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookies-policy > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
