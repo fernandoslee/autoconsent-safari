@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_wijgeboortekaartjes.nl_mk3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://wijgeboortekaartjes.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wijgeboortekaartjes\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#popup-overlay > div#the-cookie-notification > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#popup-overlay > div#the-cookie-notification > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#popup-overlay > div#the-cookie-notification > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-decline",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#popup-overlay > div#the-cookie-notification > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#btn-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
