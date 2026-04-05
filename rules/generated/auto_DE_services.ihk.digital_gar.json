@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_services.ihk.digital_gar",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://services.ihk.digital/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?services\\.ihk\\.digital/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookieBannerDialog > div#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieDecline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookieBannerDialog > div#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieDecline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookieBannerDialog > div#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieDecline",
+            "comment": "Webanalyse ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookieBannerDialog > div#cookie-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookieDecline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
