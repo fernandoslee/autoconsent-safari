@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_fuel-finder.uk_146",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fuel-finder.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fuel-finder\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#ff-cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#ff-cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#ff-cookie-reject",
+            "comment": "Essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ff-cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#ff-cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
