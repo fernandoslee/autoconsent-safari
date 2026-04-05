@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_alibabacloud.com_g8s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.alibabacloud.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?alibabacloud\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#J_7671200570 > div:nth-child(11)#consent_blackbar > div:nth-child(3)#truste-consent-track > div:not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#J_7671200570 > div:nth-child(11)#consent_blackbar > div:nth-child(3)#truste-consent-track > div:not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#J_7671200570 > div:nth-child(11)#consent_blackbar > div:nth-child(3)#truste-consent-track > div:not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required",
+            "comment": "Decline All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#J_7671200570 > div:nth-child(11)#consent_blackbar > div:nth-child(3)#truste-consent-track > div:not([id]) > div:nth-child(2)#truste-consent-buttons > button:nth-child(4)#truste-consent-required",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
