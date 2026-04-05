@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_cs.unibo.it_x7l",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cs.unibo.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?disi\\.unibo\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "comment": "SOLO COOKIE NECESSARI"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
