@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_transkulturelltcentrum.se_28p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.transkulturelltcentrum.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?transkulturelltcentrum\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tc-consent > div:nth-child(1)#tc-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tc-consent > div:nth-child(1)#tc-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tc-consent > div:nth-child(1)#tc-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Godkänn nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tc-consent > div:nth-child(1)#tc-banner > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
