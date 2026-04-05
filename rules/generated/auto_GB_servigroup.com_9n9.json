@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_servigroup.com_9n9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.servigroup.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?servigroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-banner > div:not([id]) > button:nth-child(4)#cookies-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-banner > div:not([id]) > button:nth-child(4)#cookies-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-banner > div:not([id]) > button:nth-child(4)#cookies-reject",
+            "comment": "RECHAZAR"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-banner > div:not([id]) > button:nth-child(4)#cookies-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
