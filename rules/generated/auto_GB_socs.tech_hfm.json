@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_socs.tech_hfm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://socs.tech/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?socs\\.tech/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > span#blitz-inject-2 > div#preferences-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#preferences-banner-reject-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > span#blitz-inject-2 > div#preferences-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#preferences-banner-reject-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > span#blitz-inject-2 > div#preferences-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#preferences-banner-reject-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > span#blitz-inject-2 > div#preferences-banner > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#preferences-banner-reject-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
