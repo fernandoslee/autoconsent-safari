@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kunststoffweb.de_akc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kunststoffweb.de/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?kunststoffweb\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cm-main > div:nth-child(4):not([id]) > div:not([id]) > a#accept_selection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cm-main > div:nth-child(4):not([id]) > div:not([id]) > a#accept_selection"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cm-main > div:nth-child(4):not([id]) > div:not([id]) > a#accept_selection",
+            "comment": "Nur essenzielle Cookies akzeptieren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cm-main > div:nth-child(4):not([id]) > div:not([id]) > a#accept_selection",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
