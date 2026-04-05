@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_bancobpm.it_oll",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bancobpm.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bancobpm\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > section:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > section:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > section:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "comment": "CONTINUA SENZA ACCETTARE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > section:not([id]) > div:nth-child(7):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
