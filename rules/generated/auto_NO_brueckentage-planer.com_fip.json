@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_brueckentage-planer.com_fip",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://brueckentage-planer.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brueckentage-planer\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page-wrapper > div:nth-child(5)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page-wrapper > div:nth-child(5)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page-wrapper > div:nth-child(5)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page-wrapper > div:nth-child(5)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
