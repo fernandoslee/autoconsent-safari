@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_getgoods.com_hal",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.getgoods.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?getgoods\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#js_84fa0b8c9d7da99d162659e11c5e4028_container > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#js_84fa0b8c9d7da99d162659e11c5e4028_container > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#js_84fa0b8c9d7da99d162659e11c5e4028_container > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#js_84fa0b8c9d7da99d162659e11c5e4028_container > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
