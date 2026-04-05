@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ontwerpacademie.nl_3z2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ontwerpacademie.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ontwerpacademie\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#deny-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#deny-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#deny-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#deny-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
