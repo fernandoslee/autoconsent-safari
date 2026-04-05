@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hotelesdunas.com_3ys",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hotelesdunas.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hotelesdunas\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-modal > div:not([id]) > div#cookies-body > div:nth-child(3)#cookies-buttons-container > button:nth-child(2)#cookies-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-modal > div:not([id]) > div#cookies-body > div:nth-child(3)#cookies-buttons-container > button:nth-child(2)#cookies-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-modal > div:not([id]) > div#cookies-body > div:nth-child(3)#cookies-buttons-container > button:nth-child(2)#cookies-reject-all",
+            "comment": "Rechazar todo"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-modal > div:not([id]) > div#cookies-body > div:nth-child(3)#cookies-buttons-container > button:nth-child(2)#cookies-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
