@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_sd68.bc.ca_5xh",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sd68.bc.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sd68\\.bc\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lb-cookie-consent > span:nth-child(2):not([id]) > a:nth-child(2)#lbcc-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lb-cookie-consent > span:nth-child(2):not([id]) > a:nth-child(2)#lbcc-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lb-cookie-consent > span:nth-child(2):not([id]) > a:nth-child(2)#lbcc-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lb-cookie-consent > span:nth-child(2):not([id]) > a:nth-child(2)#lbcc-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
