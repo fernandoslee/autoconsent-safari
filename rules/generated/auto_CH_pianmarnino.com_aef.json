@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_pianmarnino.com_aef",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pianmarnino.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pianmarnino\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookiebar > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookiebar > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookiebar > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > span:not([id])",
+            "comment": "Accetta solo i necessari"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookiebar > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
