@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kiel-canal.de_4v9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kiel-canal.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kiel-canal\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#a-banner > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#a-banner > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#a-banner > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#a-banner > div:not([id]) > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
