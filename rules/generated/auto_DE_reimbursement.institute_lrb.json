@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_reimbursement.institute_lrb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://reimbursement.institute/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?reimbursement\\.institute/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > p:nth-child(6):not([id]) > a:nth-child(1)#cookie-no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > p:nth-child(6):not([id]) > a:nth-child(1)#cookie-no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > p:nth-child(6):not([id]) > a:nth-child(1)#cookie-no",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > p:nth-child(6):not([id]) > a:nth-child(1)#cookie-no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
