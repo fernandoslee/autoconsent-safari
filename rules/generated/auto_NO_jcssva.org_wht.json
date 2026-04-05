@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_jcssva.org_wht",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://jcssva.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jcssva\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookiesinfo > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#rechazartodascookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookiesinfo > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#rechazartodascookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookiesinfo > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#rechazartodascookie",
+            "comment": "RECHAZAR"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookiesinfo > div:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#rechazartodascookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
