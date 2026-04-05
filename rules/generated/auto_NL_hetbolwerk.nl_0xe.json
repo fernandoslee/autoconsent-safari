@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hetbolwerk.nl_0xe",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hetbolwerk.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hetbolwerk\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#cookies-eu-reject",
+            "comment": "WEIGER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-banner > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
