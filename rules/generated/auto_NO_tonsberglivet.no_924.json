@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_tonsberglivet.no_924",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://tonsberglivet.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tonsberglivet\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-window > div:nth-child(4)#privacy-window-options > button:nth-child(1)#privacy-window-button-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-window > div:nth-child(4)#privacy-window-options > button:nth-child(1)#privacy-window-button-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-window > div:nth-child(4)#privacy-window-options > button:nth-child(1)#privacy-window-button-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-window > div:nth-child(4)#privacy-window-options > button:nth-child(1)#privacy-window-button-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
