@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_skyrc.com_g64",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.skyrc.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?skyrc\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebox > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#declineCookie-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebox > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#declineCookie-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebox > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#declineCookie-btn",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebox > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > button:nth-child(1)#declineCookie-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
