@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cotonea.de_m3d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cotonea.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cotonea\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > nav:not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > nav:not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > nav:not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > nav:not([id]) > div:nth-child(3):not([id]) > a:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
