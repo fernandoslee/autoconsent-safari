@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_maison-edition.fr_d9b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://maison-edition.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?maison-edition\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-refuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
