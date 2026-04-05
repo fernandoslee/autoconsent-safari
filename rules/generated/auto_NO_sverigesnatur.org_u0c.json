@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_sverigesnatur.org_u0c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.sverigesnatur.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sverigesnatur\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-oFRFaewoXS > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-bNMgKDOpbR > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-oFRFaewoXS > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-bNMgKDOpbR > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-oFRFaewoXS > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-bNMgKDOpbR > button:nth-child(2):not([id])",
+            "comment": "Godkänn endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-oFRFaewoXS > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#toggle-bNMgKDOpbR > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
