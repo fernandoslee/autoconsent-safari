@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_weltzentrum-der-medizintechnik.de_eq3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.weltzentrum-der-medizintechnik.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?weltzentrum-der-medizintechnik\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiescript_injected > div#cookiescript_wrapper > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiescript_injected > div#cookiescript_wrapper > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiescript_injected > div#cookiescript_wrapper > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiescript_injected > div#cookiescript_wrapper > div:nth-child(4)#cookiescript_buttons > div:nth-child(3)#cookiescript_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
