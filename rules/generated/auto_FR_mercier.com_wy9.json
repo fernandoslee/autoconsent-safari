@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_mercier.com_wy9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mercier.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mercier\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ppms_cm_consent_popup_21f765ac-0a50-42ab-8744-271546a638e2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ppms_cm_consent_popup_21f765ac-0a50-42ab-8744-271546a638e2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ppms_cm_consent_popup_21f765ac-0a50-42ab-8744-271546a638e2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ppms_cm_consent_popup_21f765ac-0a50-42ab-8744-271546a638e2 > div#ppms_cm_popup_overlay > div:nth-child(1)#ppms_cm_popup > div:nth-child(3)#ppms_cm_centered_buttons > button:nth-child(2)#ppms_cm_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
