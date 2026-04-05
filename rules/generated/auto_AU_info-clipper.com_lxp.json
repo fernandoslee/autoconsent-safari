@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_info-clipper.com_lxp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.info-clipper.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?info-clipper\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bccs-modal > div:nth-child(4)#cookie-consent > div:not([id]) > div:nth-child(2)#bccs-options > div:nth-child(4):not([id]) > button:nth-child(1)#bccs-linkRefuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bccs-modal > div:nth-child(4)#cookie-consent > div:not([id]) > div:nth-child(2)#bccs-options > div:nth-child(4):not([id]) > button:nth-child(1)#bccs-linkRefuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bccs-modal > div:nth-child(4)#cookie-consent > div:not([id]) > div:nth-child(2)#bccs-options > div:nth-child(4):not([id]) > button:nth-child(1)#bccs-linkRefuseAll",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bccs-modal > div:nth-child(4)#cookie-consent > div:not([id]) > div:nth-child(2)#bccs-options > div:nth-child(4):not([id]) > button:nth-child(1)#bccs-linkRefuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
