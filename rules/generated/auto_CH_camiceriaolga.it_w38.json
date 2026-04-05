@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_camiceriaolga.it_w38",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.camiceriaolga.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?camiceriaolga\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_banner > div:not([id]) > form:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_banner > div:not([id]) > form:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_banner > div:not([id]) > form:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_banner > div:not([id]) > form:not([id]) > p:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
