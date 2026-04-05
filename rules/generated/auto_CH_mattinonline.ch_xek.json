@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mattinonline.ch_xek",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mattinonline.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mattinonline\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cms_privacy_popup > div:not([id]) > div:nth-child(5):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cms_privacy_popup > div:not([id]) > div:nth-child(5):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cms_privacy_popup > div:not([id]) > div:nth-child(5):not([id]) > a:nth-child(2):not([id])",
+            "comment": "RIFIUTO"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cms_privacy_popup > div:not([id]) > div:nth-child(5):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
