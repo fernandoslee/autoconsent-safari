@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_recetas.com_osa",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.recetas.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?recetas\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div#cookie-banner-inner > div:nth-child(2)#cookie-banner-buttons > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div#cookie-banner-inner > div:nth-child(2)#cookie-banner-buttons > button:nth-child(1)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div#cookie-banner-inner > div:nth-child(2)#cookie-banner-buttons > button:nth-child(1)#cookie-reject",
+            "comment": "Solo esenciales"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div#cookie-banner-inner > div:nth-child(2)#cookie-banner-buttons > button:nth-child(1)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
