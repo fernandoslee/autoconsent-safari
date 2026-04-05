@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_brickform.com_wj1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.brickform.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?brickform\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking",
+            "comment": "Disable Tracking"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
