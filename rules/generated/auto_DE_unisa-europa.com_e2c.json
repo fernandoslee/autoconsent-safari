@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_unisa-europa.com_e2c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.unisa-europa.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unisa-europa\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div#fondo_landing > div#capa > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div#fondo_landing > div#capa > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div#fondo_landing > div#capa > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "REFUSE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div#fondo_landing > div#capa > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
