@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_vpe.de_o34",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vpe.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vpe\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > button:nth-child(3)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > button:nth-child(3)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > button:nth-child(3)#cookie-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > button:nth-child(3)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
