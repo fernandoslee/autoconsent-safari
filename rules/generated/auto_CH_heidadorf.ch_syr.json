@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_heidadorf.ch_syr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.heidadorf.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?heidadorf\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rcc-decline-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
