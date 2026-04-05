@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_cawst.org_ngk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cawst.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cawst\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#siteWrapper > header:nth-child(3)#header > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#siteWrapper > header:nth-child(3)#header > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#siteWrapper > header:nth-child(3)#header > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#siteWrapper > header:nth-child(3)#header > div:nth-child(2):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
