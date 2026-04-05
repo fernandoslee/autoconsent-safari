@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_stadtwerke-ratingen.de_0er",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.stadtwerke-ratingen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stadtwerke-ratingen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cb_container > div#cb_modal > div:not([id]) > div:nth-child(4)#cb_modal_footer > div:not([id]) > div:not([id]) > button:nth-child(1)#CB_DeclineAndHide"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cb_container > div#cb_modal > div:not([id]) > div:nth-child(4)#cb_modal_footer > div:not([id]) > div:not([id]) > button:nth-child(1)#CB_DeclineAndHide"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cb_container > div#cb_modal > div:not([id]) > div:nth-child(4)#cb_modal_footer > div:not([id]) > div:not([id]) > button:nth-child(1)#CB_DeclineAndHide",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cb_container > div#cb_modal > div:not([id]) > div:nth-child(4)#cb_modal_footer > div:not([id]) > div:not([id]) > button:nth-child(1)#CB_DeclineAndHide",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
