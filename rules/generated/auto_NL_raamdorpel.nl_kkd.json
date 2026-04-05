@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_raamdorpel.nl_kkd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.raamdorpel.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?raamdorpel\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#consent-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#consent-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#consent-deny",
+            "comment": "AFWIJZEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#consent-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
