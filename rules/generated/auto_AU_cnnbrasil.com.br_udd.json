@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_cnnbrasil.com.br_udd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cnnbrasil.com.br/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cnnbrasil\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#adopt-reject-all-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#adopt-reject-all-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#adopt-reject-all-button",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#adopt-reject-all-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
