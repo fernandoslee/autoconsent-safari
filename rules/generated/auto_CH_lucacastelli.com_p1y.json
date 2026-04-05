@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_lucacastelli.com_p1y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://lucacastelli.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lucacastelli\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lccb-root > div:nth-child(1)#lccb-banner > div:nth-child(3):not([id]) > button:nth-child(1)#lccb-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lccb-root > div:nth-child(1)#lccb-banner > div:nth-child(3):not([id]) > button:nth-child(1)#lccb-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lccb-root > div:nth-child(1)#lccb-banner > div:nth-child(3):not([id]) > button:nth-child(1)#lccb-reject",
+            "comment": "RIFIUTA"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lccb-root > div:nth-child(1)#lccb-banner > div:nth-child(3):not([id]) > button:nth-child(1)#lccb-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
