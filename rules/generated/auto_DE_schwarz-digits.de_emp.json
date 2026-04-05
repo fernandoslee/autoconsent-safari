@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_schwarz-digits.de_emp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://schwarz-digits.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schwarz-digits\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#scmp-root-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"banner-reject-all-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#scmp-root-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"banner-reject-all-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#scmp-root-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"banner-reject-all-button\"]",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#scmp-root-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"banner-reject-all-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
