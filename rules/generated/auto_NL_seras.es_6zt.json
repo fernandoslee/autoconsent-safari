@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_seras.es_6zt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://seras.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?seras\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(2)#cookies-eu-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(2)#cookies-eu-reject",
+            "comment": "RECHAZAR TODAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(2)#cookies-eu-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
