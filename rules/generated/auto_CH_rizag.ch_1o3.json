@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_rizag.ch_1o3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rizag.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rizag\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineBtn",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
