@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_adventurebikerider.com_g7a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.adventurebikerider.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adventurebikerider\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gnar-consent-popup-outer > div:not([id]) > div#gnar-consent-popup > div:nth-child(5):not([id]) > button:nth-child(1)#deny-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gnar-consent-popup-outer > div:not([id]) > div#gnar-consent-popup > div:nth-child(5):not([id]) > button:nth-child(1)#deny-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gnar-consent-popup-outer > div:not([id]) > div#gnar-consent-popup > div:nth-child(5):not([id]) > button:nth-child(1)#deny-cookies",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gnar-consent-popup-outer > div:not([id]) > div#gnar-consent-popup > div:nth-child(5):not([id]) > button:nth-child(1)#deny-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
