@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_aqualia.com_v35",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.aqualia.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?aqualia\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(5)#wrapper > div:nth-child(1)#p_p_id_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_ > section:nth-child(2)#portlet_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-law > div:nth-child(1)#_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_modalGdprCookies > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > a:nth-child(2)#cookies-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(5)#wrapper > div:nth-child(1)#p_p_id_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_ > section:nth-child(2)#portlet_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-law > div:nth-child(1)#_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_modalGdprCookies > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > a:nth-child(2)#cookies-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(5)#wrapper > div:nth-child(1)#p_p_id_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_ > section:nth-child(2)#portlet_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-law > div:nth-child(1)#_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_modalGdprCookies > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > a:nth-child(2)#cookies-reject",
+            "comment": "RECHAZAR TODAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(5)#wrapper > div:nth-child(1)#p_p_id_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_ > section:nth-child(2)#portlet_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3)#cookie-law > div:nth-child(1)#_com_fcc_web_cookies_portlet_CookiesPortlet_INSTANCE_FCC_Cookies_WAR_FCC_Cookiesportlet_modalGdprCookies > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(5):not([id]) > a:nth-child(2)#cookies-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
