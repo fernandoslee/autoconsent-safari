@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_marketplaceglobal.com_709",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://marketplaceglobal.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?marketplaceglobal\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > button:nth-child(6)#reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > button:nth-child(6)#reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > button:nth-child(6)#reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > button:nth-child(6)#reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
