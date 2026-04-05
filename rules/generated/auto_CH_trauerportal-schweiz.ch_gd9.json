@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_trauerportal-schweiz.ch_gd9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.trauerportal-schweiz.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?trauerportal-schweiz\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cms > div:nth-child(4)#cookiePopup > button:nth-child(2)#CookieAblehnen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cms > div:nth-child(4)#cookiePopup > button:nth-child(2)#CookieAblehnen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cms > div:nth-child(4)#cookiePopup > button:nth-child(2)#CookieAblehnen",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cms > div:nth-child(4)#cookiePopup > button:nth-child(2)#CookieAblehnen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
