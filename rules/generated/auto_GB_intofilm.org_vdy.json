@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_intofilm.org_vdy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.intofilm.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?intofilm\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#as-cookie-cutter > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cc-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#as-cookie-cutter > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cc-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#as-cookie-cutter > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cc-deny",
+            "comment": "Reject Analytics Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#as-cookie-cutter > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cc-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
