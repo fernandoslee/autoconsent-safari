@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_gemac-fieldbus.com_ox4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gemac-fieldbus.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gemac-fieldbus\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#zpconsent-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#zpconsent-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#zpconsent-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#zpcookie-banner > div#zpcookie-banner-msgbar > p:not([id]) > span:nth-child(2):not([id]) > a:nth-child(1)#zpconsent-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
