@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_vilgain.co.uk_jrl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vilgain.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vilgain\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#snippet-modalStack-snModals > div:nth-child(4)#snippet-modalStack-cookieModal-snModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#snippet-modalStack-snModals > div:nth-child(4)#snippet-modalStack-cookieModal-snModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#snippet-modalStack-snModals > div:nth-child(4)#snippet-modalStack-cookieModal-snModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Refuse all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#snippet-modalStack-snModals > div:nth-child(4)#snippet-modalStack-cookieModal-snModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
