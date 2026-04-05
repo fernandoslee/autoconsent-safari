@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_mopedrenovering.se_62f",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mopedrenovering.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mopedrenovering\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tws-react-common--modal > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tws-react-common--modal > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tws-react-common--modal > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton",
+            "comment": "TILLÅT BARA NÖDVÄNDIGA COOKIES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tws-react-common--modal > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#consentNecessaryButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
