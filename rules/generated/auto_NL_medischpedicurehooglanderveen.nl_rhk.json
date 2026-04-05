@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_medischpedicurehooglanderveen.nl_rhk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://medischpedicurehooglanderveen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?medischpedicurehooglanderveen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_alert_location > div#cookie_melding > div:nth-child(7):not([id]) > button:nth-child(2)#cookie_afwijzen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_alert_location > div#cookie_melding > div:nth-child(7):not([id]) > button:nth-child(2)#cookie_afwijzen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_alert_location > div#cookie_melding > div:nth-child(7):not([id]) > button:nth-child(2)#cookie_afwijzen",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_alert_location > div#cookie_melding > div:nth-child(7):not([id]) > button:nth-child(2)#cookie_afwijzen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
