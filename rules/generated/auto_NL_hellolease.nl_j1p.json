@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hellolease.nl_j1p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hellolease.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hellolease\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookiesBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookiesBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookiesBtn",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#denyCookiesBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
