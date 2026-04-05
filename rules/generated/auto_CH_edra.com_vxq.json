@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_edra.com_vxq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.edra.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?edra\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-9515-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-9515-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-9515-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only",
+            "comment": "Accetta solo necessari"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-9515-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
