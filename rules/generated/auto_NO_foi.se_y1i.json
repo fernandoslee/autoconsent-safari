@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_foi.se_y1i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.foi.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?foi\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#svid10_7fd35d7f166c56ebe0bbf0d > div#svid10_7fd35d7f166c56ebe0bdd7c > div#svid94_7fd35d7f166c56ebe0b934c > div:nth-child(4)#svid10_6d6d80ac1673ce9a606157e > div#svid12_6d6d80ac1673ce9a606157f > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_ignore"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#svid10_7fd35d7f166c56ebe0bbf0d > div#svid10_7fd35d7f166c56ebe0bdd7c > div#svid94_7fd35d7f166c56ebe0b934c > div:nth-child(4)#svid10_6d6d80ac1673ce9a606157e > div#svid12_6d6d80ac1673ce9a606157f > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_ignore"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#svid10_7fd35d7f166c56ebe0bbf0d > div#svid10_7fd35d7f166c56ebe0bdd7c > div#svid94_7fd35d7f166c56ebe0b934c > div:nth-child(4)#svid10_6d6d80ac1673ce9a606157e > div#svid12_6d6d80ac1673ce9a606157f > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_ignore",
+            "comment": "Endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#svid10_7fd35d7f166c56ebe0bbf0d > div#svid10_7fd35d7f166c56ebe0bdd7c > div#svid94_7fd35d7f166c56ebe0b934c > div:nth-child(4)#svid10_6d6d80ac1673ce9a606157e > div#svid12_6d6d80ac1673ce9a606157f > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cookie_ignore",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
