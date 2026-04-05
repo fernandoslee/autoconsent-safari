@@ -1,6 +1,5 @@
 {
     "name": "auto_GB_utmost.co.uk_0",
-    "vendorUrl": "https://www.utmost.co.uk/",
     "cosmetic": false,
     "runContext": {
         "main": true,
@@ -10,19 +9,29 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div > div:nth-child(2) > button:nth-child(7)"
+            "exists": "body > div#cookie-bar > div:nth-child(2):not([id]) > button:nth-child(7)#cookies-deny-all"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:nth-child(2) > button:nth-child(7)"
+            "visible": "body > div#cookie-bar > div:nth-child(2):not([id]) > button:nth-child(7)#cookies-deny-all"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "body > div > div:nth-child(2) > button:nth-child(7)",
-            "text": "I DO NOT ACCEPT"
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-bar > div:nth-child(2):not([id]) > button:nth-child(7)#cookies-deny-all",
+            "comment": "I DO NOT ACCEPT"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-bar > div:nth-child(2):not([id]) > button:nth-child(7)#cookies-deny-all",
+            "timeout": 1000,
+            "check": "none"
         }
     ]
 }
