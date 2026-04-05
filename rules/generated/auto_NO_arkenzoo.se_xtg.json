@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_arkenzoo.se_xtg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.arkenzoo.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?arkenzoo\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > div:nth-child(2)#cookie_consent_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#submit_privacy_consent1 > button:nth-child(1)#cookie_only_necessary2"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > div:nth-child(2)#cookie_consent_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#submit_privacy_consent1 > button:nth-child(1)#cookie_only_necessary2"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > div:nth-child(2)#cookie_consent_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#submit_privacy_consent1 > button:nth-child(1)#cookie_only_necessary2",
+            "comment": "Acceptera endast nödvändiga cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > div:nth-child(2)#cookie_consent_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2)#submit_privacy_consent1 > button:nth-child(1)#cookie_only_necessary2",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
