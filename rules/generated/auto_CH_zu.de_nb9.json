@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_zu.de_nb9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zu.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zu\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(3)#cookieNoticeMain > div:not([id]) > div:nth-child(1)#cookieNoticeContainerMain > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(3)#cookieNoticeMain > div:not([id]) > div:nth-child(1)#cookieNoticeContainerMain > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(3)#cookieNoticeMain > div:not([id]) > div:nth-child(1)#cookieNoticeContainerMain > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice > div#cookieNoticeInner > div:not([id]) > section:nth-child(3)#cookieNoticeMain > div:not([id]) > div:nth-child(1)#cookieNoticeContainerMain > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
