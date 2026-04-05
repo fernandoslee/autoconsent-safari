@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_iberiaexpress.com_dyv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.iberiaexpress.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iberiaexpress\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > div#cookiesTermsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejectCookiesTerms"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > div#cookiesTermsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejectCookiesTerms"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > div#cookiesTermsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejectCookiesTerms",
+            "comment": "RECHAZAR TODAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > ngb-modal-window:not([id]) > div:not([id]) > div:not([id]) > div#cookiesTermsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#rejectCookiesTerms",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
