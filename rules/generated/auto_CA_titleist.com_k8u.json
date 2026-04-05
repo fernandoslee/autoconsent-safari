@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_titleist.com_k8u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.titleist.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?titleist\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-inner > div:nth-child(1)#cookies-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-inner > div:nth-child(1)#cookies-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-inner > div:nth-child(1)#cookies-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Accept Only Essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2)#cookiebanner-inner > div:nth-child(1)#cookies-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
