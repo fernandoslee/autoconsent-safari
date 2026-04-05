@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_pinex.ch_jh1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pinex.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pinex\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#tygh_container > div:nth-child(5)#hw_cookie_law > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
