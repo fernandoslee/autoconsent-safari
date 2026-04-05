@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_essentialrecruitment.co.uk_m7m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.essentialrecruitment.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?essentialrecruitment\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#fupi_cookie_notice > div:nth-child(1)#fupi_welcome_panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#fupi_decline_cookies_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#fupi_cookie_notice > div:nth-child(1)#fupi_welcome_panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#fupi_decline_cookies_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#fupi_cookie_notice > div:nth-child(1)#fupi_welcome_panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#fupi_decline_cookies_btn",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#fupi_cookie_notice > div:nth-child(1)#fupi_welcome_panel > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4)#fupi_decline_cookies_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
