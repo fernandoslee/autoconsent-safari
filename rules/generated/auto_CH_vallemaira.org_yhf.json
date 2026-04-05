@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_vallemaira.org_yhf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vallemaira.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vallemaira\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookienotice > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejectcookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookienotice > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejectcookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookienotice > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejectcookie",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookienotice > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#rejectcookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
