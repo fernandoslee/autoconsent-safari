@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_velociped.ch_anj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.velociped.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?velociped\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-information-banner > div:nth-child(2)#cookie_information_link > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-information-banner > div:nth-child(2)#cookie_information_link > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-information-banner > div:nth-child(2)#cookie_information_link > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-information-banner > div:nth-child(2)#cookie_information_link > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
