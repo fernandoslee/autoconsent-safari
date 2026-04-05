@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_dictionary.nl_839",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.dictionary.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?dictionary\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-consent-banner > div:nth-child(2):not([id]) > a:nth-child(1)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-consent-banner > div:nth-child(2):not([id]) > a:nth-child(1)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-consent-banner > div:nth-child(2):not([id]) > a:nth-child(1)#reject-cookies",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-consent-banner > div:nth-child(2):not([id]) > a:nth-child(1)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
