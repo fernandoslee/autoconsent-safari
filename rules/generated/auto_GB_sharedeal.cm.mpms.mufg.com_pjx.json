@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_sharedeal.cm.mpms.mufg.com_pjx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://sharedeal.cm.mpms.mufg.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?sharedeal\\.cm\\.mpms\\.mufg\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > form:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > form:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > form:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Deny tracking"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > form:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
