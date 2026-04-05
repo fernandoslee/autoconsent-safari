@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_pixartprinting.com_s9c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pixartprinting.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pixartprinting\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#refuse-notif",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
