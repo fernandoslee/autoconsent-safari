@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vanherwerden.nl_n2y",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vanherwerden.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vanherwerden\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > span:nth-child(4)#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#elc-decline-all-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > span:nth-child(4)#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#elc-decline-all-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > span:nth-child(4)#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#elc-decline-all-link",
+            "comment": "Niet accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > span:nth-child(4)#blitz-inject-1 > section:nth-child(1)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(5):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#elc-decline-all-link",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
