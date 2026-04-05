@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_thenordicseason.cupmanager.net_piv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://thenordicseason.cupmanager.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thenordicseason\\.cupmanager\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > dialog#cookieConsentBanner > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > dialog#cookieConsentBanner > div:nth-child(4):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > dialog#cookieConsentBanner > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "comment": "NEJ, BARA NÖDVÄNDIGA"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > dialog#cookieConsentBanner > div:nth-child(4):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
