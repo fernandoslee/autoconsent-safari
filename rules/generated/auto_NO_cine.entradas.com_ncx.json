@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_cine.entradas.com_ncx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cine.entradas.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cine\\.entradas\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#reka-dialog-content-v-0 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#reka-dialog-content-v-0 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#reka-dialog-content-v-0 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Rechazar todo"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#reka-dialog-content-v-0 > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
