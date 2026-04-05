@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_vardgivare.skane.se_mwj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vardgivare.skane.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vardgivare\\.skane\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > header#skane-se-v2-header > div:nth-child(2)#cookie-info-box > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#consent-no-tracking"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > header#skane-se-v2-header > div:nth-child(2)#cookie-info-box > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#consent-no-tracking"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > header#skane-se-v2-header > div:nth-child(2)#cookie-info-box > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#consent-no-tracking",
+            "comment": "Neka kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > header#skane-se-v2-header > div:nth-child(2)#cookie-info-box > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#consent-no-tracking",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
