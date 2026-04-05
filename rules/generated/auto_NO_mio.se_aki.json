@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_mio.se_aki",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mio.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mio\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"onlyNecessaryCookies\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"onlyNecessaryCookies\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"onlyNecessaryCookies\"]",
+            "comment": "Endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(4):not([id])[data-testid=\"cookieBanner\"] > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])[data-testid=\"onlyNecessaryCookies\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
