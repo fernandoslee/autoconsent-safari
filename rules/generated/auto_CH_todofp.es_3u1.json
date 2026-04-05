@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_todofp.es_3u1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://todofp.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?todofp\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#fondo > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rechazaCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#fondo > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rechazaCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#fondo > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rechazaCookies",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#fondo > div:nth-child(5):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#rechazaCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
