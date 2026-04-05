@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_unife.it_l9q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.unife.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?unife\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "comment": "SOLO COOKIE TECNICI"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-banner > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
