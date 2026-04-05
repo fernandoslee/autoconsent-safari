@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": ".site-modals__modal--cookies"
+            "exists": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-vhnsijzq-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".site-modals__modal--cookies"
+            "visible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-vhnsijzq-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": ".site-modals__modal-decline",
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-vhnsijzq-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "DECLINE"
         }
     ],
     "test": [
         {
-            "waitForVisible": ".site-modals__modal--cookies",
+            "waitForVisible": "body > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2)#data-vhnsijzq-content > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
