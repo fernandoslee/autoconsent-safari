@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_amal.se_aqn",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://amal.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?amal\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#svid10_4b2099d3183113ac8361270 > div:nth-child(5)#svid94_4b2099d3183113ac83610b2 > div:nth-child(1)#svid10_4b2099d3183113ac8361406 > div:nth-child(2)#svid12_715eb9a218df2b002ed23099 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#svid10_4b2099d3183113ac8361270 > div:nth-child(5)#svid94_4b2099d3183113ac83610b2 > div:nth-child(1)#svid10_4b2099d3183113ac8361406 > div:nth-child(2)#svid12_715eb9a218df2b002ed23099 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#svid10_4b2099d3183113ac8361270 > div:nth-child(5)#svid94_4b2099d3183113ac83610b2 > div:nth-child(1)#svid10_4b2099d3183113ac8361406 > div:nth-child(2)#svid12_715eb9a218df2b002ed23099 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Godkänn nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#svid10_4b2099d3183113ac8361270 > div:nth-child(5)#svid94_4b2099d3183113ac83610b2 > div:nth-child(1)#svid10_4b2099d3183113ac8361406 > div:nth-child(2)#svid12_715eb9a218df2b002ed23099 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
