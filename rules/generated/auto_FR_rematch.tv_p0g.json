@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_rematch.tv_p0g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rematch.tv/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rematch\\.tv/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div#app > div:not([id]) > div:nth-child(3)#base-layout-modals-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > p:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div#app > div:not([id]) > div:nth-child(3)#base-layout-modals-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > p:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div#app > div:not([id]) > div:nth-child(3)#base-layout-modals-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > p:not([id])",
+            "comment": "I refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div#app > div:not([id]) > div:nth-child(3)#base-layout-modals-container > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(7):not([id]) > div:nth-child(2):not([id]) > p:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
