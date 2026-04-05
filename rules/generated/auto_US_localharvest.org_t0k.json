@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_localharvest.org_t0k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.localharvest.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?localharvest\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lh-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#lh-consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lh-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#lh-consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lh-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#lh-consent-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lh-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#lh-consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
