@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bastelideen.de_19c",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bastelideen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bastelideen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#consent-reject",
+            "comment": "Nein, danke"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > div:nth-child(3):not([id]) > button:nth-child(1)#consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
