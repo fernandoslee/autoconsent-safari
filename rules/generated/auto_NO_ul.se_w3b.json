@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_ul.se_w3b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ul.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ul\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookie-bar > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookie-bar > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookie-bar > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Jag accepterar endast grundläggande kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookie-bar > div:not([id]) > div:not([id]) > form:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
