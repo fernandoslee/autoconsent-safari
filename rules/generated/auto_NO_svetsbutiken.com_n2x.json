@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_svetsbutiken.com_n2x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.svetsbutiken.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?svetsbutiken\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > a:nth-child(1)#cookie-consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > a:nth-child(1)#cookie-consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > a:nth-child(1)#cookie-consent-reject",
+            "comment": "Endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > p:not([id]) > a:nth-child(1)#cookie-consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
