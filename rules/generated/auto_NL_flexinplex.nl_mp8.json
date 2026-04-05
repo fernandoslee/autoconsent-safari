@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_flexinplex.nl_mp8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.flexinplex.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?flexinplex\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > button:nth-child(4):not([id])",
+            "comment": "Essentiële cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
