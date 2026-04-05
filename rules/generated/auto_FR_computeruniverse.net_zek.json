@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_computeruniverse.net_zek",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.computeruniverse.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?computeruniverse\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__next > main#main-app > section:nth-child(1):not([id]) > dialog#gdpr_cookie_notice > div#consent-manager-modal-content > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__next > main#main-app > section:nth-child(1):not([id]) > dialog#gdpr_cookie_notice > div#consent-manager-modal-content > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__next > main#main-app > section:nth-child(1):not([id]) > dialog#gdpr_cookie_notice > div#consent-manager-modal-content > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject-all",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__next > main#main-app > section:nth-child(1):not([id]) > dialog#gdpr_cookie_notice > div#consent-manager-modal-content > div:nth-child(3):not([id]) > button:nth-child(2)#consent-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
