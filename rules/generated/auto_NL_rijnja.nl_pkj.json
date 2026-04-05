@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_rijnja.nl_pkj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rijnja.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rijnja\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > section#app > dialog:nth-child(5):not([id]) > section:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > section#app > dialog:nth-child(5):not([id]) > section:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > section#app > dialog:nth-child(5):not([id]) > section:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > section#app > dialog:nth-child(5):not([id]) > section:not([id]) > footer:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
