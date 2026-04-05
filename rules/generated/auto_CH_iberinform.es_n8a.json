@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_iberinform.es_n8a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.iberinform.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iberinform\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(8)#cookies_new-consent-sdk > div:nth-child(2)#cookies_new-banner-sdk > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#cookies_new-button-group-parent > div#cookies_new-button-group > button:nth-child(2)#cookies_new-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(8)#cookies_new-consent-sdk > div:nth-child(2)#cookies_new-banner-sdk > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#cookies_new-button-group-parent > div#cookies_new-button-group > button:nth-child(2)#cookies_new-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(8)#cookies_new-consent-sdk > div:nth-child(2)#cookies_new-banner-sdk > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#cookies_new-button-group-parent > div#cookies_new-button-group > button:nth-child(2)#cookies_new-reject-all-handler",
+            "comment": "Rechazar cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(8)#cookies_new-consent-sdk > div:nth-child(2)#cookies_new-banner-sdk > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2)#cookies_new-button-group-parent > div#cookies_new-button-group > button:nth-child(2)#cookies_new-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
