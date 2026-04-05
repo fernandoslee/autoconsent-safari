@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_lesmenagers.com_9cd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lesmenagers.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lesmenagers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > aside#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#block-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > aside#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#block-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > aside#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#block-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > aside#cookiesModal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#block-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
