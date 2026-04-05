@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_byschulz.shop_4ao",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.byschulz.shop/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?byschulz\\.shop/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
