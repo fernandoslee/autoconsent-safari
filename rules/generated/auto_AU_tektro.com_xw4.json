@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_tektro.com_xw4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tektro.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tektro\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieAcceptBar > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieAcceptBar > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieAcceptBar > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-disagree",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieAcceptBar > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#cookie-disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
