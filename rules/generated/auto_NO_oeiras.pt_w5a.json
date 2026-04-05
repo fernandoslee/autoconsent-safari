@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_oeiras.pt_w5a",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.oeiras.pt/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?oeiras\\.pt/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(4)#section-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(4)#section-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(4)#section-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject-cookies",
+            "comment": "Rejeitar "
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(4)#section-cookies > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
