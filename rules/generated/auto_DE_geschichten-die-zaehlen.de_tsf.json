@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_geschichten-die-zaehlen.de_tsf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.geschichten-die-zaehlen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?geschichten-die-zaehlen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#matomo-cookiebanner > button:nth-child(4)#matomo-cookiebanner__deny-button"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#matomo-cookiebanner > button:nth-child(4)#matomo-cookiebanner__deny-button"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#matomo-cookiebanner > button:nth-child(4)#matomo-cookiebanner__deny-button",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#matomo-cookiebanner > button:nth-child(4)#matomo-cookiebanner__deny-button",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
