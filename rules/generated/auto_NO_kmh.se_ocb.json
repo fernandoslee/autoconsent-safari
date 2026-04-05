@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_kmh.se_ocb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kmh.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kmh\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sv_WscEKBlXV5zlo9SPTSviO > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sv_WscEKBlXV5zlo9SPTSviO > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sv_WscEKBlXV5zlo9SPTSviO > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "GODKÄNN NÖDVÄNDIGA KAKOR"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sv_WscEKBlXV5zlo9SPTSviO > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
