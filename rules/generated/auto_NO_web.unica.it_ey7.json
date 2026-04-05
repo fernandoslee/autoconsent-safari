@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_web.unica.it_ey7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://web.unica.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?web\\.unica\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bs-gdpr-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#bs-gdpr-cookies-modal-decline-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bs-gdpr-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#bs-gdpr-cookies-modal-decline-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bs-gdpr-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#bs-gdpr-cookies-modal-decline-btn",
+            "comment": "Rifiuta"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bs-gdpr-cookies-modal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#bs-gdpr-cookies-modal-decline-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
