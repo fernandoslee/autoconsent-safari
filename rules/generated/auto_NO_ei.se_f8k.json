@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_ei.se_f8k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://ei.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ei\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#svid10_771ecc01174bf3df809c250 > div#svid10_771ecc01174bf3df809c258 > div#svid94_771ecc01174bf3df809c2e4 > div:nth-child(2)#svid30_4306b017176842faf911ec5 > div:nth-child(2)#svid12_66185b2817dc26036872e83_svid30_4306b017176842faf911ec5 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#svid10_771ecc01174bf3df809c250 > div#svid10_771ecc01174bf3df809c258 > div#svid94_771ecc01174bf3df809c2e4 > div:nth-child(2)#svid30_4306b017176842faf911ec5 > div:nth-child(2)#svid12_66185b2817dc26036872e83_svid30_4306b017176842faf911ec5 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#svid10_771ecc01174bf3df809c250 > div#svid10_771ecc01174bf3df809c258 > div#svid94_771ecc01174bf3df809c2e4 > div:nth-child(2)#svid30_4306b017176842faf911ec5 > div:nth-child(2)#svid12_66185b2817dc26036872e83_svid30_4306b017176842faf911ec5 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Avvisa alla utom nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#svid10_771ecc01174bf3df809c250 > div#svid10_771ecc01174bf3df809c258 > div#svid94_771ecc01174bf3df809c2e4 > div:nth-child(2)#svid30_4306b017176842faf911ec5 > div:nth-child(2)#svid12_66185b2817dc26036872e83_svid30_4306b017176842faf911ec5 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
