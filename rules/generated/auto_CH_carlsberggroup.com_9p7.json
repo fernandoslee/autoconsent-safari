@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_carlsberggroup.com_9p7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.carlsberggroup.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?carlsberggroup\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cbgccp-cookies-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#cbg_ccp_cookie_refuse_optional_btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cbgccp-cookies-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#cbg_ccp_cookie_refuse_optional_btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cbgccp-cookies-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#cbg_ccp_cookie_refuse_optional_btn",
+            "comment": "Refuse optional"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cbgccp-cookies-banner > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2)#cbg_ccp_cookie_refuse_optional_btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
