@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_zadkine.paris.fr_ksu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.zadkine.paris.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?zadkine\\.paris\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"orejime-banner\"] > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])[data-testid=\"orejime-banner-decline\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"orejime-banner\"] > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])[data-testid=\"orejime-banner-decline\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"orejime-banner\"] > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])[data-testid=\"orejime-banner-decline\"]",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id])[data-testid=\"orejime-banner\"] > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])[data-testid=\"orejime-banner-decline\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
