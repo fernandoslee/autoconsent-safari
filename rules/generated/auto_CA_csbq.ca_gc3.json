@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_csbq.ca_gc3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://csbq.ca/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?csbq\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(6)#cookie-popup > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(6)#cookie-popup > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(6)#cookie-popup > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(6)#cookie-popup > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
