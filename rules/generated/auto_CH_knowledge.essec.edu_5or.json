@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_knowledge.essec.edu_5or",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://knowledge.essec.edu/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?knowledge\\.essec\\.edu/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a#ch2-c-1-title"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a#ch2-c-1-title"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a#ch2-c-1-title",
+            "comment": "Necessary cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#ch2-settings > div:nth-child(5):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a#ch2-c-1-title",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
