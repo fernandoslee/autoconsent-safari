@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ibercaja.es_5d4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ibercaja.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ibercaja\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies-bar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#butCookiesBarReject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies-bar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#butCookiesBarReject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies-bar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#butCookiesBarReject",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies-bar > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3)#butCookiesBarReject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
