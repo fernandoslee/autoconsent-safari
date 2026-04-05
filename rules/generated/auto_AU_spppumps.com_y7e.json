@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_spppumps.com_y7e",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.spppumps.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spppumps\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#scm-cookiebanner > div:nth-child(5):not([id]) > button:nth-child(2)#scm-deny-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#scm-cookiebanner > div:nth-child(5):not([id]) > button:nth-child(2)#scm-deny-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#scm-cookiebanner > div:nth-child(5):not([id]) > button:nth-child(2)#scm-deny-all",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#scm-cookiebanner > div:nth-child(5):not([id]) > button:nth-child(2)#scm-deny-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
