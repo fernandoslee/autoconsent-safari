@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_jobs-ete.com_q3g",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jobs-ete.com/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?cidj\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__abconsent-cmp > div#sd-cmp > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__abconsent-cmp > div#sd-cmp > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__abconsent-cmp > div#sd-cmp > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Continuer sans accepter"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__abconsent-cmp > div#sd-cmp > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
