@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hillhouttuinhout.nl_3v0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hillhouttuinhout.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hillhouttuinhout\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#jquery-cookie-law-script > div:nth-child(2)#cookie-law-container-box > div#cookie-law-container > div:not([id]) > div:nth-child(2)#cookie-law-action > a:nth-child(2)#cookie-law-button-more"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#jquery-cookie-law-script > div:nth-child(2)#cookie-law-container-box > div#cookie-law-container > div:not([id]) > div:nth-child(2)#cookie-law-action > a:nth-child(2)#cookie-law-button-more"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#jquery-cookie-law-script > div:nth-child(2)#cookie-law-container-box > div#cookie-law-container > div:not([id]) > div:nth-child(2)#cookie-law-action > a:nth-child(2)#cookie-law-button-more",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#jquery-cookie-law-script > div:nth-child(2)#cookie-law-container-box > div#cookie-law-container > div:not([id]) > div:nth-child(2)#cookie-law-action > a:nth-child(2)#cookie-law-button-more",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
