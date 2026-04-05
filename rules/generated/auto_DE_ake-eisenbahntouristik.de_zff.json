@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ake-eisenbahntouristik.de_zff",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ake-eisenbahntouristik.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ake-eisenbahntouristik\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#pm-accept-necessary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#pm-accept-necessary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#pm-accept-necessary",
+            "comment": "Nur Notwendige ✔"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#pm-accept-necessary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
