@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_architectuur.org_6ai",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.architectuur.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?architectuur\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wr1 > div:nth-child(5)#cookie-banner > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wr1 > div:nth-child(5)#cookie-banner > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wr1 > div:nth-child(5)#cookie-banner > button:nth-child(3)#reject-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wr1 > div:nth-child(5)#cookie-banner > button:nth-child(3)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
