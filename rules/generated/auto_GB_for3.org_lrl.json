@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_for3.org_lrl",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.for3.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?for3\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiejar_stacks_in_26752_1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#stacks_out_26752_20 > div#stacks_in_26752_20 > div#stacks_in_26752_20_button > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiejar_stacks_in_26752_1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#stacks_out_26752_20 > div#stacks_in_26752_20 > div#stacks_in_26752_20_button > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiejar_stacks_in_26752_1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#stacks_out_26752_20 > div#stacks_in_26752_20 > div#stacks_in_26752_20_button > a:not([id])",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiejar_stacks_in_26752_1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div#stacks_out_26752_20 > div#stacks_in_26752_20 > div#stacks_in_26752_20_button > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
