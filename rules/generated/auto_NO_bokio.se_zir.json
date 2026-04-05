@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_bokio.se_zir",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bokio.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bokio\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrap > div:nth-child(17)#cookiemodal > div:not([id]) > div:not([id]) > button:nth-child(4)#cookie-donottrack"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrap > div:nth-child(17)#cookiemodal > div:not([id]) > div:not([id]) > button:nth-child(4)#cookie-donottrack"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrap > div:nth-child(17)#cookiemodal > div:not([id]) > div:not([id]) > button:nth-child(4)#cookie-donottrack",
+            "comment": "Avvisa alla"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrap > div:nth-child(17)#cookiemodal > div:not([id]) > div:not([id]) > button:nth-child(4)#cookie-donottrack",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
