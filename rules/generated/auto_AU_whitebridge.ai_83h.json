@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_whitebridge.ai_83h",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://whitebridge.ai/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?whitebridge\\.ai/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2).body > div:nth-child(10):not([id]).fs-cc-components > div:nth-child(1):not([id]).fs-cc-banner3_component > div:nth-child(1):not([id]).fs-cc-banner3_container > div:nth-child(2):not([id]).fs-cc-banner3_buttons-wrapper > a:nth-child(1):not([id]).fs-cc-banner3_button.fs-cc-button-alt.w-inline-block > div:nth-child(2):not([id]).fs-cc-banner3_button-text"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2).body > div:nth-child(10):not([id]).fs-cc-components > div:nth-child(1):not([id]).fs-cc-banner3_component > div:nth-child(1):not([id]).fs-cc-banner3_container > div:nth-child(2):not([id]).fs-cc-banner3_buttons-wrapper > a:nth-child(1):not([id]).fs-cc-banner3_button.fs-cc-button-alt.w-inline-block > div:nth-child(2):not([id]).fs-cc-banner3_button-text"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2).body > div:nth-child(10):not([id]).fs-cc-components > div:nth-child(1):not([id]).fs-cc-banner3_component > div:nth-child(1):not([id]).fs-cc-banner3_container > div:nth-child(2):not([id]).fs-cc-banner3_buttons-wrapper > a:nth-child(1):not([id]).fs-cc-banner3_button.fs-cc-button-alt.w-inline-block > div:nth-child(2):not([id]).fs-cc-banner3_button-text",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2).body > div:nth-child(10):not([id]).fs-cc-components > div:nth-child(1):not([id]).fs-cc-banner3_component > div:nth-child(1):not([id]).fs-cc-banner3_container > div:nth-child(2):not([id]).fs-cc-banner3_buttons-wrapper > a:nth-child(1):not([id]).fs-cc-banner3_button.fs-cc-button-alt.w-inline-block > div:nth-child(2):not([id]).fs-cc-banner3_button-text",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
