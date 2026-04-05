@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_difesa.it_hzz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.difesa.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?difesa\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body:nth-child(2) > div:nth-child(8):not([id]).gdprcookie > div:nth-child(3):not([id]).gdprcookie-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body:nth-child(2) > div:nth-child(8):not([id]).gdprcookie > div:nth-child(3):not([id]).gdprcookie-buttons > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body:nth-child(2) > div:nth-child(8):not([id]).gdprcookie > div:nth-child(3):not([id]).gdprcookie-buttons > button:nth-child(3):not([id])",
+            "comment": "Rifiuta"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body:nth-child(2) > div:nth-child(8):not([id]).gdprcookie > div:nth-child(3):not([id]).gdprcookie-buttons > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
