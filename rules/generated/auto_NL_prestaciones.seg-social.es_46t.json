@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_prestaciones.seg-social.es_46t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://prestaciones.seg-social.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?prestaciones\\.seg-social\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > app-root:not([id]) > div:not([id]) > app-main-layout:nth-child(2):not([id]) > app-banner-cookies:nth-child(4):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > sdss-button:nth-child(2)#btn_rechazar"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > app-root:not([id]) > div:not([id]) > app-main-layout:nth-child(2):not([id]) > app-banner-cookies:nth-child(4):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > sdss-button:nth-child(2)#btn_rechazar"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > app-root:not([id]) > div:not([id]) > app-main-layout:nth-child(2):not([id]) > app-banner-cookies:nth-child(4):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > sdss-button:nth-child(2)#btn_rechazar",
+            "comment": "Rechazar todas"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > app-root:not([id]) > div:not([id]) > app-main-layout:nth-child(2):not([id]) > app-banner-cookies:nth-child(4):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > sdss-button:nth-child(2)#btn_rechazar",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
