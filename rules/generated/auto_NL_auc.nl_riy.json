@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_auc.nl_riy",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.auc.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auc\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookiebar > div:not([id]) > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieNoAccept"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookiebar > div:not([id]) > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieNoAccept"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookiebar > div:not([id]) > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieNoAccept",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookiebar > div:not([id]) > div#cookieConsent > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#cookieNoAccept",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
