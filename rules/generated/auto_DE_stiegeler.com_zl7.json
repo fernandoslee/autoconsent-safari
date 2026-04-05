@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_stiegeler.com_zl7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://stiegeler.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?stiegeler\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#muse-ccbanner > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(1)#cc_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#muse-ccbanner > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(1)#cc_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#muse-ccbanner > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(1)#cc_deny",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#muse-ccbanner > div:not([id]) > div:nth-child(7):not([id]) > button:nth-child(1)#cc_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
