@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_ultrastickershop.nl_hx2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ultrastickershop.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ultrastickershop\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.geist_9c1fd2b9-module__We3PEq__variable.geist_mono_e0f6b80d-module__yeUymq__variable.antialiased.min-h-screen.flex.flex-col > div:not([id]).hidden.md\\:block.fixed.bottom-4.right-4.z-50.w-\\[320px\\].rounded-2xl.border.border-gray-200.bg-white.p-5.shadow-2xl > div:nth-child(3):not([id]).flex.flex-col.gap-2 > button:nth-child(2):not([id]).w-full.rounded-xl.border-ultra-green.border-2.py-2\\.5.text-sm.font-semibold.text-black.transition.hover\\:bg-gray-50.cursor-pointer"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.geist_9c1fd2b9-module__We3PEq__variable.geist_mono_e0f6b80d-module__yeUymq__variable.antialiased.min-h-screen.flex.flex-col > div:not([id]).hidden.md\\:block.fixed.bottom-4.right-4.z-50.w-\\[320px\\].rounded-2xl.border.border-gray-200.bg-white.p-5.shadow-2xl > div:nth-child(3):not([id]).flex.flex-col.gap-2 > button:nth-child(2):not([id]).w-full.rounded-xl.border-ultra-green.border-2.py-2\\.5.text-sm.font-semibold.text-black.transition.hover\\:bg-gray-50.cursor-pointer"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body.geist_9c1fd2b9-module__We3PEq__variable.geist_mono_e0f6b80d-module__yeUymq__variable.antialiased.min-h-screen.flex.flex-col > div:not([id]).hidden.md\\:block.fixed.bottom-4.right-4.z-50.w-\\[320px\\].rounded-2xl.border.border-gray-200.bg-white.p-5.shadow-2xl > div:nth-child(3):not([id]).flex.flex-col.gap-2 > button:nth-child(2):not([id]).w-full.rounded-xl.border-ultra-green.border-2.py-2\\.5.text-sm.font-semibold.text-black.transition.hover\\:bg-gray-50.cursor-pointer",
+            "comment": "Alle afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body.geist_9c1fd2b9-module__We3PEq__variable.geist_mono_e0f6b80d-module__yeUymq__variable.antialiased.min-h-screen.flex.flex-col > div:not([id]).hidden.md\\:block.fixed.bottom-4.right-4.z-50.w-\\[320px\\].rounded-2xl.border.border-gray-200.bg-white.p-5.shadow-2xl > div:nth-child(3):not([id]).flex.flex-col.gap-2 > button:nth-child(2):not([id]).w-full.rounded-xl.border-ultra-green.border-2.py-2\\.5.text-sm.font-semibold.text-black.transition.hover\\:bg-gray-50.cursor-pointer",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
