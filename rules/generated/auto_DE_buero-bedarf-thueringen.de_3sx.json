@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_buero-bedarf-thueringen.de_3sx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.buero-bedarf-thueringen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?buero-bedarf-thueringen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#columns > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#center_column > dialog:nth-child(18)#cookie_consent_dialog > form:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(4)#submitDisallowAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#columns > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#center_column > dialog:nth-child(18)#cookie_consent_dialog > form:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(4)#submitDisallowAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#columns > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#center_column > dialog:nth-child(18)#cookie_consent_dialog > form:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(4)#submitDisallowAll",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#columns > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#center_column > dialog:nth-child(18)#cookie_consent_dialog > form:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(4)#submitDisallowAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
