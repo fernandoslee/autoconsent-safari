@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_ucuenca.edu.ec_0gg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ucuenca.edu.ec/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ucuenca\\.edu\\.ec/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(13)#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(13)#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(13)#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a#reject-cookies",
+            "comment": "Rechazar cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(13)#cookie-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
