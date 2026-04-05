@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_usato.ch_099",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.usato.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?usato\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:not([id]) > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:not([id]) > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:not([id]) > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:not([id]) > section:nth-child(1):not([id]) > div:nth-child(5):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
