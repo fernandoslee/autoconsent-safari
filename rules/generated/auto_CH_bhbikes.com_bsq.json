@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bhbikes.com_bsq",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bhbikes.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bhbikes\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#reject-cookies",
+            "comment": "RECHAZAR OPCIONALES"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
