@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_cvketelcollectief.consumentenbond.nl_jmk",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://cvketelcollectief.consumentenbond.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cvketelcollectief\\.consumentenbond\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div#__FAAS_SSR__1775206030309__KOQ__ > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div#__FAAS_SSR__1775206030309__KOQ__ > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div#__FAAS_SSR__1775206030309__KOQ__ > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Niet accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div#__FAAS_SSR__1775206030309__KOQ__ > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
