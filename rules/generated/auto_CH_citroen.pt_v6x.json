@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_citroen.pt_v6x",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.citroen.pt/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?citroen\\.pt/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "comment": "CONTINUAR SEM ACEITAR →"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_psaihm_main_div > div:nth-child(5)#_psaihm_1_top > a#_psaihm_continue_without_accepting",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
