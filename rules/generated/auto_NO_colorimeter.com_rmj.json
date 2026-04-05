@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_colorimeter.com_rmj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://colorimeter.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?colorimeter\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#layui-layer1 > div:nth-child(1)#ID-gugetag > div#ads > div:nth-child(1):not([id]) > button:nth-child(2)#Rejectall"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#layui-layer1 > div:nth-child(1)#ID-gugetag > div#ads > div:nth-child(1):not([id]) > button:nth-child(2)#Rejectall"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#layui-layer1 > div:nth-child(1)#ID-gugetag > div#ads > div:nth-child(1):not([id]) > button:nth-child(2)#Rejectall",
+            "comment": "Reject All"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#layui-layer1 > div:nth-child(1)#ID-gugetag > div#ads > div:nth-child(1):not([id]) > button:nth-child(2)#Rejectall",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
