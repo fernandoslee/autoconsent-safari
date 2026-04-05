@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_evocamp.de_leo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://evocamp.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?evocamp\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(6)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#consent-banner-btn-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(6)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#consent-banner-btn-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(6)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#consent-banner-btn-close",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(6)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#consent-banner-btn-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
