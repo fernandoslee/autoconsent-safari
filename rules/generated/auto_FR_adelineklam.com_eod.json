@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_adelineklam.com_eod",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://adelineklam.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adelineklam\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#shopify-block-AVDR6U2NqMTd5cUVZW__3058753826952816051 > e-kookie:nth-child(2)#ekookie > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
