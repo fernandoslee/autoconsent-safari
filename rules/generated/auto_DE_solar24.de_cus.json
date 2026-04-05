@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_solar24.de_cus",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.solar24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?solar24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(6)#cookie-banner > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(6)#cookie-banner > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(6)#cookie-banner > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-reject",
+            "comment": "Nur erforderliche"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(6)#cookie-banner > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cb-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
