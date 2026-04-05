@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_gloow.nl_flv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gloow.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gloow\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gloow-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gloow-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gloow-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gloow-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
