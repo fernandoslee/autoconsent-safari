@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_woerlitztourist.de_6ye",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.woerlitztourist.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?woerlitztourist\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > article#cookie-consent > div#consent-manager > div#consent-manager-inner > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#cm-selectSpecific"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > article#cookie-consent > div#consent-manager > div#consent-manager-inner > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#cm-selectSpecific"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > article#cookie-consent > div#consent-manager > div#consent-manager-inner > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#cm-selectSpecific",
+            "comment": "Nur Notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > article#cookie-consent > div#consent-manager > div#consent-manager-inner > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > div:not([id]) > button:nth-child(1)#cm-selectSpecific",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
