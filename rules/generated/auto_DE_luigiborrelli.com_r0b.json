@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_luigiborrelli.com_r0b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.luigiborrelli.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?luigiborrelli\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-message > p:nth-child(5):not([id]) > button:nth-child(4)#gdpr-cookie-accept-no"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-message > p:nth-child(5):not([id]) > button:nth-child(4)#gdpr-cookie-accept-no"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-message > p:nth-child(5):not([id]) > button:nth-child(4)#gdpr-cookie-accept-no",
+            "comment": "Accetta Necessari"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-message > p:nth-child(5):not([id]) > button:nth-child(4)#gdpr-cookie-accept-no",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
