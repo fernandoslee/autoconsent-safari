@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_cheapenergy24.de_wbo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.cheapenergy24.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?cheapenergy24\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > up-modal:not([id]) > up-modal-viewport:nth-child(2):not([id]) > up-modal-box:nth-child(2):not([id]) > up-modal-content:not([id]) > div:not([id]) > div:not([id]) > form:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
