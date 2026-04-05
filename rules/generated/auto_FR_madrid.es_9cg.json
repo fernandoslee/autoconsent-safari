@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_madrid.es_9cg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.madrid.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?madrid\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#iam-cookie-control-modal > div:nth-child(2):not([id]) > button:nth-child(2)#iam-cookie-control-modal-action-secondary"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#iam-cookie-control-modal > div:nth-child(2):not([id]) > button:nth-child(2)#iam-cookie-control-modal-action-secondary"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#iam-cookie-control-modal > div:nth-child(2):not([id]) > button:nth-child(2)#iam-cookie-control-modal-action-secondary",
+            "comment": "Rechazar todas"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#iam-cookie-control-modal > div:nth-child(2):not([id]) > button:nth-child(2)#iam-cookie-control-modal-action-secondary",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
