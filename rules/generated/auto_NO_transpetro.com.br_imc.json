@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_transpetro.com.br_imc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://transpetro.com.br/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?transpetro\\.com\\.br/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(2)#footer > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookie-bottom-popup > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(2)#footer > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookie-bottom-popup > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(2)#footer > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookie-bottom-popup > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Rejeitar Todos"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(2)#footer > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#cookie-bottom-popup > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
