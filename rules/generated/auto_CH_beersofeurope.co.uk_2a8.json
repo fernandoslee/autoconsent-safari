@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_beersofeurope.co.uk_2a8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.beersofeurope.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?beersofeurope\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bs-cookie-settings > div#bs-cookie-wrapper > div:nth-child(1)#bs-cookie-bar > div:not([id]) > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bs-cookie-settings > div#bs-cookie-wrapper > div:nth-child(1)#bs-cookie-bar > div:not([id]) > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bs-cookie-settings > div#bs-cookie-wrapper > div:nth-child(1)#bs-cookie-bar > div:not([id]) > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bs-cookie-settings > div#bs-cookie-wrapper > div:nth-child(1)#bs-cookie-bar > div:not([id]) > div#c-inr > div:nth-child(2)#c-bns > button:nth-child(2)#c-s-bn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
