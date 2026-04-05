@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_jnrousseau.com_oa5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jnrousseau.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jnrousseau\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-modal > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
