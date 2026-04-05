@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_viavisolutions.com_pzp",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.viavisolutions.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?viavisolutions\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieRibbon > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookieBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieRibbon > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookieBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieRibbon > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookieBtn",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieRibbon > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#declineCookieBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
