@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_schwulst.de_n0t",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.schwulst.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schwulst\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > div:nth-child(5)#privacy-consent > small:not([id]) > small:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > div:nth-child(5)#privacy-consent > small:not([id]) > small:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > div:nth-child(5)#privacy-consent > small:not([id]) > small:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Nur notwendige"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > div:nth-child(5)#privacy-consent > small:not([id]) > small:not([id]) > div:nth-child(4):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
