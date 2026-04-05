@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_routeplanner.suunto.com_pvf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://routeplanner.suunto.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?routeplanner\\.suunto\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-modal > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(3)#cookie-essential-only"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-modal > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(3)#cookie-essential-only"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-modal > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(3)#cookie-essential-only",
+            "comment": "Allow essential only"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-modal > div:not([id]) > div:nth-child(4):not([id]) > div:not([id]) > button:nth-child(3)#cookie-essential-only",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
