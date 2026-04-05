@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_destincommun.fr_oep",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.destincommun.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?destincommun\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2)#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form7d4912aff420439dbf0b8a2bccd53b2d > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2)#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form7d4912aff420439dbf0b8a2bccd53b2d > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form7d4912aff420439dbf0b8a2bccd53b2d > button:nth-child(3):not([id])",
+            "comment": "Uniquement les cookies nécessaires"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#cookie-consent-modal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > form#form7d4912aff420439dbf0b8a2bccd53b2d > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
