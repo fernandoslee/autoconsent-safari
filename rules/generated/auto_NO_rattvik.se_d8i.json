@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_rattvik.se_d8i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rattvik.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rattvik\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#svid10_211ac4b4171ac43d048c5b64 > div:nth-child(4)#svid12_163d09f17c0749178e90bd8 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#svid10_211ac4b4171ac43d048c5b64 > div:nth-child(4)#svid12_163d09f17c0749178e90bd8 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#svid10_211ac4b4171ac43d048c5b64 > div:nth-child(4)#svid12_163d09f17c0749178e90bd8 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])",
+            "comment": "Godkänn nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#svid10_211ac4b4171ac43d048c5b64 > div:nth-child(4)#svid12_163d09f17c0749178e90bd8 > div:nth-child(2):not([id]) > dialog:not([id]) > div:nth-child(3):not([id]) > form:nth-child(1):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
