@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_pickawood.com_f0z",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pickawood.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pickawood\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-agreement > a:nth-child(4)#cookie-bar-single-selection"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-agreement > a:nth-child(4)#cookie-bar-single-selection"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-agreement > a:nth-child(4)#cookie-bar-single-selection",
+            "comment": "noodzakelijke cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-agreement > a:nth-child(4)#cookie-bar-single-selection",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
