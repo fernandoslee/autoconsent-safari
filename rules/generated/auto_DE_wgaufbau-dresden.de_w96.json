@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_wgaufbau-dresden.de_w96",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.wgaufbau-dresden.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?wgaufbau-dresden\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#consent-banner > div#consent-banner-center > div:nth-child(2)#consent-banner-right > div#content-banner-buttons > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#consent-banner > div#consent-banner-center > div:nth-child(2)#consent-banner-right > div#content-banner-buttons > div:nth-child(2):not([id]) > button:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#consent-banner > div#consent-banner-center > div:nth-child(2)#consent-banner-right > div#content-banner-buttons > div:nth-child(2):not([id]) > button:not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#consent-banner > div#consent-banner-center > div:nth-child(2)#consent-banner-right > div#content-banner-buttons > div:nth-child(2):not([id]) > button:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
