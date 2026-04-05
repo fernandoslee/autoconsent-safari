@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_mijnkoffiemachine.nl_47p",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mijnkoffiemachine.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mijnkoffiemachine\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookies",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBar > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#rejectCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
