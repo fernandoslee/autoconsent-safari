@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_euchner.com_ro5",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.euchner.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?euchner\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section#cookiebanner > div#cookieheading > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiedeny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section#cookiebanner > div#cookieheading > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiedeny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section#cookiebanner > div#cookieheading > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiedeny",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section#cookiebanner > div#cookieheading > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiedeny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
