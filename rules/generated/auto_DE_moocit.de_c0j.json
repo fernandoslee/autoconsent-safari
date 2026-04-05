@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_moocit.de_c0j",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://moocit.de/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?glanz-verlag\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > p:nth-child(2)#onetrust-policy-text > a:nth-child(1)#consent-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > p:nth-child(2)#onetrust-policy-text > a:nth-child(1)#consent-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > p:nth-child(2)#onetrust-policy-text > a:nth-child(1)#consent-reject",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#onetrust-consent-sdk > div:nth-child(2)#onetrust-banner-sdk > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(1)#onetrust-group-container > div:nth-child(2)#onetrust-policy > p:nth-child(2)#onetrust-policy-text > a:nth-child(1)#consent-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
