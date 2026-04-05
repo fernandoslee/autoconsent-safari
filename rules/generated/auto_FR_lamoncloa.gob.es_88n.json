@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_lamoncloa.gob.es_88n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lamoncloa.gob.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lamoncloa\\.gob\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#s4-workspace > div#s4-bodyContainer > div#ctl00_DeltaPlaceHolderMain > div:not([id]) > div#contentBox > div:nth-child(4)#divCookieInfo > button:nth-child(3)#ctl00_CookieInfo_btnLinkNO"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#s4-workspace > div#s4-bodyContainer > div#ctl00_DeltaPlaceHolderMain > div:not([id]) > div#contentBox > div:nth-child(4)#divCookieInfo > button:nth-child(3)#ctl00_CookieInfo_btnLinkNO"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#s4-workspace > div#s4-bodyContainer > div#ctl00_DeltaPlaceHolderMain > div:not([id]) > div#contentBox > div:nth-child(4)#divCookieInfo > button:nth-child(3)#ctl00_CookieInfo_btnLinkNO",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#s4-workspace > div#s4-bodyContainer > div#ctl00_DeltaPlaceHolderMain > div:not([id]) > div#contentBox > div:nth-child(4)#divCookieInfo > button:nth-child(3)#ctl00_CookieInfo_btnLinkNO",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
