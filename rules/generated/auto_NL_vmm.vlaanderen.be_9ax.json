@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vmm.vlaanderen.be_9ax",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://vmm.vlaanderen.be/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vmm\\.vlaanderen\\.be/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#question-landing > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#question-landing > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#question-landing > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Enkel noodzakelijke cookies aanvaarden"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#question-landing > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
