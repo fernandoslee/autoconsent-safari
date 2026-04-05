@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_daikin.it_5hg",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.daikin.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?daikin\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-42f9c2e0b1 > div:not([id]) > div:not([id]) > section#cookie-modal-1527893968 > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-42f9c2e0b1 > div:not([id]) > div:not([id]) > section#cookie-modal-1527893968 > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-42f9c2e0b1 > div:not([id]) > div:not([id]) > section#cookie-modal-1527893968 > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#container-ccb95b6c01 > div:nth-child(1):not([id]) > div#container-42f9c2e0b1 > div:not([id]) > div:not([id]) > section#cookie-modal-1527893968 > div:nth-child(4):not([id]) > div:nth-child(3):not([id]) > button:not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
