@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_silicloud.com_g6q",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.silicloud.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?silicloud\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#__nuxt > div:not([id]) > footer:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#el-collapse-head-20"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#__nuxt > div:not([id]) > footer:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#el-collapse-head-20"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#__nuxt > div:not([id]) > footer:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#el-collapse-head-20",
+            "comment": "Strictly Necessary Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#__nuxt > div:not([id]) > footer:nth-child(7):not([id]) > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(1)#el-collapse-head-20",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
