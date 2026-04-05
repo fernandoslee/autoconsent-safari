@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_costco.com.mx_app",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.costco.com.mx/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?costco\\.com\\.mx/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(5):not([id]) > sip-cs-dynamic-component:nth-child(8):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(5):not([id]) > sip-cs-dynamic-component:nth-child(8):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(5):not([id]) > sip-cs-dynamic-component:nth-child(8):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "comment": "No Acepto"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > sip-header:nth-child(1):not([id]) > header:nth-child(5):not([id]) > sip-cs-dynamic-component:nth-child(8):not([id]) > sip-sip-gdpr-options-component:not([id]) > div#gdprMessage > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
