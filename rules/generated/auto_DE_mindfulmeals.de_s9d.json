@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_mindfulmeals.de_s9d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mindfulmeals.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mindfulmeals\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#reject-all",
+            "comment": "Nur Essentielle"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(3)#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
