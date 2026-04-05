@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > main#main > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+            "exists": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3):not([id]) > span:nth-child(1):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main#main > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+            "visible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3):not([id]) > span:nth-child(1):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > main#main > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
-            "comment": "Cookies ablehnen"
+            "waitForThenClick": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3):not([id]) > span:nth-child(1):not([id])",
+            "comment": "Ablehnen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > main#main > div:nth-child(6):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "waitForVisible": "body > div:not([id]) > footer:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:not([id]) > section:nth-child(2):not([id]) > footer:nth-child(3):not([id]) > button:nth-child(3):not([id]) > span:nth-child(1):not([id])",
             "timeout": 1000,
             "check": "none"
         }
