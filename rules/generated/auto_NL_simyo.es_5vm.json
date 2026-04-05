@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_simyo.es_5vm",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.simyo.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?simyo\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#noticeDescription > ul:nth-child(4):not([id]) > li:nth-child(2):not([id]) > button#reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#noticeDescription > ul:nth-child(4):not([id]) > li:nth-child(2):not([id]) > button#reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#noticeDescription > ul:nth-child(4):not([id]) > li:nth-child(2):not([id]) > button#reject-all",
+            "comment": "Rechazar todo"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2)#noticeDescription > ul:nth-child(4):not([id]) > li:nth-child(2):not([id]) > button#reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
