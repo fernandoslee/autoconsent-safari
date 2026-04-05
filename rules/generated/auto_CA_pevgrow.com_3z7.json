@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_pevgrow.com_3z7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://pevgrow.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pevgrow\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#alcacookiealert > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#alcaCookieKo"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#alcacookiealert > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#alcaCookieKo"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#alcacookiealert > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#alcaCookieKo",
+            "comment": "RECHAZAR TODO"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#alcacookiealert > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#alcaCookieKo",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
