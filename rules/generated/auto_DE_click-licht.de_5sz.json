@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_click-licht.de_5sz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.click-licht.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?click-licht\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#page > main:nth-child(4)#outer_wrapper > div#page_wrapper > div:nth-child(5)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#page > main:nth-child(4)#outer_wrapper > div#page_wrapper > div:nth-child(5)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#page > main:nth-child(4)#outer_wrapper > div#page_wrapper > div:nth-child(5)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#page > main:nth-child(4)#outer_wrapper > div#page_wrapper > div:nth-child(5)#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
