@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_autonoleggiodelivery.it_t4i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://autonoleggiodelivery.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?autonoleggiodelivery\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#lwaio-consent-bar > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cookie_action_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#lwaio-consent-bar > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cookie_action_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#lwaio-consent-bar > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cookie_action_reject",
+            "comment": "Rifiuta"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#lwaio-consent-bar > div:nth-child(1):not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#cookie_action_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
