@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_buendnis-buergerenergie.de_rne",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.buendnis-buergerenergie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?buendnis-buergerenergie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > a:nth-child(3)#no-accept-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > a:nth-child(3)#no-accept-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > a:nth-child(3)#no-accept-cookies",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > a:nth-child(3)#no-accept-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
