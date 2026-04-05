@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_manage.autodesk.com_ze3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://manage.autodesk.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?manage\\.autodesk\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#spa-root > div:not([id]) > div#lowerContainer > div:nth-child(3):not([id]) > div:nth-child(1)#uh-footer-container > article:not([id]) > div:not([id]) > div:not([id]) > div#container-34a83e409d > div:not([id]) > div:not([id]) > div:nth-child(2)#universal-footer-example > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#text-c53c49b37b > div:not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#spa-root > div:not([id]) > div#lowerContainer > div:nth-child(3):not([id]) > div:nth-child(1)#uh-footer-container > article:not([id]) > div:not([id]) > div:not([id]) > div#container-34a83e409d > div:not([id]) > div:not([id]) > div:nth-child(2)#universal-footer-example > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#text-c53c49b37b > div:not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#spa-root > div:not([id]) > div#lowerContainer > div:nth-child(3):not([id]) > div:nth-child(1)#uh-footer-container > article:not([id]) > div:not([id]) > div:not([id]) > div#container-34a83e409d > div:not([id]) > div:not([id]) > div:nth-child(2)#universal-footer-example > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#text-c53c49b37b > div:not([id]) > p:not([id]) > a:nth-child(2):not([id])",
+            "comment": "Do not sell or share my personal information"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#spa-root > div:not([id]) > div#lowerContainer > div:nth-child(3):not([id]) > div:nth-child(1)#uh-footer-container > article:not([id]) > div:not([id]) > div:not([id]) > div#container-34a83e409d > div:not([id]) > div:not([id]) > div:nth-child(2)#universal-footer-example > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div#text-c53c49b37b > div:not([id]) > p:not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
