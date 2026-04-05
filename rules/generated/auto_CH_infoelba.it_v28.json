@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_infoelba.it_v28",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.infoelba.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?infoelba\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])",
+            "comment": "Accetta solo necessari"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > footer:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2)#acconsento-click-button-necessary-only > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
