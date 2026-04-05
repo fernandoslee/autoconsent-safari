@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ericgrauffelonlineshop.com_n3r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ericgrauffelonlineshop.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ericgrauffel\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > main:not([id]) > footer:nth-child(6)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(11)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-exit"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > main:not([id]) > footer:nth-child(6)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(11)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-exit"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > main:not([id]) > footer:nth-child(6)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(11)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-exit",
+            "comment": "I refuse"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > main:not([id]) > footer:nth-child(6)#footer > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(11)#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1)#cookie-exit",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
