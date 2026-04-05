@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_abosvenskaforsamling.fi_rpj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.abosvenskaforsamling.fi/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?abosvenskaforsamling\\.fi/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookie-selection-buttons > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookie-selection-buttons > button:nth-child(3)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookie-selection-buttons > button:nth-child(3)#reject-cookies",
+            "comment": "Godkänn endast nödvändiga kakor"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#cookie-selection-buttons > button:nth-child(3)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
