@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_hematologiegroningen.nl_637",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://hematologiegroningen.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hematologiegroningen\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3)#hg-cookie-notice > a:nth-child(3)#hg_cookie_remove_consent"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3)#hg-cookie-notice > a:nth-child(3)#hg_cookie_remove_consent"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3)#hg-cookie-notice > a:nth-child(3)#hg_cookie_remove_consent",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > header:nth-child(2):not([id]) > div:nth-child(3)#hg-cookie-notice > a:nth-child(3)#hg_cookie_remove_consent",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
