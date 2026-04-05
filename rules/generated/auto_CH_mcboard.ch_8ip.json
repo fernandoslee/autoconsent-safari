@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mcboard.ch_8ip",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mcboard.ch/"
+    },
+    "runContext": {
+        "main": false,
+        "frame": true,
+        "urlPattern": "^https?://(www\\.)?intersportrent\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01",
+            "comment": "Reject optional cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#dr_cookie_banner_container > div:nth-child(2)#dr_detailed-banner > div:nth-child(2):not([id]) > a:nth-child(2)#cc-deny-01",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
