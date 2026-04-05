@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_keuzevrijbijmij.nl_dcx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://keuzevrijbijmij.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?keuzevrijbijmij\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(3)#disallow-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(3)#disallow-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(3)#disallow-cookies",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(3)#disallow-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
