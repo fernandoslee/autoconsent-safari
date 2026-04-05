@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_thrifty.co.uk_xfu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.thrifty.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?thrifty\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#thrifty-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#thrifty-button-group-parent > div#thrifty-button-group > button:nth-child(2)#thrifty-reject-all-handler"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#thrifty-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#thrifty-button-group-parent > div#thrifty-button-group > button:nth-child(2)#thrifty-reject-all-handler"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#thrifty-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#thrifty-button-group-parent > div#thrifty-button-group > button:nth-child(2)#thrifty-reject-all-handler",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#thrifty-cookies > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#thrifty-button-group-parent > div#thrifty-button-group > button:nth-child(2)#thrifty-reject-all-handler",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
