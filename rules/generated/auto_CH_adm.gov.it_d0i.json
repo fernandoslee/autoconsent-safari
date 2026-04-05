@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_adm.gov.it_d0i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.adm.gov.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?adm\\.gov\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(3)#wrapper > div:nth-child(3)#p_p_id_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR_ > section:nth-child(2)#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#cookiebar-tra > div:not([id]) > div:not([id]) > div:not([id]) > form#cs > div:nth-child(3):not([id]) > button:nth-child(1)#cb-RejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(3)#wrapper > div:nth-child(3)#p_p_id_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR_ > section:nth-child(2)#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#cookiebar-tra > div:not([id]) > div:not([id]) > div:not([id]) > form#cs > div:nth-child(3):not([id]) > button:nth-child(1)#cb-RejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(3)#wrapper > div:nth-child(3)#p_p_id_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR_ > section:nth-child(2)#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#cookiebar-tra > div:not([id]) > div:not([id]) > div:not([id]) > form#cs > div:nth-child(3):not([id]) > button:nth-child(1)#cb-RejectAll",
+            "comment": "Rifiuta tutti\ni cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(3)#wrapper > div:nth-child(3)#p_p_id_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR_ > section:nth-child(2)#portlet_com_liferay_journal_content_web_portlet_JournalContentPortlet_INSTANCE_COOKIEBAR > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#cookiebar-tra > div:not([id]) > div:not([id]) > div:not([id]) > form#cs > div:nth-child(3):not([id]) > button:nth-child(1)#cb-RejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
