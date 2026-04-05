@@ -10,19 +10,22 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": ".cookie-banner-mount-point button.accept"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body#collection-59d726c7f6576e961db44d2c > div:not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Decline"
+            "waitForThenClick": ".cookie-banner-mount-point button.decline"
         }
     ]
 }
