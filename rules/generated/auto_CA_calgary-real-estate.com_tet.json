@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_calgary-real-estate.com_tet",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.calgary-real-estate.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?calgary-real-estate\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > section:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
