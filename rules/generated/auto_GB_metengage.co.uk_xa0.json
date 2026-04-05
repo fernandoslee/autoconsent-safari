@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_metengage.co.uk_xa0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.metengage.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?metengage\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#CookieRejectButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#CookieRejectButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#CookieRejectButton",
+            "comment": "Reject non-essential"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsent > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > button:nth-child(2)#CookieRejectButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
