@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_librerias-picasso.com_7uc",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.librerias-picasso.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?librerias-picasso\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-compliant > div:not([id]) > div:not([id]) > div:nth-child(1)#introcookies > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-compliant > div:not([id]) > div:not([id]) > div:nth-child(1)#introcookies > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-compliant > div:not([id]) > div:not([id]) > div:nth-child(1)#introcookies > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-refuse",
+            "comment": "Denegar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-compliant > div:not([id]) > div:not([id]) > div:nth-child(1)#introcookies > div:nth-child(2):not([id]) > button:nth-child(1)#cookie-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
