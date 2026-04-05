@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_houstonzoo.org_api",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.houstonzoo.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?houstonzoo\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking",
+            "comment": "Disable Tracking"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#modal-overlay > div#modalMain > div:not([id]) > a:nth-child(1)#stopTracking",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
