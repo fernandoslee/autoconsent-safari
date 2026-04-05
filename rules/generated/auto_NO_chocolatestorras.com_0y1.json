@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_chocolatestorras.com_0y1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://chocolatestorras.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?chocolatestorras\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(15)#pixelizer_bglayer > div#pixelizer_acceptCookiesDialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(15)#pixelizer_bglayer > div#pixelizer_acceptCookiesDialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(15)#pixelizer_bglayer > div#pixelizer_acceptCookiesDialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "comment": "Solo necesarias"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(15)#pixelizer_bglayer > div#pixelizer_acceptCookiesDialog > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
