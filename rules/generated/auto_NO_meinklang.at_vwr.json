@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_meinklang.at_vwr",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://meinklang.at/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?meinklang\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#st-container > div:nth-child(13)#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#st-container > div:nth-child(13)#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#st-container > div:nth-child(13)#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#st-container > div:nth-child(13)#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
