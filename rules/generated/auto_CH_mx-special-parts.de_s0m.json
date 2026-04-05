@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_mx-special-parts.de_s0m",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.mx-special-parts.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mx-special-parts\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
