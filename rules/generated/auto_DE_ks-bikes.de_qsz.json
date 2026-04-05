@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ks-bikes.de_qsz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ks-bikes.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ks-bikes\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#allaround > div:nth-child(6)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#allaround > div:nth-child(6)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#allaround > div:nth-child(6)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#allaround > div:nth-child(6)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
