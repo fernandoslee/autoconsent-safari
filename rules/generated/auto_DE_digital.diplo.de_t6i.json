@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_digital.diplo.de_t6i",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://digital.diplo.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?digital\\.diplo\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#root > div:nth-child(2)#footer > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-banner > div:nth-child(3):not([id]) > button#cookie-no-button[data-testid=\"cookie-no-button\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#root > div:nth-child(2)#footer > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-banner > div:nth-child(3):not([id]) > button#cookie-no-button[data-testid=\"cookie-no-button\"]"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#root > div:nth-child(2)#footer > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-banner > div:nth-child(3):not([id]) > button#cookie-no-button[data-testid=\"cookie-no-button\"]",
+            "comment": "DENY"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#root > div:nth-child(2)#footer > div:not([id]) > div:not([id]) > div:not([id]) > div#cookie-banner > div:nth-child(3):not([id]) > button#cookie-no-button[data-testid=\"cookie-no-button\"]",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
