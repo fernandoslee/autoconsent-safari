@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_doctorio.io_pfj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://doctorio.io/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?doctorio\\.io/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer:not([id]) > div:nth-child(2)#z3po-cookie-overlay > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-essential"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer:not([id]) > div:nth-child(2)#z3po-cookie-overlay > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-essential"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer:not([id]) > div:nth-child(2)#z3po-cookie-overlay > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-essential",
+            "comment": "NUR NOTWENDIGE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer:not([id]) > div:nth-child(2)#z3po-cookie-overlay > div#cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#btn-essential",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
