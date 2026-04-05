@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_iqmakelaars.nl_3ap",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.iqmakelaars.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iqmakelaars\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > button:nth-child(4)#zl_cookie_declinebutton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > button:nth-child(4)#zl_cookie_declinebutton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > button:nth-child(4)#zl_cookie_declinebutton",
+            "comment": "Niet accepteren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > button:nth-child(4)#zl_cookie_declinebutton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
