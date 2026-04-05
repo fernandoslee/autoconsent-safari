@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_giottiline.com_n8s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.giottiline.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?giottiline\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#_cookie_banner_cont > div#_cookie_banner > div:nth-child(2):not([id]) > button#_cookie_banner_close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#_cookie_banner_cont > div#_cookie_banner > div:nth-child(2):not([id]) > button#_cookie_banner_close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#_cookie_banner_cont > div#_cookie_banner > div:nth-child(2):not([id]) > button#_cookie_banner_close",
+            "comment": "CONTINUE WITHOUT ACCEPTING"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#_cookie_banner_cont > div#_cookie_banner > div:nth-child(2):not([id]) > button#_cookie_banner_close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
