@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_xwiki.sonia.de_nj0",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://xwiki.sonia.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?xwiki\\.sonia\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#xwikimaincontainer > div:nth-child(1)#cookieConsent > div:nth-child(2)#cookieConsentContent > button:nth-child(3)#cookieConsentRejectAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#xwikimaincontainer > div:nth-child(1)#cookieConsent > div:nth-child(2)#cookieConsentContent > button:nth-child(3)#cookieConsentRejectAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#xwikimaincontainer > div:nth-child(1)#cookieConsent > div:nth-child(2)#cookieConsentContent > button:nth-child(3)#cookieConsentRejectAll",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#xwikimaincontainer > div:nth-child(1)#cookieConsent > div:nth-child(2)#cookieConsentContent > button:nth-child(3)#cookieConsentRejectAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
