@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_felger-shop.no_k5s",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.felger-shop.no/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?felger-shop\\.no/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form:not([id]) > form:nth-child(5):not([id]) > div:nth-child(20)#cookie-diss > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > span:not([id]) > a:nth-child(5):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form:not([id]) > form:nth-child(5):not([id]) > div:nth-child(20)#cookie-diss > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > span:not([id]) > a:nth-child(5):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form:not([id]) > form:nth-child(5):not([id]) > div:nth-child(20)#cookie-diss > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > span:not([id]) > a:nth-child(5):not([id])",
+            "comment": "neka"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form:not([id]) > form:nth-child(5):not([id]) > div:nth-child(20)#cookie-diss > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > span:not([id]) > a:nth-child(5):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
