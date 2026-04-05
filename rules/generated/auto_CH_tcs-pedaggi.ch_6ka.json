@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_tcs-pedaggi.ch_6ka",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tcs-pedaggi.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tcs-pedaggi\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > tcs-root:not([id]) > tcs-cookie-popup:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > tcs-root:not([id]) > tcs-cookie-popup:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > tcs-root:not([id]) > tcs-cookie-popup:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id])",
+            "comment": "Continua senza accettare"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > tcs-root:not([id]) > tcs-cookie-popup:nth-child(5):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > button:not([id]) > span:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
