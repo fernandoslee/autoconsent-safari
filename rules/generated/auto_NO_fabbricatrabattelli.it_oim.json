@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_fabbricatrabattelli.it_oim",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fabbricatrabattelli.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fabbricatrabattelli\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-btn-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-btn-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-btn-reject-all",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > button:nth-child(2)#cookie-consent-btn-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
