@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_hotel-ami.com_oak",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.hotel-ami.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?hotel-ami\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cc-consent-dialog > div:not([id]) > div:not([id]) > button:nth-child(5)#cc-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cc-consent-dialog > div:not([id]) > div:not([id]) > button:nth-child(5)#cc-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cc-consent-dialog > div:not([id]) > div:not([id]) > button:nth-child(5)#cc-decline",
+            "comment": "DECLINE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cc-consent-dialog > div:not([id]) > div:not([id]) > button:nth-child(5)#cc-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
