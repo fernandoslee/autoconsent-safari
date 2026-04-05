@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_eventpeppers.com_o69",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.eventpeppers.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eventpeppers\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body.front.not-logged-in.client-country-de.i18n-de.scrolling-watch.one-sidebar.sidebar-right.without-content.working-hover.x-accel.supports-sticky.supports-calc.checked-processed.lightbox-processed.inline-messages-processed.scrollhelper-processed > div:not([id]).cookie-banner.fixed > div:nth-child(2):not([id]).cookie-banner-controls > button:nth-child(3):not([id]).cookie-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body.front.not-logged-in.client-country-de.i18n-de.scrolling-watch.one-sidebar.sidebar-right.without-content.working-hover.x-accel.supports-sticky.supports-calc.checked-processed.lightbox-processed.inline-messages-processed.scrollhelper-processed > div:not([id]).cookie-banner.fixed > div:nth-child(2):not([id]).cookie-banner-controls > button:nth-child(3):not([id]).cookie-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body.front.not-logged-in.client-country-de.i18n-de.scrolling-watch.one-sidebar.sidebar-right.without-content.working-hover.x-accel.supports-sticky.supports-calc.checked-processed.lightbox-processed.inline-messages-processed.scrollhelper-processed > div:not([id]).cookie-banner.fixed > div:nth-child(2):not([id]).cookie-banner-controls > button:nth-child(3):not([id]).cookie-deny",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body.front.not-logged-in.client-country-de.i18n-de.scrolling-watch.one-sidebar.sidebar-right.without-content.working-hover.x-accel.supports-sticky.supports-calc.checked-processed.lightbox-processed.inline-messages-processed.scrollhelper-processed > div:not([id]).cookie-banner.fixed > div:nth-child(2):not([id]).cookie-banner-controls > button:nth-child(3):not([id]).cookie-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
