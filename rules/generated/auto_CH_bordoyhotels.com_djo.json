@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_bordoyhotels.com_djo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bordoyhotels.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bordoyhotels\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookies > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3)#reject_all_noredirect"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookies > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3)#reject_all_noredirect"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookies > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3)#reject_all_noredirect",
+            "comment": "RECHAZAR TODAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookies > div:not([id]) > p:nth-child(2):not([id]) > a:nth-child(3)#reject_all_noredirect",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
