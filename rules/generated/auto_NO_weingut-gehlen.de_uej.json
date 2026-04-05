@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_weingut-gehlen.de_uej",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.weingut-gehlen.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?weingut-gehlen\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_einstellungen > div#cookie_einstellungen_box > div#cookie_einstellungen_box_inner > button:nth-child(3)#cookie_button_ablehnen"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_einstellungen > div#cookie_einstellungen_box > div#cookie_einstellungen_box_inner > button:nth-child(3)#cookie_button_ablehnen"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_einstellungen > div#cookie_einstellungen_box > div#cookie_einstellungen_box_inner > button:nth-child(3)#cookie_button_ablehnen",
+            "comment": "Alle Cookies\nablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_einstellungen > div#cookie_einstellungen_box > div#cookie_einstellungen_box_inner > button:nth-child(3)#cookie_button_ablehnen",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
