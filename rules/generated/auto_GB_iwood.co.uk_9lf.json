@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_iwood.co.uk_9lf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.iwood.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?iwood\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#DeclineCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#DeclineCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#DeclineCookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiebanner > div:nth-child(2):not([id]) > div:nth-child(2)#DeclineCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
