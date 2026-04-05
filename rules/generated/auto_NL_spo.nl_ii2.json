@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_spo.nl_ii2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.spo.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?spo\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button-deny",
+            "comment": "Weiger"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-button-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
