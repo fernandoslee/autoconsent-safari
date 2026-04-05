@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_onzestroom.nl_yaw",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://onzestroom.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?onzestroom\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:not([id]) > span:nth-child(4):not([id]) > button#gdpr_btn_full_disagree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:not([id]) > span:nth-child(4):not([id]) > button#gdpr_btn_full_disagree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:not([id]) > span:nth-child(4):not([id]) > button#gdpr_btn_full_disagree",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:not([id]) > span:nth-child(4):not([id]) > button#gdpr_btn_full_disagree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
