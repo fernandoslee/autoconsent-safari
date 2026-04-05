@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_linztourismus.at_yeo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.linztourismus.at/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?linztourismus\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#f__privacy-cookie-manager > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#privacy-manager-index > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#f__privacy-cookie-manager > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#privacy-manager-index > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#f__privacy-cookie-manager > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#privacy-manager-index > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "NUR ERFORDERLICHE"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#f__privacy-cookie-manager > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#privacy-manager-index > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
