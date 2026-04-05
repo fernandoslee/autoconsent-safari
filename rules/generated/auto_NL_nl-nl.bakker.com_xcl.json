@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForThenClick": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "comment": "Afwijzen"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
+            "waitForVisible": "body > section#shopify-section-up-cookie-banner > section:nth-child(2)#up-pc__banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
             "timeout": 1000,
             "check": "none"
         }
