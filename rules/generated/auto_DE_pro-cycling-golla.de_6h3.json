@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_pro-cycling-golla.de_6h3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pro-cycling-golla.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pro-cycling-golla\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5)#cookie_information > div:nth-child(2)#cookie_information_link > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
