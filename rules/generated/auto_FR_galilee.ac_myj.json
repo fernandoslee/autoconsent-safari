@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_galilee.ac_myj",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://galilee.ac/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?galilee\\.ac/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#custom-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cc-refuse"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#custom-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cc-refuse"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#custom-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cc-refuse",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#custom-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(1)#cc-refuse",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
