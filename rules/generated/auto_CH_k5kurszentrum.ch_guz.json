@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_k5kurszentrum.ch_guz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.k5kurszentrum.ch/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?k5kurszentrum\\.ch/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > p:nth-child(2):not([id]) > button:nth-child(2)#seopress-user-consent-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
