@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_midlock.nl_bvz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.midlock.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?midlock\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > footer#footer > div:nth-child(2)#cookie-banner > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > footer#footer > div:nth-child(2)#cookie-banner > button:nth-child(2)#decline-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > footer#footer > div:nth-child(2)#cookie-banner > button:nth-child(2)#decline-cookies",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > footer#footer > div:nth-child(2)#cookie-banner > button:nth-child(2)#decline-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
