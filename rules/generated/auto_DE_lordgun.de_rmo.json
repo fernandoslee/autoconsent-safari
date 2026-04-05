@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_lordgun.de_rmo",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.lordgun.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?lordgun\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bannerCookiesConsent > div:not([id]) > a:nth-child(4)#btnCookieBannerClose"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bannerCookiesConsent > div:not([id]) > a:nth-child(4)#btnCookieBannerClose"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bannerCookiesConsent > div:not([id]) > a:nth-child(4)#btnCookieBannerClose",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bannerCookiesConsent > div:not([id]) > a:nth-child(4)#btnCookieBannerClose",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
