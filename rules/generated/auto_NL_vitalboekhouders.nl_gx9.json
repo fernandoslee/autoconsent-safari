@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_vitalboekhouders.nl_gx9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.vitalboekhouders.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?vitalboekhouders\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1)#cw-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cw-btn-reject-all > a:not([id]) > div:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1)#cw-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cw-btn-reject-all > a:not([id]) > div:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1)#cw-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cw-btn-reject-all > a:not([id]) > div:not([id])",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(5):not([id]) > div:nth-child(1)#cw-cookie-banner > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cw-btn-reject-all > a:not([id]) > div:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
