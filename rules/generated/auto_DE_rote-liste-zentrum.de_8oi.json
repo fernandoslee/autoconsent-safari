@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_rote-liste-zentrum.de_8oi",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.rote-liste-zentrum.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?rote-liste-zentrum\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#privacy-note > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#privacy-note > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#privacy-note > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#privacy-note > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
