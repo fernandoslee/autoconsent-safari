@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_auf-nach-mallorca.info_07d",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.auf-nach-mallorca.info/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?auf-nach-mallorca\\.info/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-content-start > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie-consent-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-content-start > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie-consent-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-content-start > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie-consent-deny",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:not([id]) > div:not([id]) > div:nth-child(2)#cookie-consent-content-start > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button#cookie-consent-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
