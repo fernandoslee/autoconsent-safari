@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_ssvp.fr_ybx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ssvp.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ssvp\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#advencyRgpd > button:nth-child(3)#refuseAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#advencyRgpd > button:nth-child(3)#refuseAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#advencyRgpd > button:nth-child(3)#refuseAll",
+            "comment": "TOUT REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#advencyRgpd > button:nth-child(3)#refuseAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
