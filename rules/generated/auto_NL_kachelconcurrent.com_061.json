@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_kachelconcurrent.com_061",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.kachelconcurrent.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kachelconcurrent\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiePopup > div:not([id]) > div#simplemodal-data > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiePopup > div:not([id]) > div#simplemodal-data > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiePopup > div:not([id]) > div#simplemodal-data > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > a:not([id])",
+            "comment": "Noodzakelijke Cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiePopup > div:not([id]) > div#simplemodal-data > div:nth-child(2):not([id]) > div:not([id]) > ul:nth-child(1):not([id]) > li:nth-child(2):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
