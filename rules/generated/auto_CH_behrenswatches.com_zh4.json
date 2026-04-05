@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_behrenswatches.com_zh4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.behrenswatches.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?behrenswatches\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > b:not([id]) > b:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > b:not([id]) > b:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > b:not([id]) > b:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > b:not([id]) > b:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookie-reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
