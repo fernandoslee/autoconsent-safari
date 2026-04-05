@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_ddrbildarchiv.de_jfb",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.ddrbildarchiv.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?ddrbildarchiv\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie > div:nth-child(2)#cookieButtons > a:nth-child(2)#linkDenyCookie"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie > div:nth-child(2)#cookieButtons > a:nth-child(2)#linkDenyCookie"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie > div:nth-child(2)#cookieButtons > a:nth-child(2)#linkDenyCookie",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie > div:nth-child(2)#cookieButtons > a:nth-child(2)#linkDenyCookie",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
