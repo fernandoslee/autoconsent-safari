@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_bengans.se_86n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.bengans.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?bengans\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie_consent_manager_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie_consent_manager_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie_consent_manager_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "comment": "Spara endast nödvändiga"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie_consent_manager_wrapper > div#cookie_consent > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
