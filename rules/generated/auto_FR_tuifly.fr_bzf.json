@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tuifly.fr_bzf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tuifly.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tuifly\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#sliding-popup > div#cookies-content > div:not([id]) > div:nth-child(4)#popup-buttons > button:nth-child(3)#cookies-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#sliding-popup > div#cookies-content > div:not([id]) > div:nth-child(4)#popup-buttons > button:nth-child(3)#cookies-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#sliding-popup > div#cookies-content > div:not([id]) > div:nth-child(4)#popup-buttons > button:nth-child(3)#cookies-decline",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#sliding-popup > div#cookies-content > div:not([id]) > div:nth-child(4)#popup-buttons > button:nth-child(3)#cookies-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
