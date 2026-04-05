@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_servihabitat.com_330",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.servihabitat.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?servihabitat\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#p_p_id_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet_ > section:nth-child(2)#portlet_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#condition_privacy > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#p_p_id_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet_ > section:nth-child(2)#portlet_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#condition_privacy > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#p_p_id_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet_ > section:nth-child(2)#portlet_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#condition_privacy > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "comment": "Rechazar cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#p_p_id_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet_ > section:nth-child(2)#portlet_com_servihabitat_modal_condiciones_portlet_ServihabitatModalCondicionesPortlet > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(1)#condition_privacy > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
