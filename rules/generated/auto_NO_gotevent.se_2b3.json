@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_gotevent.se_2b3",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://gotevent.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gotevent\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "comment": "ENDAST NÖDVÄNDIGA"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
