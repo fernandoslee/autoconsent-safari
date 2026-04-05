@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_clinicaplanas.com_d5n",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.clinicaplanas.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?clinicaplanas\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#supercookies-sticky > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#button-supercookies-reject-all"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#supercookies-sticky > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#button-supercookies-reject-all"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#supercookies-sticky > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#button-supercookies-reject-all",
+            "comment": "RECHAZAR"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#supercookies-sticky > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(2)#button-supercookies-reject-all",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
