@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_store.foodforjoe.es_r83",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://store.foodforjoe.es/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?store\\.foodforjoe\\.es/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-popup > div:not([id]) > aside:not([id]) > section:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-popup > div:not([id]) > aside:not([id]) > section:nth-child(5):not([id]) > button:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-popup > div:not([id]) > aside:not([id]) > section:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "comment": "RECHAZAR TODAS"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-popup > div:not([id]) > aside:not([id]) > section:nth-child(5):not([id]) > button:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
