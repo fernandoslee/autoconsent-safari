@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_villes-et-villages-fleuris.com_9b8",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://villes-et-villages-fleuris.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?villes-et-villages-fleuris\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bloc-cookies-container > div#bloc-cookies > div:not([id]) > div:nth-child(17):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bloc-cookies-container > div#bloc-cookies > div:not([id]) > div:nth-child(17):not([id]) > div:nth-child(1):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bloc-cookies-container > div#bloc-cookies > div:not([id]) > div:nth-child(17):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bloc-cookies-container > div#bloc-cookies > div:not([id]) > div:nth-child(17):not([id]) > div:nth-child(1):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
