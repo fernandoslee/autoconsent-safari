@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_voedingleeft.nl_51b",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://voedingleeft.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?voedingleeft\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#app > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cn-deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#app > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cn-deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#app > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cn-deny",
+            "comment": "Afwijzen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#app > div:nth-child(2):not([id]) > div:nth-child(6):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#cn-deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
