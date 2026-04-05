@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_freedomtravel.se_xrz",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.freedomtravel.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?freedomtravel\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > div:nth-child(5):not([id]) > div:nth-child(8):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > div:nth-child(5):not([id]) > div:nth-child(8):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > div:nth-child(5):not([id]) > div:nth-child(8):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Neka alla"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > div:nth-child(5):not([id]) > div:nth-child(8):not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
