@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_fjallsport.se_z1r",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.fjallsport.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?fjallsport\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#js-cookienotice > div:not([id]) > div:not([id]) > a:nth-child(4)#js-gdpr-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#js-cookienotice > div:not([id]) > div:not([id]) > a:nth-child(4)#js-gdpr-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#js-cookienotice > div:not([id]) > div:not([id]) > a:nth-child(4)#js-gdpr-decline",
+            "comment": "Neka"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#js-cookienotice > div:not([id]) > div:not([id]) > a:nth-child(4)#js-gdpr-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
