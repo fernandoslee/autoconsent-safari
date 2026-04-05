@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_connect-techniek.nl_0o1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://connect-techniek.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?connect-techniek\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#mfn-consent-mode > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#mfn-consent-mode > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#mfn-consent-mode > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#mfn-consent-mode > div:not([id]) > footer:nth-child(2):not([id]) > a:nth-child(1)#consent_deny",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
