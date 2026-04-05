@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_makeplayingcards.com_7p1",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.makeplayingcards.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?makeplayingcards\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > form#form1 > div:nth-child(3)#divPage > div:nth-child(2)#div_footer > div:nth-child(3)#divAcceptCookiePolicy > p:nth-child(2):not([id]) > a:nth-child(1)#btn_reject"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > form#form1 > div:nth-child(3)#divPage > div:nth-child(2)#div_footer > div:nth-child(3)#divAcceptCookiePolicy > p:nth-child(2):not([id]) > a:nth-child(1)#btn_reject"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > form#form1 > div:nth-child(3)#divPage > div:nth-child(2)#div_footer > div:nth-child(3)#divAcceptCookiePolicy > p:nth-child(2):not([id]) > a:nth-child(1)#btn_reject",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > form#form1 > div:nth-child(3)#divPage > div:nth-child(2)#div_footer > div:nth-child(3)#divAcceptCookiePolicy > p:nth-child(2):not([id]) > a:nth-child(1)#btn_reject",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
