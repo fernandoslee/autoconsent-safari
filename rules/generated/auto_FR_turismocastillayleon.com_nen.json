@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_turismocastillayleon.com_nen",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.turismocastillayleon.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?turismocastillayleon\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieNotice > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieNotice > div:nth-child(2):not([id]) > a:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieNotice > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "comment": "Rechazar todas las cookies"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieNotice > div:nth-child(2):not([id]) > a:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
