@@ -1,0 +1,40 @@
+{
+    "name": "auto_US_itep.org_til",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://itep.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?itep\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#gdpr-cookie-toast > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#gdpr-cookie-toast > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#gdpr-cookie-toast > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#gdpr-cookie-toast > div:nth-child(3):not([id]) > button:nth-child(2)#gdpr-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
