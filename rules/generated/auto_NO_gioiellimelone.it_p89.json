@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_gioiellimelone.it_p89",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gioiellimelone.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gioiellimelone\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-1397-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-1397-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-1397-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only",
+            "comment": "Solo necessari"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#acconsento-click > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2)#el-acconsento-id-1397-1 > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div#acconsento-click-button-necessary-only",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
