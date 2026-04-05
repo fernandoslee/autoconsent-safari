@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_tintin.com_7i2",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tintin.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tintin\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookiesbanner > div:not([id]) > a:nth-child(2)#cookiesok"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookiesbanner > div:not([id]) > a:nth-child(2)#cookiesok"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookiesbanner > div:not([id]) > a:nth-child(2)#cookiesok",
+            "comment": "Continue without accepting"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookiesbanner > div:not([id]) > a:nth-child(2)#cookiesok",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
