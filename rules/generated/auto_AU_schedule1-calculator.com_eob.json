@@ -1,0 +1,40 @@
+{
+    "name": "auto_AU_schedule1-calculator.com_eob",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://schedule1-calculator.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?schedule1-calculator\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(1)#denyCookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(1)#denyCookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(1)#denyCookies",
+            "comment": "Deny"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieBanner > div:nth-child(2):not([id]) > button:nth-child(1)#denyCookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
