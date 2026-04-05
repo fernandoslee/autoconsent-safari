@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_kuechenfreundin.at_rv7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://kuechenfreundin.at/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?kuechenfreundin\\.at/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "comment": "ABLEHNEN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#an-cookie-notice > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
