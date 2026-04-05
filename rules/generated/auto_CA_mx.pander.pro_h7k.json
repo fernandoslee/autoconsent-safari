@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_mx.pander.pro_h7k",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://mx.pander.pro/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?mx\\.pander\\.pro/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(10)#modal_content > div:nth-child(1)#modal_content_wrapper > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(10)#modal_content > div:nth-child(1)#modal_content_wrapper > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(10)#modal_content > div:nth-child(1)#modal_content_wrapper > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(10)#modal_content > div:nth-child(1)#modal_content_wrapper > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > a:not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
