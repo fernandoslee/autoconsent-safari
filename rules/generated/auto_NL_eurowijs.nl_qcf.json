@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_eurowijs.nl_qcf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.eurowijs.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?eurowijs\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#wrapper > section:nth-child(6)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(8):not([id]) > button:nth-child(2)#elc-decline-all-link"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#wrapper > section:nth-child(6)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(8):not([id]) > button:nth-child(2)#elc-decline-all-link"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#wrapper > section:nth-child(6)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(8):not([id]) > button:nth-child(2)#elc-decline-all-link",
+            "comment": "WEIGEREN"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#wrapper > section:nth-child(6)#elc-cookie-consent-container > div#elc-cookie-consent > form#elc-cookie-consent-form > div:nth-child(8):not([id]) > button:nth-child(2)#elc-decline-all-link",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
