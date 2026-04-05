@@ -1,0 +1,40 @@
+{
+    "name": "auto_NO_akvariumkungen.se_5uv",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.akvariumkungen.se/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?akvariumkungen\\.se/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "comment": "Neka"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#top > div:nth-child(2):not([id]) > tws-accept-cookies:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
