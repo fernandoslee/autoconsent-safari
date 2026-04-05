@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_playmobil-funpark.de_gn4",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.playmobil-funpark.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?playmobil-funpark\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#container > main:nth-child(2)#outercontent > div:nth-child(9)#cookie-t7Wsxh10-cookieBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(4)#cookie-t7Wsxh10-denyAllButton"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#container > main:nth-child(2)#outercontent > div:nth-child(9)#cookie-t7Wsxh10-cookieBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(4)#cookie-t7Wsxh10-denyAllButton"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#container > main:nth-child(2)#outercontent > div:nth-child(9)#cookie-t7Wsxh10-cookieBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(4)#cookie-t7Wsxh10-denyAllButton",
+            "comment": "Deny all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#container > main:nth-child(2)#outercontent > div:nth-child(9)#cookie-t7Wsxh10-cookieBar > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(4)#cookie-t7Wsxh10-denyAllButton",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
