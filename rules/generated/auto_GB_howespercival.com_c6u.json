@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_howespercival.com_c6u",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.howespercival.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?howespercival\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cokie-law > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(12):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cokie-law > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(12):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cokie-law > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(12):not([id])",
+            "comment": "Reject all"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cokie-law > div:not([id]) > div:nth-child(1):not([id]) > button:nth-child(12):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
