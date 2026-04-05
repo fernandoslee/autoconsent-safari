@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_primarmi.it_pxt",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://primarmi.it/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?primarmi\\.it/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn",
+            "comment": "Rifiuta tutto"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieConsentBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#rejectAllBtn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
