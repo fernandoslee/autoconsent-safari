@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_tib.org_fyu",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.tib.org/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?tib\\.org/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#fragment-fd012b87-50a3-eda0-6d86-5e51c369b8c4 > div#cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#fragment-fd012b87-50a3-eda0-6d86-5e51c369b8c4 > div#cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#fragment-fd012b87-50a3-eda0-6d86-5e51c369b8c4 > div#cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "comment": "Rechazar"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#senna_surface1-default > div:nth-child(2):not([id]) > div#wrapper > div#content > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(3):not([id]) > div:nth-child(1)#fragment-fd012b87-50a3-eda0-6d86-5e51c369b8c4 > div#cookies-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
