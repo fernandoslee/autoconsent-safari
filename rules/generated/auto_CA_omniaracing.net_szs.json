@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_omniaracing.net_szs",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.omniaracing.net/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?omniaracing\\.net/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#bootstrapCookieConsentSettingsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bccs-buttonDoNotAgree"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#bootstrapCookieConsentSettingsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bccs-buttonDoNotAgree"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#bootstrapCookieConsentSettingsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bccs-buttonDoNotAgree",
+            "comment": "Rifiuta tutti"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#bootstrapCookieConsentSettingsModal > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1)#bccs-buttonDoNotAgree",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
