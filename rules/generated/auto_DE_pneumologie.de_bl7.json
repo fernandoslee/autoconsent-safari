@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_pneumologie.de_bl7",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.pneumologie.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?pneumologie\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookieconsent_banner > div:not([id]) > button:nth-child(2)#cookieconsent_banner_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookieconsent_banner > div:not([id]) > button:nth-child(2)#cookieconsent_banner_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookieconsent_banner > div:not([id]) > button:nth-child(2)#cookieconsent_banner_decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookieconsent_banner > div:not([id]) > button:nth-child(2)#cookieconsent_banner_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
