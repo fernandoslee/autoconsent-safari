@@ -1,0 +1,40 @@
+{
+    "name": "auto_CA_memoiredencrier.com_kwd",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://memoiredencrier.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?memoiredencrier\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ff-wp-tracking > div:not([id]) > div:not([id]) > div#ff-wp-tracking-popup > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ff-wp-tracking > div:not([id]) > div:not([id]) > div#ff-wp-tracking-popup > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ff-wp-tracking > div:not([id]) > div:not([id]) > div#ff-wp-tracking-popup > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "comment": "REFUSER"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ff-wp-tracking > div:not([id]) > div:not([id]) > div#ff-wp-tracking-popup > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
