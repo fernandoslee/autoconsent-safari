@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_numeridanse.com_8ue",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://numeridanse.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?numeridanse\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#tracking-consent-close"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#tracking-consent-close"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#tracking-consent-close",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2)#tracking-consent-close",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
