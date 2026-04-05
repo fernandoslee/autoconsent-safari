@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_steuernsteuern.de_tsx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.steuernsteuern.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?steuernsteuern\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#avelor-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#avelor-cookie-decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#avelor-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#avelor-cookie-decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#avelor-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#avelor-cookie-decline",
+            "comment": "Ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#avelor-cookie-banner > div:nth-child(3):not([id]) > button:nth-child(2)#avelor-cookie-decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
