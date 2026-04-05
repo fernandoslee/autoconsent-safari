@@ -1,0 +1,40 @@
+{
+    "name": "auto_CH_testingtime.com_3jf",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.testingtime.com/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?testingtime\\.com/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-consent > div:nth-child(2):not([id]) > button:nth-child(4)#cookie-reject-btn"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-consent > div:nth-child(2):not([id]) > button:nth-child(4)#cookie-reject-btn"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-consent > div:nth-child(2):not([id]) > button:nth-child(4)#cookie-reject-btn",
+            "comment": "Reject"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-consent > div:nth-child(2):not([id]) > button:nth-child(4)#cookie-reject-btn",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
