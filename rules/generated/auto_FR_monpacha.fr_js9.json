@@ -1,0 +1,40 @@
+{
+    "name": "auto_FR_monpacha.fr_js9",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://monpacha.fr/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?monpacha\\.fr/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "comment": "Refuser"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#cookie-banner > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookies",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
