@@ -1,0 +1,40 @@
+{
+    "name": "auto_NL_jbproductions.nl_148",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.jbproductions.nl/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?jbproductions\\.nl/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > aside:nth-child(1)#cookiePreference > div:nth-child(2)#cookiesStart > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiesDenyAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > aside:nth-child(1)#cookiePreference > div:nth-child(2)#cookiesStart > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiesDenyAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > aside:nth-child(1)#cookiePreference > div:nth-child(2)#cookiesStart > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiesDenyAll",
+            "comment": "Weigeren"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > aside:nth-child(1)#cookiePreference > div:nth-child(2)#cookiesStart > div:nth-child(2):not([id]) > section:nth-child(2):not([id]) > div:nth-child(2):not([id]) > a:nth-child(2)#cookiesDenyAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
