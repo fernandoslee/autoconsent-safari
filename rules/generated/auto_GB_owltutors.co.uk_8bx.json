@@ -1,0 +1,40 @@
+{
+    "name": "auto_GB_owltutors.co.uk_8bx",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://owltutors.co.uk/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?owltutors\\.co\\.uk/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div#ot_local_storage_notice > button:nth-child(3)#ot_local_storage_decline"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div#ot_local_storage_notice > button:nth-child(3)#ot_local_storage_decline"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div#ot_local_storage_notice > button:nth-child(3)#ot_local_storage_decline",
+            "comment": "Decline"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div#ot_local_storage_notice > button:nth-child(3)#ot_local_storage_decline",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
