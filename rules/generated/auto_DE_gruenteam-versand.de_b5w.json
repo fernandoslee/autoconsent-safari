@@ -1,0 +1,40 @@
+{
+    "name": "auto_DE_gruenteam-versand.de_b5w",
+    "cosmetic": false,
+    "_metadata": {
+        "vendorUrl": "http://www.gruenteam-versand.de/"
+    },
+    "runContext": {
+        "main": true,
+        "frame": false,
+        "urlPattern": "^https?://(www\\.)?gruenteam-versand\\.de/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "body > div:not([id]) > div#PrivacyCategoryAlert > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#DenyAll"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "body > div:not([id]) > div#PrivacyCategoryAlert > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#DenyAll"
+        }
+    ],
+    "optIn": [],
+    "optOut": [
+        {
+            "wait": 500
+        },
+        {
+            "waitForThenClick": "body > div:not([id]) > div#PrivacyCategoryAlert > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#DenyAll",
+            "comment": "ablehnen"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "body > div:not([id]) > div#PrivacyCategoryAlert > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(3)#DenyAll",
+            "timeout": 1000,
+            "check": "none"
+        }
+    ]
+}
