@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?webarchive\\.nationalarchives\\.gov\\.uk/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.tna-cookie-banner__message.tna-cookie-banner__message--prompt"],
     "detectCmp": [
         {
-            "exists": "body > div#tna-cookie-prompt-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie"
+            "exists": "div.tna-cookie-banner__message.tna-cookie-banner__message--prompt"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tna-cookie-prompt-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie"
+            "visible": "div.tna-cookie-banner__message.tna-cookie-banner__message--prompt"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.tna-button-group > button:nth-of-type(1)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#tna-cookie-prompt-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie",
-            "comment": "Reject analytics cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#tna-cookie-prompt-banner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#reject-cookie",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.tna-button-group > button:nth-of-type(2)"
         }
     ]
 }
