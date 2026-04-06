@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?magazines-motivatie\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookies-eu-banner"],
     "detectCmp": [
         {
-            "exists": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(1)#cookies-eu-reject"
+            "exists": "#cookies-eu-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(1)#cookies-eu-reject"
+            "visible": "#cookies-eu-banner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(1)#cookies-eu-reject",
-            "comment": "WEIGEREN"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookies-eu-wrapper > div#cookies-eu-banner > div:nth-child(2)#cookies-eu-buttons > button:nth-child(1)#cookies-eu-reject",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#cookies-eu-reject"
         }
     ]
 }
