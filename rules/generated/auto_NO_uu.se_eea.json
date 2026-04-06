@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?uu\\.se/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.sv-cookie-consent-banner"],
     "detectCmp": [
         {
-            "exists": "body > div > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "exists": "div.sv-cookie-consent-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "visible": "div.sv-cookie-consent-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Godkänn alla kakor')] | //a[contains(., 'Godkänn alla kakor')]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "comment": "Godkänn nödvändiga kakor"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > form:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Godkänn nödvändiga kakor')] | //a[contains(., 'Godkänn nödvändiga kakor')]"
         }
     ]
 }
