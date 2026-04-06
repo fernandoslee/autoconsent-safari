@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_meintiptopf.ch_84l",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://meintiptopf.ch/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?meintiptopf\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["footer.Footer_consent-banner-footer__xOCnD"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1)#consent-manager > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "footer.Footer_consent-banner-footer__xOCnD"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1)#consent-manager > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "footer.Footer_consent-banner-footer__xOCnD"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[aria-label=\"Alle\\ akzeptieren\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#consent-manager > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Notwendige Cookies zulassen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#consent-manager > footer:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "footer.Footer_consent-banner-footer__xOCnD"
         }
     ]
 }
