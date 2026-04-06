@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?glassesdirect\\.co\\.uk/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie-banner_policy-buttons__TCti_"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:nth-child(3)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.cookie-banner_policy-buttons__TCti_"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:nth-child(3)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.cookie-banner_policy-buttons__TCti_"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.cookie-banner_cookie-cookie-accept__jLVGH"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:nth-child(3)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "REJECT"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:nth-child(3)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.cookie-banner_btn-cookie-refuse__bVxnG"
         }
     ]
 }
