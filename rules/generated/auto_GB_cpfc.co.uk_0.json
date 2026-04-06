@@ -7,22 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?cpfc\\.co\\.uk/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["dialog.modal_modal__uBYC7"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "dialog.modal_modal__uBYC7"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "dialog.modal_modal__uBYC7"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'ACCEPT')] | //a[contains(., 'ACCEPT')]"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "REJECT"
+            "waitForThenClick": "xpath///button[contains(., 'REJECT')] | //a[contains(., 'REJECT')]"
         }
     ]
 }
