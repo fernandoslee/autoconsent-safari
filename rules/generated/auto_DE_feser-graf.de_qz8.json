@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_feser-graf.de_qz8",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.feser-graf.de/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?feser-graf\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-consent-banner"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+            "exists": "#cookie-consent-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all"
+            "visible": "#cookie-consent-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#btn-accept-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
-            "comment": "Alle verweigern"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-consent-banner > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:nth-child(3)#btn-reject-all",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cookie-consent-banner"
         }
     ]
 }
