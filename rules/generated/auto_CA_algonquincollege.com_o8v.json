@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?algonquincollege\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#accn-cookie-consent"],
     "detectCmp": [
         {
-            "exists": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2)#accn-statement-scroller > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+            "exists": "#accn-cookie-consent"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2)#accn-statement-scroller > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])"
+            "visible": "#accn-cookie-consent"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Allow All')] | //a[contains(., 'Allow All')]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2)#accn-statement-scroller > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
-            "comment": "Essential Only"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#accn-cookie-consent-wrapper > div#accn-cookie-consent > div:nth-child(2)#accn-statement-scroller > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Essential Only')] | //a[contains(., 'Essential Only')]"
         }
     ]
 }
