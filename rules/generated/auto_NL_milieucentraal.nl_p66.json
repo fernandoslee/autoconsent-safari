@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?milieucentraal\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.c-cookie-bar.cookie-bar--is-visible"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+            "exists": "div.c-cookie-bar.cookie-bar--is-visible"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+            "visible": "div.c-cookie-bar.cookie-bar--is-visible"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.cookie-bar__button-holder > button:nth-of-type(2)"
         }
     ]
 }
