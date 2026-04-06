@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?haproxy\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-banner"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "exists": "#cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "visible": "#cookie-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.flex > button:nth-of-type(2)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
-            "comment": "Deny "
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-banner > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.btn-transparent"
         }
     ]
 }
