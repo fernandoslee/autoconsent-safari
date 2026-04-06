@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?vrhump\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-consent-popup"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+            "exists": "#cookie-consent-popup"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject"
+            "visible": "#cookie-consent-popup"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-accept"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
-            "comment": "REJECT"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-consent-popup > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-reject",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#cookie-reject"
         }
     ]
 }
