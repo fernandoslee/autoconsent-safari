@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_slachtofferhulp.nl_4m4",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.slachtofferhulp.nl/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?slachtofferhulp\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#firstTimeVisitorCookieDialog dialog.is-aligned-bottom"],
     "detectCmp": [
         {
-            "exists": "body > shn-dialog#firstTimeVisitorCookieDialog > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "#firstTimeVisitorCookieDialog dialog.is-aligned-bottom"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > shn-dialog#firstTimeVisitorCookieDialog > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "#firstTimeVisitorCookieDialog dialog.is-aligned-bottom"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > shn-dialog#firstTimeVisitorCookieDialog > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Niet accepteren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > shn-dialog#firstTimeVisitorCookieDialog > dialog:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#firstTimeVisitorCookieDialog dialog.is-aligned-bottom"
         }
     ]
 }
