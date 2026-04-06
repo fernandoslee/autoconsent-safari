@@ -7,32 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?virgin\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie-modal-box"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#__next > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "div.cookie-modal-box"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#__next > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "div.cookie-modal-box"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Accept all')] | //a[contains(., 'Accept all')]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body:not([id]) > div#__next > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "Reject all"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body:not([id]) > div#__next > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Reject all')] | //a[contains(., 'Reject all')]"
         }
     ]
 }
