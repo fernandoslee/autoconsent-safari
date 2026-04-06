@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_das-ist-drin.de_e12",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://das-ist-drin.de/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?das-ist-drin\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.snoop-modal-wrapper"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.snoop-modal-wrapper"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.snoop-modal-wrapper"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.qa-cookie-consent-accept-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
-            "comment": "Mit notwendigen fortfahren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id]) > div:not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.snoop-modal-wrapper"
         }
     ]
 }
