@@ -1,38 +1,31 @@
 {
     "name": "auto_AU_staff.flinders.edu.au_cpu",
     "vendorUrl": "https://staff.flinders.edu.au/",
-    "cosmetic": false,
+    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
         "urlPattern": "^https?://(www\\.)?staff\\.flinders\\.edu\\.au/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.gdpr-notification__content > div:nth-of-type(1)"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
+            "exists": "div.gdpr-notification__content > div:nth-of-type(1)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button"
+            "visible": "div.gdpr-notification__content > div:nth-of-type(1)"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr_accept_button"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button",
-            "comment": "Reject all non-essential cookies and continue"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div#gdpr_notification_container > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(6):not([id]) > div:not([id]) > a#gdpr_reject_button",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.gdpr-notification__content > div:nth-of-type(1)"
         }
     ]
 }
