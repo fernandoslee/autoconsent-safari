@@ -7,22 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?deezer\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.gdpr-modalContainer"],
     "detectCmp": [
         {
-            "exists": "body#unlogged-body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all"
+            "exists": "div.gdpr-modalContainer"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#unlogged-body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all"
+            "visible": "div.gdpr-modalContainer"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-btn-accept-all"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body#unlogged-body > div#cookie-banner-deezer > div#gdpr-dir-tag > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button#gdpr-btn-refuse-all",
-            "comment": "Refuse"
+            "waitForThenClick": "#gdpr-btn-refuse-all"
         }
     ]
 }
