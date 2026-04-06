@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?pointp\\.fr/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#popin_tc_privacy"],
     "detectCmp": [
         {
-            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+            "exists": "#popin_tc_privacy"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+            "visible": "#popin_tc_privacy"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
-            "comment": "Continuer sans accepter"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Continuer sans accepter')] | //a[contains(., 'Continuer sans accepter')]"
         }
     ]
 }
