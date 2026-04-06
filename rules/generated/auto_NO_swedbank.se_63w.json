@@ -1,6 +1,6 @@
 {
     "name": "auto_NO_swedbank.se_63w",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.swedbank.se/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?swedbank\\.se/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#component-cookie-banner"],
     "detectCmp": [
         {
-            "exists": "body > section#component-cookie-banner > div:nth-child(1):not([id]) > footer:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-banner-accept-essentials"
+            "exists": "#component-cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > section#component-cookie-banner > div:nth-child(1):not([id]) > footer:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-banner-accept-essentials"
+            "visible": "#component-cookie-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookie-banner-initial-accept-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > section#component-cookie-banner > div:nth-child(1):not([id]) > footer:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-banner-accept-essentials",
-            "comment": "Bara nödvändiga cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > section#component-cookie-banner > div:nth-child(1):not([id]) > footer:nth-child(4):not([id]) > div:nth-child(1):not([id]) > button:nth-child(2)#cookie-banner-accept-essentials",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#component-cookie-banner"
         }
     ]
 }
