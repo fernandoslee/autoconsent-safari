@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?blutspendezurich\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookieconsent-bar"],
     "detectCmp": [
         {
-            "exists": "body > div#cookieconsent > div#cookieconsent-bar > div:nth-child(3):not([id]) > a:nth-child(2)#decline"
+            "exists": "#cookieconsent-bar"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookieconsent > div#cookieconsent-bar > div:nth-child(3):not([id]) > a:nth-child(2)#decline"
+            "visible": "#cookieconsent-bar"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookieconsent > div#cookieconsent-bar > div:nth-child(3):not([id]) > a:nth-child(2)#decline",
-            "comment": "Ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookieconsent > div#cookieconsent-bar > div:nth-child(3):not([id]) > a:nth-child(2)#decline",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#decline"
         }
     ]
 }
