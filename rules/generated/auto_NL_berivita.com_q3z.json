@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_berivita.com_q3z",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.berivita.com/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?berivita\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie_popup_dialog"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+            "exists": "div.cookie_popup_dialog"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])"
+            "visible": "div.cookie_popup_dialog"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
-            "comment": "Liever geen cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > button:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.cookie_popup_dialog"
         }
     ]
 }
