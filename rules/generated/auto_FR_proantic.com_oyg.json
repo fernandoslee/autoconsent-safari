@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?proantic\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie > div:not([id]) > div:nth-child(2)#Buttondivanalytic > button:nth-child(2):not([id])"
+            "exists": "#cookie"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie > div:not([id]) > div:nth-child(2)#Buttondivanalytic > button:nth-child(2):not([id])"
+            "visible": "#cookie"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#Buttondivanalytic > button:nth-of-type(1)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie > div:not([id]) > div:nth-child(2)#Buttondivanalytic > button:nth-child(2):not([id])",
-            "comment": "Refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie > div:not([id]) > div:nth-child(2)#Buttondivanalytic > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#Buttondivanalytic > button:nth-of-type(2)"
         }
     ]
 }
