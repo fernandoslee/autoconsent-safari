@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?privateaser\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#privacy-banner"],
     "detectCmp": [
         {
-            "exists": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected"
+            "exists": "#privacy-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected"
+            "visible": "#privacy-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#privacy-accepted"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected",
-            "comment": "Refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#privacy-banner > div:nth-child(3):not([id]) > button:nth-child(1)#privacy-rejected",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#privacy-rejected"
         }
     ]
 }
