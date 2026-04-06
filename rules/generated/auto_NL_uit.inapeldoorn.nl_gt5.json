@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_uit.inapeldoorn.nl_gt5",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://uit.inapeldoorn.nl/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?uit\\.inapeldoorn\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#ez-cookie-notification"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2)#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ez-cookie-notification__decline"
+            "exists": "#ez-cookie-notification"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2)#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ez-cookie-notification__decline"
+            "visible": "#ez-cookie-notification"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2)#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ez-cookie-notification__decline",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2)#ez-cookie-notification > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#ez-cookie-notification__decline",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#ez-cookie-notification"
         }
     ]
 }
