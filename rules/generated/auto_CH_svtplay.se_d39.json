@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_svtplay.se_d39",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.svtplay.se/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?svtplay\\.se/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.c8db8c7a6 > div"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "exists": "div.c8db8c7a6 > div"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])"
+            "visible": "div.c8db8c7a6 > div"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
-            "comment": "TILLÅT NÖDVÄNDIGA"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:nth-child(4):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.c8db8c7a6 > div"
         }
     ]
 }
