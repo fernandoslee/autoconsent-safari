@@ -7,32 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?edinburghcastle\\.scot/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["section.privacy-banner"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "section.privacy-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "section.privacy-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.privacy-banner__actions.privacy-banner__set.privacy-banner__btn-wrapper--stacked button.privacy-banner__btn.privacy-banner__accept"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject all and close"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body:not([id]) > section:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.privacy-banner__actions.privacy-banner__set.privacy-banner__btn-wrapper--stacked button.privacy-banner__btn.privacy-banner__btn--secondary.privacy-banner__reject"
         }
     ]
 }
