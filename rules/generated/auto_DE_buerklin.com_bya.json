@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?buerklin\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#ccm-widget"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "#ccm-widget"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "#ccm-widget"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[aria-label=\"Agree\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "comment": "Deny"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#ccm-widget > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.ccm--decline-cookies"
         }
     ]
 }
