@@ -7,32 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?docs\\.portainer\\.io/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["[data-testid=\"cookies-dialog\"]"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "[data-testid=\"cookies-dialog\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "[data-testid=\"cookies-dialog\"]"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[aria-label=\"Accept\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "[aria-label=\"Reject\"]"
         }
     ]
 }
