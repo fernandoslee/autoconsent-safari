@@ -1,28 +1,31 @@
 {
     "name": "auto_GB_3djake.uk_0",
     "vendorUrl": "https://www.3djake.uk/",
-    "cosmetic": false,
+    "cosmetic": true,
     "runContext": {
         "main": true,
         "frame": false,
         "urlPattern": "^https?://(www\\.)?3djake\\.uk/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["form.tc-banner--active"],
     "detectCmp": [
         {
-            "exists": "body#top > div:not([id]) > form:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "form.tc-banner--active"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body#top > div:not([id]) > form:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "form.tc-banner--active"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.tc-banner__controls button.tc-banner__btn.tc-banner__btn--primary.tc-banner__btn--accept"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body#top > div:not([id]) > form:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Essential cookies only"
+            "hide": "form.tc-banner--active"
         }
     ]
 }
