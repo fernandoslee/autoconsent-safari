@@ -13,6 +13,7 @@ addon/*.js
 .vscode/
 .env
 .DS_Store
+xcode/AutoconsentSafari/AutoconsentSafari\ Extension/Resources/
 rules/filterlists/easylist_*.txt
 lib/filterlist-engine.ts
 data/top-1m.csv

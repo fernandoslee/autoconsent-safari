@@ -34,3 +34,15 @@ cp -r addon/devtools dist/addon-firefox/
 cp addon/manifest.mv3.json dist/addon-mv3/manifest.json
 cp addon/manifest.firefox.json dist/addon-firefox/manifest.json
 cp node_modules/bulma/css/bulma.min.css dist/addon-mv3/devtools/
+
+## Safari build target
+mkdir -p dist/addon-safari
+cp dist/addon-mv3/background.bundle.js dist/addon-safari/
+cp dist/addon-mv3/content.bundle.js    dist/addon-safari/
+cp dist/addon-mv3/popup.bundle.js      dist/addon-safari/
+cp -r addon/icons                      dist/addon-safari/
+cp rules/rules.json                    dist/addon-safari/
+cp rules/compact-rules.json            dist/addon-safari/
+cp addon/popup.html                    dist/addon-safari/
+cp addon/manifest.safari.json          dist/addon-safari/manifest.json
+# devtools/ intentionally omitted — Safari has no chrome.devtools API
