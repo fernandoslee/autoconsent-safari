@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_kinopoisk.ru_w3g",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.kinopoisk.ru/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?kinopoisk\\.ru/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.gdpr-popup-v3-main__main-buttons.gdpr-popup-v3-main__buttons"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+            "exists": "div.gdpr-popup-v3-main__main-buttons.gdpr-popup-v3-main__buttons"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory"
+            "visible": "div.gdpr-popup-v3-main__main-buttons.gdpr-popup-v3-main__buttons"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-popup-v3-button-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
-            "comment": "Allow essential cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2)#gdpr-popup-v3-button-mandatory",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.gdpr-popup-v3-main__main-buttons.gdpr-popup-v3-main__buttons"
         }
     ]
 }
