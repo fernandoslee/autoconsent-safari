@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?mijngelderland\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-bar"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "#cookie-bar"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "#cookie-bar"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-bar > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Weigeren')] | //a[contains(., 'Weigeren')]"
         }
     ]
 }
