@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?flysas\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["dialog._1ncak0u0"],
     "detectCmp": [
         {
-            "exists": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button"
+            "exists": "dialog._1ncak0u0"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button"
+            "visible": "dialog._1ncak0u0"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Consent')] | //a[contains(., 'Consent')]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button",
-            "comment": "Deny"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > dialog:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > button:nth-child(2)#deny-consent-button",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#deny-consent-button"
         }
     ]
 }
