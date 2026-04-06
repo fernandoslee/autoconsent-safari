@@ -1,6 +1,6 @@
 {
     "name": "auto_AU_gayseniordating.com_bdr",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "https://www.gayseniordating.com/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?gayseniordating\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-policy"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-policy > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "#cookie-policy"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-policy > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "#cookie-policy"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-policy > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Close"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-policy > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cookie-policy"
         }
     ]
 }
