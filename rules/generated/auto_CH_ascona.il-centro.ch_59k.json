@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?ascona\\.il-centro\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.bottom-md"],
     "detectCmp": [
         {
-            "exists": "body > div#ampsandConsentElement > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "exists": "div.bottom-md"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#ampsandConsentElement > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "visible": "div.bottom-md"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#ampsandConsentElement > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "comment": "Rifiuta"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#ampsandConsentElement > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.flex > button:nth-of-type(3)"
         }
     ]
 }
