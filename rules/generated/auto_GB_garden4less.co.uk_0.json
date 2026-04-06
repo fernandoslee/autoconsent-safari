@@ -7,22 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?garden4less\\.co\\.uk/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#consent-box"],
     "detectCmp": [
         {
-            "exists": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies"
+            "exists": "#consent-box"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies"
+            "visible": "#consent-box"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#accept-cookies"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body:not([id]) > div#consent-box > p:not([id]) > span:not([id]) > button:nth-child(2)#decline-cookies",
-            "comment": "DECLINE"
+            "waitForThenClick": "#decline-cookies"
         }
     ]
 }
