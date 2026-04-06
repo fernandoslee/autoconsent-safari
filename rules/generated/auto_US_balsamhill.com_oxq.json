@@ -1,6 +1,6 @@
 {
     "name": "auto_US_balsamhill.com_oxq",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://balsamhill.com/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?balsamhill\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookieBanner"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+            "exists": "#cookieBanner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(2):not([id])"
+            "visible": "#cookieBanner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(2):not([id])",
-            "comment": "Do Not Sell My Personal Information"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:not([id]) > div:nth-child(1)#cookieBanner[data-testid=\"cookie-banner\"] > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:not([id]) > a:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cookieBanner"
         }
     ]
 }
