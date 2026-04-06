@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_maps.engadin.ch_m40",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.maps.engadin.ch/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?maps\\.engadin\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.oax_modal_wrap.oax_cookie_consent_modal.oax_modal_large"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.oax_modal_wrap.oax_cookie_consent_modal.oax_modal_large"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.oax_modal_wrap.oax_cookie_consent_modal.oax_modal_large"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.oax-cookie-consent-select-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Necessary cookies only"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div#oax-dialog-main > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.oax_modal_wrap.oax_cookie_consent_modal.oax_modal_large"
         }
     ]
 }
