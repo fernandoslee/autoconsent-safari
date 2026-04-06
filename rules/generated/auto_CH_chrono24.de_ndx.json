@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_chrono24.de_ndx",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.chrono24.de/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?chrono24\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.gdpr-layer-footer"],
     "detectCmp": [
         {
-            "exists": "body > dialog:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "div.gdpr-layer-footer"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > dialog:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "div.gdpr-layer-footer"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > dialog:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "Nur notwendige Cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > dialog:not([id]) > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.gdpr-layer-footer"
         }
     ]
 }
