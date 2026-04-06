@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?lethpolytech\\.ca/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.consent-banner"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > a:nth-child(3):not([id])"
+            "exists": "div.consent-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > a:nth-child(3):not([id])"
+            "visible": "div.consent-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "a.cookie-accept"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > a:nth-child(3):not([id])",
-            "comment": "Decline"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > a:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "a.cookie-decline"
         }
     ]
 }
