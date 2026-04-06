@@ -1,6 +1,6 @@
 {
     "name": "auto_AU_tripcentral.ca_v7v",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "https://www.tripcentral.ca/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?tripcentral\\.ca/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookiemodal"],
     "detectCmp": [
         {
-            "exists": "body > div#cookiemodal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#footer-cookie-buttons > a:nth-child(2)#footer-cookie-close"
+            "exists": "#cookiemodal"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookiemodal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#footer-cookie-buttons > a:nth-child(2)#footer-cookie-close"
+            "visible": "#cookiemodal"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#footer-cookie-accept"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookiemodal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#footer-cookie-buttons > a:nth-child(2)#footer-cookie-close",
-            "comment": "Close"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookiemodal > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(5)#footer-cookie-buttons > a:nth-child(2)#footer-cookie-close",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cookiemodal"
         }
     ]
 }
