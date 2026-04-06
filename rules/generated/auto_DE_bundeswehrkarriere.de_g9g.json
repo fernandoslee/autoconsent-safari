@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_bundeswehrkarriere.de_g9g",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.bundeswehrkarriere.de/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?bundeswehrkarriere\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["body.node-tag-home > div:nth-of-type(3)"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(4):not([id])"
+            "exists": "body.node-tag-home > div:nth-of-type(3)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(4):not([id])"
+            "visible": "body.node-tag-home > div:nth-of-type(3)"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(4):not([id])",
-            "comment": "Alle Cookies ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(5):not([id]) > button:nth-child(4):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "body.node-tag-home > div:nth-of-type(3)"
         }
     ]
 }
