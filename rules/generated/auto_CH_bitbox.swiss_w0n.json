@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?bitbox\\.swiss/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie-monster"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.cookie-monster"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.cookie-monster"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-action=\"accept\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject all"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "[data-action=\"deny\"]"
         }
     ]
 }
