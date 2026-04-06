@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?degussa-goldhandel\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#ae97ba1ca-a75f-4928-b74d-23a72eaa8573"],
     "detectCmp": [
         {
-            "exists": "dialog[data-nosnippet] a[role='button'][data-order='1']"
+            "exists": "#ae97ba1ca-a75f-4928-b74d-23a72eaa8573"
         }
     ],
     "detectPopup": [
         {
-            "visible": "dialog[data-nosnippet] a[role='button'][data-order='1']"
+            "visible": "#ae97ba1ca-a75f-4928-b74d-23a72eaa8573"
         }
     ],
-    "optIn": [
-        {
-            "waitForThenClick": "dialog[data-nosnippet] a[role='button'][data-order='0']"
-        }
-    ],
+    "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": "dialog[data-nosnippet] a[role='button'][data-order='1']"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "dialog[data-nosnippet] a[role='button'][data-order='1']",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.a15cc-ext-4-360 > a:nth-of-type(2)"
         }
     ]
 }
