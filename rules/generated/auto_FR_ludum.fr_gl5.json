@@ -1,6 +1,6 @@
 {
     "name": "auto_FR_ludum.fr_gl5",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.ludum.fr/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?ludum\\.fr/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookiesplus-content"],
     "detectCmp": [
         {
-            "exists": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "exists": "#cookiesplus-content"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])"
+            "visible": "#cookiesplus-content"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.col-xs-12 > button:nth-of-type(1)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "comment": "Rejeter"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookiesplus-modal-container > div:not([id]) > div:nth-child(1)#cookiesplus-modal > div:nth-child(3)#cookiesplus-content > div:not([id]) > form#cookiesplus-form > div:nth-child(3):not([id]) > div:nth-child(1):not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cookiesplus-content"
         }
     ]
 }
