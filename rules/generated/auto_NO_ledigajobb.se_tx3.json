@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?ledigajobb\\.se/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-consent-modal"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+            "exists": "#cookie-consent-modal"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])"
+            "visible": "#cookie-consent-modal"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.pt-3 > button:nth-of-type(1)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
-            "comment": "Godkänn nödvändiga cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-consent-modal > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(4):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.pt-3 > button:nth-of-type(2)"
         }
     ]
 }
