@@ -1,3 +1,52 @@
+# Autoconsent — Safari Fork
+
+> **This is a private fork of [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent).**
+> The full fork context, setup instructions, and architecture are in [SAFARI.md](SAFARI.md).
+
+## Fork Rules
+
+**Working directory:** `~/Projects/autoconsent` (not the SMB volume — git/npm are unreliable there)
+
+**GitHub remotes:**
+- `origin` → `https://github.com/fernandoslee/autoconsent-safari.git` (our fork)
+- `upstream` → `https://github.com/duckduckgo/autoconsent.git` (DuckDuckGo)
+
+**Files owned by this fork** (the only files you may ever modify):
+```
+addon/manifest.safari.json
+build.sh                       (Safari block appended at bottom)
+update_version.js              (one extra line at bottom)
+.gitignore                     (one extra line)
+.github/workflows/upstream-sync.yml
+.github/workflows/safari-build.yml
+SAFARI.md
+CLAUDE.md
+xcode/                         (Xcode project — not yet generated)
+```
+
+**Files that must never be modified** (any change creates upstream merge conflicts):
+```
+lib/   addon/content.ts   addon/background.ts   addon/mv-compat.ts
+addon/popup.ts   addon/utils.ts   addon/devtools/   rules/
+addon/manifest.mv3.json   addon/manifest.firefox.json
+package.json   tsconfig.json   scripts/   tests/
+```
+
+## Safari-Specific Build
+
+```bash
+npm install            # first time only
+npm run prepublish     # builds dist/addon-safari/ (and mv3, firefox)
+```
+
+The Safari bundle is at `dist/addon-safari/`. It must not contain a `devtools/` directory and must not have `browsingData` in its `manifest.json`. The build script enforces this.
+
+## Upstream Sync
+
+Runs daily via `.github/workflows/upstream-sync.yml`. Clean merges land automatically; conflicts open a PR. The only files at risk of conflict are `build.sh` and `update_version.js` — both have append-only changes at positions upstream never touches.
+
+---
+
 # Autoconsent Agent Guide
 
 A library for automatically handling cookie consent popups on websites. Used in DuckDuckGo browser apps. Rules detect Consent Management Providers (CMPs) and automate opt-out/opt-in flows.
