@@ -1,6 +1,6 @@
 {
     "name": "auto_CH_sac-uto.ch_3gu",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://sac-uto.ch/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?sac-uto\\.ch/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cs2gdpr-cookiebanner"],
     "detectCmp": [
         {
-            "exists": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-accept-required-banner"
+            "exists": "#cs2gdpr-cookiebanner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-accept-required-banner"
+            "visible": "#cs2gdpr-cookiebanner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-accept-required-banner",
-            "comment": "ERFORDERLICHE COOKIES AKZEPTIEREN"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#gdrp-cookieoverlay > div:nth-child(3)#cs2gdpr-cookiebanner > div:not([id]) > div:nth-child(3):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#btn-accept-required-banner",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cs2gdpr-cookiebanner"
         }
     ]
 }
