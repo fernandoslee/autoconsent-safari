@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?chamrousse\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie_container.cookie-short_container"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieRefuse"
+            "exists": "div.cookie_container.cookie-short_container"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieRefuse"
+            "visible": "div.cookie_container.cookie-short_container"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#cookieAccepts"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieRefuse",
-            "comment": "Non, tout refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2)#cookieRefuse",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#cookieRefuse"
         }
     ]
 }
