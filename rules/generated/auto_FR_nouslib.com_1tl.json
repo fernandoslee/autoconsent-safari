@@ -1,6 +1,6 @@
 {
     "name": "auto_FR_nouslib.com_1tl",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.nouslib.com/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?nouslib\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#consent > user-consent"],
     "detectCmp": [
         {
-            "exists": "body > div#consent > user-consent:nth-child(1):not([id]) > consent-dialog:not([id]) > consent-content:not([id]) > consent-message:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "exists": "#consent > user-consent"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#consent > user-consent:nth-child(1):not([id]) > consent-dialog:not([id]) > consent-content:not([id]) > consent-message:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "visible": "#consent > user-consent"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#consent > user-consent:nth-child(1):not([id]) > consent-dialog:not([id]) > consent-content:not([id]) > consent-message:nth-child(1):not([id]) > button:nth-child(1):not([id])",
-            "comment": "Continuer sans accepter"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#consent > user-consent:nth-child(1):not([id]) > consent-dialog:not([id]) > consent-content:not([id]) > consent-message:nth-child(1):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#consent > user-consent"
         }
     ]
 }
