@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?pflanzenhof-online\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.page-wrap--cookie-permission"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+            "exists": "div.page-wrap--cookie-permission"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])"
+            "visible": "div.page-wrap--cookie-permission"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "a.cookie-permission--accept-button"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
-            "comment": "Ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > a:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "a.cookie-permission--decline-button"
         }
     ]
 }
