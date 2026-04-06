@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?zuidas\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.c-cookie-bar.js-cookie-bar"],
     "detectCmp": [
         {
-            "exists": "body > main#maincontent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.c-cookie-bar.js-cookie-bar"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > main#maincontent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.c-cookie-bar.js-cookie-bar"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > main#maincontent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > main#maincontent > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.c-cookie-bar__button.c-cookie-bar__button--reject.js-cookie-reject"
         }
     ]
 }
