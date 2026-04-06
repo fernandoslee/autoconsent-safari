@@ -7,25 +7,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?urallawoolroom\\.com\\.au/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.sqs-cookie-banner-v2-cta-container"],
     "detectCmp": [
         {
-            "exists": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+            "exists": "div.sqs-cookie-banner-v2-cta-container"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".cookie-banner-mount-point section[aria-label='Cookie banner']"
+            "visible": "div.sqs-cookie-banner-v2-cta-container"
         }
     ],
-    "optIn": [
-        {
-            "waitForThenClick": ".cookie-banner-mount-point button.accept"
-        }
-    ],
+    "optIn": [],
     "optOut": [
         {
-            "waitForThenClick": ".cookie-banner-mount-point button.decline"
+            "waitForThenClick": "button.sqs-cookie-banner-v2-deny.sqs-cookie-banner-v2-cta"
         }
     ]
 }
