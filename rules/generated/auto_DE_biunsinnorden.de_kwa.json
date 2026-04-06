@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?biunsinnorden\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cookie-note-main"],
     "detectCmp": [
         {
-            "exists": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "exists": "#cookie-note-main"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required"
+            "visible": "#cookie-note-main"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required",
-            "comment": "Notwendige Cookies akzeptieren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#cookie-note-main > div:nth-child(2):not([id]) > button:nth-child(2)#cookie-accept-required",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#cookie-accept-required"
         }
     ]
 }
