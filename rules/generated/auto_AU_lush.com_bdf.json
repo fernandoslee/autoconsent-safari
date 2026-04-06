@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?lush\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie-banner-styles__BannerButtons-sc-d9631133-2"],
     "detectCmp": [
         {
-            "exists": "body > div#portal-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#portal-cookie-banner__wrapper > aside#portal-cookie-banner__content > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.cookie-banner-styles__BannerButtons-sc-d9631133-2"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#portal-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#portal-cookie-banner__wrapper > aside#portal-cookie-banner__content > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.cookie-banner-styles__BannerButtons-sc-d9631133-2"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-test=\"cookie__accept\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#portal-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#portal-cookie-banner__wrapper > aside#portal-cookie-banner__content > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Reject non-essential"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#portal-cookie-banner > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2)#portal-cookie-banner__wrapper > aside#portal-cookie-banner__content > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "[data-test=\"cookie__reject\"]"
         }
     ]
 }
