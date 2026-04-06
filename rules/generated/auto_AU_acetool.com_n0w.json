@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?acetool\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.stacked-popups.stacked-popups--position-right"],
     "detectCmp": [
         {
-            "exists": "body > div#shopify-section-popups > div:nth-child(1):not([id]) > modal-box#modal-popups-0 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.stacked-popups.stacked-popups--position-right"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#shopify-section-popups > div:nth-child(1):not([id]) > modal-box#modal-popups-0 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.stacked-popups.stacked-popups--position-right"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.increased-spacing button.button--solid"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#shopify-section-popups > div:nth-child(1):not([id]) > modal-box#modal-popups-0 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Decline all cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#shopify-section-popups > div:nth-child(1):not([id]) > modal-box#modal-popups-0 > div:nth-child(1):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.increased-spacing button.button--outline"
         }
     ]
 }
