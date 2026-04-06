@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?speedtest\\.vodafone\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["[data-cy=\"modal-dialog\"]"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:not([id]) > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+            "exists": "[data-cy=\"modal-dialog\"]"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:not([id]) > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])"
+            "visible": "[data-cy=\"modal-dialog\"]"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "[data-cy=\"button-accept-all\"]"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:not([id]) > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
-            "comment": "Alle ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:not([id]) > div:not([id]) > main:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(4):not([id]) > div:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "xpath///button[contains(., 'Alle ablehnen')] | //a[contains(., 'Alle ablehnen')]"
         }
     ]
 }
