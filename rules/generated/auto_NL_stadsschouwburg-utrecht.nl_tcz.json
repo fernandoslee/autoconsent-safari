@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_stadsschouwburg-utrecht.nl_tcz",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://stadsschouwburg-utrecht.nl/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?stadsschouwburg-utrecht\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#cc-window-overlay"],
     "detectCmp": [
         {
-            "exists": "body > section#cc-window-overlay > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "exists": "#cc-window-overlay"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > section#cc-window-overlay > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])"
+            "visible": "#cc-window-overlay"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > section#cc-window-overlay > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
-            "comment": "essentiële cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > section#cc-window-overlay > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#cc-window-overlay"
         }
     ]
 }
