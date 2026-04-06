@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?schwaebisch-hall\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.show-cookie-banner"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "exists": "div.show-cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])"
+            "visible": "div.show-cookie-banner"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.js-cookie-accept-ok"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "comment": "Ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.js-decline-cookies"
         }
     ]
 }
