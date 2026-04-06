@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?ersatzteil-shop24\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.consent-banner-body"],
     "detectCmp": [
         {
-            "exists": "body > div#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close"
+            "exists": "div.consent-banner-body"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close"
+            "visible": "div.consent-banner-body"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#consent-banner-btn-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close",
-            "comment": "Ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#consent-manager > div:nth-child(1)#consent-banner > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button#consent-banner-btn-close",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#consent-banner-btn-close"
         }
     ]
 }
