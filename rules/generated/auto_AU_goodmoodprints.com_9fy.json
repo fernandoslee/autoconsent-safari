@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?goodmoodprints\\.com/"
     },
-    "prehideSelectors": [".MuiStack-root:has(a[href='/privacy']):has(button)"],
+    "prehideSelectors": ["div.__variable_ddaaa7 > div:nth-of-type(2)"],
     "detectCmp": [
         {
-            "exists": ".MuiStack-root:has(a[href='/privacy']):has(button)"
+            "exists": "div.__variable_ddaaa7 > div:nth-of-type(2)"
         }
     ],
     "detectPopup": [
         {
-            "visible": ".MuiStack-root:has(a[href='/privacy']):has(button)"
+            "visible": "div.__variable_ddaaa7 > div:nth-of-type(2)"
         }
     ],
-    "optIn": [
-        {
-            "waitForThenClick": "xpath///button[contains(., 'Got it')]"
-        }
-    ],
+    "optIn": [],
     "optOut": [
         {
-            "hide": ".MuiStack-root:has(a[href='/privacy']):has(button)"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": ".MuiStack-root:has(a[href='/privacy']):has(button)",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.__variable_ddaaa7 > div:nth-of-type(2)"
         }
     ]
 }
