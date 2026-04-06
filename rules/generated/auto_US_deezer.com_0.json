@@ -7,22 +7,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?deezer\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.gdpr-modalContainer"],
     "detectCmp": [
         {
-            "exists": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button"
+            "exists": "div.gdpr-modalContainer"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button"
+            "visible": "div.gdpr-modalContainer"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#gdpr-btn-accept-all"
+        }
+    ],
     "optOut": [
         {
-            "waitForThenClick": "body > div[id][cookie-banner-data-theme] > div > div > div > div:nth-child(2) > div:nth-child(2) > button",
-            "text": "Refuse"
+            "waitForThenClick": "#gdpr-btn-refuse-all"
         }
     ]
 }
