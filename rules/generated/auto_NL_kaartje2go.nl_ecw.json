@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?kaartje2go\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.consentmodal__modal"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiebanner-decline[data-testid=\"button-cookie-decline\"]"
+            "exists": "div.consentmodal__modal"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiebanner-decline[data-testid=\"button-cookie-decline\"]"
+            "visible": "div.consentmodal__modal"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiebanner-decline[data-testid=\"button-cookie-decline\"]",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#cookiebanner-decline[data-testid=\"button-cookie-decline\"]",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#cookiebanner-decline"
         }
     ]
 }
