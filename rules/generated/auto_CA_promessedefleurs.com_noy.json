@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?promessedefleurs\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.inset-x-0"],
     "detectCmp": [
         {
-            "exists": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "exists": "div.inset-x-0"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])"
+            "visible": "div.inset-x-0"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.mst-gdpr__buttons > button:nth-of-type(2)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "comment": "Refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#gdprCookieBar > div:not([id]) > div:nth-child(1):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.mst-gdpr__buttons > button:nth-of-type(3)"
         }
     ]
 }
