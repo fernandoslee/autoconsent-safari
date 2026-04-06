@@ -1,0 +1,116 @@
+name: Upstream Sync
+
+on:
+  schedule:
+    # Run daily at 02:00 UTC — upstream release.yml runs at 00:00 UTC,
+    # giving it 2 hours to tag before we sync.
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout fork main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SYNC_PAT }}
+          # SYNC_PAT must be a Personal Access Token (classic) with repo scope,
+          # stored as a repository secret. The default GITHUB_TOKEN cannot push
+          # to a branch that triggers further workflows, hence the PAT.
+
+      - name: Configure git identity
+        run: |
+          git config user.email "safari-sync-bot@users.noreply.github.com"
+          git config user.name "Safari Sync Bot"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/duckduckgo/autoconsent.git || true
+          git fetch upstream main --tags
+
+      - name: Check if there are new upstream commits
+        id: check_new
+        run: |
+          UPSTREAM_SHA=$(git rev-parse upstream/main)
+          FORK_MERGE_BASE=$(git merge-base HEAD upstream/main)
+          if [ "$UPSTREAM_SHA" = "$FORK_MERGE_BASE" ]; then
+            echo "No new upstream commits."
+            echo "has_new_commits=false" >> "$GITHUB_OUTPUT"
+          else
+            COMMIT_COUNT=$(git rev-list HEAD..upstream/main --count)
+            echo "Found $COMMIT_COUNT new upstream commit(s)."
+            echo "has_new_commits=true" >> "$GITHUB_OUTPUT"
+            echo "upstream_sha=$UPSTREAM_SHA" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Attempt merge
+        id: merge
+        if: steps.check_new.outputs.has_new_commits == 'true'
+        run: |
+          set +e
+          git merge upstream/main \
+            --no-edit \
+            -m "chore: sync upstream $(date -u +%Y-%m-%d)"
+          # NOTE: no --strategy-option=theirs — that would silently overwrite
+          # our build.sh / update_version.js additions if upstream touches the
+          # same lines. Git's three-way merge handles non-conflicting hunks
+          # cleanly on its own; true conflicts are caught by the non-zero exit.
+          MERGE_EXIT=$?
+          set -e
+
+          if [ $MERGE_EXIT -eq 0 ]; then
+            echo "merge_status=clean" >> "$GITHUB_OUTPUT"
+          else
+            echo "merge_status=conflict" >> "$GITHUB_OUTPUT"
+            git merge --abort
+          fi
+
+      - name: Push clean merge to main
+        if: |
+          steps.check_new.outputs.has_new_commits == 'true' &&
+          steps.merge.outputs.merge_status == 'clean'
+        run: git push origin main
+
+      - name: Create PR branch for conflict resolution
+        if: |
+          steps.check_new.outputs.has_new_commits == 'true' &&
+          steps.merge.outputs.merge_status == 'conflict'
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_PAT }}
+          UPSTREAM_SHA: ${{ steps.check_new.outputs.upstream_sha }}
+        run: |
+          BRANCH="upstream-sync/$(date -u +%Y-%m-%d)"
+          git checkout -b "$BRANCH"
+          set +e
+          git merge upstream/main --no-commit --no-ff
+          set -e
+          git add -A
+          git commit --allow-empty \
+            -m "chore: upstream sync $(date -u +%Y-%m-%d) — CONFLICT REQUIRES MANUAL RESOLUTION"
+          git push origin "$BRANCH"
+
+          cat > /tmp/pr_body.md << 'EOF'
+          Automated merge of `duckduckgo/autoconsent` main into this fork produced
+          merge conflicts that require manual resolution.
+
+          **The only two files this fork modifies are `build.sh` and `update_version.js`.**
+          Check those first — search for `<<<<<<<` conflict markers, resolve, then merge this PR.
+
+          The Safari build workflow will run automatically after merge.
+          EOF
+          echo "" >> /tmp/pr_body.md
+          echo "**Upstream SHA:** $UPSTREAM_SHA" >> /tmp/pr_body.md
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore: upstream sync $(date -u +%Y-%m-%d) — CONFLICT" \
+            --body-file /tmp/pr_body.md \
+            --label "upstream-sync" \
+            --assignee "@me"
