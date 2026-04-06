@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_wolt.com_jyq",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://wolt.com/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?wolt\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cb_elevation_elevationLarge_23d"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "exists": "div.cb_elevation_elevationLarge_23d"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])"
+            "visible": "div.cb_elevation_elevationLarge_23d"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "div.b1m5dgh8 > button:nth-of-type(2)"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
-            "comment": "Use only necessary"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(1):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.cb_elevation_elevationLarge_23d"
         }
     ]
 }
