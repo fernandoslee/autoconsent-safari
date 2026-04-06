@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?mijn\\.simyo\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.modal--lg"],
     "detectCmp": [
         {
-            "exists": "body > div#__nuxt > div:not([id]) > div:nth-child(3):not([id]) > section#modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "exists": "div.modal--lg"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__nuxt > div:not([id]) > div:nth-child(3):not([id]) > section#modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])"
+            "visible": "div.modal--lg"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__nuxt > div:not([id]) > div:nth-child(3):not([id]) > section#modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__nuxt > div:not([id]) > div:nth-child(3):not([id]) > section#modal > div:nth-child(2):not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "[data-cy=\"deny-cookie\"]"
         }
     ]
 }
