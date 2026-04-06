@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_planteenolijfboom.nl_pdo",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.planteenolijfboom.nl/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?planteenolijfboom\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["section.gdpr-cookie-banner"],
     "detectCmp": [
         {
-            "exists": "body > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "exists": "section.gdpr-cookie-banner"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])"
+            "visible": "section.gdpr-cookie-banner"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "comment": "Weiger"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#siteWrapper > div:nth-child(1):not([id]) > section:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "section.gdpr-cookie-banner"
         }
     ]
 }
