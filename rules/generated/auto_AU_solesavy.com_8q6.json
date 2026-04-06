@@ -1,6 +1,6 @@
 {
     "name": "auto_AU_solesavy.com_8q6",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "https://solesavy.com/atoms-model-000-bitcoin-release-information/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?solesavy\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.u21-privacy-banner.u21-privacy-banner--show"],
     "detectCmp": [
         {
-            "exists": "body > div#wrapper > div:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+            "exists": "div.u21-privacy-banner.u21-privacy-banner--show"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#wrapper > div:nth-child(4):not([id]) > button:nth-child(3):not([id])"
+            "visible": "div.u21-privacy-banner.u21-privacy-banner--show"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#wrapper > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
-            "comment": "OK"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#wrapper > div:nth-child(4):not([id]) > button:nth-child(3):not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.u21-privacy-banner.u21-privacy-banner--show"
         }
     ]
 }
