@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_aknw.de_wcz",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.aknw.de/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?aknw\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.js-ppwcm-settings__view--start > div:nth-of-type(2)"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+            "exists": "div.js-ppwcm-settings__view--start > div:nth-of-type(2)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:not([id])"
+            "visible": "div.js-ppwcm-settings__view--start > div:nth-of-type(2)"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.button-primary"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:not([id])",
-            "comment": "Nur wesentliche Cookies annehmen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(3):not([id]) > a:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.js-ppwcm-settings__view--start > div:nth-of-type(2)"
         }
     ]
 }
