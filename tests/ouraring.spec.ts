@@ -1,3 +1,3 @@
 import generateCMPTests from '../playwright/runner';
 
-generateCMPTests('ouraring', ['https://ouraring.com/']);
+generateCMPTests('Onetrust', ['https://ouraring.com/']);
