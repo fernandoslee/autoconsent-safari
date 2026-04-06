@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?avanza\\.se/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.cookie-banner-content"],
     "detectCmp": [
         {
-            "exists": "body > aza-app:not([id]) > aza-shell:not([id]) > div:nth-child(2):not([id]) > aza-cookie-message:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+            "exists": "div.cookie-banner-content"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > aza-app:not([id]) > aza-shell:not([id]) > div:nth-child(2):not([id]) > aza-cookie-message:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > span:not([id])"
+            "visible": "div.cookie-banner-content"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.accept-cookie-button"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > aza-app:not([id]) > aza-shell:not([id]) > div:nth-child(2):not([id]) > aza-cookie-message:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
-            "comment": "Godkänn endast nödvändiga cookies"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > aza-app:not([id]) > aza-shell:not([id]) > div:nth-child(2):not([id]) > aza-cookie-message:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:nth-child(3):not([id]) > button:nth-child(2):not([id]) > span:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "div.column > button:nth-of-type(2)"
         }
     ]
 }
