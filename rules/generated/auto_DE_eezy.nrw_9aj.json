@@ -1,6 +1,6 @@
 {
     "name": "auto_DE_eezy.nrw_9aj",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://eezy.nrw/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?eezy\\.nrw/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.privacy-center"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+            "exists": "div.privacy-center"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:not([id])"
+            "visible": "div.privacy-center"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "a.accept-all"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
-            "comment": "verweigern"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:not([id]) > div:nth-child(1):not([id]) > p:nth-child(2):not([id]) > a:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.privacy-center"
         }
     ]
 }
