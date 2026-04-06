@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?gmf\\.fr/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#popin_tc_privacy"],
     "detectCmp": [
         {
-            "exists": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+            "exists": "#popin_tc_privacy"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button"
+            "visible": "#popin_tc_privacy"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#popin_tc_privacy_button_2"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
-            "comment": "Refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#tc-privacy-wrapper > div#popin_tc_privacy > div:nth-child(2)#popin_tc_privacy_container_button > button:nth-child(1)#popin_tc_privacy_button",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#popin_tc_privacy_button"
         }
     ]
 }
