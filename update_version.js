@@ -10,3 +10,4 @@ function updateVersion(manifestFile) {
 
 updateVersion('./addon/manifest.mv3.json');
 updateVersion('./addon/manifest.firefox.json');
+updateVersion('./addon/manifest.safari.json');
