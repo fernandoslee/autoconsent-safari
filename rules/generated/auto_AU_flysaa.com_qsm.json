@@ -1,6 +1,6 @@
 {
     "name": "auto_AU_flysaa.com_qsm",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "https://www.flysaa.com/"
     },
@@ -9,33 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?flysaa\\.com/"
     },
-    "prehideSelectors": ["#cookiesPortletDiv"],
+    "prehideSelectors": ["#_es_indra_ibe_saa_CookiesPortlet_cookiesForm"],
     "detectCmp": [
         {
-            "exists": "#cookiesPortletDiv"
+            "exists": "#_es_indra_ibe_saa_CookiesPortlet_cookiesForm"
         }
     ],
     "detectPopup": [
         {
-            "visible": "#cookiesPortletDiv .cookie-buttons"
+            "visible": "#_es_indra_ibe_saa_CookiesPortlet_cookiesForm"
         }
     ],
     "optIn": [
         {
-            "waitForThenClick": "#cookiesPortletDiv button[name='acceptAll']"
+            "waitForThenClick": "[aria-label=\"Accept\\ All\"]"
         }
     ],
     "optOut": [
         {
-            "waitForThenClick": "#cookiesPortletDiv button[aria-label='Only Mandatory']",
-            "comment": "Only Mandatory"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "#cookiesPortletDiv .cookie-buttons",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#_es_indra_ibe_saa_CookiesPortlet_cookiesForm"
         }
     ]
 }
