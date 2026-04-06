@@ -1,6 +1,6 @@
 {
     "name": "auto_FR_labanquepostale.com_1e6",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.labanquepostale.com/"
     },
@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?labanquepostale\\.com/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#footer_tc_privacy"],
     "detectCmp": [
         {
-            "exists": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:not([id]) > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
+            "exists": "#footer_tc_privacy"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:not([id]) > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2"
+            "visible": "#footer_tc_privacy"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "#footer_tc_privacy_button_3"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:not([id]) > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2",
-            "comment": "UNIQUEMENT AUTORISER LES COOKIES ESSENTIELS"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#tc-privacy-wrapper > div#footer_tc_privacy > div:not([id]) > div:nth-child(2)#footer_tc_privacy_container_button > button:nth-child(2)#footer_tc_privacy_button_2",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "#footer_tc_privacy"
         }
     ]
 }
