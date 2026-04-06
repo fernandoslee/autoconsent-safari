@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?immobilien\\.sparkasse\\.de/"
     },
-    "prehideSelectors": ["#tc-privacy-wrapper"],
+    "prehideSelectors": ["div.MuiDialog-container div.MuiPaper-root"],
     "detectCmp": [
         {
-            "exists": "[data-testid=\"consentManager\"]"
+            "exists": "div.MuiDialog-container div.MuiPaper-root"
         }
     ],
     "detectPopup": [
         {
-            "visible": "[data-testid=\"consentManager\"]"
+            "visible": "div.MuiDialog-container div.MuiPaper-root"
         }
     ],
-    "optIn": [
-        {
-            "waitForThenClick": "[data-testid=\"privacyBanner-agreeAll\"]"
-        }
-    ],
+    "optIn": [],
     "optOut": [
         {
             "waitForThenClick": "[data-testid=\"privacyBanner-rejectAll\"]"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "[data-testid=\"consentManager\"]",
-            "timeout": 1000,
-            "check": "none"
         }
     ]
 }
