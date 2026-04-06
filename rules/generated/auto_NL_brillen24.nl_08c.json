@@ -1,6 +1,6 @@
 {
     "name": "auto_NL_brillen24.nl_08c",
-    "cosmetic": false,
+    "cosmetic": true,
     "_metadata": {
         "vendorUrl": "http://www.brillen24.nl/"
     },
@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?brillen24\\.nl/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.b24-modal.fvp-content-desktop_fvp-container-modal__1_H_h.first-visit-popup"],
     "detectCmp": [
         {
-            "exists": "body > div#__next > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"refuse-all-cookies\"]"
+            "exists": "div.b24-modal.fvp-content-desktop_fvp-container-modal__1_H_h.first-visit-popup"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#__next > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"refuse-all-cookies\"]"
+            "visible": "div.b24-modal.fvp-content-desktop_fvp-container-modal__1_H_h.first-visit-popup"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#__next > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"refuse-all-cookies\"]",
-            "comment": "Weigeren"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#__next > div:nth-child(2)#cookieBanner > div:not([id]) > div:nth-child(2):not([id]) > button:nth-child(2):not([id])[data-testid=\"refuse-all-cookies\"]",
-            "timeout": 1000,
-            "check": "none"
+            "hide": "div.b24-modal.fvp-content-desktop_fvp-container-modal__1_H_h.first-visit-popup"
         }
     ]
 }
