@@ -12,12 +12,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(4):not([id])"
+            "exists": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(4):not([id])"
+            "visible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])"
         }
     ],
     "optIn": [],
@@ -26,13 +26,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(4):not([id])",
-            "comment": "Allow anonymous analytics"
+            "waitForThenClick": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])",
+            "comment": "Reject"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(4):not([id])",
+            "waitForVisible": "body > span:not([id]) > div#plugin-consent > section:nth-child(1):not([id]) > div:nth-child(5):not([id])",
             "timeout": 1000,
             "check": "none"
         }

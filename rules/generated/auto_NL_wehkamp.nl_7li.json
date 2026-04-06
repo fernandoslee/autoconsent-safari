@@ -13,12 +13,12 @@
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria2096499113-\\:ro\\:"
+            "exists": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria2096499113-\\:ro\\:"
+            "visible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)"
         }
     ],
     "optIn": [],
@@ -27,13 +27,13 @@
             "wait": 500
         },
         {
-            "waitForThenClick": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria2096499113-\\:ro\\:",
+            "waitForThenClick": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)",
             "comment": "weigeren"
         }
     ],
     "test": [
         {
-            "waitForVisible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)#react-aria2096499113-\\:ro\\:",
+            "waitForVisible": "body > div:not([id]) > div:not([id])[data-testid=\"consent-dialog\"] > section:not([id]) > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:nth-child(2):not([id]) > button:nth-child(1)",
             "timeout": 1000,
             "check": "none"
         }
