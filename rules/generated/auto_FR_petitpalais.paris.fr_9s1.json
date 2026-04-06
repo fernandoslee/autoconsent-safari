@@ -9,32 +9,25 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?petitpalais\\.paris\\.fr/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["div.orejime-Notice"],
     "detectCmp": [
         {
-            "exists": "body > div#orejime > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+            "exists": "div.orejime-Notice"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div#orejime > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])"
+            "visible": "div.orejime-Notice"
         }
     ],
-    "optIn": [],
+    "optIn": [
+        {
+            "waitForThenClick": "button.orejime-Notice-button.orejime-Notice-saveButton"
+        }
+    ],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div#orejime > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
-            "comment": "Refuser"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div#orejime > div:nth-child(1):not([id]) > div:not([id]) > div:not([id]) > div:not([id]) > ul:nth-child(2):not([id]) > li:nth-child(2):not([id]) > button:not([id])",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "button.orejime-Button--decline.orejime-Notice-button.orejime-Notice-declineButton"
         }
     ]
 }
