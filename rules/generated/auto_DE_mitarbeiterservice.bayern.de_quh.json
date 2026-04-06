@@ -9,32 +9,21 @@
         "frame": false,
         "urlPattern": "^https?://(www\\.)?mitarbeiterservice\\.bayern\\.de/"
     },
-    "prehideSelectors": [],
+    "prehideSelectors": ["#matomoCookieNotification"],
     "detectCmp": [
         {
-            "exists": "body > div:not([id]) > div:nth-child(1)#matomoCookieNotification > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#disallowMatomoCookieNotification"
+            "exists": "#matomoCookieNotification"
         }
     ],
     "detectPopup": [
         {
-            "visible": "body > div:not([id]) > div:nth-child(1)#matomoCookieNotification > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#disallowMatomoCookieNotification"
+            "visible": "#matomoCookieNotification"
         }
     ],
     "optIn": [],
     "optOut": [
         {
-            "wait": 500
-        },
-        {
-            "waitForThenClick": "body > div:not([id]) > div:nth-child(1)#matomoCookieNotification > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#disallowMatomoCookieNotification",
-            "comment": "Webanalyse ablehnen"
-        }
-    ],
-    "test": [
-        {
-            "waitForVisible": "body > div:not([id]) > div:nth-child(1)#matomoCookieNotification > div:not([id]) > div:not([id]) > div:nth-child(2):not([id]) > div:not([id]) > div:nth-child(2):not([id]) > button#disallowMatomoCookieNotification",
-            "timeout": 1000,
-            "check": "none"
+            "waitForThenClick": "#disallowMatomoCookieNotification"
         }
     ]
 }
