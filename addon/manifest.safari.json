@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Autoconsent",
+  "description": "Automatically opt out of cookie consent popups.",
   "version": "2026.3.31",
   "background": {
     "service_worker": "background.bundle.js"
