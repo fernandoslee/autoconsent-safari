@@ -1,91 +1,148 @@
-# Autoconsent
+# Autoconsent for Safari
 
-This is a library of rules for navigating through common consent popups on the web. These rules
-can be run in a Chrome extension, or in a Playwright-orchestrated headless browser. Using
-these rules, opt-in and opt-out options can be selected automatically, without requiring
-user-input.
+A Safari extension that automatically opts out of cookie consent popups. This is a private fork of [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) that adds a Safari distribution target.
 
-## Using the library
-Autoconsent is meant to be used in browser apps and extensions. [DuckDuckGo browser apps](https://duckduckgo.com/app) use this library to automatically handle cookie consent popups.
+> **Current version:** 2026.3.31  
+> **Status:** Working locally. Handles the vast majority of GDPR cookie banners automatically.
 
-To integrate Autoconsent, you'll need to instantiate the main `AutoConsent` class in a content script (running in isolated page context), and implement some configuration hooks in a background script. See [this document](docs/api.md) for more details on internal APIs and data flows.
+---
 
-```javascript
-import AutoConsent from '@duckduckgo/autoconsent'; // or '@duckduckgo/autoconsent/extra' for the version with filterlists
-import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
-import { consentomatic } from '@duckduckgo/autoconsent/rules/consentomatic.json'
+## What it does
 
-const autoconsent = new AutoConsent(
-    chrome.runtime.sendMessage, // provide a callback to send messages to the background script
-    null, // optionally provide a config object here if you don't want to implement a background script
-    { autoconsent, consentomatic },
-);
+When you visit a website with a cookie consent popup, the extension silently clicks "Reject all" (or equivalent) for you. It covers 285+ Consent Management Providers (CMPs) — OneTrust, Sourcepoint, Cookiebot, and hundreds of others — plus thousands of site-specific rules maintained by the DuckDuckGo team.
 
-// connect the message receiver callback to handle messages from the background script
-chrome.runtime.onMessage.addListener((message) => {
-  return Promise.resolve(consent.receiveMessageCallback(message));
-});
-```
+Sites with no reject option get their popup hidden via cosmetic rules. Sites with no matching rule are left untouched.
 
-In some environments (e.g. browser extensions), it's useful to access [eval snippet functions](./lib/eval-snippets.ts) directly in the background script. This can be done by importing the `evalSnippets` object from the library:
+---
 
-```javascript
-import { evalSnippets } from '@duckduckgo/autoconsent';
-```
+## Installation (one-time)
 
-## Browser extension
+### Prerequisites
 
-Autoconsent comes with a reference extension implementation. It is not published in stores since the feature is available in all [DuckDuckGo apps](https://duckduckgo.com/app), but you can build it yourself and use for testing.
+- macOS 13.0+ (Ventura or later)
+- Xcode 15+ (free from the Mac App Store)
+- Node.js LTS
 
-To build the extension:
+### Steps
 
 ```bash
-# Download dependencies
+# 1. Clone and install dependencies
+git clone https://github.com/fernandoslee/autoconsent-safari.git
+cd autoconsent-safari
 npm install
-# Build the extension
+
+# 2. Build the Safari extension bundle
 npm run prepublish
+# → produces dist/addon-safari/
+
+# 3. Accept Xcode license (first time only)
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -license accept
+sudo xcodebuild -runFirstLaunch
+
+# 4. Generate the Xcode project (first time only)
+xcrun safari-web-extension-converter \
+  dist/addon-safari \
+  --project-location xcode/ \
+  --app-name "AutoconsentSafari" \
+  --bundle-identifier "com.yourorg.autoconsent-safari" \
+  --macos-only \
+  --no-open
+
+# 5. Fix bundle identifier prefix in the generated project
+# Edit xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
+# Change: PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;
+# To:     PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";
+
+# 6. Build the app
+xcodebuild build \
+  -project xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj \
+  -scheme AutoconsentSafari \
+  -configuration Debug \
+  CODE_SIGN_IDENTITY="-" \
+  CODE_SIGNING_REQUIRED=NO
+
+# 7. Open the app to register the extension with Safari
+open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
 
-The extension-specific code can be found in the `addon` directory. There are two versions of the
-addon (found under `dist/addon` after building), one for `mv3` version for Chromium-based browsers, and a `firefox` version for Firefox.
-You can load these in [Chrome](https://developer.chrome.com/docs/extensions/mv3/getstarted/#unpacked)
-in developer mode, and in [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
-as a temporary addon.
+Then go to **Safari → Settings → Extensions**, enable **Autoconsent**, and set Website Access to **Allow on All Websites**.
 
-### Watch mode
-For development, you can run in watch mode
+> Safari will show an "unsigned extension" warning — expected for local builds without an Apple Developer account.
+
+---
+
+## Rebuilding after rule updates
+
+Rules sync automatically from upstream within 24 hours. After pulling, rebuild and reinstall:
 
 ```bash
-npm run watch
+git pull
+npm run prepublish
+xcodebuild build \
+  -project xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj \
+  -scheme AutoconsentSafari \
+  -configuration Debug \
+  CODE_SIGN_IDENTITY="-" \
+  CODE_SIGNING_REQUIRED=NO
+open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
 
-This will rebuild the extension on every source file change. You still need to refresh the extension in the browser to see the changes.
+You do **not** need to re-run `xcrun safari-web-extension-converter` — that's a one-time step.
 
-## Rules
+---
 
-The library's functionality is implemented as a set of rules that define how to manage consent on
-a subset of sites. These generally correspond to specific Consent Management Providers (CMPs)
-that are installed on multiple sites. Each CMP ruleset defines:
+## How it works
 
- * If the site is using that CMP
- * If a popup is displayed
- * Steps to specify an 'opt-in' or 'opt-out' consent for the CMP.
- * Optionally, a test if the consent was correctly applied.
+The extension injects a content script on every page. The script checks the page against 285+ CMP rules and, when a match is found, automatically clicks the reject/decline button. If the CMP has no reject option, the popup is hidden via CSS.
 
-There are currently three ways of implementing a CMP:
+Rules are maintained upstream by DuckDuckGo and sync daily via GitHub Actions.
 
- 1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
- 1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
- rulesets allow.
- 3. As a [Consent-O-Matic](https://github.com/cavi-au/Consent-O-Matic) rule. The `ConsentOMaticCMP` class implements
- compability with rules written for the Consent-O-Matic extension.
+---
 
-For more details on rule types, see [Rule Syntax Reference](docs/rule-syntax.md).
+## Current state & known limitations
+
+| Area | Status |
+|---|---|
+| GDPR cookie banners | Working — covers the major CMPs |
+| US-only popups (CCPA) | Partial — depends on the CMP |
+| Sites with no reject button | Handled via cosmetic (hide) rules |
+| Unsigned local build | Working — Safari shows a one-time warning |
+| Signed/notarized DMG | Not yet set up (requires Apple Developer account) |
+| App Store distribution | Not planned |
+
+**Sites not handled** are ones with no matching rule. The upstream project adds rules continuously — pulling regularly keeps coverage up to date.
+
+---
+
+## Upstream sync
+
+This fork stays in sync with [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) via a daily GitHub Actions workflow (`.github/workflows/upstream-sync.yml`). Clean merges land automatically. Conflicts (rare) open a PR for manual resolution.
+
+---
+
+## Fork structure
+
+Only four files differ from upstream:
+
+| File | Change |
+|---|---|
+| `addon/manifest.safari.json` | Safari-specific manifest (no `browsingData`, no `devtools_page`) |
+| `build.sh` | +10 lines that produce `dist/addon-safari/` |
+| `update_version.js` | +1 line to stamp `manifest.safari.json` on version bumps |
+| `.gitignore` | +1 line to exclude `xcode/.../Resources/` |
+
+Everything else is byte-for-byte identical to upstream.
+
+---
+
+## Remotes
+
+```
+origin    https://github.com/fernandoslee/autoconsent-safari.git  (this fork)
+upstream  https://github.com/duckduckgo/autoconsent.git           (DuckDuckGo)
+```
 
 ## License
 
-MPLv2.
-
-## Manual Testing
-
-To test the extension / addon with Firefox, open the `about:debugging`, navigate to "This Firefox" on the menu and under "Temporary Extensions" click on "Load Temporary Addon". Select the `manifest.json` file from the `dist/firefox` directory. You will need to build the extension before as described above. The extension should then be active and you can test it manually by simply visiting websites.
+MPLv2 — same as upstream.
