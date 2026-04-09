@@ -1,3 +1,20 @@
+# v14.69.0 (Thu Apr 09 2026)
+
+#### 🚀 Enhancement
+
+- fix(hm.com): detect iOS cookie popup and add US opt-out flow [#1250](https://github.com/duckduckgo/autoconsent/pull/1250) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- Update docs and agent instructions [#1249](https://github.com/duckduckgo/autoconsent/pull/1249) ([@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.68.0 (Wed Apr 08 2026)
 
 #### 🚀 Enhancement
