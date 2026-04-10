@@ -1,120 +1,120 @@
 name: Safari Unsigned Build
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'addon/**'
-      - 'lib/**'
-      - 'rules/**'
-      - 'build.sh'
-  workflow_dispatch:
+    push:
+        branches: [main]
+        paths:
+            - 'addon/**'
+            - 'lib/**'
+            - 'rules/**'
+            - 'build.sh'
+    workflow_dispatch:
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  build-unsigned:
-    runs-on: macos-14  # Apple Silicon; Xcode 15.x pre-installed
+    build-unsigned:
+        runs-on: macos-14 # Apple Silicon; Xcode 15.x pre-installed
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Use Node.js LTS
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm
+            - name: Use Node.js LTS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
+                  cache: npm
 
-      - name: Install Node dependencies
-        run: npm ci
+            - name: Install Node dependencies
+              run: npm ci
 
-      - name: Build Safari extension bundle
-        run: npm run prepublish
+            - name: Build Safari extension bundle
+              run: npm run prepublish
 
-      - name: Verify Safari bundle
-        run: |
-          ls dist/addon-safari/
-          [ ! -d dist/addon-safari/devtools ] \
-            || (echo "ERROR: devtools/ must not be in the Safari bundle" && exit 1)
-          ! grep -q "browsingData" dist/addon-safari/manifest.json \
-            || (echo "ERROR: browsingData must not be in manifest.json" && exit 1)
+            - name: Verify Safari bundle
+              run: |
+                  ls dist/addon-safari/
+                  [ ! -d dist/addon-safari/devtools ] \
+                    || (echo "ERROR: devtools/ must not be in the Safari bundle" && exit 1)
+                  ! grep -q "browsingData" dist/addon-safari/manifest.json \
+                    || (echo "ERROR: browsingData must not be in manifest.json" && exit 1)
 
-      - name: Generate Xcode project
-        run: |
-          xcrun safari-web-extension-converter \
-            dist/addon-safari \
-            --project-location xcode/ \
-            --app-name "AutoconsentSafari" \
-            --bundle-identifier "com.yourorg.autoconsent-safari" \
-            --macos-only \
-            --no-open 2>&1 || true
+            - name: Generate Xcode project
+              run: |
+                  xcrun safari-web-extension-converter \
+                    dist/addon-safari \
+                    --project-location xcode/ \
+                    --app-name "AutoconsentSafari" \
+                    --bundle-identifier "com.yourorg.autoconsent-safari" \
+                    --macos-only \
+                    --no-open 2>&1 || true
 
-      - name: Fix bundle identifier prefix
-        run: |
-          sed -i '' \
-            's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
-            xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
+            - name: Fix bundle identifier prefix
+              run: |
+                  sed -i '' \
+                    's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
+                    xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 
-      - name: Get version
-        run: |
-          VERSION=$(node -e "console.log(require('./package.json').version)")
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+            - name: Get version
+              run: |
+                  VERSION=$(node -e "console.log(require('./package.json').version)")
+                  echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
-      - name: Build unsigned app
-        run: |
-          xcodebuild build \
-            -project xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj \
-            -scheme AutoconsentSafari \
-            -configuration Debug \
-            CODE_SIGN_IDENTITY="-" \
-            CODE_SIGNING_REQUIRED=NO \
-            -quiet
+            - name: Build unsigned app
+              run: |
+                  xcodebuild build \
+                    -project xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj \
+                    -scheme AutoconsentSafari \
+                    -configuration Debug \
+                    CODE_SIGN_IDENTITY="-" \
+                    CODE_SIGNING_REQUIRED=NO \
+                    -quiet
 
-      - name: Zip app
-        run: |
-          APP=$(find ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug \
-            -name "AutoconsentSafari.app" | head -1)
-          ditto -c -k --keepParent "$APP" \
-            "$RUNNER_TEMP/AutoconsentSafari-${{ env.VERSION }}-unsigned.zip"
+            - name: Zip app
+              run: |
+                  APP=$(find ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug \
+                    -name "AutoconsentSafari.app" | head -1)
+                  ditto -c -k --keepParent "$APP" \
+                    "$RUNNER_TEMP/AutoconsentSafari-${{ env.VERSION }}-unsigned.zip"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: AutoconsentSafari-${{ env.VERSION }}-unsigned
-          path: ${{ runner.temp }}/AutoconsentSafari-*-unsigned.zip
-          retention-days: 30
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: AutoconsentSafari-${{ env.VERSION }}-unsigned
+                  path: ${{ runner.temp }}/AutoconsentSafari-*-unsigned.zip
+                  retention-days: 30
 
-      - name: Update latest pre-release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Delete previous latest release + tag so we can recreate fresh
-          gh release delete latest --yes 2>/dev/null || true
-          git push origin :refs/tags/latest 2>/dev/null || true
+            - name: Update latest pre-release
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  # Delete previous latest release + tag so we can recreate fresh
+                  gh release delete latest --yes 2>/dev/null || true
+                  git push origin :refs/tags/latest 2>/dev/null || true
 
-          gh release create latest \
-            --prerelease \
-            --title "Latest unsigned build (${{ env.VERSION }})" \
-            --notes "$(cat <<'EOF'
-          Unsigned build of Autoconsent ${{ env.VERSION }} for Safari. No Apple Developer account required.
+                  gh release create latest \
+                    --prerelease \
+                    --title "Latest unsigned build (${{ env.VERSION }})" \
+                    --notes "$(cat <<'EOF'
+                  Unsigned build of Autoconsent ${{ env.VERSION }} for Safari. No Apple Developer account required.
 
-          ## Install
+                  ## Install
 
-          1. Download **AutoconsentSafari-${{ env.VERSION }}-unsigned.zip** below and unzip it
-          2. Remove the macOS quarantine flag:
-             \`\`\`bash
-             xattr -cr AutoconsentSafari.app
-             \`\`\`
-          3. Open **AutoconsentSafari.app** (Safari will warn it is unsigned — this is expected)
-          4. In Safari: **Settings → Extensions → Enable Autoconsent**
-          5. Set Website Access to **Allow on All Websites**
+                  1. Download **AutoconsentSafari-${{ env.VERSION }}-unsigned.zip** below and unzip it
+                  2. Remove the macOS quarantine flag:
+                     \`\`\`bash
+                     xattr -cr AutoconsentSafari.app
+                     \`\`\`
+                  3. Open **AutoconsentSafari.app** (Safari will warn it is unsigned — this is expected)
+                  4. In Safari: **Settings → Extensions → Enable Autoconsent**
+                  5. Set Website Access to **Allow on All Websites**
 
-          That's it. The extension will now automatically dismiss cookie consent popups.
+                  That's it. The extension will now automatically dismiss cookie consent popups.
 
-          ---
-          Built from [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) ${{ env.VERSION }}.
-          EOF
-          )" \
-            "$RUNNER_TEMP/AutoconsentSafari-${{ env.VERSION }}-unsigned.zip"
+                  ---
+                  Built from [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) ${{ env.VERSION }}.
+                  EOF
+                  )" \
+                    "$RUNNER_TEMP/AutoconsentSafari-${{ env.VERSION }}-unsigned.zip"

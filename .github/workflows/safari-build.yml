@@ -1,194 +1,194 @@
 name: Safari Build
 
 on:
-  push:
-    branches: [main]
-    paths:
-      # Only run when something that affects the Safari bundle changes
-      - 'addon/**'
-      - 'lib/**'
-      - 'rules/**'
-      - 'build.sh'
-      - 'xcode/**'
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Trigger reason (e.g. upstream-sync, manual)'
-        required: false
-        default: 'manual'
+    push:
+        branches: [main]
+        paths:
+            # Only run when something that affects the Safari bundle changes
+            - 'addon/**'
+            - 'lib/**'
+            - 'rules/**'
+            - 'build.sh'
+            - 'xcode/**'
+    workflow_dispatch:
+        inputs:
+            reason:
+                description: 'Trigger reason (e.g. upstream-sync, manual)'
+                required: false
+                default: 'manual'
 
 jobs:
-  build-safari:
-    runs-on: macos-14  # Apple Silicon runner; Xcode 15.x pre-installed
+    build-safari:
+        runs-on: macos-14 # Apple Silicon runner; Xcode 15.x pre-installed
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Use Node.js LTS
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm
+            - name: Use Node.js LTS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
+                  cache: npm
 
-      - name: Install Node dependencies
-        run: npm ci
+            - name: Install Node dependencies
+              run: npm ci
 
-      - name: Build web extension bundle
-        run: npm run prepublish
-        # Runs: compile-filterlist + build-rules + build.sh
-        # Produces dist/addon-safari/ (and dist/addon-mv3/, dist/addon-firefox/)
+            - name: Build web extension bundle
+              run: npm run prepublish
+              # Runs: compile-filterlist + build-rules + build.sh
+              # Produces dist/addon-safari/ (and dist/addon-mv3/, dist/addon-firefox/)
 
-      - name: Verify Safari bundle contents
-        run: |
-          echo "=== dist/addon-safari/ ==="
-          ls -la dist/addon-safari/
-          if [ -d dist/addon-safari/devtools ]; then
-            echo "ERROR: devtools/ must not be in the Safari bundle"
-            exit 1
-          fi
-          if grep -q "browsingData" dist/addon-safari/manifest.json; then
-            echo "ERROR: manifest.safari.json must not contain browsingData"
-            exit 1
-          fi
+            - name: Verify Safari bundle contents
+              run: |
+                  echo "=== dist/addon-safari/ ==="
+                  ls -la dist/addon-safari/
+                  if [ -d dist/addon-safari/devtools ]; then
+                    echo "ERROR: devtools/ must not be in the Safari bundle"
+                    exit 1
+                  fi
+                  if grep -q "browsingData" dist/addon-safari/manifest.json; then
+                    echo "ERROR: manifest.safari.json must not contain browsingData"
+                    exit 1
+                  fi
 
-      - name: Generate Xcode project
-        run: |
-          xcrun safari-web-extension-converter \
-            dist/addon-safari \
-            --project-location xcode/ \
-            --app-name "AutoconsentSafari" \
-            --bundle-identifier "com.yourorg.autoconsent-safari" \
-            --macos-only \
-            --no-open 2>&1 || true
+            - name: Generate Xcode project
+              run: |
+                  xcrun safari-web-extension-converter \
+                    dist/addon-safari \
+                    --project-location xcode/ \
+                    --app-name "AutoconsentSafari" \
+                    --bundle-identifier "com.yourorg.autoconsent-safari" \
+                    --macos-only \
+                    --no-open 2>&1 || true
 
-      - name: Fix bundle identifier prefix
-        run: |
-          sed -i '' \
-            's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
-            xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
+            - name: Fix bundle identifier prefix
+              run: |
+                  sed -i '' \
+                    's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
+                    xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 
-      - name: Set marketing version from package.json
-        run: |
-          MARKETING_VERSION=$(node -e "const p=require('./package.json'); console.log(p.version)")
-          BUILD_NUMBER=${{ github.run_number }}
-          echo "MARKETING_VERSION=$MARKETING_VERSION" >> "$GITHUB_ENV"
-          echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
-          cd xcode/AutoconsentSafari
-          xcrun agvtool new-marketing-version "$MARKETING_VERSION"
-          xcrun agvtool new-version -all "$BUILD_NUMBER"
+            - name: Set marketing version from package.json
+              run: |
+                  MARKETING_VERSION=$(node -e "const p=require('./package.json'); console.log(p.version)")
+                  BUILD_NUMBER=${{ github.run_number }}
+                  echo "MARKETING_VERSION=$MARKETING_VERSION" >> "$GITHUB_ENV"
+                  echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+                  cd xcode/AutoconsentSafari
+                  xcrun agvtool new-marketing-version "$MARKETING_VERSION"
+                  xcrun agvtool new-version -all "$BUILD_NUMBER"
 
-      - name: Install Apple signing certificate
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
-          CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-        run: |
-          KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain"
-          CERT_PATH="$RUNNER_TEMP/cert.p12"
-          echo -n "$CERTIFICATE_BASE64" | base64 --decode -o "$CERT_PATH"
-          security create-keychain -p "keychain-password" "$KEYCHAIN_PATH"
-          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
-          security unlock-keychain -p "keychain-password" "$KEYCHAIN_PATH"
-          security import "$CERT_PATH" \
-            -k "$KEYCHAIN_PATH" \
-            -P "$CERTIFICATE_PASSWORD" \
-            -T /usr/bin/codesign \
-            -T /usr/bin/xcodebuild
-          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
-          security set-key-partition-list \
-            -S "apple-tool:,apple:" \
-            -s -k "keychain-password" "$KEYCHAIN_PATH"
+            - name: Install Apple signing certificate
+              env:
+                  CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+                  CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+              run: |
+                  KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain"
+                  CERT_PATH="$RUNNER_TEMP/cert.p12"
+                  echo -n "$CERTIFICATE_BASE64" | base64 --decode -o "$CERT_PATH"
+                  security create-keychain -p "keychain-password" "$KEYCHAIN_PATH"
+                  security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+                  security unlock-keychain -p "keychain-password" "$KEYCHAIN_PATH"
+                  security import "$CERT_PATH" \
+                    -k "$KEYCHAIN_PATH" \
+                    -P "$CERTIFICATE_PASSWORD" \
+                    -T /usr/bin/codesign \
+                    -T /usr/bin/xcodebuild
+                  security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
+                  security set-key-partition-list \
+                    -S "apple-tool:,apple:" \
+                    -s -k "keychain-password" "$KEYCHAIN_PATH"
 
-      - name: Build and archive (macOS)
-        run: |
-          xcodebuild archive \
-            -project "xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj" \
-            -scheme "AutoconsentSafari" \
-            -configuration Release \
-            -destination "generic/platform=macOS" \
-            -archivePath "$RUNNER_TEMP/AutoconsentSafari.xcarchive" \
-            DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}" \
-            CODE_SIGN_STYLE="Manual" \
-            CODE_SIGN_IDENTITY="Developer ID Application"
+            - name: Build and archive (macOS)
+              run: |
+                  xcodebuild archive \
+                    -project "xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj" \
+                    -scheme "AutoconsentSafari" \
+                    -configuration Release \
+                    -destination "generic/platform=macOS" \
+                    -archivePath "$RUNNER_TEMP/AutoconsentSafari.xcarchive" \
+                    DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}" \
+                    CODE_SIGN_STYLE="Manual" \
+                    CODE_SIGN_IDENTITY="Developer ID Application"
 
-      - name: Export .app from archive
-        env:
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        run: |
-          cat > "$RUNNER_TEMP/ExportOptions.plist" << EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-            "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-            <key>method</key>
-            <string>developer-id</string>
-            <key>teamID</key>
-            <string>${APPLE_TEAM_ID}</string>
-            <key>signingStyle</key>
-            <string>manual</string>
-            <key>stripSwiftSymbols</key>
-            <true/>
-          </dict>
-          </plist>
-          EOF
-          xcodebuild -exportArchive \
-            -archivePath "$RUNNER_TEMP/AutoconsentSafari.xcarchive" \
-            -exportPath "$RUNNER_TEMP/export/" \
-            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+            - name: Export .app from archive
+              env:
+                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+              run: |
+                  cat > "$RUNNER_TEMP/ExportOptions.plist" << EOF
+                  <?xml version="1.0" encoding="UTF-8"?>
+                  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+                    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+                  <plist version="1.0">
+                  <dict>
+                    <key>method</key>
+                    <string>developer-id</string>
+                    <key>teamID</key>
+                    <string>${APPLE_TEAM_ID}</string>
+                    <key>signingStyle</key>
+                    <string>manual</string>
+                    <key>stripSwiftSymbols</key>
+                    <true/>
+                  </dict>
+                  </plist>
+                  EOF
+                  xcodebuild -exportArchive \
+                    -archivePath "$RUNNER_TEMP/AutoconsentSafari.xcarchive" \
+                    -exportPath "$RUNNER_TEMP/export/" \
+                    -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
 
-      - name: Notarize .app
-        env:
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          API_KEY_ID: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_ID }}
-          API_KEY_ISSUER: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_ISSUER }}
-          API_KEY_B64: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_B64 }}
-        run: |
-          API_KEY_PATH="$RUNNER_TEMP/AuthKey_${API_KEY_ID}.p8"
-          echo -n "$API_KEY_B64" | base64 --decode -o "$API_KEY_PATH"
-          APP_PATH=$(find "$RUNNER_TEMP/export/" -name "*.app" | head -1)
-          ditto -c -k --keepParent "$APP_PATH" "$RUNNER_TEMP/AutoconsentSafari.zip"
-          xcrun notarytool submit "$RUNNER_TEMP/AutoconsentSafari.zip" \
-            --key "$API_KEY_PATH" \
-            --key-id "$API_KEY_ID" \
-            --issuer "$API_KEY_ISSUER" \
-            --team-id "$APPLE_TEAM_ID" \
-            --wait \
-            --timeout 600
-          xcrun stapler staple "$APP_PATH"
+            - name: Notarize .app
+              env:
+                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+                  API_KEY_ID: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_ID }}
+                  API_KEY_ISSUER: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_ISSUER }}
+                  API_KEY_B64: ${{ secrets.APPLE_APP_STORE_CONNECT_API_KEY_B64 }}
+              run: |
+                  API_KEY_PATH="$RUNNER_TEMP/AuthKey_${API_KEY_ID}.p8"
+                  echo -n "$API_KEY_B64" | base64 --decode -o "$API_KEY_PATH"
+                  APP_PATH=$(find "$RUNNER_TEMP/export/" -name "*.app" | head -1)
+                  ditto -c -k --keepParent "$APP_PATH" "$RUNNER_TEMP/AutoconsentSafari.zip"
+                  xcrun notarytool submit "$RUNNER_TEMP/AutoconsentSafari.zip" \
+                    --key "$API_KEY_PATH" \
+                    --key-id "$API_KEY_ID" \
+                    --issuer "$API_KEY_ISSUER" \
+                    --team-id "$APPLE_TEAM_ID" \
+                    --wait \
+                    --timeout 600
+                  xcrun stapler staple "$APP_PATH"
 
-      - name: Create DMG
-        run: |
-          APP_PATH=$(find "$RUNNER_TEMP/export/" -name "*.app" | head -1)
-          hdiutil create \
-            -volname "Autoconsent Safari" \
-            -srcfolder "$APP_PATH" \
-            -ov \
-            -format UDZO \
-            "$RUNNER_TEMP/AutoconsentSafari-${{ env.MARKETING_VERSION }}.dmg"
+            - name: Create DMG
+              run: |
+                  APP_PATH=$(find "$RUNNER_TEMP/export/" -name "*.app" | head -1)
+                  hdiutil create \
+                    -volname "Autoconsent Safari" \
+                    -srcfolder "$APP_PATH" \
+                    -ov \
+                    -format UDZO \
+                    "$RUNNER_TEMP/AutoconsentSafari-${{ env.MARKETING_VERSION }}.dmg"
 
-      - name: Upload DMG artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: AutoconsentSafari-${{ env.MARKETING_VERSION }}-${{ github.run_number }}
-          path: ${{ runner.temp }}/AutoconsentSafari-*.dmg
-          retention-days: 30
+            - name: Upload DMG artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: AutoconsentSafari-${{ env.MARKETING_VERSION }}-${{ github.run_number }}
+                  path: ${{ runner.temp }}/AutoconsentSafari-*.dmg
+                  retention-days: 30
 
-      - name: Create GitHub Release
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: safari-${{ env.MARKETING_VERSION }}-${{ env.BUILD_NUMBER }}
-          name: "Safari ${{ env.MARKETING_VERSION }} (build ${{ env.BUILD_NUMBER }})"
-          body: |
-            Automated Safari build of autoconsent ${{ env.MARKETING_VERSION }}.
+            - name: Create GitHub Release
+              if: github.ref == 'refs/heads/main'
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: safari-${{ env.MARKETING_VERSION }}-${{ env.BUILD_NUMBER }}
+                  name: 'Safari ${{ env.MARKETING_VERSION }} (build ${{ env.BUILD_NUMBER }})'
+                  body: |
+                      Automated Safari build of autoconsent ${{ env.MARKETING_VERSION }}.
 
-            Based on upstream: https://github.com/duckduckgo/autoconsent
-          files: ${{ runner.temp }}/AutoconsentSafari-*.dmg
-          generate_release_notes: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                      Based on upstream: https://github.com/duckduckgo/autoconsent
+                  files: ${{ runner.temp }}/AutoconsentSafari-*.dmg
+                  generate_release_notes: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Clean up keychain
-        if: always()
-        run: security delete-keychain "$RUNNER_TEMP/build.keychain" || true
+            - name: Clean up keychain
+              if: always()
+              run: security delete-keychain "$RUNNER_TEMP/build.keychain" || true
