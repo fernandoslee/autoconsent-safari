@@ -254,13 +254,13 @@
         position: relative;
       }
 
-      /* Radio covers the entire pill area; clicking it selects directly */
+      /* Radio is hidden; the <label for=""> handles the click natively */
       .mpill input {
         position: absolute;
-        inset: 0;
         opacity: 0;
-        cursor: pointer;
-        z-index: 1;
+        width: 0;
+        height: 0;
+        pointer-events: none;
       }
 
       .mpill-lbl {
@@ -274,7 +274,7 @@
         border: 1px solid transparent;
         transition: all 0.15s;
         user-select: none;
-        pointer-events: none;
+        cursor: pointer;
       }
 
       /* Adjacent sibling: input is immediately before the label */
@@ -594,21 +594,21 @@
       <div class="sec-lbl">Mode</div>
       <div class="mode-row">
         <!--
-          Mode pills: radio covers the full pill area (opacity:0, inset:0).
-          Clicking the pill area hits the radio directly, no label needed.
-          #optout:checked + .mpill-lbl CSS drives the highlight.
+          Mode pills: radio is hidden (opacity:0, width:0); <label for="">
+          handles clicks natively. #optout:checked + .mpill-lbl CSS drives
+          the highlight via the adjacent sibling selector.
         -->
         <div class="mpill">
           <input type="radio" id="optout" name="mode" value="optOut" checked />
-          <span class="mpill-lbl">Reject</span>
+          <label class="mpill-lbl" for="optout">Reject</label>
         </div>
         <div class="mpill">
           <input type="radio" id="optin" name="mode" value="optIn" />
-          <span class="mpill-lbl">Accept</span>
+          <label class="mpill-lbl" for="optin">Accept</label>
         </div>
         <div class="mpill">
           <input type="radio" id="prompt" name="mode" value="null" />
-          <span class="mpill-lbl">Ask</span>
+          <label class="mpill-lbl" for="prompt">Ask</label>
         </div>
       </div>
     </div>
