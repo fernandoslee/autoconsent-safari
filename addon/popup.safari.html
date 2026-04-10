@@ -101,6 +101,7 @@
         margin-bottom: 10px;
       }
 
+      /* ── Status ring: driven by #enabled state via :has() ─────────── */
       .status-ring {
         position: relative;
         width: 10px;
@@ -125,8 +126,9 @@
         background: var(--accent);
       }
 
-      .status-ring.off::before,
-      .status-ring.off::after {
+      /* When master toggle is off, ring goes gray — pure CSS via :has() */
+      html:has(#enabled:not(:checked)) .status-ring::before,
+      html:has(#enabled:not(:checked)) .status-ring::after {
         background: var(--text-3);
         animation: none;
       }
@@ -171,21 +173,23 @@
       }
 
       /* ── Master toggle ────────────────────────────────────────────── */
+      /* The <label> wraps the checkbox + track + thumb, so clicking
+         anywhere on it toggles the checkbox natively. CSS :checked
+         sibling selectors drive the visual — no JavaScript needed.   */
       .master-wrap {
         position: relative;
         flex-shrink: 0;
         width: 42px;
         height: 23px;
+        cursor: pointer;
       }
 
       #enabled {
         position: absolute;
-        inset: 0;
         opacity: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        z-index: 2;
+        width: 0;
+        height: 0;
+        pointer-events: none;
       }
 
       .master-track {
@@ -250,6 +254,7 @@
         position: relative;
       }
 
+      /* Radio covers the entire pill area; clicking it selects directly */
       .mpill input {
         position: absolute;
         inset: 0;
@@ -269,15 +274,10 @@
         border: 1px solid transparent;
         transition: all 0.15s;
         user-select: none;
-        cursor: pointer;
+        pointer-events: none;
       }
 
-      .mpill input:checked + .mpill-lbl {
-        color: var(--text);
-        background: var(--bg-4);
-        border-color: var(--border-2);
-      }
-
+      /* Adjacent sibling: input is immediately before the label */
       #optout:checked + .mpill-lbl {
         color: var(--accent);
         background: var(--accent-lo);
@@ -288,6 +288,12 @@
         color: var(--danger);
         background: var(--danger-lo);
         border-color: rgba(244, 63, 94, 0.3);
+      }
+
+      #prompt:checked + .mpill-lbl {
+        color: var(--text);
+        background: var(--bg-4);
+        border-color: var(--border-2);
       }
 
       /* ── Toggle rows ──────────────────────────────────────────────── */
@@ -324,7 +330,20 @@
         text-transform: uppercase;
       }
 
-      /* ── Small toggle ─────────────────────────────────────────────── */
+      /* ── Small toggle (radio pair) ────────────────────────────────── */
+      /*
+       * Layout (in DOM order):
+       *   input[value="true"]   ← "on" radio
+       *   input[value="false"]  ← "off" radio
+       *   label.stog-on-lbl     ← visible when ON; clicking → turns off
+       *   label.stog-off-lbl    ← visible when OFF; clicking → turns on
+       *   div.stog-track
+       *   div.stog-thumb
+       *
+       * Visual state and label visibility are 100% CSS-driven via :checked
+       * sibling selectors. No JavaScript needed — popup.ts's programmatic
+       * .checked assignments and user label clicks both work automatically.
+       */
       .stog {
         position: relative;
         width: 34px;
@@ -332,8 +351,7 @@
         flex-shrink: 0;
       }
 
-      /* Radios must NOT be display:none — labels can't activate those.
-         Keep them in the DOM but invisible. */
+      /* Radios: accessible to labels but invisible and non-interactive */
       .stog input[type="radio"] {
         position: absolute;
         opacity: 0;
@@ -342,14 +360,26 @@
         pointer-events: none;
       }
 
-      /* Full-area label — handles the click natively */
-      .stog-tap {
+      /* Labels cover the full toggle area */
+      .stog-on-lbl,
+      .stog-off-lbl {
+        display: none; /* hidden unless revealed by :checked rule below */
         position: absolute;
         inset: 0;
         z-index: 2;
         cursor: pointer;
       }
 
+      /* Show the label that will toggle to the OPPOSITE state */
+      .stog input[value="true"]:checked ~ .stog-on-lbl {
+        display: block; /* ON is active → show label that turns it OFF */
+      }
+
+      .stog input[value="false"]:checked ~ .stog-off-lbl {
+        display: block; /* OFF is active → show label that turns it ON */
+      }
+
+      /* Track and thumb — default (off) state */
       .stog-track {
         position: absolute;
         inset: 0;
@@ -357,7 +387,6 @@
         background: var(--bg-3);
         border: 1px solid var(--border-2);
         transition: background 0.18s, border-color 0.18s;
-        z-index: 0;
       }
 
       .stog-thumb {
@@ -369,15 +398,15 @@
         border-radius: 50%;
         background: var(--text-3);
         transition: transform 0.18s, background 0.18s;
-        z-index: 1;
       }
 
-      .stog.on .stog-track {
+      /* Active (on) state — triggered by CSS, no JS */
+      .stog input[value="true"]:checked ~ .stog-track {
         background: var(--accent-lo);
         border-color: var(--accent-mid);
       }
 
-      .stog.on .stog-thumb {
+      .stog input[value="true"]:checked ~ .stog-thumb {
         background: var(--accent);
         transform: translateX(15px);
       }
@@ -538,11 +567,16 @@
     <!-- Header -->
     <div class="hd">
       <div class="hd-top">
-        <div class="status-ring" id="status-ring"></div>
+        <div class="status-ring"></div>
         <span class="brand">Autoconsent</span>
       </div>
       <div class="hd-site">
         <span class="site-name" id="current-site">—</span>
+        <!--
+          Master toggle: <label> wraps checkbox + track + thumb.
+          Clicking anywhere on the label activates the checkbox natively.
+          #enabled:checked ~ .master-track/thumb CSS handles the visual.
+        -->
         <label class="master-wrap">
           <input type="checkbox" id="enabled" name="enabled" checked />
           <div class="master-track"></div>
@@ -555,17 +589,22 @@
     <div class="sec">
       <div class="sec-lbl">Mode</div>
       <div class="mode-row">
+        <!--
+          Mode pills: radio covers the full pill area (opacity:0, inset:0).
+          Clicking the pill area hits the radio directly, no label needed.
+          #optout:checked + .mpill-lbl CSS drives the highlight.
+        -->
         <div class="mpill">
           <input type="radio" id="optout" name="mode" value="optOut" checked />
-          <label class="mpill-lbl" for="optout">Reject</label>
+          <span class="mpill-lbl">Reject</span>
         </div>
         <div class="mpill">
           <input type="radio" id="optin" name="mode" value="optIn" />
-          <label class="mpill-lbl" for="optin">Accept</label>
+          <span class="mpill-lbl">Accept</span>
         </div>
         <div class="mpill">
           <input type="radio" id="prompt" name="mode" value="null" />
-          <label class="mpill-lbl" for="prompt">Ask</label>
+          <span class="mpill-lbl">Ask</span>
         </div>
       </div>
     </div>
@@ -574,12 +613,26 @@
     <div class="sec">
       <div class="sec-lbl">Protection</div>
 
+      <!--
+        Each .stog contains (in DOM order):
+          input[value="true"]  — the "on" radio
+          input[value="false"] — the "off" radio
+          label.stog-on-lbl    — covers stog when ON; for="X-off" turns it off
+          label.stog-off-lbl   — covers stog when OFF; for="X-on" turns it on
+          div.stog-track + div.stog-thumb — purely visual, CSS-driven
+
+        The label that's currently visible is always the one pointing to
+        the OPPOSITE state, so every click toggles. CSS :checked sibling
+        selectors update both label visibility and the track/thumb visual.
+      -->
+
       <div class="t-row">
         <span class="t-lbl">Pre-hide popups</span>
-        <div class="stog" data-on="prehide-on" data-off="prehide-off">
+        <div class="stog">
           <input type="radio" id="prehide-on" name="prehide" value="true" checked />
           <input type="radio" id="prehide-off" name="prehide" value="false" />
-          <label class="stog-tap" for="prehide-off"></label>
+          <label class="stog-on-lbl" for="prehide-off"></label>
+          <label class="stog-off-lbl" for="prehide-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -587,10 +640,11 @@
 
       <div class="t-row">
         <span class="t-lbl">Cosmetic rules</span>
-        <div class="stog" data-on="cosmetic-on" data-off="cosmetic-off">
+        <div class="stog">
           <input type="radio" id="cosmetic-on" name="cosmetic" value="true" checked />
           <input type="radio" id="cosmetic-off" name="cosmetic" value="false" />
-          <label class="stog-tap" for="cosmetic-off"></label>
+          <label class="stog-on-lbl" for="cosmetic-off"></label>
+          <label class="stog-off-lbl" for="cosmetic-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -598,10 +652,11 @@
 
       <div class="t-row">
         <span class="t-lbl">Generated rules</span>
-        <div class="stog" data-on="generated-on" data-off="generated-off">
+        <div class="stog">
           <input type="radio" id="generated-on" name="generated" value="true" checked />
           <input type="radio" id="generated-off" name="generated" value="false" />
-          <label class="stog-tap" for="generated-off"></label>
+          <label class="stog-on-lbl" for="generated-off"></label>
+          <label class="stog-off-lbl" for="generated-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -612,10 +667,11 @@
           Unknown popups
           <span class="badge">β</span>
         </span>
-        <div class="stog" data-on="heuristic-action-on" data-off="heuristic-action-off">
+        <div class="stog">
           <input type="radio" id="heuristic-action-on" name="heuristic-action" value="true" />
           <input type="radio" id="heuristic-action-off" name="heuristic-action" value="false" checked />
-          <label class="stog-tap" for="heuristic-action-on"></label>
+          <label class="stog-on-lbl" for="heuristic-action-off"></label>
+          <label class="stog-off-lbl" for="heuristic-action-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -623,10 +679,11 @@
 
       <div class="t-row">
         <span class="t-lbl">Highlight clicks</span>
-        <div class="stog" data-on="visual-test-on" data-off="visual-test-off">
+        <div class="stog">
           <input type="radio" id="visual-test-on" name="visual-test" value="true" checked />
           <input type="radio" id="visual-test-off" name="visual-test" value="false" />
-          <label class="stog-tap" for="visual-test-off"></label>
+          <label class="stog-on-lbl" for="visual-test-off"></label>
+          <label class="stog-off-lbl" for="visual-test-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -685,55 +742,11 @@
 
     <script src="popup.bundle.js"></script>
     <script>
-      // ── Radio-pair → visual toggle sync ────────────────────────────
-      // The .stog-tap label handles clicks natively (no synthetic events).
-      // We only need to sync the visual class and flip the label's `for`
-      // whenever the radio state changes.
-      function setupToggles() {
-        document.querySelectorAll(".stog[data-on]").forEach((stog) => {
-          const onId = stog.dataset.on;
-          const offId = stog.dataset.off;
-          const onInp = document.getElementById(onId);
-          const offInp = document.getElementById(offId);
-          const tap = stog.querySelector(".stog-tap");
-
-          function sync() {
-            const isOn = onInp.checked;
-            stog.classList.toggle("on", isOn);
-            // Point label to whichever radio is NOT currently checked
-            // so clicking always toggles to the opposite state.
-            if (tap) tap.htmlFor = isOn ? offId : onId;
-          }
-
-          onInp.addEventListener("change", sync);
-          offInp.addEventListener("change", sync);
-
-          sync();
-        });
-      }
-
-      // ── Status ring follows #enabled ────────────────────────────────
-      function syncRing() {
-        const ring = document.getElementById("status-ring");
-        const en = document.getElementById("enabled");
-        ring.classList.toggle("off", !en.checked);
-      }
-
-      // ── Debug accordion ─────────────────────────────────────────────
+      // Debug accordion — the only JS needed in this popup.
+      // All toggle/ring visual state is handled by CSS :checked selectors.
       document.getElementById("dbg-hd").addEventListener("click", () => {
         document.getElementById("dbg-body").classList.toggle("open");
         document.getElementById("dbg-chevron").classList.toggle("open");
-      });
-
-      // ── Init after popup.bundle.js sets storage-backed state ────────
-      // bundle.js does async chrome.storage reads before setting .checked,
-      // so we defer our visual sync slightly.
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          setupToggles();
-          syncRing();
-          document.getElementById("enabled").addEventListener("change", syncRing);
-        }, 80);
       });
     </script>
   </body>
