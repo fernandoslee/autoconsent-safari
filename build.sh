@@ -43,6 +43,13 @@ cp dist/addon-mv3/popup.bundle.js      dist/addon-safari/
 cp -r addon/icons                      dist/addon-safari/
 cp rules/rules.json                    dist/addon-safari/
 cp rules/compact-rules.json            dist/addon-safari/
+node -e "
+const fs = require('fs');
+const f = 'dist/addon-safari/compact-rules.json';
+const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+d.generated_at = new Date().toISOString();
+fs.writeFileSync(f, JSON.stringify(d));
+"
 cp addon/popup.safari.html             dist/addon-safari/popup.html
 cp addon/popup.safari.js               dist/addon-safari/popup.safari.js
 cp addon/manifest.safari.json          dist/addon-safari/manifest.json
