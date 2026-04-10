@@ -99,3 +99,59 @@ chrome.storage.local.get('rules', (result) => {
     });
   });
 }());
+
+// ── Tooltips (1s hover delay, JS-driven to escape overflow:hidden) ─────────
+(function () {
+  let timer = null;
+  let tipEl  = null;
+
+  function isDark() {
+    const t = document.documentElement.getAttribute('data-theme');
+    return t === 'dark' ||
+      (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  function removeTip() {
+    clearTimeout(timer);
+    timer = null;
+    if (tipEl) { tipEl.remove(); tipEl = null; }
+  }
+
+  function showTip(target) {
+    const text = target.getAttribute('data-tip');
+    if (!text) { return; }
+
+    const dark = isDark();
+    const el = document.createElement('div');
+    el.textContent = text;
+    el.style.cssText =
+      'position:fixed;' +
+      'background:' + (dark ? 'rgba(255,255,255,0.9)' : 'rgba(28,28,30,0.92)') + ';' +
+      'color:'      + (dark ? '#1c1c1e'               : '#ffffff')              + ';' +
+      'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;' +
+      'font-size:10.5px;font-weight:500;' +
+      'padding:5px 9px;border-radius:7px;' +
+      'white-space:nowrap;pointer-events:none;z-index:9999;' +
+      'box-shadow:0 2px 12px rgba(0,0,0,0.28);' +
+      'transform:translateX(-50%)';
+
+    document.body.appendChild(el);
+
+    const rect = target.getBoundingClientRect();
+    el.style.left = (rect.left + rect.width / 2) + 'px';
+    el.style.top  = (rect.top  - el.offsetHeight - 8) + 'px';
+    tipEl = el;
+  }
+
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-tip]');
+    if (!target) { return; }
+    removeTip();
+    timer = setTimeout(() => { showTip(target); }, 1000);
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest('[data-tip]')) { return; }
+    removeTip();
+  });
+}());
