@@ -25,6 +25,13 @@ const _origClose = window.close.bind(window);
 window.close = function () {
   if (_resetting) {
     _resetting = false;
+    // Save accordion open state before reload so it survives the reload.
+    // sessionStorage persists through location.reload() but is cleared
+    // when the popup window closes — exactly the scope we want.
+    const details = document.querySelector('.pdbg');
+    if (details) {
+      sessionStorage.setItem('ac_dbg_open', details.open ? 'true' : 'false');
+    }
     window.location.reload();
   } else {
     _origClose();
@@ -39,6 +46,15 @@ document.getElementById('reset').addEventListener(
   },
   true,
 );
+
+// Restore accordion state after a reset-triggered reload.
+(function () {
+  const saved = sessionStorage.getItem('ac_dbg_open');
+  if (saved === null) { return; }
+  sessionStorage.removeItem('ac_dbg_open');
+  const details = document.querySelector('.pdbg');
+  if (details) { details.open = saved === 'true'; }
+}());
 
 // ── Extension version ──────────────────────────────────────────────────────
 (function () {
