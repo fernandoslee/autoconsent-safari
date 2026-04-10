@@ -330,11 +330,24 @@
         width: 34px;
         height: 19px;
         flex-shrink: 0;
-        cursor: pointer;
       }
 
-      .stog input {
-        display: none;
+      /* Radios must NOT be display:none — labels can't activate those.
+         Keep them in the DOM but invisible. */
+      .stog input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+
+      /* Full-area label — handles the click natively */
+      .stog-tap {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        cursor: pointer;
       }
 
       .stog-track {
@@ -344,6 +357,7 @@
         background: var(--bg-3);
         border: 1px solid var(--border-2);
         transition: background 0.18s, border-color 0.18s;
+        z-index: 0;
       }
 
       .stog-thumb {
@@ -355,6 +369,7 @@
         border-radius: 50%;
         background: var(--text-3);
         transition: transform 0.18s, background 0.18s;
+        z-index: 1;
       }
 
       .stog.on .stog-track {
@@ -564,6 +579,7 @@
         <div class="stog" data-on="prehide-on" data-off="prehide-off">
           <input type="radio" id="prehide-on" name="prehide" value="true" checked />
           <input type="radio" id="prehide-off" name="prehide" value="false" />
+          <label class="stog-tap" for="prehide-off"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -574,6 +590,7 @@
         <div class="stog" data-on="cosmetic-on" data-off="cosmetic-off">
           <input type="radio" id="cosmetic-on" name="cosmetic" value="true" checked />
           <input type="radio" id="cosmetic-off" name="cosmetic" value="false" />
+          <label class="stog-tap" for="cosmetic-off"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -584,6 +601,7 @@
         <div class="stog" data-on="generated-on" data-off="generated-off">
           <input type="radio" id="generated-on" name="generated" value="true" checked />
           <input type="radio" id="generated-off" name="generated" value="false" />
+          <label class="stog-tap" for="generated-off"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -597,6 +615,7 @@
         <div class="stog" data-on="heuristic-action-on" data-off="heuristic-action-off">
           <input type="radio" id="heuristic-action-on" name="heuristic-action" value="true" />
           <input type="radio" id="heuristic-action-off" name="heuristic-action" value="false" checked />
+          <label class="stog-tap" for="heuristic-action-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -607,6 +626,7 @@
         <div class="stog" data-on="visual-test-on" data-off="visual-test-off">
           <input type="radio" id="visual-test-on" name="visual-test" value="true" checked />
           <input type="radio" id="visual-test-off" name="visual-test" value="false" />
+          <label class="stog-tap" for="visual-test-off"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
@@ -666,34 +686,29 @@
     <script src="popup.bundle.js"></script>
     <script>
       // ── Radio-pair → visual toggle sync ────────────────────────────
-      function syncTog(el) {
-        const on = document.getElementById(el.dataset.on);
-        el.classList.toggle("on", on && on.checked);
-      }
-
+      // The .stog-tap label handles clicks natively (no synthetic events).
+      // We only need to sync the visual class and flip the label's `for`
+      // whenever the radio state changes.
       function setupToggles() {
-        document.querySelectorAll(".stog[data-on]").forEach((el) => {
-          const onId = el.dataset.on;
-          const offId = el.dataset.off;
+        document.querySelectorAll(".stog[data-on]").forEach((stog) => {
+          const onId = stog.dataset.on;
+          const offId = stog.dataset.off;
           const onInp = document.getElementById(onId);
           const offInp = document.getElementById(offId);
+          const tap = stog.querySelector(".stog-tap");
 
-          el.addEventListener("click", () => {
-            if (onInp.checked) {
-              offInp.checked = true;
-              offInp.dispatchEvent(new Event("change", { bubbles: true }));
-            } else {
-              onInp.checked = true;
-              onInp.dispatchEvent(new Event("change", { bubbles: true }));
-            }
-            syncTog(el);
-          });
+          function sync() {
+            const isOn = onInp.checked;
+            stog.classList.toggle("on", isOn);
+            // Point label to whichever radio is NOT currently checked
+            // so clicking always toggles to the opposite state.
+            if (tap) tap.htmlFor = isOn ? offId : onId;
+          }
 
-          [onInp, offInp].forEach((inp) => {
-            inp.addEventListener("change", () => syncTog(el));
-          });
+          onInp.addEventListener("change", sync);
+          offInp.addEventListener("change", sync);
 
-          syncTog(el);
+          sync();
         });
       }
 
