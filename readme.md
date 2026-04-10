@@ -187,7 +187,26 @@ Or double-click it in Finder. macOS may still show a warning — click **Open** 
 
 The extension injects a content script on every page at `document_start`. The script checks the page against 285+ CMP rules. When a match is found, it automatically clicks the reject/decline button. If the popup has no reject option, it is hidden via CSS.
 
-The background service worker loads all rules on install and responds to the content script with the applicable ruleset for each page. Rules are maintained by DuckDuckGo upstream and synced into this fork daily.
+The background service worker loads all rules on install and responds to the content script with the applicable ruleset for each page.
+
+---
+
+## Rules auto-update
+
+Rules are decoupled from the app binary and update automatically — no app reinstall required.
+
+A lightweight content script (`rules-updater.js`) runs once per 24 hours in the background while you browse normally. It fetches the latest `compact-rules.json` and `rules.json` directly from this repository via the [jsDelivr CDN](https://www.jsdelivr.com/) and writes them into the extension's local storage. On the next page load, the updated rules are active.
+
+| Component | How it updates |
+|---|---|
+| Rules (285+ CMPs) | Automatically, once per 24 h — no action needed |
+| Engine (JS bundle) | Requires downloading a new release or rebuilding |
+
+The engine (the code that interprets and executes rules) changes infrequently — only when DuckDuckGo modifies the detection or opt-out logic. Rules change weekly as new CMPs are added or existing ones are fixed.
+
+**Update timeline:** Upstream pushes rules → this fork syncs within 24 h → jsDelivr CDN picks up the change within ~12 h → your extension fetches the update on its next 24 h check. Maximum staleness: ~60 hours.
+
+**Fallback:** If the CDN fetch fails (offline, network error), the previously stored rules remain in use. The extension never stops working due to a failed update.
 
 ---
 
@@ -199,6 +218,8 @@ The background service worker loads all rules on install and responds to the con
 | US-only popups (CCPA) | Partial — depends on the CMP |
 | Sites with no reject button | Handled via cosmetic (hide) rules |
 | Sites with no matching rule | Left untouched |
+| Rules | Auto-update every 24 h — no reinstall needed |
+| Engine | Requires new release or rebuild to update |
 | Unsigned local build | Working — Safari shows a one-time warning |
 | Signed/notarized build | Not available — requires Apple Developer account |
 | App Store distribution | Not planned |

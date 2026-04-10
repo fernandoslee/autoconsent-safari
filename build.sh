@@ -46,3 +46,39 @@ cp rules/compact-rules.json            dist/addon-safari/
 cp addon/popup.html                    dist/addon-safari/
 cp addon/manifest.safari.json          dist/addon-safari/manifest.json
 # devtools/ intentionally omitted — Safari has no chrome.devtools API
+
+## Generate rules auto-updater content script (Safari only)
+## Runs once per 24 h in the top frame; fetches compact-rules.json and
+## rules.json from the CDN and writes them into chrome.storage.local so
+## rule updates reach users without a full app rebuild.
+cat > dist/addon-safari/rules-updater.js << 'ENDOFSCRIPT'
+(async () => {
+  const COMPACT_URL =
+    "https://cdn.jsdelivr.net/gh/fernandoslee/autoconsent-safari@main/rules/compact-rules.json";
+  const FULL_URL =
+    "https://cdn.jsdelivr.net/gh/fernandoslee/autoconsent-safari@main/rules/rules.json";
+  const INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+  try {
+    const { rules_checked_at: last = 0 } =
+      await chrome.storage.local.get("rules_checked_at");
+
+    if (Date.now() - last < INTERVAL_MS) return;
+
+    // Stamp before fetching so parallel tabs don't also trigger a fetch
+    await chrome.storage.local.set({ rules_checked_at: Date.now() });
+
+    const [cr, fr] = await Promise.all([fetch(COMPACT_URL), fetch(FULL_URL)]);
+    if (!cr.ok || !fr.ok) return;
+
+    const [compact, full] = await Promise.all([cr.json(), fr.json()]);
+
+    await chrome.storage.local.set({
+      rules: compact,
+      fullRules: full.autoconsent,
+    });
+  } catch (_) {
+    // Silent fail — bundled rules remain in use
+  }
+})();
+ENDOFSCRIPT
