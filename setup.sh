@@ -68,28 +68,27 @@ if grep -q "browsingData" dist/addon-safari/manifest.json; then
   die "Build error: manifest.json must not contain browsingData"
 fi
 
-# ── 6. Generate Xcode project (first time only) ────────────────────────────────
+# ── 6. Generate Xcode project ─────────────────────────────────────────────────
+# Always regenerate so new extension files (e.g. rules-updater.js) are
+# picked up in project.pbxproj without manual intervention.
 
-if [ ! -d "xcode/AutoconsentSafari" ]; then
-  echo ""
-  info "Generating Xcode project (first time only)..."
-  xcrun safari-web-extension-converter \
-    dist/addon-safari \
-    --project-location xcode/ \
-    --app-name "AutoconsentSafari" \
-    --bundle-identifier "com.yourorg.autoconsent-safari" \
-    --macos-only \
-    --no-open 2>&1 | grep -v "^$" | grep -v "^Xcode\|^App\|^Platform\|^Language" || true
+echo ""
+info "Generating Xcode project..."
+rm -rf xcode/
+xcrun safari-web-extension-converter \
+  dist/addon-safari \
+  --project-location xcode/ \
+  --app-name "AutoconsentSafari" \
+  --bundle-identifier "com.yourorg.autoconsent-safari" \
+  --macos-only \
+  --no-open 2>&1 | grep -v "^$" | grep -v "^Xcode\|^App\|^Platform\|^Language" || true
 
-  # Fix bundle identifier prefix mismatch introduced by the converter
-  sed -i '' \
-    's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
-    xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
+# Fix bundle identifier prefix mismatch introduced by the converter
+sed -i '' \
+  's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
+  xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 
-  success "Xcode project generated at xcode/"
-else
-  success "Xcode project already exists — skipping generation"
-fi
+success "Xcode project generated at xcode/"
 
 # ── 7. Build the macOS app ─────────────────────────────────────────────────────
 
