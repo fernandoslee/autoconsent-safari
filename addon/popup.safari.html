@@ -1,189 +1,166 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
   <head>
     <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;400;500&display=swap"
-      rel="stylesheet"
-    />
     <style>
-      :root {
-        --bg: #080b10;
-        --bg-2: #0f1520;
-        --bg-3: #162030;
-        --bg-4: #1e2d40;
-        --accent: #10b981;
-        --accent-lo: rgba(16, 185, 129, 0.12);
-        --accent-mid: rgba(16, 185, 129, 0.35);
-        --danger: #f43f5e;
-        --danger-lo: rgba(244, 63, 94, 0.12);
-        --warn: #f59e0b;
-        --text: #e2e8f0;
-        --text-2: #94a3b8;
-        --text-3: #475569;
-        --border: rgba(255, 255, 255, 0.06);
-        --border-2: rgba(255, 255, 255, 0.1);
-        --r: 8px;
-        --r-sm: 5px;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      /* ── Theme: CSS custom properties ──────────────────────────────── */
 
       html {
-        width: 300px;
+        /* Light defaults — also active for data-theme="light" */
+        --bg:      #f5f5f7;
+        --bg2:     #ffffff;
+        --bg3:     rgba(118,118,128,0.12);
+        --text:    #1c1c1e;
+        --text2:   #3a3a3c;
+        --text3:   #6e6e73;
+        --text4:   #aeaeb2;
+        --sep:     rgba(0,0,0,0.08);
+        --sep2:    rgba(0,0,0,0.05);
+        --acc:     #007aff;
+        --on:      #34c759;
+        --off:     #c7c7cc;
+        --seg-bg:  #ffffff;
+        --seg-sh:  0 1px 4px rgba(0,0,0,0.14);
+        --tip-bg:  rgba(28,28,30,0.92);
+        --tip-fg:  #ffffff;
+      }
+
+      html[data-theme="dark"] {
+        --bg:      #1c1c1e;
+        --bg2:     #2c2c2e;
+        --bg3:     rgba(118,118,128,0.18);
+        --text:    #ffffff;
+        --text2:   #ebebf5;
+        --text3:   #98989d;
+        --text4:   #48484a;
+        --sep:     rgba(255,255,255,0.1);
+        --sep2:    rgba(255,255,255,0.06);
+        --acc:     #0a84ff;
+        --on:      #30d158;
+        --off:     #3a3a3c;
+        --seg-bg:  rgba(118,118,128,0.32);
+        --seg-sh:  none;
+        --tip-bg:  rgba(255,255,255,0.9);
+        --tip-fg:  #1c1c1e;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        html[data-theme="system"] {
+          --bg:      #1c1c1e;
+          --bg2:     #2c2c2e;
+          --bg3:     rgba(118,118,128,0.18);
+          --text:    #ffffff;
+          --text2:   #ebebf5;
+          --text3:   #98989d;
+          --text4:   #48484a;
+          --sep:     rgba(255,255,255,0.1);
+          --sep2:    rgba(255,255,255,0.06);
+          --acc:     #0a84ff;
+          --on:      #30d158;
+          --off:     #3a3a3c;
+          --seg-bg:  rgba(118,118,128,0.32);
+          --seg-sh:  none;
+          --tip-bg:  rgba(255,255,255,0.9);
+          --tip-fg:  #1c1c1e;
+        }
+      }
+
+      /* ── Base ─────────────────────────────────────────────────────── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html {
+        width: 260px;
         background: var(--bg);
-        font-family: "DM Sans", -apple-system, sans-serif;
-        font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                     "Helvetica Neue", sans-serif;
+        font-size: 12px;
         color: var(--text);
         -webkit-font-smoothing: antialiased;
       }
+      body { width: 260px; overflow: hidden; }
 
-      body {
-        width: 300px;
-        overflow: hidden;
-      }
-
-      /* ── Proceed button (injected by popup.bundle.js) ─────────────── */
+      /* ── Proceed button (injected dynamically by popup.bundle.js) ─── */
       #proceed {
         display: block;
-        width: calc(100% - 24px);
-        margin: 12px 12px 0;
-        padding: 10px 0;
-        border-radius: var(--r);
-        border: 1px solid var(--accent-mid);
-        background: var(--accent-lo);
-        color: var(--accent);
-        font-family: "DM Sans", sans-serif;
-        font-size: 12px;
+        width: calc(100% - 20px);
+        margin: 10px 10px 0;
+        padding: 8px 0;
+        border-radius: 8px;
+        border: 1px solid rgba(0,122,255,0.3);
+        background: rgba(0,122,255,0.08);
+        color: var(--acc);
+        font-family: inherit;
+        font-size: 11px;
         font-weight: 600;
-        letter-spacing: 0.02em;
         cursor: pointer;
-        transition: background 0.15s, border-color 0.15s;
-      }
-
-      #proceed:hover {
-        background: rgba(16, 185, 129, 0.2);
-        border-color: var(--accent);
       }
 
       /* ── Header ───────────────────────────────────────────────────── */
-      .hd {
-        padding: 14px 14px 12px;
-        background: linear-gradient(160deg, #0d1825 0%, var(--bg) 100%);
-        border-bottom: 1px solid var(--border);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hd::before {
-        content: "";
-        position: absolute;
-        top: -40px;
-        right: -40px;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
-        pointer-events: none;
-      }
-
-      .hd-top {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 10px;
-      }
-
-      /* ── Status ring: driven by #enabled state via :has() ─────────── */
-      .status-ring {
-        position: relative;
-        width: 10px;
-        height: 10px;
-        flex-shrink: 0;
-      }
-
-      .status-ring::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        background: var(--accent);
-        animation: glow-pulse 2.5s ease-in-out infinite;
-      }
-
-      .status-ring::after {
-        content: "";
-        position: absolute;
-        inset: 2px;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-
-      /* When master toggle is off, ring goes gray — pure CSS via :has() */
-      html:has(#enabled:not(:checked)) .status-ring::before,
-      html:has(#enabled:not(:checked)) .status-ring::after {
-        background: var(--text-3);
-        animation: none;
-      }
-
-      @keyframes glow-pulse {
-        0%,
-        100% {
-          opacity: 0.35;
-          transform: scale(1.8);
-        }
-        50% {
-          opacity: 0;
-          transform: scale(2.4);
-        }
-      }
-
-      .brand {
-        font-family: "Syne", sans-serif;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--text-3);
-      }
-
-      .hd-site {
+      .ph {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
+        padding: 10px 14px 9px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--sep);
       }
-
-      .site-name {
-        font-family: "DM Mono", monospace;
+      .ph-brand {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text3);
+        margin-bottom: 1px;
+      }
+      .ph-site {
         font-size: 13px;
         font-weight: 500;
         color: var(--text);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        min-width: 0;
+        max-width: 120px;
+      }
+      .ph-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      /* ── Theme segmented control ──────────────────────────────────── */
+      .theme-seg {
+        display: flex;
+        gap: 1px;
+        background: var(--bg3);
+        border-radius: 6px;
+        padding: 2px;
+      }
+      .ts-btn {
+        padding: 3px 7px;
+        border-radius: 4px;
+        font-size: 10px;
+        color: var(--text3);
+        cursor: pointer;
+        user-select: none;
+        line-height: 1;
+        transition: background 0.12s, color 0.12s, box-shadow 0.12s;
+      }
+      .ts-btn.active {
+        background: var(--seg-bg);
+        color: var(--acc);
+        box-shadow: var(--seg-sh);
+        font-weight: 600;
       }
 
       /* ── Master toggle ────────────────────────────────────────────── */
-      /* The <label> wraps the checkbox + track + thumb, so clicking
-         anywhere on it toggles the checkbox natively. CSS :checked
-         sibling selectors drive the visual — no JavaScript needed.   */
       .master-wrap {
         position: relative;
+        width: 38px;
+        height: 22px;
         flex-shrink: 0;
-        width: 42px;
-        height: 23px;
         cursor: pointer;
       }
-
       #enabled {
         position: absolute;
         opacity: 0;
@@ -191,167 +168,114 @@
         height: 0;
         pointer-events: none;
       }
-
       .master-track {
         position: absolute;
         inset: 0;
-        border-radius: 12px;
-        background: var(--bg-3);
-        border: 1px solid var(--border-2);
-        transition: background 0.2s, border-color 0.2s;
+        border-radius: 11px;
+        background: var(--off);
+        transition: background 0.18s;
       }
-
       .master-thumb {
         position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 15px;
-        height: 15px;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
-        background: var(--text-3);
-        transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.06);
+        transition: transform 0.18s;
       }
-
-      #enabled:checked ~ .master-track {
-        background: var(--accent-lo);
-        border-color: var(--accent-mid);
-      }
-
-      #enabled:checked ~ .master-thumb {
-        background: var(--accent);
-        transform: translateX(19px);
-        box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
-      }
+      #enabled:checked ~ .master-track  { background: var(--on); }
+      #enabled:checked ~ .master-thumb  { transform: translateX(16px); }
 
       /* ── Section ──────────────────────────────────────────────────── */
-      .sec {
-        padding: 11px 14px;
-        border-bottom: 1px solid var(--border);
+      .ps {
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--sep);
       }
-
-      .sec-lbl {
-        font-family: "Syne", sans-serif;
-        font-size: 8.5px;
+      .ps-lbl {
+        font-size: 9px;
         font-weight: 700;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--text-3);
-        margin-bottom: 8px;
+        color: var(--text3);
+        margin-bottom: 6px;
       }
 
       /* ── Mode pills ───────────────────────────────────────────────── */
-      .mode-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3px;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--r-sm);
-        padding: 3px;
+      .mode-seg {
+        display: flex;
+        background: var(--bg3);
+        border-radius: 8px;
+        padding: 2px;
+        gap: 2px;
       }
-
-      .mpill {
-        position: relative;
-      }
-
-      /* Radio is hidden; the <label for=""> handles the click natively */
-      .mpill input {
+      .mpill { position: relative; flex: 1; }
+      .mpill input[type="radio"] {
         position: absolute;
         opacity: 0;
         width: 0;
         height: 0;
         pointer-events: none;
       }
-
       .mpill-lbl {
         display: block;
         text-align: center;
-        padding: 5px 4px;
-        border-radius: 3px;
+        padding: 5px 2px;
+        border-radius: 6px;
         font-size: 11px;
         font-weight: 500;
-        color: var(--text-3);
-        border: 1px solid transparent;
-        transition: all 0.15s;
-        user-select: none;
+        color: var(--text3);
         cursor: pointer;
+        user-select: none;
+        transition: background 0.12s, color 0.12s, box-shadow 0.12s;
       }
-
-      /* Adjacent sibling: input is immediately before the label */
-      #optout:checked + .mpill-lbl {
-        color: var(--accent);
-        background: var(--accent-lo);
-        border-color: var(--accent-mid);
-      }
-
-      #optin:checked + .mpill-lbl {
-        color: var(--danger);
-        background: var(--danger-lo);
-        border-color: rgba(244, 63, 94, 0.3);
-      }
-
+      #optout:checked + .mpill-lbl,
+      #optin:checked  + .mpill-lbl,
       #prompt:checked + .mpill-lbl {
+        background: var(--seg-bg);
         color: var(--text);
-        background: var(--bg-4);
-        border-color: var(--border-2);
+        font-weight: 600;
+        box-shadow: var(--seg-sh);
       }
 
-      /* ── Toggle rows ──────────────────────────────────────────────── */
-      .t-row {
+      /* ── Protection rows ──────────────────────────────────────────── */
+      .pt-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 7px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.025);
+        padding: 5px 0;
+        border-bottom: 1px solid var(--sep2);
       }
-
-      .t-row:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-
-      .t-lbl {
-        font-size: 12px;
-        font-weight: 400;
-        color: var(--text);
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .badge {
-        font-size: 7.5px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        padding: 1px 4px 1.5px;
-        border-radius: 3px;
-        background: rgba(245, 158, 11, 0.15);
-        color: var(--warn);
-        text-transform: uppercase;
+      .pt-row:last-child { border-bottom: none; padding-bottom: 0; }
+      .pt-lbl { font-size: 11.5px; color: var(--text2); }
+      .pt-lbl .beta {
+        font-size: 9px;
+        font-weight: 600;
+        color: var(--text3);
+        margin-left: 3px;
       }
 
       /* ── Small toggle (radio pair) ────────────────────────────────── */
       /*
-       * Layout (in DOM order):
+       * DOM order inside .stog:
        *   input[value="true"]   ← "on" radio
        *   input[value="false"]  ← "off" radio
        *   label.stog-on-lbl     ← visible when ON; clicking → turns off
        *   label.stog-off-lbl    ← visible when OFF; clicking → turns on
-       *   div.stog-track
-       *   div.stog-thumb
+       *   div.stog-track        ← background pill
+       *   div.stog-thumb        ← sliding circle
        *
-       * Visual state and label visibility are 100% CSS-driven via :checked
-       * sibling selectors. No JavaScript needed — popup.ts's programmatic
-       * .checked assignments and user label clicks both work automatically.
+       * CSS :checked siblings drive all visual state. popup.ts sets
+       * .checked on the radio elements directly — no JS needed here.
        */
       .stog {
         position: relative;
-        width: 34px;
-        height: 19px;
+        width: 31px;
+        height: 18px;
         flex-shrink: 0;
       }
-
-      /* Radios: accessible to labels but invisible and non-interactive */
       .stog input[type="radio"] {
         position: absolute;
         opacity: 0;
@@ -359,136 +283,98 @@
         height: 0;
         pointer-events: none;
       }
-
-      /* Labels cover the full toggle area */
       .stog-on-lbl,
       .stog-off-lbl {
-        display: none; /* hidden unless revealed by :checked rule below */
+        display: none;
         position: absolute;
         inset: 0;
         z-index: 2;
         cursor: pointer;
       }
+      .stog input[value="true"]:checked  ~ .stog-on-lbl  { display: block; }
+      .stog input[value="false"]:checked ~ .stog-off-lbl { display: block; }
 
-      /* Show the label that will toggle to the OPPOSITE state */
-      .stog input[value="true"]:checked ~ .stog-on-lbl {
-        display: block; /* ON is active → show label that turns it OFF */
-      }
-
-      .stog input[value="false"]:checked ~ .stog-off-lbl {
-        display: block; /* OFF is active → show label that turns it ON */
-      }
-
-      /* Track and thumb — default (off) state */
       .stog-track {
         position: absolute;
         inset: 0;
-        border-radius: 10px;
-        background: var(--bg-3);
-        border: 1px solid var(--border-2);
-        transition: background 0.18s, border-color 0.18s;
+        border-radius: 9px;
+        background: var(--off);
+        transition: background 0.18s;
       }
-
       .stog-thumb {
         position: absolute;
-        top: 2.5px;
-        left: 2.5px;
-        width: 12px;
-        height: 12px;
+        top: 2px;
+        left: 2px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
-        background: var(--text-3);
-        transition: transform 0.18s, background 0.18s;
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.06);
+        transition: transform 0.18s;
       }
+      .stog input[value="true"]:checked ~ .stog-track { background: var(--on); }
+      .stog input[value="true"]:checked ~ .stog-thumb { transform: translateX(13px); }
 
-      /* Active (on) state — triggered by CSS, no JS */
-      .stog input[value="true"]:checked ~ .stog-track {
-        background: var(--accent-lo);
-        border-color: var(--accent-mid);
-      }
-
-      .stog input[value="true"]:checked ~ .stog-thumb {
-        background: var(--accent);
-        transform: translateX(15px);
-      }
-
-      /* ── Debug section (<details>/<summary>) ─────────────────────── */
-      /* Hide the browser's native disclosure triangle */
-      .dbg-details > summary {
-        list-style: none;
-      }
-      .dbg-details > summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .dbg-hd {
+      /* ── Debug accordion ──────────────────────────────────────────── */
+      .pdbg > summary {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 14px;
-        border-bottom: 1px solid var(--border);
+        padding: 7px 14px;
+        border-bottom: 1px solid var(--sep);
         cursor: pointer;
-        user-select: none;
-      }
-
-      .dbg-hd-lbl {
-        font-family: "Syne", sans-serif;
-        font-size: 8.5px;
+        list-style: none;
+        font-size: 9px;
         font-weight: 700;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--text-3);
+        color: var(--text3);
       }
+      .pdbg > summary::-webkit-details-marker { display: none; }
 
-      .dbg-chevron {
-        width: 12px;
-        height: 12px;
-        color: var(--text-3);
-        transition: transform 0.2s;
+      .dbg-chev {
+        width: 10px;
+        height: 10px;
+        color: var(--text4);
+        transition: transform 0.18s;
+        flex-shrink: 0;
       }
+      .pdbg[open] .dbg-chev { transform: rotate(180deg); }
 
-      /* Rotate chevron when details is open — no JS needed */
-      .dbg-details[open] .dbg-chevron {
-        transform: rotate(180deg);
-      }
-
-      .dbg-body {
+      .pdbg-body {
         padding: 8px 14px 10px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--sep);
+        background: var(--bg2);
       }
-
       .dbg-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2px 8px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
-
       .dbg-chk {
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 0;
+        padding: 3px 0;
       }
-
       .dbg-chk input[type="checkbox"] {
         appearance: none;
         -webkit-appearance: none;
         width: 12px;
         height: 12px;
         border-radius: 3px;
-        background: var(--bg-3);
-        border: 1px solid var(--border-2);
+        background: var(--bg3);
+        border: 1px solid var(--sep);
         cursor: pointer;
-        position: relative;
         flex-shrink: 0;
+        position: relative;
         transition: background 0.12s, border-color 0.12s;
       }
-
       .dbg-chk input[type="checkbox"]:checked {
-        background: var(--accent);
-        border-color: var(--accent);
+        background: var(--on);
+        border-color: var(--on);
       }
-
       .dbg-chk input[type="checkbox"]:checked::after {
         content: "";
         position: absolute;
@@ -496,92 +382,83 @@
         left: 3px;
         width: 4px;
         height: 7px;
-        border: 1.5px solid #000;
+        border: 1.5px solid #ffffff;
         border-top: none;
         border-left: none;
         transform: rotate(40deg);
       }
-
       .dbg-chk label {
         font-size: 11px;
-        color: var(--text-2);
+        color: var(--text3);
         cursor: pointer;
-        line-height: 1;
       }
-
       .retries-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-top: 4px;
       }
-
-      .retries-row label {
-        font-size: 11px;
-        color: var(--text-2);
-      }
-
+      .retries-row label { font-size: 11px; color: var(--text3); }
       #retries {
-        width: 50px;
-        background: var(--bg-3);
-        border: 1px solid var(--border-2);
-        border-radius: var(--r-sm);
+        width: 52px;
+        background: var(--bg3);
+        border: 1px solid var(--sep);
+        border-radius: 6px;
         color: var(--text);
-        font-family: "DM Mono", monospace;
+        font-family: inherit;
         font-size: 12px;
-        padding: 4px 6px;
+        padding: 3px 6px;
         text-align: center;
         outline: none;
-        transition: border-color 0.15s;
       }
-
-      #retries:focus {
-        border-color: var(--accent-mid);
-      }
+      #retries:focus { border-color: var(--acc); }
 
       /* ── Footer ───────────────────────────────────────────────────── */
-      .ft {
+      .pft {
+        padding: 8px 14px 6px;
+        background: var(--bg2);
+      }
+      .pft-btns {
         display: flex;
         gap: 6px;
-        padding: 10px 14px;
+        margin-bottom: 7px;
       }
-
-      .ft-btn {
+      .pft-btn {
         flex: 1;
-        padding: 7px 0;
-        border-radius: var(--r-sm);
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text-3);
-        font-family: "DM Sans", sans-serif;
+        padding: 6px 0;
+        border-radius: 7px;
+        background: var(--bg3);
+        border: none;
         font-size: 11px;
         font-weight: 500;
+        color: var(--acc);
         cursor: pointer;
-        transition: background 0.12s, color 0.12s, border-color 0.12s;
+        font-family: inherit;
       }
-
-      .ft-btn:hover {
-        background: var(--bg-3);
-        color: var(--text-2);
-        border-color: var(--border-2);
+      .pft-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
+      .pft-version,
+      .pft-rules { font-size: 9.5px; color: var(--text4); }
+      .pft-link  { font-size: 9.5px; color: var(--acc); text-decoration: none; cursor: pointer; }
     </style>
   </head>
   <body>
+
     <!-- Header -->
-    <div class="hd">
-      <div class="hd-top">
-        <div class="status-ring"></div>
-        <span class="brand">Autoconsent</span>
+    <div class="ph">
+      <div>
+        <div class="ph-brand">Autoconsent</div>
+        <span class="ph-site" id="current-site">—</span>
       </div>
-      <div class="hd-site">
-        <span class="site-name" id="current-site">—</span>
-        <!--
-          Master toggle: <label> wraps checkbox + track + thumb.
-          Clicking anywhere on the label activates the checkbox natively.
-          #enabled:checked ~ .master-track/thumb CSS handles the visual.
-        -->
-        <label class="master-wrap">
+      <div class="ph-right">
+        <div class="theme-seg">
+          <div class="ts-btn"        data-scheme="light"  data-tip="Light mode">☀︎</div>
+          <div class="ts-btn"        data-scheme="dark"   data-tip="Dark mode">◗</div>
+          <div class="ts-btn active" data-scheme="system" data-tip="Follow system">A</div>
+        </div>
+        <label class="master-wrap" data-tip="Enable / disable for this site">
           <input type="checkbox" id="enabled" name="enabled" checked />
           <div class="master-track"></div>
           <div class="master-thumb"></div>
@@ -590,103 +467,82 @@
     </div>
 
     <!-- Mode -->
-    <div class="sec">
-      <div class="sec-lbl">Mode</div>
-      <div class="mode-row">
-        <!--
-          Mode pills: radio is hidden (opacity:0, width:0); <label for="">
-          handles clicks natively. #optout:checked + .mpill-lbl CSS drives
-          the highlight via the adjacent sibling selector.
-        -->
+    <div class="ps">
+      <div class="ps-lbl">Mode</div>
+      <div class="mode-seg">
         <div class="mpill">
           <input type="radio" id="optout" name="mode" value="optOut" checked />
-          <label class="mpill-lbl" for="optout">Reject</label>
+          <label class="mpill-lbl" for="optout" data-tip="Auto-reject cookie banners">Reject</label>
         </div>
         <div class="mpill">
           <input type="radio" id="optin" name="mode" value="optIn" />
-          <label class="mpill-lbl" for="optin">Accept</label>
+          <label class="mpill-lbl" for="optin" data-tip="Auto-accept cookie banners">Accept</label>
         </div>
         <div class="mpill">
           <input type="radio" id="prompt" name="mode" value="null" />
-          <label class="mpill-lbl" for="prompt">Ask</label>
+          <label class="mpill-lbl" for="prompt" data-tip="Ask before acting">Ask</label>
         </div>
       </div>
     </div>
 
     <!-- Protection -->
-    <div class="sec">
-      <div class="sec-lbl">Protection</div>
+    <div class="ps">
+      <div class="ps-lbl">Protection</div>
 
-      <!--
-        Each .stog contains (in DOM order):
-          input[value="true"]  — the "on" radio
-          input[value="false"] — the "off" radio
-          label.stog-on-lbl    — covers stog when ON; for="X-off" turns it off
-          label.stog-off-lbl   — covers stog when OFF; for="X-on" turns it on
-          div.stog-track + div.stog-thumb — purely visual, CSS-driven
-
-        The label that's currently visible is always the one pointing to
-        the OPPOSITE state, so every click toggles. CSS :checked sibling
-        selectors update both label visibility and the track/thumb visual.
-      -->
-
-      <div class="t-row">
-        <span class="t-lbl">Pre-hide popups</span>
+      <div class="pt-row">
+        <span class="pt-lbl" data-tip="Hide banners before they flash on screen">Pre-hide popups</span>
         <div class="stog">
-          <input type="radio" id="prehide-on" name="prehide" value="true" checked />
+          <input type="radio" id="prehide-on"  name="prehide" value="true"  checked />
           <input type="radio" id="prehide-off" name="prehide" value="false" />
-          <label class="stog-on-lbl" for="prehide-off"></label>
+          <label class="stog-on-lbl"  for="prehide-off"></label>
           <label class="stog-off-lbl" for="prehide-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
       </div>
 
-      <div class="t-row">
-        <span class="t-lbl">Cosmetic rules</span>
+      <div class="pt-row">
+        <span class="pt-lbl" data-tip="Hide banners that have no reject button">Cosmetic rules</span>
         <div class="stog">
-          <input type="radio" id="cosmetic-on" name="cosmetic" value="true" checked />
+          <input type="radio" id="cosmetic-on"  name="cosmetic" value="true"  checked />
           <input type="radio" id="cosmetic-off" name="cosmetic" value="false" />
-          <label class="stog-on-lbl" for="cosmetic-off"></label>
+          <label class="stog-on-lbl"  for="cosmetic-off"></label>
           <label class="stog-off-lbl" for="cosmetic-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
       </div>
 
-      <div class="t-row">
-        <span class="t-lbl">Generated rules</span>
+      <div class="pt-row">
+        <span class="pt-lbl" data-tip="Auto-generated rules for thousands of sites">Generated rules</span>
         <div class="stog">
-          <input type="radio" id="generated-on" name="generated" value="true" checked />
+          <input type="radio" id="generated-on"  name="generated" value="true"  checked />
           <input type="radio" id="generated-off" name="generated" value="false" />
-          <label class="stog-on-lbl" for="generated-off"></label>
+          <label class="stog-on-lbl"  for="generated-off"></label>
           <label class="stog-off-lbl" for="generated-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
       </div>
 
-      <div class="t-row">
-        <span class="t-lbl">
-          Unknown popups
-          <span class="badge">β</span>
-        </span>
+      <div class="pt-row">
+        <span class="pt-lbl" data-tip="Heuristic detection for unrecognised banners">Unknown popups <span class="beta">(beta)</span></span>
         <div class="stog">
-          <input type="radio" id="heuristic-action-on" name="heuristic-action" value="true" />
+          <input type="radio" id="heuristic-action-on"  name="heuristic-action" value="true"  />
           <input type="radio" id="heuristic-action-off" name="heuristic-action" value="false" checked />
-          <label class="stog-on-lbl" for="heuristic-action-off"></label>
+          <label class="stog-on-lbl"  for="heuristic-action-off"></label>
           <label class="stog-off-lbl" for="heuristic-action-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
         </div>
       </div>
 
-      <div class="t-row">
-        <span class="t-lbl">Highlight clicks</span>
+      <div class="pt-row">
+        <span class="pt-lbl" data-tip="Flash a red outline around automated clicks">Highlight clicks</span>
         <div class="stog">
-          <input type="radio" id="visual-test-on" name="visual-test" value="true" />
+          <input type="radio" id="visual-test-on"  name="visual-test" value="true"  />
           <input type="radio" id="visual-test-off" name="visual-test" value="false" checked />
-          <label class="stog-on-lbl" for="visual-test-off"></label>
+          <label class="stog-on-lbl"  for="visual-test-off"></label>
           <label class="stog-off-lbl" for="visual-test-on"></label>
           <div class="stog-track"></div>
           <div class="stog-thumb"></div>
@@ -694,43 +550,44 @@
       </div>
     </div>
 
-    <!-- Debug: native <details> accordion — no JavaScript needed -->
-    <details class="dbg-details">
-      <summary class="dbg-hd">
-        <span class="dbg-hd-lbl">Debug logging</span>
-        <svg class="dbg-chevron" viewBox="0 0 12 12" fill="none">
-          <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Debug logging -->
+    <details class="pdbg">
+      <summary>
+        Debug logging
+        <svg class="dbg-chev" viewBox="0 0 10 10" fill="none">
+          <path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </summary>
-      <div class="dbg-body">
+      <div class="pdbg-body">
         <div class="dbg-grid">
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-lifecycle" name="logs-lifecycle" checked />
-            <label for="logs-lifecycle">Lifecycle</label>
+            <input type="checkbox" id="logs-lifecycle"      name="logs-lifecycle"      checked />
+            <label for="logs-lifecycle"      data-tip="Log CMP lifecycle events">Lifecycle</label>
           </div>
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-rulesteps" name="logs-rulesteps" checked />
-            <label for="logs-rulesteps">Rule steps</label>
+            <input type="checkbox" id="logs-rulesteps"      name="logs-rulesteps"      checked />
+            <label for="logs-rulesteps"      data-tip="Log each rule step">Rule steps</label>
           </div>
           <div class="dbg-chk">
             <input type="checkbox" id="logs-detectionsteps" name="logs-detectionsteps" />
-            <label for="logs-detectionsteps">Detection</label>
+            <label for="logs-detectionsteps" data-tip="Log detection steps">Detection</label>
           </div>
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-waits" name="logs-waits" />
-            <label for="logs-waits">Wait steps</label>
+            <input type="checkbox" id="logs-waits"          name="logs-waits" />
+            <label for="logs-waits"          data-tip="Log wait/sleep steps">Wait steps</label>
           </div>
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-evals" name="logs-evals" />
-            <label for="logs-evals">Evals</label>
+            <input type="checkbox" id="logs-evals"          name="logs-evals" />
+            <label for="logs-evals"          data-tip="Log JS eval results">Evals</label>
           </div>
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-errors" name="logs-errors" checked />
-            <label for="logs-errors">Errors</label>
+            <input type="checkbox" id="logs-errors"         name="logs-errors"         checked />
+            <label for="logs-errors"         data-tip="Log errors (recommended)">Errors</label>
           </div>
           <div class="dbg-chk">
-            <input type="checkbox" id="logs-messages" name="logs-messages" />
-            <label for="logs-messages">Messages</label>
+            <input type="checkbox" id="logs-messages"       name="logs-messages" />
+            <label for="logs-messages"       data-tip="Log extension messages">Messages</label>
           </div>
         </div>
         <div class="retries-row">
@@ -741,9 +598,16 @@
     </details>
 
     <!-- Footer -->
-    <div class="ft">
-      <button class="ft-btn" id="reload">↺ Reload rules</button>
-      <button class="ft-btn" id="reset">Reset</button>
+    <div class="pft">
+      <div class="pft-btns">
+        <button class="pft-btn" id="reload" data-tip="Reload rules from extension bundle">↺ Reload rules</button>
+        <button class="pft-btn" id="reset"  data-tip="Restore all settings to defaults">Reset</button>
+      </div>
+      <div class="pft-meta">
+        <span class="pft-version" id="ext-version" data-tip="Extension version">—</span>
+        <span class="pft-rules"   id="rules-date"  data-tip="Date rules were last built"></span>
+        <a    class="pft-link"    id="gh-link"      data-tip="View source on GitHub" href="#">GitHub ↗</a>
+      </div>
     </div>
 
     <script src="popup.bundle.js"></script>
