@@ -15,6 +15,38 @@ Sites with no reject option get their popup hidden via cosmetic rules. Sites wit
 
 ---
 
+## Quick start (no build needed)
+
+Download the latest pre-built unsigned app from the [Releases page](https://github.com/fernandoslee/autoconsent-safari/releases/tag/latest), then:
+
+```bash
+# Remove macOS quarantine flag (required for apps not from the App Store)
+xattr -cr AutoconsentSafari.app
+
+# Open the app to register the extension with Safari
+open AutoconsentSafari.app
+```
+
+Then go to **Safari → Settings → Extensions**, enable **Autoconsent**, and set Website Access to **Allow on All Websites**.
+
+> Safari will show an "unsigned extension" warning — expected without a paid Apple Developer account.
+
+---
+
+## Build from source
+
+If you want to build it yourself or make changes, a single script handles everything:
+
+```bash
+git clone https://github.com/fernandoslee/autoconsent-safari.git
+cd autoconsent-safari
+./setup.sh
+```
+
+`setup.sh` checks all dependencies, builds the JS bundle, generates the Xcode project on first run, builds the app, and opens it. See below for manual steps and dependency details.
+
+---
+
 ## Dependencies
 
 ### System requirements
