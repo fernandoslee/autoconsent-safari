@@ -42,17 +42,17 @@ document.getElementById('reset').addEventListener(
 
 // ── Extension version ──────────────────────────────────────────────────────
 (function () {
-  var el = document.getElementById('ext-version');
+  const el = document.getElementById('ext-version');
   if (el) {
     el.textContent = 'v' + chrome.runtime.getManifest().version;
   }
 }());
 
 // ── Rules date ─────────────────────────────────────────────────────────────
-chrome.storage.local.get('rules', function (result) {
-  var el = document.getElementById('rules-date');
+chrome.storage.local.get('rules', (result) => {
+  const el = document.getElementById('rules-date');
   if (!el) { return; }
-  var ts = result && result.rules && result.rules.generated_at;
+  const ts = result && result.rules && result.rules.generated_at;
   if (ts) {
     el.textContent = 'Rules: ' + new Date(ts).toLocaleDateString('en-US', {
       month: 'short',
@@ -63,9 +63,9 @@ chrome.storage.local.get('rules', function (result) {
 
 // ── GitHub link ────────────────────────────────────────────────────────────
 (function () {
-  var el = document.getElementById('gh-link');
+  const el = document.getElementById('gh-link');
   if (!el) { return; }
-  el.addEventListener('click', function (e) {
+  el.addEventListener('click', (e) => {
     e.preventDefault();
     chrome.tabs.create({ url: 'https://github.com/fernandoslee/autoconsent-safari' });
   });
