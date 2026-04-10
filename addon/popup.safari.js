@@ -70,3 +70,32 @@ chrome.storage.local.get('rules', (result) => {
     chrome.tabs.create({ url: 'https://github.com/fernandoslee/autoconsent-safari' });
   });
 }());
+
+// ── Theme switching ────────────────────────────────────────────────────────
+(function () {
+  const KEY = 'colorScheme';
+
+  function applyTheme(scheme) {
+    const s = scheme || 'system';
+    document.documentElement.setAttribute('data-theme', s);
+    document.querySelectorAll('.ts-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.scheme === s);
+    });
+  }
+
+  // Restore saved theme immediately on load
+  chrome.storage.local.get(KEY, (result) => {
+    applyTheme(result[KEY]);
+  });
+
+  // Handle user clicks on the three theme buttons
+  document.querySelectorAll('.ts-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const scheme = btn.dataset.scheme;
+      applyTheme(scheme);
+      const obj = {};
+      obj[KEY] = scheme;
+      chrome.storage.local.set(obj);
+    });
+  });
+}());
