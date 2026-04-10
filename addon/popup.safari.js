@@ -39,3 +39,34 @@ document.getElementById('reset').addEventListener(
   },
   true,
 );
+
+// ── Extension version ──────────────────────────────────────────────────────
+(function () {
+  var el = document.getElementById('ext-version');
+  if (el) {
+    el.textContent = 'v' + chrome.runtime.getManifest().version;
+  }
+}());
+
+// ── Rules date ─────────────────────────────────────────────────────────────
+chrome.storage.local.get('rules', function (result) {
+  var el = document.getElementById('rules-date');
+  if (!el) { return; }
+  var ts = result && result.rules && result.rules.generated_at;
+  if (ts) {
+    el.textContent = 'Rules: ' + new Date(ts).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
+  }
+});
+
+// ── GitHub link ────────────────────────────────────────────────────────────
+(function () {
+  var el = document.getElementById('gh-link');
+  if (!el) { return; }
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    chrome.tabs.create({ url: 'https://github.com/fernandoslee/autoconsent-safari' });
+  });
+}());
