@@ -52,12 +52,21 @@ jobs:
             exit 1
           fi
 
-      - name: Populate Xcode extension Resources from dist
+      - name: Generate Xcode project
         run: |
-          RESOURCES_DIR="xcode/AutoconsentSafari/AutoconsentSafari Extension/Resources"
-          rm -rf "$RESOURCES_DIR"
-          mkdir -p "$RESOURCES_DIR"
-          cp -r dist/addon-safari/. "$RESOURCES_DIR/"
+          xcrun safari-web-extension-converter \
+            dist/addon-safari \
+            --project-location xcode/ \
+            --app-name "AutoconsentSafari" \
+            --bundle-identifier "com.yourorg.autoconsent-safari" \
+            --macos-only \
+            --no-open 2>&1 || true
+
+      - name: Fix bundle identifier prefix
+        run: |
+          sed -i '' \
+            's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
+            xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 
       - name: Set marketing version from package.json
         run: |
