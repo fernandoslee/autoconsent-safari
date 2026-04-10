@@ -1,9 +1,8 @@
 # Autoconsent for Safari
 
-A Safari extension that automatically opts out of cookie consent popups. This is a private fork of [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) that adds a Safari distribution target.
+A Safari extension that automatically opts out of cookie consent popups. This is an unofficial, personal fork of [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) that adds a Safari distribution target.
 
-> **Current version:** 2026.3.31  
-> **Status:** Working locally. Handles the vast majority of GDPR cookie banners automatically.
+> **This project is provided as-is, with no warranties or guarantees of any kind. Use at your own risk.**
 
 ---
 
@@ -15,27 +14,29 @@ Sites with no reject option get their popup hidden via cosmetic rules. Sites wit
 
 ---
 
-## Quick start (no build needed)
+## Installation options
 
-Download the latest pre-built unsigned app from the [Releases page](https://github.com/fernandoslee/autoconsent-safari/releases/tag/latest), then:
-
-```bash
-# Remove macOS quarantine flag (required for apps not from the App Store)
-xattr -cr AutoconsentSafari.app
-
-# Open the app to register the extension with Safari
-open AutoconsentSafari.app
-```
-
-Then go to **Safari → Settings → Extensions**, enable **Autoconsent**, and set Website Access to **Allow on All Websites**.
-
-> Safari will show an "unsigned extension" warning — expected without a paid Apple Developer account.
+There are two ways to install this extension. **Building from source is strongly recommended** — it gives you full visibility into what you are running. The pre-built option is provided for convenience but requires you to explicitly bypass macOS security controls, which carries risk.
 
 ---
 
-## Build from source
+## Option A — Build from source (recommended)
 
-If you want to build it yourself or make changes, a single script handles everything:
+Building from source means you compile the code yourself, so you know exactly what is being installed. This is the safest approach.
+
+### Requirements
+
+| Dependency | Version | Notes |
+|---|---|---|
+| macOS | 13.0+ (Ventura) | |
+| Safari | 16.4+ | MV3 extension support |
+| Xcode | 15+ | Free from the Mac App Store (~7 GB) |
+| Node.js | LTS (18+) | [nodejs.org](https://nodejs.org) or `brew install node` |
+| npm | 9+ | Bundled with Node.js |
+
+### Automated setup (recommended)
+
+A single script handles the entire process:
 
 ```bash
 git clone https://github.com/fernandoslee/autoconsent-safari.git
@@ -43,38 +44,13 @@ cd autoconsent-safari
 ./setup.sh
 ```
 
-`setup.sh` checks all dependencies, builds the JS bundle, generates the Xcode project on first run, builds the app, and opens it. See below for manual steps and dependency details.
+`setup.sh` will check all dependencies, build the JavaScript bundle, generate the Xcode project on first run, build the app, and open it to register the extension with Safari.
 
----
+### Manual setup (step by step)
 
-## Dependencies
+If you prefer to run each step yourself:
 
-### System requirements
-
-| Dependency | Version | Notes |
-|---|---|---|
-| macOS | 13.0+ (Ventura) | Required to run the extension |
-| Safari | 16.4+ | MV3 extension support |
-| Xcode | 15+ | Free from the Mac App Store |
-| Node.js | LTS (18+) | Install via [nodejs.org](https://nodejs.org) or `brew install node` |
-| npm | 9+ | Bundled with Node.js |
-
-### Node packages
-
-Installed automatically by `npm install`. Key packages:
-
-| Package | Purpose |
-|---|---|
-| `esbuild` | Bundles TypeScript source into extension JS files |
-| `typescript` | Type checking |
-| `playwright` | E2E test runner |
-| `web-test-runner` | Unit test runner |
-
----
-
-## First-time setup
-
-### 1. Clone and install Node dependencies
+**1. Clone and install dependencies**
 
 ```bash
 git clone https://github.com/fernandoslee/autoconsent-safari.git
@@ -82,17 +58,15 @@ cd autoconsent-safari
 npm install
 ```
 
-### 2. Build the Safari extension bundle
+**2. Build the Safari extension bundle**
 
 ```bash
 npm run prepublish
 ```
 
-This compiles TypeScript, bundles all rules, and produces `dist/addon-safari/` — the web extension bundle that Xcode will package into the macOS app.
+Compiles TypeScript, bundles all rules, and produces `dist/addon-safari/`.
 
-### 3. Set up Xcode (first time only)
-
-If you've never used Xcode from the command line before, run these once:
+**3. Set up Xcode command-line tools (first time only)**
 
 ```bash
 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
@@ -100,7 +74,7 @@ sudo xcodebuild -license accept
 sudo xcodebuild -runFirstLaunch
 ```
 
-### 4. Generate the Xcode project (first time only)
+**4. Generate the Xcode project (first time only)**
 
 ```bash
 xcrun safari-web-extension-converter \
@@ -112,9 +86,7 @@ xcrun safari-web-extension-converter \
   --no-open
 ```
 
-### 5. Fix bundle identifier (first time only)
-
-The converter generates a mismatched bundle ID for the host app. Fix it with a find-and-replace in the project file:
+**5. Fix bundle identifier (first time only)**
 
 ```bash
 sed -i '' \
@@ -122,7 +94,7 @@ sed -i '' \
   xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 ```
 
-### 6. Build the macOS app
+**6. Build the app**
 
 ```bash
 xcodebuild build \
@@ -133,29 +105,21 @@ xcodebuild build \
   CODE_SIGNING_REQUIRED=NO
 ```
 
-The built app lands in Xcode's DerivedData directory.
-
-### 7. Register the extension with Safari
+**7. Open the app to register the extension**
 
 ```bash
 open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
 
-Opening the app registers it with Safari. You only need to do this once, or after a rebuild.
+**8. Enable in Safari**
 
-### 8. Enable in Safari
+Go to **Safari → Settings → Extensions**, enable **Autoconsent**, and set Website Access to **Allow on All Websites**.
 
-1. Go to **Safari → Settings → Extensions**
-2. Enable **Autoconsent**
-3. Set Website Access to **Allow on All Websites**
+Safari will show an "unsigned extension" warning — this is expected for local builds without a paid Apple Developer account ($99/year).
 
-> Safari will show an "unsigned extension" warning for local builds — this is expected without a paid Apple Developer account.
+### Rebuilding after updates
 
----
-
-## Rebuilding after updates
-
-Rules sync automatically from upstream every 24 hours. After pulling, a rebuild and re-open is all that's needed — steps 4 and 5 are one-time only.
+Rules sync automatically from upstream daily. After pulling:
 
 ```bash
 git pull
@@ -171,7 +135,51 @@ xcodebuild build \
 open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
 
-If the rebuild doesn't take effect in Safari, try disabling the extension, quitting Safari fully (`Cmd+Q`), reopening Safari, and re-enabling the extension.
+Steps 4 and 5 are one-time only. If Safari doesn't pick up the update, disable the extension, quit Safari (`Cmd+Q`), reopen, and re-enable.
+
+---
+
+## Option B — Pre-built download
+
+> **Read this section carefully before proceeding.**
+
+A pre-built unsigned `.app` is published automatically by CI on every update and is available on the [Releases page](https://github.com/fernandoslee/autoconsent-safari/releases/tag/latest).
+
+### Why it is unsigned
+
+Distributing a properly signed and notarized macOS app requires an Apple Developer Program membership ($99/year). This is a personal project with no commercial intent, so no certificate has been purchased. The app is built by a GitHub Actions CI pipeline from the source code in this repository, but it has not been reviewed or approved by Apple.
+
+### Security implications
+
+macOS includes Gatekeeper, a security feature that blocks apps not signed by a verified developer. Installing this app requires you to explicitly disable Gatekeeper's protection for it. **You should understand what this means before proceeding:**
+
+- You are running software that has not been verified by Apple.
+- The `xattr -cr` command below removes the quarantine flag that macOS uses to warn you about unverified downloads. Once removed, macOS will not prompt you again.
+- If you have any doubt about the source of the file you downloaded, do not proceed. Build from source instead.
+
+The risk is mitigated by the fact that the source code is fully open, the CI build pipeline is public and auditable, and the extension only reads web page content to detect and dismiss cookie banners — it does not have access to passwords, files, or other sensitive data.
+
+### Installation steps
+
+**1.** Download `AutoconsentSafari-*-unsigned.zip` from the [Releases page](https://github.com/fernandoslee/autoconsent-safari/releases/tag/latest) and unzip it.
+
+**2.** Verify the download came from this repository's CI pipeline (check the release was published by `github-actions[bot]`).
+
+**3.** Remove the macOS quarantine flag:
+
+```bash
+xattr -cr AutoconsentSafari.app
+```
+
+**4.** Open the app:
+
+```bash
+open AutoconsentSafari.app
+```
+
+Or double-click it in Finder. macOS may still show a warning — click **Open** to proceed.
+
+**5.** In Safari: **Settings → Extensions → Enable Autoconsent → Allow on All Websites**.
 
 ---
 
@@ -179,9 +187,7 @@ If the rebuild doesn't take effect in Safari, try disabling the extension, quitt
 
 The extension injects a content script on every page at `document_start`. The script checks the page against 285+ CMP rules. When a match is found, it automatically clicks the reject/decline button. If the popup has no reject option, it is hidden via CSS.
 
-The background service worker loads all rules on install and responds to the content script with the applicable ruleset for each page.
-
-Rules are maintained by DuckDuckGo upstream and synced into this fork daily.
+The background service worker loads all rules on install and responds to the content script with the applicable ruleset for each page. Rules are maintained by DuckDuckGo upstream and synced into this fork daily.
 
 ---
 
@@ -192,22 +198,19 @@ Rules are maintained by DuckDuckGo upstream and synced into this fork daily.
 | GDPR cookie banners | Working — covers all major CMPs |
 | US-only popups (CCPA) | Partial — depends on the CMP |
 | Sites with no reject button | Handled via cosmetic (hide) rules |
+| Sites with no matching rule | Left untouched |
 | Unsigned local build | Working — Safari shows a one-time warning |
-| Signed/notarized DMG | Not set up — requires Apple Developer account ($99/yr) |
+| Signed/notarized build | Not available — requires Apple Developer account |
 | App Store distribution | Not planned |
-
-Sites with no matching rule are left untouched. Pulling regularly keeps rule coverage up to date as the upstream project adds rules continuously.
 
 ---
 
 ## Upstream sync
 
-This fork tracks [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) via `.github/workflows/upstream-sync.yml`, which runs daily at 02:00 UTC and merges upstream `main` into this fork.
+This fork tracks [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) via a daily GitHub Actions workflow that merges upstream `main` into this fork.
 
-- **Clean merge** → pushed automatically
-- **Conflict** → a PR is opened for manual resolution
-
-Conflicts are rare — the fork's changes to `build.sh` and `update_version.js` are append-only at positions upstream never touches.
+- **Clean merge** → pushed automatically; unsigned CI build publishes a new release
+- **Conflict** → a PR is opened for manual resolution (rare)
 
 ---
 
@@ -226,12 +229,9 @@ Everything else is byte-for-byte identical to upstream.
 
 ---
 
-## Remotes
+## Disclaimer
 
-```
-origin    https://github.com/fernandoslee/autoconsent-safari.git  (this fork)
-upstream  https://github.com/duckduckgo/autoconsent.git           (DuckDuckGo)
-```
+This project is not affiliated with or endorsed by DuckDuckGo. It is an independent personal fork maintained on a best-effort basis, provided as-is with no warranties, guarantees, or support obligations. The upstream project ([duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent)) is the authoritative source for rules and engine updates.
 
 ## License
 
