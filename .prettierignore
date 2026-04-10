@@ -6,3 +6,6 @@ package-lock.json
 addon/manifest.*.json
 **/*.md
 **/*.har
+# Safari fork additions
+setup.sh
+xcode/
