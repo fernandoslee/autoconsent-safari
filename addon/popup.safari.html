@@ -411,7 +411,15 @@
         transform: translateX(15px);
       }
 
-      /* ── Debug section ────────────────────────────────────────────── */
+      /* ── Debug section (<details>/<summary>) ─────────────────────── */
+      /* Hide the browser's native disclosure triangle */
+      .dbg-details > summary {
+        list-style: none;
+      }
+      .dbg-details > summary::-webkit-details-marker {
+        display: none;
+      }
+
       .dbg-hd {
         display: flex;
         align-items: center;
@@ -438,18 +446,14 @@
         transition: transform 0.2s;
       }
 
-      .dbg-chevron.open {
+      /* Rotate chevron when details is open — no JS needed */
+      .dbg-details[open] .dbg-chevron {
         transform: rotate(180deg);
       }
 
       .dbg-body {
-        display: none;
         padding: 8px 14px 10px;
         border-bottom: 1px solid var(--border);
-      }
-
-      .dbg-body.open {
-        display: block;
       }
 
       .dbg-grid {
@@ -690,49 +694,51 @@
       </div>
     </div>
 
-    <!-- Debug -->
-    <div class="dbg-hd" id="dbg-hd">
-      <span class="dbg-hd-lbl">Debug logging</span>
-      <svg class="dbg-chevron" id="dbg-chevron" viewBox="0 0 12 12" fill="none">
-        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    </div>
-    <div class="dbg-body" id="dbg-body">
-      <div class="dbg-grid">
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-lifecycle" name="logs-lifecycle" checked />
-          <label for="logs-lifecycle">Lifecycle</label>
+    <!-- Debug: native <details> accordion — no JavaScript needed -->
+    <details class="dbg-details">
+      <summary class="dbg-hd">
+        <span class="dbg-hd-lbl">Debug logging</span>
+        <svg class="dbg-chevron" viewBox="0 0 12 12" fill="none">
+          <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </summary>
+      <div class="dbg-body">
+        <div class="dbg-grid">
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-lifecycle" name="logs-lifecycle" checked />
+            <label for="logs-lifecycle">Lifecycle</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-rulesteps" name="logs-rulesteps" checked />
+            <label for="logs-rulesteps">Rule steps</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-detectionsteps" name="logs-detectionsteps" />
+            <label for="logs-detectionsteps">Detection</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-waits" name="logs-waits" />
+            <label for="logs-waits">Wait steps</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-evals" name="logs-evals" />
+            <label for="logs-evals">Evals</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-errors" name="logs-errors" checked />
+            <label for="logs-errors">Errors</label>
+          </div>
+          <div class="dbg-chk">
+            <input type="checkbox" id="logs-messages" name="logs-messages" />
+            <label for="logs-messages">Messages</label>
+          </div>
         </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-rulesteps" name="logs-rulesteps" checked />
-          <label for="logs-rulesteps">Rule steps</label>
-        </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-detectionsteps" name="logs-detectionsteps" />
-          <label for="logs-detectionsteps">Detection</label>
-        </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-waits" name="logs-waits" />
-          <label for="logs-waits">Wait steps</label>
-        </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-evals" name="logs-evals" />
-          <label for="logs-evals">Evals</label>
-        </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-errors" name="logs-errors" checked />
-          <label for="logs-errors">Errors</label>
-        </div>
-        <div class="dbg-chk">
-          <input type="checkbox" id="logs-messages" name="logs-messages" />
-          <label for="logs-messages">Messages</label>
+        <div class="retries-row">
+          <label for="retries">Detection attempts</label>
+          <input type="number" id="retries" name="retries" value="20" min="1" max="100" />
         </div>
       </div>
-      <div class="retries-row">
-        <label for="retries">Detection attempts</label>
-        <input type="number" id="retries" name="retries" value="20" min="1" max="100" />
-      </div>
-    </div>
+    </details>
 
     <!-- Footer -->
     <div class="ft">
@@ -741,13 +747,7 @@
     </div>
 
     <script src="popup.bundle.js"></script>
-    <script>
-      // Debug accordion — the only JS needed in this popup.
-      // All toggle/ring visual state is handled by CSS :checked selectors.
-      document.getElementById("dbg-hd").addEventListener("click", () => {
-        document.getElementById("dbg-body").classList.toggle("open");
-        document.getElementById("dbg-chevron").classList.toggle("open");
-      });
-    </script>
+    <!-- popup.safari.js must be a separate file: MV3 CSP blocks inline scripts -->
+    <script src="popup.safari.js"></script>
   </body>
 </html>
