@@ -10,6 +10,7 @@ rules/consentomatic.json
 rules/compact-rules.json
 lib/**/*.js
 addon/*.js
+!addon/popup.safari.js
 .vscode/
 .env
 .DS_Store
