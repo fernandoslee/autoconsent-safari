@@ -43,7 +43,7 @@ cp dist/addon-mv3/popup.bundle.js      dist/addon-safari/
 cp -r addon/icons                      dist/addon-safari/
 cp rules/rules.json                    dist/addon-safari/
 cp rules/compact-rules.json            dist/addon-safari/
-cp addon/popup.html                    dist/addon-safari/
+cp addon/popup.safari.html             dist/addon-safari/popup.html
 cp addon/manifest.safari.json          dist/addon-safari/manifest.json
 # devtools/ intentionally omitted — Safari has no chrome.devtools API
 
