@@ -93,11 +93,21 @@ chrome.storage.local.get('rules', (result) => {
 
   function applyTheme(scheme) {
     const s = scheme || 'system';
-    document.documentElement.setAttribute('data-theme', s);
+    // Resolve 'system' to the actual effective theme via matchMedia.
+    // CSS @media (prefers-color-scheme) is unreliable in Safari extension popups.
+    const effective = s === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : s;
+    document.documentElement.setAttribute('data-theme', effective);
     document.querySelectorAll('.ts-btn').forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.scheme === s);
     });
   }
+
+  // Re-apply if system dark/light preference changes while popup is open.
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    chrome.storage.local.get(KEY, (result) => { applyTheme(result[KEY]); });
+  });
 
   // Restore saved theme immediately on load
   chrome.storage.local.get(KEY, (result) => {
@@ -122,9 +132,7 @@ chrome.storage.local.get('rules', (result) => {
   let tipEl  = null;
 
   function isDark() {
-    const t = document.documentElement.getAttribute('data-theme');
-    return t === 'dark' ||
-      (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
   function removeTip() {
@@ -155,7 +163,8 @@ chrome.storage.local.get('rules', (result) => {
 
     const rect = target.getBoundingClientRect();
     el.style.left = (rect.left + rect.width / 2) + 'px';
-    el.style.top  = (rect.top  - el.offsetHeight - 8) + 'px';
+    const above = rect.top - el.offsetHeight - 8;
+    el.style.top = (above < 4 ? rect.bottom + 8 : above) + 'px';
     tipEl = el;
   }
 
