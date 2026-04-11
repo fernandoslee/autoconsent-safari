@@ -1,3 +1,16 @@
+# v14.70.0 (Sat Apr 11 2026)
+
+#### 🚀 Enhancement
+
+- Add autoconsent rule for Gallup cookie banner [#1251](https://github.com/duckduckgo/autoconsent/pull/1251) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.69.0 (Thu Apr 09 2026)
 
 #### 🚀 Enhancement
