@@ -10,44 +10,44 @@ name: Auto-merge safe bot PRs
 # Upstream-sync conflict PRs (branch upstream-sync/*) are excluded by criteria 2.
 
 on:
-  pull_request_target:
-    types: [opened, labeled, synchronize]
+    pull_request_target:
+        types: [opened, labeled, synchronize]
 
 jobs:
-  auto-merge:
-    runs-on: ubuntu-latest
-    if: |
-      github.event.pull_request.user.login == 'github-actions[bot]' &&
-      startsWith(github.event.pull_request.head.ref, 'create-pull-request/') &&
-      contains(github.event.pull_request.labels.*.name, 'dependencies')
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - name: Check changed files
-        id: check-files
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          FILES=$(gh pr view "${{ github.event.pull_request.number }}" \
-            --repo "$GITHUB_REPOSITORY" \
-            --json files \
-            --jq '.files[].path' | sort -u)
-          echo "Changed files: $FILES"
+    auto-merge:
+        runs-on: ubuntu-latest
+        if: |
+            github.event.pull_request.user.login == 'github-actions[bot]' &&
+            startsWith(github.event.pull_request.head.ref, 'create-pull-request/') &&
+            contains(github.event.pull_request.labels.*.name, 'dependencies')
+        permissions:
+            contents: write
+            pull-requests: write
+        steps:
+            - name: Check changed files
+              id: check-files
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  FILES=$(gh pr view "${{ github.event.pull_request.number }}" \
+                    --repo "$GITHUB_REPOSITORY" \
+                    --json files \
+                    --jq '.files[].path' | sort -u)
+                  echo "Changed files: $FILES"
 
-          UNEXPECTED=$(echo "$FILES" | grep -v '^rules/filterlist\.txt$' || true)
-          if [ -n "$UNEXPECTED" ]; then
-            echo "PR touches files outside rules/filterlist.txt: $UNEXPECTED — skipping."
-            echo "eligible=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "Only rules/filterlist.txt changed — eligible for auto-merge."
-            echo "eligible=true" >> "$GITHUB_OUTPUT"
-          fi
+                  UNEXPECTED=$(echo "$FILES" | grep -v '^rules/filterlist\.txt$' || true)
+                  if [ -n "$UNEXPECTED" ]; then
+                    echo "PR touches files outside rules/filterlist.txt: $UNEXPECTED — skipping."
+                    echo "eligible=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "Only rules/filterlist.txt changed — eligible for auto-merge."
+                    echo "eligible=true" >> "$GITHUB_OUTPUT"
+                  fi
 
-      - name: Enable auto-merge
-        if: steps.check-files.outputs.eligible == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge --auto --squash "${{ github.event.pull_request.number }}" \
-            --repo "$GITHUB_REPOSITORY"
+            - name: Enable auto-merge
+              if: steps.check-files.outputs.eligible == 'true'
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  gh pr merge --auto --squash "${{ github.event.pull_request.number }}" \
+                    --repo "$GITHUB_REPOSITORY"
