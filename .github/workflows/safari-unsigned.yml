@@ -64,32 +64,24 @@ jobs:
             - name: Inject icons into Xcode project (before build)
               run: |
                   ICON_SRC="addon/icons/app-icon-1024.png"
-                  # App icon asset catalog — all required sizes
-                  ICON_DIR="xcode/AutoconsentSafari/AutoconsentSafari/Assets.xcassets/AppIcon.appiconset"
+                  RES_DIR="xcode/AutoconsentSafari/AutoconsentSafari/Resources"
+
+                  # Generate .icns from source PNG
+                  ICONSET="$RUNNER_TEMP/AppIcon.iconset"
+                  mkdir -p "$ICONSET"
                   for size in 16 32 128 256 512; do
-                    sips -z $size $size "$ICON_SRC" --out "$ICON_DIR/icon_${size}x${size}.png" >/dev/null
+                    sips -z $size $size "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}.png" >/dev/null
                     double=$((size * 2))
-                    sips -z $double $double "$ICON_SRC" --out "$ICON_DIR/icon_${size}x${size}@2x.png" >/dev/null
+                    sips -z $double $double "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}@2x.png" >/dev/null
                   done
-                  # Host app window icon (shown on the "enable extension" screen)
-                  sips -z 384 384 "$ICON_SRC" --out "xcode/AutoconsentSafari/AutoconsentSafari/Resources/Icon.png" >/dev/null
-                  # Extension large icon (shown in Safari Extensions preferences)
-                  LARGE_DIR="xcode/AutoconsentSafari/AutoconsentSafari/Assets.xcassets/LargeIcon.imageset"
-                  sips -z 512 512 "$ICON_SRC" --out "$LARGE_DIR/icon.png" >/dev/null
-                  # Update LargeIcon Contents.json to reference the file
-                  cat > "$LARGE_DIR/Contents.json" << 'CJSON'
-                  {
-                    "images": [
-                      { "idiom": "universal", "filename": "icon.png", "scale": "1x" },
-                      { "idiom": "universal", "scale": "2x" },
-                      { "idiom": "universal", "scale": "3x" }
-                    ],
-                    "info": { "author": "xcode", "version": 1 }
-                  }
-                  CJSON
-                  # Set CFBundleIconName in source Info.plist so xcodebuild picks it up
-                  /usr/libexec/PlistBuddy -c "Add :CFBundleIconName string AppIcon" \
-                    "xcode/AutoconsentSafari/AutoconsentSafari/Info.plist" 2>/dev/null || true
+                  iconutil -c icns "$ICONSET" -o "$RES_DIR/AppIcon.icns"
+
+                  # Host app window icon (the "enable extension" screen)
+                  sips -z 384 384 "$ICON_SRC" --out "$RES_DIR/Icon.png" >/dev/null
+
+                  # Add .icns to Xcode project build and set CFBundleIconFile
+                  PLIST="xcode/AutoconsentSafari/AutoconsentSafari/Info.plist"
+                  /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$PLIST" 2>/dev/null || true
 
             - name: Get version
               run: |
