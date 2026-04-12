@@ -1,1 +1,14 @@
-.claude/
+# Upstream files — don't reformat, avoids merge conflicts on sync
+AGENTS.md
+CHANGELOG.md
+ci/
+data/
+docs/api.md
+docs/rule-syntax.md
+lib/consentomatic/
+package.json
+package-lock.json
+addon/manifest.mv3.json
+addon/manifest.firefox.json
+.github/ISSUE_TEMPLATE/
+.github/PULL_REQUEST_TEMPLATE.md

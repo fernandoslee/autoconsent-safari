@@ -14,10 +14,11 @@ addon/*.js
 .vscode/
 .env
 .DS_Store
-xcode/AutoconsentSafari/AutoconsentSafari\ Extension/Resources/
+xcode/
 rules/filterlists/easylist_*.txt
 lib/filterlist-engine.ts
 data/top-1m.csv
 .superpowers/
+.claude/
 docs/superpowers/
 CLAUDE.md
