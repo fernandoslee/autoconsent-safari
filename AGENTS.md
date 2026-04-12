@@ -8,10 +8,12 @@
 **Working directory:** `~/Projects/autoconsent` (not the SMB volume — git/npm are unreliable there)
 
 **GitHub remotes:**
+
 - `origin` → `https://github.com/fernandoslee/autoconsent-safari.git` (our fork)
 - `upstream` → `https://github.com/duckduckgo/autoconsent.git` (DuckDuckGo)
 
 **Files owned by this fork** (the only files you may ever modify):
+
 ```
 addon/manifest.safari.json
 build.sh                       (Safari block appended at bottom)
@@ -25,6 +27,7 @@ xcode/                         (Xcode project — not yet generated)
 ```
 
 **Fork-modified upstream workflow files** (each has one added `if: github.repository == 'duckduckgo/autoconsent'` guard so the job is silently skipped in this fork — these workflows require DuckDuckGo-internal secrets that don't exist here):
+
 ```
 .github/workflows/release.yml          (daily cron guard on check-for-commits job)
 .github/workflows/ddg-release.yml      (guard on get_release_info + update_asana_tasks jobs)
@@ -34,6 +37,7 @@ xcode/                         (Xcode project — not yet generated)
 ```
 
 **Files that must never be modified** (any change creates upstream merge conflicts):
+
 ```
 lib/   addon/content.ts   addon/background.ts   addon/mv-compat.ts
 addon/popup.ts   addon/utils.ts   addon/devtools/   rules/
@@ -86,18 +90,18 @@ npm run prepublish    # full build: compile filterlist, build rules, bundle
 npm run watch         # auto-rebuild on changes to lib/, addon/, rules/
 ```
 
-| Command | Purpose |
-|---------|---------|
-| `npm run watch` | Auto-rebuild on changes to `lib/`, `addon/`, `rules/` (runs `prepublish` on each change) |
-| `npm run lint` | ESLint + Prettier + JSON rule schema validation |
-| `npm run lint-fix` | Auto-fix lint and formatting issues |
-| `npm run rule-syntax-check` | Validate `rules/autoconsent/*.json` against the TypeScript schema |
-| `npm run test:lib` | Unit tests (Web Test Runner) |
-| `npm run test` | All Playwright E2E tests |
-| `npm run test:webkit` | Playwright tests in WebKit only |
-| `npm run test:chrome` | Playwright tests in Chrome only |
-| `npm run build-rules` | Rebuild `rules.json`, `consentomatic.json`, `compact-rules.json` |
-| `npm run create-rule` | Scaffold a new JSON rule + test spec |
+| Command                     | Purpose                                                                                  |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| `npm run watch`             | Auto-rebuild on changes to `lib/`, `addon/`, `rules/` (runs `prepublish` on each change) |
+| `npm run lint`              | ESLint + Prettier + JSON rule schema validation                                          |
+| `npm run lint-fix`          | Auto-fix lint and formatting issues                                                      |
+| `npm run rule-syntax-check` | Validate `rules/autoconsent/*.json` against the TypeScript schema                        |
+| `npm run test:lib`          | Unit tests (Web Test Runner)                                                             |
+| `npm run test`              | All Playwright E2E tests                                                                 |
+| `npm run test:webkit`       | Playwright tests in WebKit only                                                          |
+| `npm run test:chrome`       | Playwright tests in Chrome only                                                          |
+| `npm run build-rules`       | Rebuild `rules.json`, `consentomatic.json`, `compact-rules.json`                         |
+| `npm run create-rule`       | Scaffold a new JSON rule + test spec                                                     |
 
 ## Code Style
 
@@ -111,14 +115,14 @@ JSON rules live in `rules/autoconsent/` (hand-maintained) and `rules/generated/`
 
 ```json
 {
-  "name": "example-cmp",
-  "prehideSelectors": ["#cookie-banner"],
-  "detectCmp": [{ "exists": "#cookie-banner" }],
-  "detectPopup": [{ "visible": "#cookie-banner" }],
-  "optIn": [{ "waitForThenClick": "#accept-all" }],
-  "optOut": [{ "waitForThenClick": "#reject-all" }],
-  "test": [{ "cookieContains": "consent=rejected" }],
-  "minimumRuleStepVersion": 1
+    "name": "example-cmp",
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optIn": [{ "waitForThenClick": "#accept-all" }],
+    "optOut": [{ "waitForThenClick": "#reject-all" }],
+    "test": [{ "cookieContains": "consent=rejected" }],
+    "minimumRuleStepVersion": 1
 }
 ```
 
@@ -135,6 +139,7 @@ Keep prehideSelectors **narrow** — they are applied across all matching rules 
 New step types are added to the autoconsent engine over time. `minimumRuleStepVersion` declares which version of the step format a rule requires. Clients that don't support the required version silently skip the rule, preventing failures on older app versions.
 
 **Version history:**
+
 - `1` (default) — all original step types (`exists`, `visible`, `waitFor`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, etc.)
 - `2` — added `removeClass`, `setStyle`, `addStyle`
 
@@ -142,7 +147,7 @@ New step types are added to the autoconsent engine over time. `minimumRuleStepVe
 
 ### Code-Based Rules
 
-For CMPs requiring complex  non-linear logic, CMP API interaction, or complex multi-path flows, use a TypeScript class extending `AutoConsentCMPBase` in `lib/cmps/`. Examples: `sourcepoint-frame.ts`, `onetrust.ts`, `cookiebot.ts`, `consentmanager.ts`.
+For CMPs requiring complex non-linear logic, CMP API interaction, or complex multi-path flows, use a TypeScript class extending `AutoConsentCMPBase` in `lib/cmps/`. Examples: `sourcepoint-frame.ts`, `onetrust.ts`, `cookiebot.ts`, `consentmanager.ts`.
 
 Code-based rules implement the `AutoCMP` interface: `detectCmp()`, `detectPopup()`, `optOut()`, `optIn()`, and optionally `test()`. They have access to DOM helpers like `this.click()`, `this.waitForElement()`, `this.waitForVisible()`, and `this.elementExists()`.
 
@@ -163,6 +168,7 @@ Prefer selectors in this order (most stable first):
 6. **Array selectors** for shadow DOM / iframe piercing: `["host-element", "button"]` finds `button` inside the shadow root of `host-element`. Each string in the array narrows the search scope — if an intermediate element has an open `shadowRoot`, the next selector runs inside it; if it's a same-origin iframe, the next selector runs inside its `contentDocument`. Use when a CMP renders inside shadow DOM or a same-origin iframe.
 
 When writing or reviewing selectors, also watch out for:
+
 - **Hardcoded attribute values** that are site-specific — use generic selectors in code-based rules.
 - **Over-qualified selectors** from generated rules — e.g. `div[id][name][role][aria-modal][tabindex][lang]` requiring every attribute to exist, or redundant `:nth-child(2)#some-id` where the ID alone suffices.
 
@@ -172,9 +178,9 @@ When writing or reviewing selectors, also watch out for:
 
 1. **Use a real browser** to investigate. A real browser in a computer-use subagent is **highly preferred** over Playwright or Puppeteer-based scripts — cookie popups often behave differently in headless/automated browsers.
 2. **Playwright test failures** are a secondary signal. Run the specific test:
-   ```bash
-   npx playwright test tests/sirdata.spec.ts --project webkit
-   ```
+    ```bash
+    npx playwright test tests/sirdata.spec.ts --project webkit
+    ```
 3. **Check test output** for which stage failed: `cmpDetected`, `popupFound`, `autoconsentDone`, `optOutResult`, `selfTestResult`.
 4. **Use the test extension** (`dist/addon-mv3/`) for manual debugging. Load it in Chrome, visit the site, and check the devtools panel for step-by-step logs.
 
@@ -210,18 +216,15 @@ Use `if`/`then`/`else` for region-dependent or variant-dependent flows:
 
 ```json
 {
-  "if": { "exists": "#reject-button" },
-  "then": [{ "waitForThenClick": "#reject-button" }],
-  "else": [{
-    "if": { "exists": "#manage-cookies" },
-    "then": [
-      { "waitForThenClick": "#manage-cookies" },
-      { "waitForThenClick": "#reject-all" }
-    ],
+    "if": { "exists": "#reject-button" },
+    "then": [{ "waitForThenClick": "#reject-button" }],
     "else": [
-      { "waitForThenClick": "[role='button'][title='Close']" }
+        {
+            "if": { "exists": "#manage-cookies" },
+            "then": [{ "waitForThenClick": "#manage-cookies" }, { "waitForThenClick": "#reject-all" }],
+            "else": [{ "waitForThenClick": "[role='button'][title='Close']" }]
+        }
     ]
-  }]
 }
 ```
 
@@ -231,7 +234,7 @@ Use `if`/`then`/`else` for region-dependent or variant-dependent flows:
 2. **Check if the popup is from a third-party CMP provider** (e.g. OneTrust, Cookiebot, Sourcepoint). If so, prefer extending or fixing the existing generic rule rather than creating a site-specific one.
 3. Fill in `detectCmp`, `detectPopup`, `optOut`, `optIn` with stable selectors. Do **not** use `{ "wait": N }` steps in `detectCmp` or `detectPopup` — detection must be fast and non-blocking (the engine retries automatically).
 4. Add a `test` array — prefer `cookieContains` when the CMP stores consent in cookies.
-   - JSON rules can also use `{ "eval": "SNIPPET_NAME" }` steps to execute predefined JavaScript snippets from `lib/eval-snippets.ts`. Useful for calling CMP APIs (e.g., `window.Cookiebot`, `__cmp('getCMPData')`) in detection, opt-out, or test phases. Each snippet is a named function that returns a boolean. New snippets must be added to `lib/eval-snippets.ts` and referenced by name in the rule JSON.
+    - JSON rules can also use `{ "eval": "SNIPPET_NAME" }` steps to execute predefined JavaScript snippets from `lib/eval-snippets.ts`. Useful for calling CMP APIs (e.g., `window.Cookiebot`, `__cmp('getCMPData')`) in detection, opt-out, or test phases. Each snippet is a named function that returns a boolean. New snippets must be added to `lib/eval-snippets.ts` and referenced by name in the rule JSON.
 5. **Always create or update the corresponding test spec** in `tests/`.
 6. **Cross-check other rules** — search for the same selectors or CMP provider name across `rules/autoconsent/` and `rules/generated/` to see if other rules need the same change or already cover this CMP.
 7. Use `data/coverage.json` to find example sites for testing. It contains per-CMP, per-region URLs: `{ "CmpName": { "REGION": { "exampleSites": [...] } } }`.
@@ -241,6 +244,7 @@ Use `if`/`then`/`else` for region-dependent or variant-dependent flows:
 ### When Generated Rules Need Fixes
 
 Generated rules (`rules/generated/auto_XX_domain_hash.json`) are created by a crawler and often have:
+
 - Deep `nth-child` chains that break on layout changes
 - Dynamic IDs from UI frameworks
 - Long body class lists
@@ -261,21 +265,25 @@ A popup should use a **click-based rule** (the default) if it has a reject/decli
 Hiding a popup can break the page if the CMP also locks scrolling or adds overlays. Watch for:
 
 **Scroll lock via CSS class:** `body` or `html` gets a class like `no-scroll`, `modal-open`, `overflow-hidden`. Fix with:
+
 ```json
 { "removeClass": "no-scroll", "selector": "body" }
 ```
 
 **Scroll lock via inline style:** `body.style.overflow = "hidden"`. Fix with:
+
 ```json
 { "addStyle": "overflow: auto !important", "selector": "body" }
 ```
 
 **Overlay preventing clicks:** A `position: fixed` div with high z-index covers the page. Fix by hiding it:
+
 ```json
 { "hide": "#overlay-selector" }
 ```
 
 **Body position lock:** `body.style.position = "fixed"` with `top: -XXpx`. Fix with:
+
 ```json
 { "setStyle": "", "selector": "body" }
 ```
@@ -284,16 +292,13 @@ Hiding a popup can break the page if the CMP also locks scrolling or adds overla
 
 ```json
 {
-  "name": "example-cosmetic",
-  "cosmetic": true,
-  "prehideSelectors": ["#cookie-banner"],
-  "detectCmp": [{ "exists": "#cookie-banner" }],
-  "detectPopup": [{ "visible": "#cookie-banner" }],
-  "optOut": [
-    { "hide": "#cookie-banner" },
-    { "removeClass": "no-scroll", "selector": "body", "optional": true }
-  ],
-  "optIn": [{ "waitForThenClick": "#accept-button" }]
+    "name": "example-cosmetic",
+    "cosmetic": true,
+    "prehideSelectors": ["#cookie-banner"],
+    "detectCmp": [{ "exists": "#cookie-banner" }],
+    "detectPopup": [{ "visible": "#cookie-banner" }],
+    "optOut": [{ "hide": "#cookie-banner" }, { "removeClass": "no-scroll", "selector": "body", "optional": true }],
+    "optIn": [{ "waitForThenClick": "#accept-button" }]
 }
 ```
 
@@ -306,6 +311,7 @@ When investigating a site where cookie popup handling is broken or missing:
 ### Step 1: Check Current State
 
 Load the bundled extension in Chrome (`dist/addon-mv3/` after `npm run prepublish`), visit the site, and check the devtools panel for autoconsent logs. Determine whether:
+
 - An existing rule matched but failed (which stage? `detectCmp`, `detectPopup`, `optOut`?)
 - No rule matched at all
 
@@ -365,8 +371,8 @@ Test specs support `skipRegions` and `onlyRegions` to control when tests run:
 
 ```typescript
 generateCMPTests('Sirdata', ['https://gizmodo.com/'], {
-    skipRegions: ['US'],   // skip test in these regions
-    onlyRegions: [],       // only run in these regions
+    skipRegions: ['US'], // skip test in these regions
+    onlyRegions: [], // only run in these regions
 });
 ```
 
@@ -407,9 +413,9 @@ E2E tests hit live sites and are inherently flaky due to site changes, regional 
 
 ## Verification
 
-| Step | Command |
-|------|---------|
-| Schema + formatting | `npm run lint` |
-| Unit tests | `npm run test:lib` |
+| Step                | Command                                                    |
+| ------------------- | ---------------------------------------------------------- |
+| Schema + formatting | `npm run lint`                                             |
+| Unit tests          | `npm run test:lib`                                         |
 | Single CMP E2E test | `npx playwright test tests/<cmp>.spec.ts --project webkit` |
-| Full E2E suite | `npm run test` |
+| Full E2E suite      | `npm run test`                                             |
