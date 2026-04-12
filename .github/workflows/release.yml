@@ -7,6 +7,7 @@ on:
 
 jobs:
     check-for-commits:
+        if: github.repository == 'duckduckgo/autoconsent'
         runs-on: ubuntu-latest
         outputs:
             ci_skip: ${{ steps.check_commits.outputs.ci_skip }}
