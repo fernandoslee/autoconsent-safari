@@ -12,6 +12,7 @@ on:
 
 jobs:
     sync:
+        if: github.repository == 'duckduckgo/autoconsent'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3

@@ -75,6 +75,7 @@ jobs:
     # Retrieve the corresponding Release data from the GitHub API
     # ------------------------------------------------------------------------------
     get_release_info:
+        if: github.repository == 'duckduckgo/autoconsent'
         uses: ./.github/workflows/get-release-info.yml
         with:
             tag_name: ${{ inputs.tag_name }}
@@ -384,7 +385,7 @@ jobs:
         runs-on: ubuntu-latest
         # Always run this final step, even if any of the updates have failed
         # unless the previous jobs were cancelled
-        if: ${{ always() && !contains(needs.*.result, 'cancelled') }}
+        if: ${{ always() && github.repository == 'duckduckgo/autoconsent' && !contains(needs.*.result, 'cancelled') }}
         needs: [create_asana_tasks, update_android, update_apple, update_windows, update_extension]
         steps:
             # --- Setup ---

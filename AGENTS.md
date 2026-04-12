@@ -24,6 +24,15 @@ CLAUDE.md
 xcode/                         (Xcode project — not yet generated)
 ```
 
+**Fork-modified upstream workflow files** (each has one added `if: github.repository == 'duckduckgo/autoconsent'` guard so the job is silently skipped in this fork — these workflows require DuckDuckGo-internal secrets that don't exist here):
+```
+.github/workflows/release.yml          (daily cron guard on check-for-commits job)
+.github/workflows/ddg-release.yml      (guard on get_release_info + update_asana_tasks jobs)
+.github/workflows/asana-sync.yml       (guard on sync job)
+.github/workflows/pr-opened.yml        (guard on process-asana-tasks job)
+.github/workflows/pr-merged.yml        (guard combined with existing merged check)
+```
+
 **Files that must never be modified** (any change creates upstream merge conflicts):
 ```
 lib/   addon/content.ts   addon/background.ts   addon/mv-compat.ts
