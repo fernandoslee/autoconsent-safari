@@ -4,12 +4,14 @@ This is a private fork of [duckduckgo/autoconsent](https://github.com/duckduckgo
 
 ## What this fork adds
 
-Four files were added or modified on top of upstream. Everything else is byte-for-byte identical to upstream and must stay that way.
+Eight files were added or modified on top of upstream. Everything else is byte-for-byte identical to upstream and must stay that way.
 
 | File | Change | Purpose |
 |---|---|---|
 | `addon/manifest.safari.json` | New | Safari 16.4+ manifest (see differences below) |
-| `build.sh` | +10 lines appended | Produces `dist/addon-safari/` |
+| `addon/popup.safari.html` | New | Safari popup UI (Apple HIG design, light/dark/system themes) |
+| `addon/popup.safari.js` | New | Safari popup extras (theme switching, tooltips, reset behaviour) |
+| `build.sh` | +~20 lines appended | Produces `dist/addon-safari/` |
 | `update_version.js` | +1 line | Stamps `manifest.safari.json` on `npm version` |
 | `.gitignore` | +1 line | Excludes `xcode/.../Resources/` (rebuilt in CI) |
 | `.github/workflows/upstream-sync.yml` | New | Daily sync from upstream |
