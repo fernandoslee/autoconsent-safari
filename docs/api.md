@@ -1,7 +1,6 @@
 # API
 
 ## Content script
-
 Most of autoconsent logic is contained in a content script that should be injected into every page. However, the high-level orchestration is controlled externally by a background service worker (in case of a web extension), or a native browser integration. Autoconsent sends and receives messages to the background worker using provided callables which mimic postMessage API:
 
 ```typescript

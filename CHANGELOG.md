@@ -335,7 +335,7 @@
 - add rule for raspberrypi.com [#1127](https://github.com/duckduckgo/autoconsent/pull/1127) ([@muodov](https://github.com/muodov))
 - Fix false positive on x [#1125](https://github.com/duckduckgo/autoconsent/pull/1125) ([@muodov](https://github.com/muodov))
 - Sirdata multi-click [#1123](https://github.com/duckduckgo/autoconsent/pull/1123) ([@muodov](https://github.com/muodov))
-- Add rule for chatgpt [#1122](https://github.com/duckduckgo/autoconsent/pull/1122) ([@muodov](https://github.com/muodov))
+- Add  rule for chatgpt [#1122](https://github.com/duckduckgo/autoconsent/pull/1122) ([@muodov](https://github.com/muodov))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1138](https://github.com/duckduckgo/autoconsent/pull/1138) ([@daxtheduck](https://github.com/daxtheduck))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1137](https://github.com/duckduckgo/autoconsent/pull/1137) ([@daxtheduck](https://github.com/daxtheduck))
 - 🤖 Add autoconsent rules for 1 sites (0 need review) [#1136](https://github.com/duckduckgo/autoconsent/pull/1136) ([@daxtheduck](https://github.com/daxtheduck))
@@ -1088,6 +1088,8 @@
 ---
 
 # v14.13.1 (Fri Aug 15 2025)
+
+
 
 ---
 
