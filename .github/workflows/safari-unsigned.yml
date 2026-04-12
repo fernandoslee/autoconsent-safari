@@ -98,15 +98,12 @@ jobs:
                   gh release delete latest --yes 2>/dev/null || true
                   git push origin :refs/tags/latest 2>/dev/null || true
 
-                  gh release create latest \
-                    --prerelease \
-                    --title "Latest unsigned build (${{ env.VERSION }})" \
-                    --notes "$(cat <<'EOF'
-                  Unsigned build of Autoconsent ${{ env.VERSION }} for Safari. No Apple Developer account required.
+                  cat > "$RUNNER_TEMP/release-notes.md" <<EOF
+                  Unsigned build of Autoconsent $VERSION for Safari. No Apple Developer account required.
 
                   ## Install
 
-                  1. Download **AutoconsentSafari-${{ env.VERSION }}-unsigned.zip** below and unzip it
+                  1. Download **AutoconsentSafari-${VERSION}-unsigned.zip** below and unzip it
                   2. Remove the macOS quarantine flag:
                      \`\`\`bash
                      xattr -cr AutoconsentSafari.app
@@ -118,7 +115,11 @@ jobs:
                   That's it. The extension will now automatically dismiss cookie consent popups.
 
                   ---
-                  Built from [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) ${{ env.VERSION }}.
+                  Built from [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) $VERSION.
                   EOF
-                  )" \
-                    "$RUNNER_TEMP/AutoconsentSafari-${{ env.VERSION }}-unsigned.zip"
+
+                  gh release create latest \
+                    --prerelease \
+                    --title "Latest unsigned build ($VERSION)" \
+                    --notes-file "$RUNNER_TEMP/release-notes.md" \
+                    "$RUNNER_TEMP/AutoconsentSafari-${VERSION}-unsigned.zip"
