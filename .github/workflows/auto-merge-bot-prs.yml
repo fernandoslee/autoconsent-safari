@@ -1,0 +1,52 @@
+name: Auto-merge safe bot PRs
+
+# Triggers after the Validate workflow (lint + test:lib) completes.
+# Merges the PR that triggered it only if ALL THREE hold:
+#   1. Author is github-actions[bot]
+#   2. Branch starts with create-pull-request/ (peter-evans action default — filterlist PRs)
+#   3. Has the "dependencies" label
+#
+# This deliberately excludes upstream-sync conflict PRs (branch upstream-sync/*)
+# which require manual resolution.
+
+on:
+  workflow_run:
+    workflows: ["Validate"]
+    types: [completed]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Merge eligible bot PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          PR_JSON=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --head "$HEAD_BRANCH" \
+            --state open \
+            --json number,author,labels,headRefName,headRefOid)
+
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r --arg sha "$HEAD_SHA" '
+            .[] |
+            select(
+              .author.login == "github-actions[bot]" and
+              (.headRefName | startswith("create-pull-request/")) and
+              (.labels | map(.name) | contains(["dependencies"])) and
+              .headRefOid == $sha
+            ) | .number')
+
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No eligible bot PR for SHA $HEAD_SHA on $HEAD_BRANCH — skipping."
+            exit 0
+          fi
+
+          echo "Merging PR #$PR_NUMBER"
+          gh pr merge "$PR_NUMBER" --squash --repo "$GITHUB_REPOSITORY"
