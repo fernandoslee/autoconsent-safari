@@ -1,15 +1,9 @@
 name: Safari Build
 
 on:
-    push:
-        branches: [main]
-        paths:
-            # Only run when something that affects the Safari bundle changes
-            - 'addon/**'
-            - 'lib/**'
-            - 'rules/**'
-            - 'build.sh'
-            - 'xcode/**'
+    # Push trigger removed until Apple signing secrets are configured.
+    # Re-add the push block below once APPLE_CERTIFICATE_BASE64 and
+    # related secrets are set in repository settings.
     workflow_dispatch:
         inputs:
             reason:
@@ -64,6 +58,10 @@ jobs:
 
             - name: Fix bundle identifier prefix
               run: |
+                  # Extension first (more specific), then app — both need quoting for the hyphen
+                  sed -i '' \
+                    's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari.Extension;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari.Extension";/g' \
+                    xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
                   sed -i '' \
                     's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
                     xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj

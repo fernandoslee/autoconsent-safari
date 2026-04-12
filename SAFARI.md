@@ -6,24 +6,24 @@ This is a private fork of [duckduckgo/autoconsent](https://github.com/duckduckgo
 
 Eight files were added or modified on top of upstream. Everything else is byte-for-byte identical to upstream and must stay that way.
 
-| File | Change | Purpose |
-|---|---|---|
-| `addon/manifest.safari.json` | New | Safari 16.4+ manifest (see differences below) |
-| `addon/popup.safari.html` | New | Safari popup UI (Apple HIG design, light/dark/system themes) |
-| `addon/popup.safari.js` | New | Safari popup extras (theme switching, tooltips, reset behaviour) |
-| `build.sh` | +~20 lines appended | Produces `dist/addon-safari/` |
-| `update_version.js` | +1 line | Stamps `manifest.safari.json` on `npm version` |
-| `.gitignore` | +1 line | Excludes `xcode/.../Resources/` (rebuilt in CI) |
-| `.github/workflows/upstream-sync.yml` | New | Daily sync from upstream |
-| `.github/workflows/safari-build.yml` | New | Builds notarized `.dmg` on macOS runner |
+| File                                  | Change              | Purpose                                                          |
+| ------------------------------------- | ------------------- | ---------------------------------------------------------------- |
+| `addon/manifest.safari.json`          | New                 | Safari 16.4+ manifest (see differences below)                    |
+| `addon/popup.safari.html`             | New                 | Safari popup UI (Apple HIG design, light/dark/system themes)     |
+| `addon/popup.safari.js`               | New                 | Safari popup extras (theme switching, tooltips, reset behaviour) |
+| `build.sh`                            | +~20 lines appended | Produces `dist/addon-safari/`                                    |
+| `update_version.js`                   | +1 line             | Stamps `manifest.safari.json` on `npm version`                   |
+| `.gitignore`                          | +1 line             | Excludes `xcode/.../Resources/` (rebuilt in CI)                  |
+| `.github/workflows/upstream-sync.yml` | New                 | Daily sync from upstream                                         |
+| `.github/workflows/safari-build.yml`  | New                 | Builds notarized `.dmg` on macOS runner                          |
 
 ### Why `manifest.safari.json` differs from `manifest.firefox.json`
 
-| Removed key | Reason |
-|---|---|
+| Removed key                      | Reason                                                                                   |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
 | `match_origin_as_fallback: true` | Safari ignores it; Apple's manifest validator warns — remove to avoid App Store friction |
-| `devtools_page` | Safari has no `chrome.devtools.*` API |
-| `browsingData` permission | Not supported until Safari 17; removing it widens target to Safari 16.4+ |
+| `devtools_page`                  | Safari has no `chrome.devtools.*` API                                                    |
+| `browsingData` permission        | Not supported until Safari 17; removing it widens target to Safari 16.4+                 |
 
 ### Why the JS source is unchanged
 
@@ -85,6 +85,7 @@ open xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj
 ```
 
 In Xcode:
+
 - **Signing & Capabilities** on both targets: set Team to your Apple ID (free account works for local builds)
 - **Deployment Target**: set minimum macOS to **13.0** on both targets
 
@@ -122,15 +123,15 @@ The `.github/workflows/safari-build.yml` workflow produces a signed, notarized `
 
 ### Required GitHub Actions secrets
 
-| Secret | Value |
-|---|---|
-| `SYNC_PAT` | GitHub PAT with `repo` + `workflow` scope |
-| `APPLE_CERTIFICATE_BASE64` | `base64 -i "Developer ID Application.p12"` |
-| `APPLE_CERTIFICATE_PASSWORD` | .p12 export password |
-| `APPLE_TEAM_ID` | 10-character Apple Team ID |
-| `APPLE_APP_STORE_CONNECT_API_KEY_ID` | For notarization |
-| `APPLE_APP_STORE_CONNECT_API_KEY_ISSUER` | Issuer UUID |
-| `APPLE_APP_STORE_CONNECT_API_KEY_B64` | base64-encoded `.p8` private key |
+| Secret                                   | Value                                      |
+| ---------------------------------------- | ------------------------------------------ |
+| `SYNC_PAT`                               | GitHub PAT with `repo` + `workflow` scope  |
+| `APPLE_CERTIFICATE_BASE64`               | `base64 -i "Developer ID Application.p12"` |
+| `APPLE_CERTIFICATE_PASSWORD`             | .p12 export password                       |
+| `APPLE_TEAM_ID`                          | 10-character Apple Team ID                 |
+| `APPLE_APP_STORE_CONNECT_API_KEY_ID`     | For notarization                           |
+| `APPLE_APP_STORE_CONNECT_API_KEY_ISSUER` | Issuer UUID                                |
+| `APPLE_APP_STORE_CONNECT_API_KEY_B64`    | base64-encoded `.p8` private key           |
 
 An Apple Developer Program membership ($99/year) is required for signing and notarization. Local builds and testing work without it.
 

@@ -53,6 +53,10 @@ jobs:
 
             - name: Fix bundle identifier prefix
               run: |
+                  # Extension first (more specific), then app — both need quoting for the hyphen
+                  sed -i '' \
+                    's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari.Extension;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari.Extension";/g' \
+                    xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
                   sed -i '' \
                     's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
                     xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj

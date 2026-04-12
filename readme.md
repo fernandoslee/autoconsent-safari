@@ -29,13 +29,13 @@ Building from source means you compile the code yourself, so you know exactly wh
 
 ### Requirements
 
-| Dependency | Version | Notes |
-|---|---|---|
-| macOS | 13.0+ (Ventura) | |
-| Safari | 16.4+ | MV3 extension support |
-| Xcode | 15+ | Free from the Mac App Store (~7 GB) |
-| Node.js | LTS (18+) | [nodejs.org](https://nodejs.org) or `brew install node` |
-| npm | 9+ | Bundled with Node.js |
+| Dependency | Version         | Notes                                                   |
+| ---------- | --------------- | ------------------------------------------------------- |
+| macOS      | 13.0+ (Ventura) |                                                         |
+| Safari     | 16.4+           | MV3 extension support                                   |
+| Xcode      | 15+             | Free from the Mac App Store (~7 GB)                     |
+| Node.js    | LTS (18+)       | [nodejs.org](https://nodejs.org) or `brew install node` |
+| npm        | 9+              | Bundled with Node.js                                    |
 
 ### Automated setup (recommended)
 
@@ -200,9 +200,9 @@ Rules are decoupled from the app binary and update automatically — no app rein
 
 A lightweight content script (`rules-updater.js`) runs once per 24 hours in the background while you browse normally. It fetches the latest `compact-rules.json` and `rules.json` directly from this repository via the [jsDelivr CDN](https://www.jsdelivr.com/) and writes them into the extension's local storage. On the next page load, the updated rules are active.
 
-| Component | How it updates |
-|---|---|
-| Rules (285+ CMPs) | Automatically, once per 24 h — no action needed |
+| Component          | How it updates                                   |
+| ------------------ | ------------------------------------------------ |
+| Rules (285+ CMPs)  | Automatically, once per 24 h — no action needed  |
 | Engine (JS bundle) | Requires downloading a new release or rebuilding |
 
 The engine (the code that interprets and executes rules) changes infrequently — only when DuckDuckGo modifies the detection or opt-out logic. Rules change weekly as new CMPs are added or existing ones are fixed.
@@ -215,17 +215,17 @@ The engine (the code that interprets and executes rules) changes infrequently �
 
 ## Current state & known limitations
 
-| Area | Status |
-|---|---|
-| GDPR cookie banners | Working — covers all major CMPs |
-| US-only popups (CCPA) | Partial — depends on the CMP |
-| Sites with no reject button | Handled via cosmetic (hide) rules |
-| Sites with no matching rule | Left untouched |
-| Rules | Auto-update every 24 h — no reinstall needed |
-| Engine | Requires new release or rebuild to update |
-| Unsigned local build | Working — Safari shows a one-time warning |
-| Signed/notarized build | Not available — requires Apple Developer account |
-| App Store distribution | Not planned |
+| Area                        | Status                                           |
+| --------------------------- | ------------------------------------------------ |
+| GDPR cookie banners         | Working — covers all major CMPs                  |
+| US-only popups (CCPA)       | Partial — depends on the CMP                     |
+| Sites with no reject button | Handled via cosmetic (hide) rules                |
+| Sites with no matching rule | Left untouched                                   |
+| Rules                       | Auto-update every 24 h — no reinstall needed     |
+| Engine                      | Requires new release or rebuild to update        |
+| Unsigned local build        | Working — Safari shows a one-time warning        |
+| Signed/notarized build      | Not available — requires Apple Developer account |
+| App Store distribution      | Not planned                                      |
 
 ---
 
@@ -242,16 +242,16 @@ This fork tracks [duckduckgo/autoconsent](https://github.com/duckduckgo/autocons
 
 Eight files differ from upstream:
 
-| File | Change |
-|---|---|
-| `addon/manifest.safari.json` | New — Safari MV3 manifest (no `browsingData`, no `devtools_page`) |
-| `addon/popup.safari.html` | New — Safari popup UI (Apple HIG design, light/dark/system themes) |
-| `addon/popup.safari.js` | New — Safari popup extras (theme switching, tooltips, reset behaviour) |
-| `build.sh` | +~20 lines appended — produces `dist/addon-safari/` |
-| `update_version.js` | +1 line — stamps `manifest.safari.json` on `npm version` |
-| `.gitignore` | +1 line — excludes `xcode/.../Resources/` (rebuilt by Xcode) |
-| `.github/workflows/upstream-sync.yml` | New — daily upstream sync |
-| `.github/workflows/safari-build.yml` | New — CI unsigned build + release |
+| File                                  | Change                                                                 |
+| ------------------------------------- | ---------------------------------------------------------------------- |
+| `addon/manifest.safari.json`          | New — Safari MV3 manifest (no `browsingData`, no `devtools_page`)      |
+| `addon/popup.safari.html`             | New — Safari popup UI (Apple HIG design, light/dark/system themes)     |
+| `addon/popup.safari.js`               | New — Safari popup extras (theme switching, tooltips, reset behaviour) |
+| `build.sh`                            | +~20 lines appended — produces `dist/addon-safari/`                    |
+| `update_version.js`                   | +1 line — stamps `manifest.safari.json` on `npm version`               |
+| `.gitignore`                          | +1 line — excludes `xcode/.../Resources/` (rebuilt by Xcode)           |
+| `.github/workflows/upstream-sync.yml` | New — daily upstream sync                                              |
+| `.github/workflows/safari-build.yml`  | New — CI unsigned build + release                                      |
 
 Everything else is byte-for-byte identical to upstream.
 

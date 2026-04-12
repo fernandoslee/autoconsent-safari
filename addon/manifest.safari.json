@@ -1,45 +1,29 @@
 {
-  "manifest_version": 3,
-  "name": "Autoconsent",
-  "description": "Automatically opt out of cookie consent popups.",
-  "version": "2026.3.31",
-  "background": {
-    "service_worker": "background.bundle.js"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "content.bundle.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true
+    "manifest_version": 3,
+    "name": "Autoconsent",
+    "description": "Automatically opt out of cookie consent popups.",
+    "version": "2026.3.31",
+    "background": {
+        "service_worker": "background.bundle.js"
     },
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "rules-updater.js"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["content.bundle.js"],
+            "run_at": "document_start",
+            "all_frames": true
+        },
+        {
+            "matches": ["*://*/*"],
+            "js": ["rules-updater.js"],
+            "run_at": "document_idle",
+            "all_frames": false
+        }
+    ],
+    "host_permissions": ["*://*/*"],
+    "permissions": ["cookies", "tabs", "scripting", "storage", "webNavigation"],
+    "action": {
+        "default_title": "Autoconsent",
+        "default_popup": "popup.html"
     }
-  ],
-  "host_permissions": [
-    "*://*/*"
-  ],
-  "permissions": [
-    "cookies",
-    "tabs",
-    "scripting",
-    "storage",
-    "webNavigation"
-  ],
-  "action": {
-    "default_title": "Autoconsent",
-    "default_popup": "popup.html"
-  }
 }
