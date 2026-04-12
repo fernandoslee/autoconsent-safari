@@ -13,6 +13,8 @@ When you visit a website with a cookie consent popup, the extension silently cli
 
 Sites with no reject option get their popup hidden via cosmetic rules. Sites with no matching rule are left untouched.
 
+<img src="docs/popup-screenshot.png" alt="Autoconsent popup" width="200" />
+
 ---
 
 ## Installation options
