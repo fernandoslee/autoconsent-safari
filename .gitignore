@@ -19,3 +19,4 @@ rules/filterlists/easylist_*.txt
 lib/filterlist-engine.ts
 data/top-1m.csv
 .superpowers/
+docs/superpowers/
