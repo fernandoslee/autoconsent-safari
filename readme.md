@@ -2,7 +2,8 @@
 
 A Safari extension that automatically opts out of cookie consent popups. This is an unofficial, personal fork of [duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent) that adds a Safari distribution target.
 
-> **This project is provided as-is, with no warranties or guarantees of any kind. Use at your own risk.**
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![Upstream sync](https://github.com/fernandoslee/autoconsent-safari/actions/workflows/upstream-sync.yml/badge.svg)](https://github.com/fernandoslee/autoconsent-safari/actions/workflows/upstream-sync.yml)
 
 ---
 
@@ -237,14 +238,18 @@ This fork tracks [duckduckgo/autoconsent](https://github.com/duckduckgo/autocons
 
 ## Fork structure
 
-Only four files differ from upstream:
+Eight files differ from upstream:
 
 | File | Change |
 |---|---|
-| `addon/manifest.safari.json` | Safari-specific manifest (no `browsingData`, no `devtools_page`) |
-| `build.sh` | +10 lines appended — produces `dist/addon-safari/` |
+| `addon/manifest.safari.json` | New — Safari MV3 manifest (no `browsingData`, no `devtools_page`) |
+| `addon/popup.safari.html` | New — Safari popup UI (Apple HIG design, light/dark/system themes) |
+| `addon/popup.safari.js` | New — Safari popup extras (theme switching, tooltips, reset behaviour) |
+| `build.sh` | +~20 lines appended — produces `dist/addon-safari/` |
 | `update_version.js` | +1 line — stamps `manifest.safari.json` on `npm version` |
 | `.gitignore` | +1 line — excludes `xcode/.../Resources/` (rebuilt by Xcode) |
+| `.github/workflows/upstream-sync.yml` | New — daily upstream sync |
+| `.github/workflows/safari-build.yml` | New — CI unsigned build + release |
 
 Everything else is byte-for-byte identical to upstream.
 
