@@ -61,27 +61,12 @@ jobs:
                     's/PRODUCT_BUNDLE_IDENTIFIER = com.yourorg.AutoconsentSafari;/PRODUCT_BUNDLE_IDENTIFIER = "com.yourorg.autoconsent-safari";/g' \
                     xcode/AutoconsentSafari/AutoconsentSafari.xcodeproj/project.pbxproj
 
-            - name: Inject icons into Xcode project (before build)
+            - name: Inject host app window icon (before build)
               run: |
                   ICON_SRC="addon/icons/app-icon-1024.png"
-                  RES_DIR="xcode/AutoconsentSafari/AutoconsentSafari/Resources"
-
-                  # Generate .icns from source PNG
-                  ICONSET="$RUNNER_TEMP/AppIcon.iconset"
-                  mkdir -p "$ICONSET"
-                  for size in 16 32 128 256 512; do
-                    sips -z $size $size "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}.png" >/dev/null
-                    double=$((size * 2))
-                    sips -z $double $double "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}@2x.png" >/dev/null
-                  done
-                  iconutil -c icns "$ICONSET" -o "$RES_DIR/AppIcon.icns"
-
-                  # Host app window icon (the "enable extension" screen)
-                  sips -z 384 384 "$ICON_SRC" --out "$RES_DIR/Icon.png" >/dev/null
-
-                  # Add .icns to Xcode project build and set CFBundleIconFile
-                  PLIST="xcode/AutoconsentSafari/AutoconsentSafari/Info.plist"
-                  /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$PLIST" 2>/dev/null || true
+                  # Replace the "enable extension" screen icon
+                  sips -z 384 384 "$ICON_SRC" --out \
+                    "xcode/AutoconsentSafari/AutoconsentSafari/Resources/Icon.png" >/dev/null
 
             - name: Get version
               run: |
@@ -97,6 +82,24 @@ jobs:
                     CODE_SIGN_IDENTITY="-" \
                     CODE_SIGNING_REQUIRED=NO \
                     -quiet
+
+            - name: Inject app icon (post-build)
+              run: |
+                  APP=$(find ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug \
+                    -name "AutoconsentSafari.app" | head -1)
+                  ICON_SRC="addon/icons/app-icon-1024.png"
+                  ICONSET="$RUNNER_TEMP/AppIcon.iconset"
+                  mkdir -p "$ICONSET"
+                  for size in 16 32 128 256 512; do
+                    sips -z $size $size "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}.png" >/dev/null
+                    double=$((size * 2))
+                    sips -z $double $double "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}@2x.png" >/dev/null
+                  done
+                  iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
+                  /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$APP/Contents/Info.plist" 2>/dev/null \
+                    || /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile AppIcon" "$APP/Contents/Info.plist"
+                  # Re-sign ONLY the outer app — no --deep, preserves extension signature
+                  codesign --force --sign - "$APP"
 
             - name: Zip app
               run: |
