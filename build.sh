@@ -35,58 +35,40 @@ cp addon/manifest.mv3.json dist/addon-mv3/manifest.json
 cp addon/manifest.firefox.json dist/addon-firefox/manifest.json
 cp node_modules/bulma/css/bulma.min.css dist/addon-mv3/devtools/
 
-## Safari build target
-mkdir -p dist/addon-safari
-cp dist/addon-mv3/background.bundle.js dist/addon-safari/
-cp dist/addon-mv3/content.bundle.js    dist/addon-safari/
-cp dist/addon-mv3/popup.bundle.js      dist/addon-safari/
-cp -r addon/icons                      dist/addon-safari/
-cp rules/rules.json                    dist/addon-safari/
-cp rules/compact-rules.json            dist/addon-safari/
+# ── Safari ────────────────────────────────────────────────────────────────────
+cp -r dist/addon-mv3 dist/addon-safari
+cp addon/manifest.safari.json dist/addon-safari/manifest.json
+cp addon/popup.safari.html dist/addon-safari/popup.safari.html
+cp addon/popup.safari.js dist/addon-safari/popup.safari.js
+rm -rf dist/addon-safari/devtools
+
+# Safari rules-updater: fetches latest rules from CDN every 24 hours
 node -e "
-const fs = require('fs');
-const f = 'dist/addon-safari/compact-rules.json';
-const d = JSON.parse(fs.readFileSync(f, 'utf8'));
-d.generated_at = new Date().toISOString();
-fs.writeFileSync(f, JSON.stringify(d));
-"
-cp addon/popup.safari.html             dist/addon-safari/popup.html
-cp addon/popup.safari.js               dist/addon-safari/popup.safari.js
-cp addon/manifest.safari.json          dist/addon-safari/manifest.json
-# devtools/ intentionally omitted — Safari has no chrome.devtools API
-
-## Generate rules auto-updater content script (Safari only)
-## Runs once per 24 h in the top frame; fetches compact-rules.json and
-## rules.json from the CDN and writes them into chrome.storage.local so
-## rule updates reach users without a full app rebuild.
-cat > dist/addon-safari/rules-updater.js << 'ENDOFSCRIPT'
-(async () => {
-  const COMPACT_URL =
-    "https://cdn.jsdelivr.net/gh/fernandoslee/autoconsent-safari@main/rules/compact-rules.json";
-  const FULL_URL =
-    "https://cdn.jsdelivr.net/gh/fernandoslee/autoconsent-safari@main/rules/rules.json";
-  const INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
-
-  try {
-    const { rules_checked_at: last = 0 } =
-      await chrome.storage.local.get("rules_checked_at");
-
-    if (Date.now() - last < INTERVAL_MS) return;
-
-    // Stamp before fetching so parallel tabs don't also trigger a fetch
-    await chrome.storage.local.set({ rules_checked_at: Date.now() });
-
-    const [cr, fr] = await Promise.all([fetch(COMPACT_URL), fetch(FULL_URL)]);
-    if (!cr.ok || !fr.ok) return;
-
-    const [compact, full] = await Promise.all([cr.json(), fr.json()]);
-
-    await chrome.storage.local.set({
-      rules: compact,
-      fullRules: full.autoconsent,
-    });
-  } catch (_) {
-    // Silent fail — bundled rules remain in use
+const code = \`
+(function() {
+  const CDN = 'https://cdn.jsdelivr.net/npm/@nicedishy/nicedishy-autoconsent-rules@latest';
+  const INTERVAL = 24 * 60 * 60 * 1000;
+  async function update() {
+    try {
+      const [rules, compact] = await Promise.all([
+        fetch(CDN + '/rules.json').then(r => r.json()),
+        fetch(CDN + '/compact-rules.json').then(r => r.json()),
+      ]);
+      const data = { rules, compact, generated_at: new Date().toISOString() };
+      chrome.storage.local.set({ rules: data });
+    } catch (e) { /* silent */ }
   }
+  chrome.runtime.onInstalled.addListener(() => update());
+  setInterval(update, INTERVAL);
+  // Also update when the service worker wakes up (if stale)
+  chrome.storage.local.get('rules', (result) => {
+    if (!result.rules || !result.rules.generated_at) return update();
+    const age = Date.now() - new Date(result.rules.generated_at).getTime();
+    if (age > INTERVAL) update();
+  });
 })();
-ENDOFSCRIPT
+\`;
+require('fs').writeFileSync('dist/addon-safari/rules-updater.js', code);
+"
+
+echo '  Safari → dist/addon-safari/'

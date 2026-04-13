@@ -10,14 +10,14 @@ rules/consentomatic.json
 rules/compact-rules.json
 lib/**/*.js
 addon/*.js
-!addon/popup.safari.js
 .vscode/
 .env
 .DS_Store
-xcode/
 rules/filterlists/easylist_*.txt
 lib/filterlist-engine.ts
 data/top-1m.csv
+!addon/popup.safari.js
+xcode/
 .superpowers/
 .claude/
 docs/superpowers/
