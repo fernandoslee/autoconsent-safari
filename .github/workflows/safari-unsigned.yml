@@ -83,23 +83,8 @@ jobs:
                     CODE_SIGNING_REQUIRED=NO \
                     -quiet
 
-            - name: Inject app icon (post-build)
-              run: |
-                  APP=$(find ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug \
-                    -name "AutoconsentSafari.app" | head -1)
-                  ICON_SRC="addon/icons/app-icon-1024.png"
-                  ICONSET="$RUNNER_TEMP/AppIcon.iconset"
-                  mkdir -p "$ICONSET"
-                  for size in 16 32 128 256 512; do
-                    sips -z $size $size "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}.png" >/dev/null
-                    double=$((size * 2))
-                    sips -z $double $double "$ICON_SRC" --out "$ICONSET/icon_${size}x${size}@2x.png" >/dev/null
-                  done
-                  iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
-                  /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$APP/Contents/Info.plist" 2>/dev/null \
-                    || /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile AppIcon" "$APP/Contents/Info.plist"
-                  # Re-sign ONLY the outer app — no --deep, preserves extension signature
-                  codesign --force --sign - "$APP"
+            # NOTE: app icon injection removed — post-build codesign breaks Safari
+            # extension loading. Will revisit once signed builds are enabled.
 
             - name: Zip app
               run: |
