@@ -47,4 +47,10 @@ rm -rf dist/addon-safari/devtools
 sed -i.bak 's/chrome\.storage\.session/chrome.storage.local/g' dist/addon-safari/background.bundle.js
 rm -f dist/addon-safari/background.bundle.js.bak
 
+# Safari: loadRules() is only called from onInstalled, which doesn't reliably
+# fire for unsigned extensions. Inject a fallback that loads rules on every
+# service worker startup.
+sed -i.bak 's/})();$/loadRules();initConfig();})();/' dist/addon-safari/background.bundle.js
+rm -f dist/addon-safari/background.bundle.js.bak
+
 echo '  Safari → dist/addon-safari/'
