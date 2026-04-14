@@ -10,4 +10,8 @@ function updateVersion(manifestFile) {
 
 updateVersion('./addon/manifest.mv3.json');
 updateVersion('./addon/manifest.firefox.json');
-fs.writeFileSync(path.join(__dirname, 'addon', 'manifest.safari.json'), JSON.stringify({...JSON.parse(fs.readFileSync(path.join(__dirname, 'addon', 'manifest.safari.json'), 'utf8')), version: v}, null, 4) + '\n');
+fs.writeFileSync(
+    path.join(__dirname, 'addon', 'manifest.safari.json'),
+    JSON.stringify({ ...JSON.parse(fs.readFileSync(path.join(__dirname, 'addon', 'manifest.safari.json'), 'utf8')), version: v }, null, 4) +
+        '\n',
+);

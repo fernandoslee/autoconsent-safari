@@ -36,39 +36,15 @@ cp addon/manifest.firefox.json dist/addon-firefox/manifest.json
 cp node_modules/bulma/css/bulma.min.css dist/addon-mv3/devtools/
 
 # ── Safari ────────────────────────────────────────────────────────────────────
+rm -rf dist/addon-safari
 cp -r dist/addon-mv3 dist/addon-safari
 cp addon/manifest.safari.json dist/addon-safari/manifest.json
 cp addon/popup.safari.html dist/addon-safari/popup.safari.html
 cp addon/popup.safari.js dist/addon-safari/popup.safari.js
 rm -rf dist/addon-safari/devtools
 
-# Safari rules-updater: fetches latest rules from CDN every 24 hours
-node -e "
-const code = \`
-(function() {
-  const CDN = 'https://cdn.jsdelivr.net/npm/@nicedishy/nicedishy-autoconsent-rules@latest';
-  const INTERVAL = 24 * 60 * 60 * 1000;
-  async function update() {
-    try {
-      const [rules, compact] = await Promise.all([
-        fetch(CDN + '/rules.json').then(r => r.json()),
-        fetch(CDN + '/compact-rules.json').then(r => r.json()),
-      ]);
-      const data = { rules, compact, generated_at: new Date().toISOString() };
-      chrome.storage.local.set({ rules: data });
-    } catch (e) { /* silent */ }
-  }
-  chrome.runtime.onInstalled.addListener(() => update());
-  setInterval(update, INTERVAL);
-  // Also update when the service worker wakes up (if stale)
-  chrome.storage.local.get('rules', (result) => {
-    if (!result.rules || !result.rules.generated_at) return update();
-    const age = Date.now() - new Date(result.rules.generated_at).getTime();
-    if (age > INTERVAL) update();
-  });
-})();
-\`;
-require('fs').writeFileSync('dist/addon-safari/rules-updater.js', code);
-"
+# Safari doesn't support chrome.storage.session — patch to use chrome.storage.local
+sed -i.bak 's/chrome\.storage\.session/chrome.storage.local/g' dist/addon-safari/background.bundle.js
+rm -f dist/addon-safari/background.bundle.js.bak
 
 echo '  Safari → dist/addon-safari/'

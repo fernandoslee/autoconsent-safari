@@ -12,12 +12,6 @@
             "js": ["content.bundle.js"],
             "run_at": "document_start",
             "all_frames": true
-        },
-        {
-            "matches": ["*://*/*"],
-            "js": ["rules-updater.js"],
-            "run_at": "document_idle",
-            "all_frames": false
         }
     ],
     "host_permissions": ["*://*/*"],
