@@ -1,3 +1,20 @@
+# v14.72.0 (Fri Apr 17 2026)
+
+#### 🚀 Enhancement
+
+- cookieconsent2: add fallback opt-out for sites without reject-all button [#1289](https://github.com/duckduckgo/autoconsent/pull/1289) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### 📝 Documentation
+
+- docs: improve Puppeteer integration guide [#1253](https://github.com/duckduckgo/autoconsent/pull/1253) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.71.0 (Tue Apr 14 2026)
 
 #### 🚀 Enhancement
