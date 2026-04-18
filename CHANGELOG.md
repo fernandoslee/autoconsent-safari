@@ -1,3 +1,15 @@
+# v14.73.0 (Sat Apr 18 2026)
+
+#### 🚀 Enhancement
+
+- Remove redundant generated rules [#1227](https://github.com/duckduckgo/autoconsent/pull/1227) ([@muodov](https://github.com/muodov))
+
+#### Authors: 1
+
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.72.0 (Fri Apr 17 2026)
 
 #### 🚀 Enhancement
