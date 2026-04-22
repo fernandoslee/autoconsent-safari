@@ -1,3 +1,16 @@
+# v14.74.0 (Wed Apr 22 2026)
+
+#### 🚀 Enhancement
+
+- Fix Sourcepoint opt-out on carwow.co.uk [#1318](https://github.com/duckduckgo/autoconsent/pull/1318) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.73.0 (Sat Apr 18 2026)
 
 #### 🚀 Enhancement
