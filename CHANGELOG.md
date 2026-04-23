@@ -1,3 +1,15 @@
+# v14.75.0 (Thu Apr 23 2026)
+
+#### 🚀 Enhancement
+
+- Bump the adblocker group across 1 directory with 2 updates [#1221](https://github.com/duckduckgo/autoconsent/pull/1221) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 1
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+
+---
+
 # v14.74.0 (Wed Apr 22 2026)
 
 #### 🚀 Enhancement
