@@ -1,3 +1,16 @@
+# v14.77.0 (Tue May 05 2026)
+
+#### 🚀 Enhancement
+
+- Add rule for Kickstarter custom consent modal [#1330](https://github.com/duckduckgo/autoconsent/pull/1330) ([@cursoragent](https://github.com/cursoragent) [@muodov](https://github.com/muodov))
+
+#### Authors: 2
+
+- Cursor Agent ([@cursoragent](https://github.com/cursoragent))
+- Maxim Tsoy ([@muodov](https://github.com/muodov))
+
+---
+
 # v14.76.0 (Sat May 02 2026)
 
 #### 🚀 Enhancement
