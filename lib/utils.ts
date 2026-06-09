@@ -78,6 +78,7 @@ export function normalizeConfig(providedConfig: any): Config {
         enableGeneratedRules: true,
         enableHeuristicDetection: false,
         enableHeuristicAction: false,
+        enablePopupMutationObserver: false,
         detectRetries: 20,
         isMainWorld: false,
         prehideTimeout: 2000,
@@ -92,6 +93,7 @@ export function normalizeConfig(providedConfig: any): Config {
             messages: false,
             waits: false,
         },
+        performanceLoggingEnabled: false,
     };
     const updatedConfig: Config = copyObject(defaultConfig);
     // filter out any unknown entries
