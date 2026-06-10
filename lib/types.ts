@@ -65,6 +65,7 @@ export type Config = {
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
     enableHeuristicAction: boolean;
+    enablePopupMutationObserver: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
@@ -75,6 +76,7 @@ export type Config = {
         messages: boolean;
         waits: boolean;
     };
+    performanceLoggingEnabled: boolean;
 };
 
 export type LifecycleState =
@@ -108,6 +110,7 @@ export type ConsentState = {
     clicks: number; // Number of clicks the script has made.
     startTime: number; // The time the script started.
     endTime: number; // The time the script ended.
+    performance?: Record<string, number[]>;
 };
 
 export interface ButtonData {
