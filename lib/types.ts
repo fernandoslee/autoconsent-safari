@@ -65,6 +65,7 @@ export type Config = {
     enableFilterList: boolean;
     enableHeuristicDetection: boolean;
     enableHeuristicAction: boolean;
+    enablePopupMutationObserver: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
@@ -75,6 +76,9 @@ export type Config = {
         messages: boolean;
         waits: boolean;
     };
+    performanceLoggingEnabled: boolean;
+    heuristicPopupSearchTimeout: number;
+    heuristicMode: PopupHandlingMode; // controls the behavior of the heuristic popup detection. Has no effect if enableHeuristicDetection is false.
 };
 
 export type LifecycleState =
@@ -108,17 +112,35 @@ export type ConsentState = {
     clicks: number; // Number of clicks the script has made.
     startTime: number; // The time the script started.
     endTime: number; // The time the script ended.
+    performance?: Record<string, number[]>;
 };
+
+export type ButtonRegexClassification = 'reject' | 'settings' | 'accept' | 'acknowledge' | 'other';
 
 export interface ButtonData {
     text: string;
     element: HTMLElement;
+    regexClassification?: ButtonRegexClassification;
 }
 
 export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    rejectButtons?: ButtonData[];
-    otherButtons?: ButtonData[];
+    regexClassification?: PopupHandlingMode;
 }
+
+/**
+ * Controls the behavior of the heuristic popup detection.
+ *  - Reject: Will click the reject button on a popup if it exists.
+ *  - Tier1: Will also click the acknowledge button on a popup if it exists, and no Reject button exists.
+ *  - Tier2: Will also click the accept button on a popup if it exists, and no Reject or Acknowledge button exists.
+ *  - None: Disabled
+ */
+export const PopupHandlingModes = {
+    None: -1,
+    Reject: 0,
+    Tier1: 1,
+    Tier2: 2,
+} as const;
+export type PopupHandlingMode = (typeof PopupHandlingModes)[keyof typeof PopupHandlingModes];
