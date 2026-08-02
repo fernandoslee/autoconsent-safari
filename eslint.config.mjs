@@ -8,7 +8,11 @@ const c = tseslint.config(
     ...ddgConfig,
 
     {
+<<<<<<< HEAD
         ignores: ['lib/consentomatic/**/*', 'dist/**/*', 'xcode/**/*'],
+=======
+        ignores: ['dist/**/*', '.agents/**/*'],
+>>>>>>> upstream/main
     },
 
     {
