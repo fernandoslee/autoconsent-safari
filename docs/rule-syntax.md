@@ -154,6 +154,18 @@ Set the inline style of the elements matched by the `selector`. `style-string` i
 ```
 Append the inline style of the elements matched by the `selector`. `style-string` is a string of CSS properties and values. The style is appended to the existing inline style, separated by a semicolon.
 
+## Stylesheet
+
+```javascript
+{
+  "stylesheet": "css-rule-string",
+  "stylesheetId": "unique-marker"
+}
+```
+Append a CSS rule (e.g. `".overlay { display: none !important; }"`) to the style element injected by autoconsent. Unlike `setStyle`/`addStyle`, which modify inline styles of currently matched elements, an appended stylesheet rule keeps applying to elements matched later — useful when the page re-adds classes or inline styles after the opt-out (e.g. scroll locks reapplied on back/forward navigation).
+
+The optional `stylesheetId` is a marker used to prevent duplicate inserts when the rule runs multiple times; if omitted, the CSS rule text itself is used for deduplication.
+
 ## Cookie match
 ```javascript
 {
@@ -225,23 +237,6 @@ Sometimes the opt-out process requires actions that span across multiple pages o
 
 Some rules do not interact with the page, and only hide the cookie pop-ups with CSS. These rules are marked with the `cosmetic: true` flag. They are useful for pop-ups that do not provide a Reject button. Cosmetic rules can be disabled with the `enableCosmeticRules` config option.
 
-### Filterlist
-Autoconsent supports cosmetic filters in common ABP/uBO format. For performance reasons, it needs to be bundled at build time. At the moment we include cosmetic filters from [Easylist Cookie](https://github.com/easylist/easylist/tree/master/easylist_cookie).
-Note that by default filterlist rules are not included, as this significantly increases the resulting bundle size. To use filterlist rules, you need to explicitly import the "extra" version of the library (`@duckduckgo/autoconsent/extra`), and set the `enableFilterlist` config option to `true`.
-
-```javascript
-// import the library version with bundled filterlist rules
-import AutoConsent from '@duckduckgo/autoconsent/extra'
-
-// ...
-
-new AutoConsent({
-  enableFilterlist: true,
-  // other options
-})
-
-```
-
 ## Context filters
 
 By default, rules will be executed in all top-level documents. Some rules are designed for specific contexts (e.g. only nested iframes, or only specific URLs). This can be configured in `runContext` field (see [runContext](#rule-syntax-reference) above).
@@ -258,11 +253,13 @@ The `minimumRuleStepVersion` field solves this: clients compare the rule's decla
 |---------|-----------------|
 | 1 | All original step types (`exists`, `visible`, `waitFor`, `waitForVisible`, `click`, `waitForThenClick`, `wait`, `hide`, `if`/`then`/`else`, `any`, `eval`, `cookieContains`, `negated`) |
 | 2 | `removeClass`, `setStyle`, `addStyle` |
+| 3 | `stylesheet` |
 
 ### When to set it
 
 - If a rule only uses version-1 step types, omit the field (defaults to `1`).
 - If a rule uses `removeClass`, `setStyle`, or `addStyle`, set `"minimumRuleStepVersion": 2`.
+- If a rule uses `stylesheet`, set `"minimumRuleStepVersion": 3`.
 - When a future version introduces new step types, any rule using them must set `minimumRuleStepVersion` to the corresponding version number.
 
 ### Adding new step types
