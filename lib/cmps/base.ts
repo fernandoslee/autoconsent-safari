@@ -1,4 +1,4 @@
-import { AutoCMP, DomActionsProvider, PopupData } from '../types';
+import { AutoCMP, DomActionsProvider, HeuristicLevel, PopupData } from '../types';
 import { AutoConsentCMPRule, AutoConsentRuleStep, ElementSelector, HideMethod, RunContext, VisibilityCheck } from '../rules';
 import { requestEval } from '../eval-handler';
 import AutoConsent from '../web';
@@ -180,12 +180,12 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
         return this.autoconsent.domActions.waitForVisible(selector, timeout, check);
     }
 
-    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean) {
+    async waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean, retries?: number, retryInterval?: number) {
         if (this.autoconsent.config.visualTest) {
             await this.highlightElements(this.elementSelector(selector), all);
         }
         this.autoconsent.updateState({ clicks: this.autoconsent.state.clicks + 1 });
-        return this.autoconsent.domActions.waitForThenClick(selector, timeout, all);
+        return this.autoconsent.domActions.waitForThenClick(selector, timeout, all, retries, retryInterval);
     }
 
     wait(ms: number) {
@@ -194,6 +194,10 @@ export default class AutoConsentCMPBase implements AutoCMP, DomActionsProvider {
 
     hide(selector: string, method?: HideMethod) {
         return this.autoconsent.domActions.hide(selector, method);
+    }
+
+    stylesheet(cssRule: string, stylesheetId?: string) {
+        return this.autoconsent.domActions.stylesheet(cssRule, stylesheetId);
     }
 
     removeClass(selector: ElementSelector, className: string) {
@@ -332,13 +336,16 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
             results.push(this.click(rule.click, rule.all));
         }
         if (rule.waitForThenClick) {
-            results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all));
+            results.push(this.waitForThenClick(rule.waitForThenClick, rule.timeout, rule.all, rule.retry, rule.retryInterval));
         }
         if (rule.wait) {
             results.push(this.wait(rule.wait));
         }
         if (rule.hide) {
             results.push(this.hide(rule.hide, rule.method));
+        }
+        if (rule.stylesheet !== undefined) {
+            results.push(this.stylesheet(rule.stylesheet, rule.stylesheetId));
         }
         if (rule.removeClass !== undefined) {
             results.push(rule.selector ? this.removeClass(rule.selector, rule.removeClass) : false);
@@ -419,14 +426,16 @@ export class AutoConsentCMP extends AutoConsentCMPBase {
 
 export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     popups: PopupData[] = [];
+    mode: HeuristicLevel;
 
-    constructor(autoconsentInstance: AutoConsent) {
+    constructor(autoconsentInstance: AutoConsent, mode: HeuristicLevel = 'reject') {
         super(autoconsentInstance);
         this.name = 'HEURISTIC';
         this.runContext = {
             main: true,
             frame: false, // do not run in iframes for security reasons
         } as RunContext;
+        this.mode = mode;
     }
 
     get hasSelfTest(): boolean {
@@ -441,9 +450,17 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
         return false;
     }
 
-    detectCmp(): Promise<boolean> {
-        this.popups = getActionablePopups();
+    async detectCmp(): Promise<boolean> {
+        // wait for one tick to deprioritize heavy DOM operations
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorStart');
+        this.popups = getActionablePopups(this.mode, this.autoconsent.config.heuristicPopupSearchTimeout);
+        this.autoconsent.config.performanceLoggingEnabled && performance.mark('heuristicDetectorEnd');
+        this.autoconsent.config.performanceLoggingEnabled &&
+            performance.measure('heuristicDetector', 'heuristicDetectorStart', 'heuristicDetectorEnd');
+
         if (this.popups.length > 0) {
+            this.name = `HEURISTIC-${this.popups[0].regexClassification?.toUpperCase()}`;
             return Promise.resolve(true);
         }
         return Promise.resolve(false);
@@ -451,17 +468,25 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
 
     async detectPopup() {
         if (this.popups.length > 0) {
-            if (this.popups.length > 1 || (this.popups[0].rejectButtons && this.popups[0].rejectButtons.length > 1)) {
-                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple reject buttons');
+            if (this.popups.length > 1) {
+                this.autoconsent.config.logs.errors && console.warn('Heuristic found multiple popups');
             }
             return true;
         }
         return false;
     }
 
+    getTargetButton() {
+        const popup = this.popups[0];
+        const level = popup.regexClassification;
+        const buttons = popup.buttons;
+        const targetButtonType = level === 'reject' ? 'reject' : level === 'tier1' ? 'acknowledge' : 'accept';
+        return buttons.find((button) => button.regexClassification === targetButtonType);
+    }
+
     optOut(): Promise<boolean> {
         // use only the first found popup candidate
-        const button = this.popups[0]?.rejectButtons?.[0];
+        const button = this.getTargetButton();
         if (button) {
             return this.clickElement(button.element);
         }
@@ -477,7 +502,7 @@ export class AutoConsentHeuristicCMP extends AutoConsentCMPBase {
     }
 
     async test(): Promise<boolean> {
-        const button = this.popups[0].rejectButtons?.[0];
+        const button = this.getTargetButton();
         if (button) {
             await this.wait(500);
             return !isElementVisible(button.element);
