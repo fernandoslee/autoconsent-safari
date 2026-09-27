@@ -7,9 +7,21 @@ A Safari extension that automatically opts out of cookie consent popups. This is
 
 ---
 
+<<<<<<< HEAD
 ## What it does
 
 When you visit a website with a cookie consent popup, the extension silently clicks "Reject all" (or equivalent) for you. It covers 285+ Consent Management Providers (CMPs) — OneTrust, Sourcepoint, Cookiebot, and hundreds of others — plus thousands of site-specific rules maintained by the DuckDuckGo team.
+=======
+```javascript
+import AutoConsent from '@duckduckgo/autoconsent';
+import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
+
+const autoconsent = new AutoConsent(
+    chrome.runtime.sendMessage, // provide a callback to send messages to the background script
+    null, // optionally provide a config object here if you don't want to implement a background script
+    { autoconsent },
+);
+>>>>>>> upstream/main
 
 Sites with no reject option get their popup hidden via cosmetic rules. Sites with no matching rule are left untouched.
 
@@ -108,11 +120,19 @@ xcodebuild build \
   CODE_SIGNING_REQUIRED=NO
 ```
 
+<<<<<<< HEAD
 **7. Open the app to register the extension**
 
 ```bash
 open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
+=======
+There are currently two ways of implementing a CMP:
+
+ 1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
+ 1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
+ rulesets allow.
+>>>>>>> upstream/main
 
 **8. Enable in Safari**
 
