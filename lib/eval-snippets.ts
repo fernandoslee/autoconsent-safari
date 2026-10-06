@@ -22,11 +22,24 @@ export const snippets = {
         const disabled = window.Didomi?.getUserConsentStatusForAll?.()?.purposes?.disabled;
         return Array.isArray(disabled) && disabled.length > 0;
     },
-    EVAL_CONSENTMANAGER_1: () => window.__cmp && typeof __cmp('getCMPData') === 'object',
-    EVAL_CONSENTMANAGER_2: () => !__cmp('consentStatus').userChoiceExists,
+    EVAL_CONSENTMANAGER_1: () => {
+        const cmpData = window.__cmp?.('getCMPData');
+        return !!cmpData && typeof cmpData === 'object';
+    },
+    EVAL_CONSENTMANAGER_2: () => window.__cmp?.('consentStatus')?.userChoiceExists === false,
     EVAL_CONSENTMANAGER_3: () => __cmp('setConsent', 0),
     EVAL_CONSENTMANAGER_4: () => __cmp('setConsent', 1),
     EVAL_CONSENTMANAGER_5: () => __cmp('consentStatus').userChoiceExists,
+    EVAL_CONSENTMANAGER_NCMP_REJECT: () => {
+        if (typeof window.__npcmp !== 'function') return false;
+        window.__npcmp('reject');
+        return true;
+    },
+    EVAL_CONSENTMANAGER_NCMP_ACCEPT: () => {
+        if (typeof window.__npcmp !== 'function') return false;
+        window.__npcmp('save');
+        return true;
+    },
     EVAL_COOKIEBOT_1: () => !!window.Cookiebot,
     EVAL_COOKIEBOT_2: () => !window.Cookiebot.hasResponse && window.Cookiebot.dialog?.visible === true,
     EVAL_COOKIEBOT_3: () => window.Cookiebot.withdraw() || true,
@@ -82,6 +95,7 @@ export const snippets = {
     // declarative rules
     EVAL_ADOPT_TEST: () => !!localStorage.getItem('adoptConsentMode'),
     EVAL_ADULTFRIENDFINDER_TEST: () => !!localStorage.getItem('cookieConsent'),
+    EVAL_AYLO_COOKIE_MANAGER_READY: () => !!(window.wl_cookie_consent_manager || window._Cookie_Consent_Manager_brand),
     EVAL_BAHN_TEST: () => utag.gdpr.getSelectedCategories().length === 1,
     EVAL_BIGCOMMERCE_CONSENT_MANAGER_DETECT: () => !!(window.consentManager && window.consentManager.version),
     EVAL_BORLABS_0: () =>
@@ -145,6 +159,7 @@ export const snippets = {
             if (x.checked) x.click();
         }) || true,
     EVAL_IUBENDA_1: () => !!document.cookie.match(/_iub_cs-\d+=/),
+    EVAL_KROWN_COOKIE_BANNER_TEST: () => localStorage.getItem('krown-cookie-banner') === 'true',
     EVAL_MICROSOFT_0: () =>
         Array.from(document.querySelectorAll('div > button'))
             .filter((el) => el.innerText.match('Reject|Ablehnen'))[0]
@@ -189,6 +204,26 @@ export const snippets = {
     EVAL_SIRDATA_UNBLOCK_SCROLL: () => {
         document.documentElement.classList.forEach((cls) => {
             if (cls.startsWith('sd-cmp-')) document.documentElement.classList.remove(cls);
+        });
+        return true;
+    },
+    EVAL_SOURCEPOINT_RESTORE_SCROLL: () => {
+        // Sourcepoint scrolls back to this saved position when it unlocks; we unlock instead, so restore and clear it
+        const root = document.documentElement;
+        const saved = root.dataset.previousScrollY;
+        if (saved && saved !== 'null') {
+            root.dataset.previousScrollY = 'null';
+            const y = -parseInt(saved, 10);
+            if (y > 0 && window.scrollY === 0) {
+                const behavior = root.style.scrollBehavior;
+                root.style.scrollBehavior = 'auto';
+                window.scrollTo(0, y);
+                root.style.scrollBehavior = behavior;
+            }
+        }
+        // Sourcepoint re-locks after a bfcache restore, which autoconsent does not re-run for
+        window.addEventListener('pagehide', () => {
+            if (root.dataset.previousScrollY) root.dataset.previousScrollY = 'null';
         });
         return true;
     },

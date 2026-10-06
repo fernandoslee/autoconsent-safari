@@ -7,9 +7,21 @@ A Safari extension that automatically opts out of cookie consent popups. This is
 
 ---
 
+<<<<<<< HEAD
 ## What it does
 
 When you visit a website with a cookie consent popup, the extension silently clicks "Reject all" (or equivalent) for you. It covers 285+ Consent Management Providers (CMPs) — OneTrust, Sourcepoint, Cookiebot, and hundreds of others — plus thousands of site-specific rules maintained by the DuckDuckGo team.
+=======
+```javascript
+import AutoConsent from '@duckduckgo/autoconsent';
+import { autoconsent } from '@duckduckgo/autoconsent/rules/rules.json';
+
+const autoconsent = new AutoConsent(
+    chrome.runtime.sendMessage, // provide a callback to send messages to the background script
+    null, // optionally provide a config object here if you don't want to implement a background script
+    { autoconsent },
+);
+>>>>>>> upstream/main
 
 Sites with no reject option get their popup hidden via cosmetic rules. Sites with no matching rule are left untouched.
 
@@ -108,11 +120,19 @@ xcodebuild build \
   CODE_SIGNING_REQUIRED=NO
 ```
 
+<<<<<<< HEAD
 **7. Open the app to register the extension**
 
 ```bash
 open ~/Library/Developer/Xcode/DerivedData/AutoconsentSafari-*/Build/Products/Debug/AutoconsentSafari.app
 ```
+=======
+There are currently two ways of implementing a CMP:
+
+ 1. As a [JSON ruleset](./rules/autoconsent/), intepreted by the `AutoConsent` class.
+ 1. As a class implementing the `AutoCMP` interface. This enables more complex logic than the linear AutoConsent
+ rulesets allow.
+>>>>>>> upstream/main
 
 **8. Enable in Safari**
 
@@ -260,6 +280,16 @@ Everything else is byte-for-byte identical to upstream.
 ## Disclaimer
 
 This project is not affiliated with or endorsed by DuckDuckGo. It is an independent personal fork maintained on a best-effort basis, provided as-is with no warranties, guarantees, or support obligations. The upstream project ([duckduckgo/autoconsent](https://github.com/duckduckgo/autoconsent)) is the authoritative source for rules and engine updates.
+
+## AI agent setup
+
+The agent skills in `.agents/skills/` need a few environment variables.
+
+1. Copy the contents from [`.claude/user-settings.json.TEMPLATE`](.claude/user-settings.json.TEMPLATE) to your user settings (e.g. `~/.claude/settings.json`), in addition to your existing config. If your settings already have an `env` block, merge the entries into it: a second `env` key would silently override the first.
+2. Replace the values in the template. Proxy values must be complete URLs with an `http://`, `https://`, or `socks5://` scheme, and without embedded credentials. `REGIONAL_PROXY_USERNAME` and `REGIONAL_PROXY_PASSWORD` are optional: they are only used for `https://` proxies, so remove them if your proxies don't need authentication. `OXYLABS_USER` and `OXYLABS_PASSWORD` are optional too: they enable the `oxylabs-testing` skill for sites that show our proxies a bot wall, so remove them if you don't have an Oxylabs account.
+3. Start a new Claude Code session: settings are only read at startup.
+
+For other agents or plain shell use, `export` the same variables in your shell profile instead.
 
 ## License
 
