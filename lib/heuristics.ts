@@ -1,107 +1,54 @@
-import { DETECT_PATTERNS, NEVER_MATCH_PATTERNS, REJECT_PATTERNS } from './heuristic-patterns';
-import { ButtonData, PopupData } from './types';
+import { checkHeuristicPatterns, classifyButtons, classifyPopup, isExcludedPopup } from './heuristic-classify';
+import { ButtonData, HeuristicLevel, PopupClassification, PopupData } from './types';
 import { isElementVisible, isTopFrame } from './utils';
 
 const BUTTON_LIKE_ELEMENT_SELECTOR = 'button, input[type="button"], input[type="submit"], a, [role="button"], [class*="button"]';
-const TEXT_LIMIT = 100000;
+const POPUP_SEARCH_MAX_TIME = 100;
 
-export function checkHeuristicPatterns(allText: string, detectPatterns = DETECT_PATTERNS) {
-    allText = allText.slice(0, TEXT_LIMIT);
-    const patterns = [];
-    const snippets = [];
-
-    for (const p of detectPatterns) {
-        const matches = allText?.match(p);
-        if (matches) {
-            patterns.push(p.toString());
-            snippets.push(...matches.map((m) => m.substring(0, 200)));
-        }
+export function getActionablePopups(mode: HeuristicLevel = 'reject', timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
+    const acceptedLevels: PopupClassification[] =
+        mode === 'tier2' ? ['reject', 'tier1', 'tier2'] : mode === 'tier1' ? ['reject', 'tier1'] : ['reject'];
+    if (acceptedLevels.length === 0) {
+        return [];
     }
-    return { patterns, snippets };
-}
-
-export function getActionablePopups(): PopupData[] {
-    const popups = getPotentialPopups();
+    const popups = getPotentialPopups(timeout);
     const result = popups.reduce((acc, popup) => {
         const popupText = popup.text?.trim();
         if (popupText) {
+            if (isExcludedPopup(popupText)) {
+                return acc;
+            }
             const { patterns } = checkHeuristicPatterns(popupText);
             if (patterns.length > 0) {
-                const { rejectButtons, otherButtons } = classifyButtons(popup.buttons);
-                if (rejectButtons.length > 0) {
-                    acc.push({
-                        ...popup,
-                        rejectButtons,
-                        otherButtons,
-                    });
-                }
+                classifyButtons(popup.buttons);
+                popup.regexClassification = classifyPopup(popup.buttons);
+                acc.push({
+                    ...popup,
+                });
             }
         }
         return acc;
     }, [] as PopupData[]);
-    return result;
+    // popups filtered by mode and sorted so a popup with reject will always win.
+    return result
+        .filter((popup) => popup.regexClassification !== undefined && acceptedLevels.includes(popup.regexClassification))
+        .sort((a, b) => ((a.regexClassification ?? '') > (b.regexClassification ?? '') ? 1 : -1));
 }
 
-export function classifyButtons(buttons: ButtonData[]): { rejectButtons: ButtonData[]; otherButtons: ButtonData[] } {
-    const rejectButtons = [];
-    const otherButtons = [];
-    for (const button of buttons) {
-        if (isRejectButton(button.text)) {
-            rejectButtons.push(button);
-        } else {
-            otherButtons.push(button);
-        }
-    }
-    return {
-        rejectButtons,
-        otherButtons,
-    };
-}
-
-export function isRejectButton(buttonText: string, rejectPatterns = REJECT_PATTERNS, neverMatchPatterns = NEVER_MATCH_PATTERNS): boolean {
-    if (!buttonText) {
-        return false;
-    }
-    const cleanedButtonText = cleanButtonText(buttonText);
-    return (
-        !neverMatchPatterns.some((p) => p.test(cleanedButtonText)) &&
-        rejectPatterns.some((p) => (p instanceof RegExp && p.test(cleanedButtonText)) || p === cleanedButtonText)
-    );
-}
-
-export function cleanButtonText(buttonText: string): string {
-    // lowercase
-    let result = buttonText.toLowerCase();
-    // remove special characters
-    result = result.replace(/[“”"'/#&[\]→✕×⟩❯><✗×‘’›«»]+/g, '');
-    // remove emojis
-    result = result.replace(
-        /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u2600-\u26FF\u2700-\u27BF\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu,
-        '',
-    );
-    // remove newlines
-    result = result.replace(/\n+/g, ' ');
-    // remove multiple spaces
-    result = result.replace(/\s+/g, ' ');
-    // strip whitespace around the text
-    result = result.trim();
-    return result;
-}
-
-function getPotentialPopups() {
+export function getPotentialPopups(timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     const isFramed = !isTopFrame();
     // do not inspect frames that are more than one level deep
     if (isFramed && window.parent && window.parent !== window.top) {
         return [];
     }
 
-    return collectPotentialPopups(isFramed);
+    return collectPotentialPopups(isFramed, timeout);
 }
 
-function collectPotentialPopups(isFramed: boolean): PopupData[] {
+function collectPotentialPopups(isFramed: boolean, timeout = POPUP_SEARCH_MAX_TIME): PopupData[] {
     let elements = [];
     if (!isFramed) {
-        elements = getPopupLikeElements();
+        elements = getPopupLikeElements(timeout);
     } else {
         // for iframes, just take the whole document
         const doc = document.body || document.documentElement;
@@ -140,7 +87,8 @@ export function isDialogLikeElement(node: HTMLElement): boolean {
  * Heuristic to get all elements that look like "popups"
  * TODO: this heuristic is too strict, not all popups are actually sticky/fixed
  */
-function getPopupLikeElements(): HTMLElement[] {
+function getPopupLikeElements(timeout = POPUP_SEARCH_MAX_TIME): HTMLElement[] {
+    const startTime = performance.now();
     const walker = document.createTreeWalker(
         document.documentElement,
         NodeFilter.SHOW_ELEMENT, // visit only element nodes
@@ -158,16 +106,20 @@ function getPopupLikeElements(): HTMLElement[] {
                         return NodeFilter.FILTER_ACCEPT;
                     }
                 }
+                // start rejecting after POPUP_SEARCH_MAX_TIME to avoid blocking the main thread
+                if (performance.now() - startTime > timeout) {
+                    return NodeFilter.FILTER_REJECT;
+                }
                 return NodeFilter.FILTER_SKIP;
             },
         },
     );
-
     const found = [];
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
         found.push(node as HTMLElement);
     }
-    return excludeContainers(found);
+    // Empty positioned children should not displace a contentful popup container.
+    return excludeContainers(found.filter((element) => element.innerText?.trim()));
 }
 
 /**
