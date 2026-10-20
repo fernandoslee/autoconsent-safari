@@ -1,7 +1,7 @@
 import { ContentScriptMessage } from './messages';
-import { ConsentOMaticConfig } from './cmps/consentomatic';
 import { AutoConsentCMPRule, ElementSelector, HideMethod, RunContext, VisibilityCheck } from './rules';
 import { CompactCMPRuleset } from './encoding';
+import type { ButtonRegexClassification, ClassifiableButton, PopupClassification } from './heuristic-classify';
 
 export type MessageSender = (message: ContentScriptMessage) => Promise<void>;
 
@@ -30,7 +30,13 @@ export interface DomActionsProvider {
     elementVisible(selector: ElementSelector, check: VisibilityCheck): boolean;
     waitForElement(selector: ElementSelector, timeout?: number): Promise<boolean>;
     waitForVisible(selector: ElementSelector, timeout?: number, check?: VisibilityCheck): Promise<boolean>;
-    waitForThenClick(selector: ElementSelector, timeout?: number, all?: boolean): Promise<boolean>;
+    waitForThenClick(
+        selector: ElementSelector,
+        timeout?: number,
+        all?: boolean,
+        retries?: number,
+        retryInterval?: number,
+    ): Promise<boolean>;
     wait(ms: number): Promise<true>;
     hide(selector: string, method: HideMethod): boolean;
     removeClass(selector: ElementSelector, className: string): boolean;
@@ -47,7 +53,6 @@ export interface DomActionsProvider {
 export type RuleBundle = {
     autoconsent: AutoConsentCMPRule[];
     compact?: CompactCMPRuleset;
-    consentomatic?: { [name: string]: ConsentOMaticConfig };
 };
 
 export type AutoAction = 'optOut' | 'optIn' | null;
@@ -62,9 +67,8 @@ export type Config = {
     detectRetries: number;
     isMainWorld: boolean;
     prehideTimeout: number;
-    enableFilterList: boolean;
     enableHeuristicDetection: boolean;
-    enableHeuristicAction: boolean;
+    enablePopupMutationObserver: boolean;
     visualTest: boolean; // If true, the script will delay before every click action
     logs: {
         lifecycle: boolean;
@@ -75,6 +79,9 @@ export type Config = {
         messages: boolean;
         waits: boolean;
     };
+    performanceLoggingEnabled: boolean;
+    heuristicPopupSearchTimeout: number;
+    heuristicMode: HeuristicLevel; // controls the behavior of the heuristic popup detection.
 };
 
 export type LifecycleState =
@@ -83,7 +90,6 @@ export type LifecycleState =
     | 'waitingForInitResponse'
     | 'started'
     | 'nothingDetected'
-    | 'cosmeticFiltersDetected'
     | 'cmpDetected'
     | 'openPopupDetected'
     | 'runningOptOut'
@@ -95,8 +101,6 @@ export type LifecycleState =
     | 'done';
 
 export type ConsentState = {
-    cosmeticFiltersOn: boolean; // true if cosmetic filter rules are currently applied.
-    filterListReported: boolean; // true if the cosmetic filter list has been reported to the user.
     lifecycle: LifecycleState; // What point in the autoconsent lifecycle this script is at.
     prehideOn: boolean; // If the script is currently hiding preHide elements.
     findCmpAttempts: number; // Number of times we tried to find CMPs in this frame.
@@ -108,10 +112,12 @@ export type ConsentState = {
     clicks: number; // Number of clicks the script has made.
     startTime: number; // The time the script started.
     endTime: number; // The time the script ended.
+    performance?: Record<string, number[]>;
 };
 
-export interface ButtonData {
-    text: string;
+export type { ButtonRegexClassification, PopupClassification };
+
+export interface ButtonData extends ClassifiableButton {
     element: HTMLElement;
 }
 
@@ -119,6 +125,14 @@ export interface PopupData {
     text: string;
     element: HTMLElement;
     buttons: ButtonData[];
-    rejectButtons?: ButtonData[];
-    otherButtons?: ButtonData[];
+    regexClassification?: PopupClassification;
 }
+
+/**
+ * The user setting for autoconsent and heuristic detection.
+ *  - off: Heuristic detection is disabled.
+ *  - reject: Heuristic detection is enabled, and will click the reject button on a popup if it exists.
+ *  - tier1: Heuristic detection is enabled, and will click the acknowledge button on a popup if it exists, and no Reject or Settings button exists.
+ *  - tier2: Heuristic detection is enabled, and will click the accept button on a popup if it exists, and no Reject, Acknowledge, or Settings button exists.
+ */
+export type HeuristicLevel = 'off' | 'reject' | 'tier1' | 'tier2';
