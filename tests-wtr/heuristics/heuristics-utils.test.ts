@@ -2,13 +2,21 @@ import { expect } from '@esm-bundle/chai';
 import {
     checkHeuristicPatterns,
     cleanButtonText,
-    isRejectButton,
+    classifyButtonTextRegex,
     classifyButtons,
-    isDisabled,
-    excludeContainers,
-    getButtonData,
-    isDialogLikeElement,
-} from '../../lib/heuristics';
+    classifyPopup,
+    isExcludedPopup,
+} from '../../lib/heuristic-classify';
+import { getActionablePopups, isDisabled, excludeContainers, getButtonData, isDialogLikeElement } from '../../lib/heuristics';
+import { ButtonData } from '../../lib/types';
+
+function rejectButtons(buttons: ButtonData[]) {
+    return buttons.filter((b) => b.regexClassification === 'reject');
+}
+
+function nonRejectButtons(buttons: ButtonData[]) {
+    return buttons.filter((b) => b.regexClassification !== 'reject');
+}
 
 describe('checkHeuristicPatterns', () => {
     it('detects cookie-related text', () => {
@@ -38,6 +46,209 @@ describe('checkHeuristicPatterns', () => {
         expect(patterns).to.have.length(0);
         expect(snippets).to.have.length(0);
     });
+
+    it('handles non-global regex with optional capture groups without throwing', () => {
+        // Regex from heuristic-patterns.ts (Polish) that has optional capture groups and
+        // no `g` flag. `String.prototype.match` returns `undefined` entries for optional
+        // groups that did not match, which used to crash the caller with a TypeError.
+        const pattern = /(używamy|stosujemy)( są)?.{0,20} plik(i|ów|ach) cookie/i;
+        const { patterns, snippets } = checkHeuristicPatterns('Używamy plików cookie i innych technologii', [pattern]);
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets.length).to.be.greaterThan(0);
+        expect(snippets.every((s) => typeof s === 'string')).to.be.true;
+    });
+
+    it('detects essential cookie notices', () => {
+        const { patterns } = checkHeuristicPatterns('We use essential cookies for site functionality and optional cookies for analytics.');
+
+        expect(patterns.length).to.be.greaterThan(0);
+    });
+
+    it('detects website cookie experience notices', () => {
+        const { patterns, snippets } = checkHeuristicPatterns(
+            'The Algonquin College website uses cookies to enhance your browsing experience.',
+        );
+
+        expect(patterns.length).to.be.greaterThan(0);
+        expect(snippets).to.include('website uses cookies to enhance your browsing experience');
+    });
+});
+
+describe('checkHeuristicPatterns with qualifiers before "cookies"', () => {
+    it('detects "we use <qualifier> cookies" notices', () => {
+        const texts = [
+            // openrouter.ai
+            'Cookie Preferences We use essential cookies for site functionality and optional cookies for analytics.',
+            'We use optional cookies to measure traffic',
+            'We use analytics cookies and similar technologies',
+            'We serve necessary cookies only',
+            'We use Google Analytics cookies to understand which pages and tools are useful.',
+            'We use third party cookies for advertising',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not match when "cookies" is further away', () => {
+        expect(
+            checkHeuristicPatterns('We use the best chocolate in our cookies', [/we (?:use|serve)(?: \w+){0,2} cookies/gi]).patterns,
+        ).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Russian popups', () => {
+    it('detects Russian cookie notices', () => {
+        const texts = [
+            'Мы используем файлы cookie для улучшения работы сайта. Правила сайта используют технологии cookie.',
+            'Этот сайт использует cookie, чтобы вам было удобнее',
+            'Продолжая работу с сайтом, вы соглашаетесь с использованием файлов cookie',
+            'Мы используем куки, чтобы сайт работал лучше',
+            'Этот сайт использует куки-файлы',
+            'Сайт использует технологии куки. Продолжая, вы принимаете обработку файлов куки',
+            'Мы применяем файлы cookie, чтобы предложить вам лучший сервис',
+            'Сайт собирает cookie для аналитики',
+            'Сохраняем куки на вашем устройстве',
+            'На сайте установлены cookie-файлы',
+            'Оставаясь на сайте, вы соглашаетесь с политикой в отношении файлов cookie',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Russian text', () => {
+        expect(checkHeuristicPatterns('Дешевые авиабилеты онлайн и бронирование отелей').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Italian popups', () => {
+    it('detects Italian cookie notices', () => {
+        const texts = [
+            'Qualcuno ha detto… cookie? Noi e i nostri partner utilizziamo i cookie per fornirti un servizio migliore',
+            'Utilizziamo cookie tecnici e di profilazione',
+            'Questo sito utilizza i cookie per migliorare la tua esperienza',
+            'Noi e i nostri 150 partner archiviamo informazioni come i cookie',
+            'Archiviare e/o accedere a informazioni su un dispositivo',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Italian text', () => {
+        expect(
+            checkHeuristicPatterns(
+                'Noi e i nostri partner commerciali utilizziamo materiali riciclati. Il sito usa la tecnologia più moderna.',
+            ).patterns,
+        ).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Swedish popups', () => {
+    it('detects Swedish cookie notices', () => {
+        const texts = [
+            // svtplay.se
+            'Viss datahantering är nödvändig för att säkerställa att vår tjänst fungerar, vilket innebär att vi använder spårningstekniker såsom cookies.',
+            'Vi använder cookies för att förbättra din upplevelse',
+            'Webbplatsen använder kakor',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Swedish text', () => {
+        expect(checkHeuristicPatterns('Vi använder svenska råvaror i våra bullar').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Japanese popups', () => {
+    it('detects Japanese cookie notices', () => {
+        const texts = [
+            '当サイトはサービス改善のためCookieを使用しています。',
+            '当ウェブサイトではクッキーを利用しています',
+            'このサイトはクッキー（Cookie）を使用しています',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Japanese text', () => {
+        expect(checkHeuristicPatterns('全国の旧車イベント情報を集約しています').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Danish popups', () => {
+    it('detects Danish cookie notices', () => {
+        const texts = [
+            'Sundhed.dk og tredjepartstjenester bruger cookies til at forbedre brugeroplevelsen.',
+            'Vi bruger cookies for at give dig den bedste oplevelse.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Danish text', () => {
+        expect(checkHeuristicPatterns('Find information om sundhed og sygdom').patterns).to.have.length(0);
+    });
+});
+
+describe('checkHeuristicPatterns with Norwegian popups', () => {
+    it('detects Norwegian cookie notices', () => {
+        const texts = [
+            'Kan vi bruke valgfrie informasjonskapsler for å forbedre tjenestene våre?',
+            'Vi bruker informasjonskapsler for å gi deg en bedre opplevelse.',
+            'Nettstedet bruker cookies til statistikk.',
+        ];
+        for (const text of texts) {
+            expect(checkHeuristicPatterns(text).patterns.length, text).to.be.greaterThan(0);
+        }
+    });
+
+    it('does not detect unrelated Norwegian text', () => {
+        expect(checkHeuristicPatterns('Vi bruker skattemeldingen til å beregne skatten din').patterns).to.have.length(0);
+    });
+});
+
+describe('isExcludedPopup', () => {
+    it('flags doublelist-style age verification popups', () => {
+        // Real-world text from the doublelist.com age gate (listings page)
+        const text =
+            'Age verification & content rules This section may contain adult oriented material of a graphic and sexual nature, ' +
+            'and could be viewed objectionable to some persons. This material is INTENDED ONLY FOR PERSONS OVER 18 YEARS OF AGE. ' +
+            'This site uses cookies for logins, ads and other normal site function. I accept I reject';
+        expect(isExcludedPopup(text)).to.be.true;
+    });
+
+    it('flags popups headed "Age verification"', () => {
+        expect(isExcludedPopup('Age verification\nYou must confirm your age to continue.')).to.be.true;
+    });
+
+    it('flags "must be 18 or older" disclaimers', () => {
+        expect(isExcludedPopup('You must be 18 years or older to enter this site.')).to.be.true;
+    });
+
+    it('flags "I am 18+" age gates', () => {
+        expect(isExcludedPopup('Confirm your age to continue. I am 18+ I am under 18')).to.be.true;
+    });
+
+    it('flags adult-content disclaimers', () => {
+        expect(isExcludedPopup('This website contains adult oriented material. Please confirm to enter.')).to.be.true;
+        expect(isExcludedPopup('Adult-only website. You must be 21 or older to enter.')).to.be.true;
+        expect(isExcludedPopup('Adult website ahead.')).to.be.true;
+    });
+
+    it('does not flag a normal cookie consent popup', () => {
+        expect(isExcludedPopup('We use cookies to enhance your experience. Accept All Reject All')).to.be.false;
+    });
+
+    it('does not flag empty strings', () => {
+        expect(isExcludedPopup('')).to.be.false;
+    });
 });
 
 describe('cleanButtonText', () => {
@@ -66,69 +277,311 @@ describe('cleanButtonText', () => {
     });
 });
 
-describe('isRejectButton', () => {
+describe('classifyButtonTextRegex', () => {
     it('matches reject patterns', () => {
-        expect(isRejectButton('let us Reject All cookies', [/reject all/gi])).to.be.true;
+        expect(classifyButtonTextRegex('Reject All')).to.equal('reject');
     });
 
     it('does not match never match patterns', () => {
-        expect(isRejectButton('let us Reject All cookies', [/reject all/gi], [/let us/gi])).to.be.false;
+        expect(classifyButtonTextRegex('reject and pay')).to.equal('other');
     });
 
     it('matches "except strictly necessary" qualifier', () => {
         // OneTrust on apnews.com labels the reject button "I Reject All (except Strictly Necessary)"
-        expect(isRejectButton('I Reject All (except Strictly Necessary)')).to.be.true;
-        expect(isRejectButton('Reject All (except Strictly Necessary)')).to.be.true;
-        expect(isRejectButton('Reject All (except Necessary)')).to.be.true;
-        expect(isRejectButton('Deny All (except Strictly Essential)')).to.be.true;
-        expect(isRejectButton('I Reject All except necessary')).to.be.true;
+        expect(classifyButtonTextRegex('I Reject All (except Strictly Necessary)')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject All (except Strictly Necessary)')).to.equal('reject');
+        expect(classifyButtonTextRegex('Reject All (except Necessary)')).to.equal('reject');
     });
 
-    it('returns false for empty string', () => {
-        expect(isRejectButton('')).to.be.false;
+    it('matches "do not accept" variants', () => {
+        expect(classifyButtonTextRegex('I do not accept')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not accept cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('I do not accept the use of cookies')).to.equal('reject');
     });
 
-    it('supports exact strings', () => {
-        expect(isRejectButton('let us reject all', ['let us reject all'])).to.be.true;
+    it('matches CCPA "do not sell/share" variants', () => {
+        expect(classifyButtonTextRegex('Do Not Sell or Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do Not Share My Personal Information')).to.equal('reject');
+        expect(classifyButtonTextRegex('Do not share my data')).to.equal('reject');
     });
 
-    it('does not match substrings in case of exact strings', () => {
-        expect(isRejectButton('let us reject all', ['reject'])).to.be.false;
+    it('matches German continue-without-accepting variants', () => {
+        expect(classifyButtonTextRegex('Ohne Akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ohne zu akzeptieren fortfahren')).to.equal('reject');
+        expect(classifyButtonTextRegex('Weiter ohne Zustimmung')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookies akzeptieren')).to.equal('accept');
+    });
+
+    it('returns other for empty string', () => {
+        expect(classifyButtonTextRegex('')).to.equal('other');
+    });
+
+    it('supports exact string patterns', () => {
+        expect(classifyButtonTextRegex('no')).to.equal('reject');
+    });
+
+    it('classifies essential-only buttons as reject choices', () => {
+        expect(classifyButtonTextRegex('Essential Only')).to.equal('reject');
+        expect(classifyButtonTextRegex('Only use essential cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Only accept necessary cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Essential only cookies')).to.equal('reject');
+    });
+
+    it('does not classify bare essential category labels as reject choices', () => {
+        expect(classifyButtonTextRegex('Essential')).to.equal('other');
+    });
+
+    it('does not match partial exact string patterns', () => {
+        expect(classifyButtonTextRegex('no problem')).to.equal('other');
+    });
+
+    it('matches Russian reject buttons', () => {
+        expect(classifyButtonTextRegex('Отклонить всё')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отклонить все файлы cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отказаться')).to.equal('reject');
+        expect(classifyButtonTextRegex('Только необходимые')).to.equal('reject');
+        expect(classifyButtonTextRegex('Принимать только необходимые файлы cookie')).to.equal('reject');
+        expect(classifyButtonTextRegex('Только необходимые куки')).to.equal('reject');
+        expect(classifyButtonTextRegex('Отклонить куки')).to.equal('reject');
+        expect(classifyButtonTextRegex('Не принимаю')).to.equal('reject');
+    });
+
+    it('matches Japanese reject buttons', () => {
+        expect(classifyButtonTextRegex('拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('全て拒否する')).to.equal('reject');
+        expect(classifyButtonTextRegex('Cookieを拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しない')).to.equal('reject');
+        expect(classifyButtonTextRegex('すべて　拒否')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意しません')).to.equal('reject');
+        expect(classifyButtonTextRegex('同意して続ける')).not.to.equal('reject');
+    });
+
+    it('matches Danish reject buttons', () => {
+        expect(classifyButtonTextRegex('Nej tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nej, tak')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Afvis cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Tillad kun nødvendige cookies')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja tak')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Læs mere om brugen af cookies på sundhed.dk')).not.to.equal('reject');
+    });
+
+    it('matches Norwegian reject buttons', () => {
+        expect(classifyButtonTextRegex('Nei')).to.equal('reject');
+        expect(classifyButtonTextRegex('Nei takk')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avvis alle')).to.equal('reject');
+        expect(classifyButtonTextRegex('Avslå')).to.equal('reject');
+        expect(classifyButtonTextRegex('Godta kun nødvendige')).to.equal('reject');
+        expect(classifyButtonTextRegex('Bare nødvendige informasjonskapsler')).to.equal('reject');
+        expect(classifyButtonTextRegex('Ja')).not.to.equal('reject');
+        expect(classifyButtonTextRegex('Les mer om hvordan vi bruker informasjonskapsler')).not.to.equal('reject');
+    });
+
+    it('matches Russian settings buttons', () => {
+        expect(classifyButtonTextRegex('Настроить')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настройки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настроить файлы cookie')).to.equal('settings');
+        expect(classifyButtonTextRegex('Настройки куки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Параметры конфиденциальности')).to.equal('settings');
+        expect(classifyButtonTextRegex('Мои предпочтения')).to.equal('settings');
+        expect(classifyButtonTextRegex('Управление файлами cookie')).to.equal('settings');
+        expect(classifyButtonTextRegex('Изменить настройки')).to.equal('settings');
+        expect(classifyButtonTextRegex('Подробные настройки')).to.equal('settings');
+    });
+
+    it('does not treat Russian policy links as settings buttons', () => {
+        expect(classifyButtonTextRegex('Подробнее')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Подробнее о файлах cookie')).to.equal('other');
+        expect(classifyButtonTextRegex('Политика конфиденциальности')).to.equal('other');
+    });
+
+    it('matches Russian acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Понятно')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Всё понятно')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Хорошо')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Закрыть')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Закрыть уведомление о cookie')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Больше не показывать')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Продолжить')).to.equal('acknowledge');
+    });
+
+    it('treats Russian confirm and save buttons as acknowledge rather than accept', () => {
+        expect(classifyButtonTextRegex('Подтвердить')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтверждаю')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтверждаю выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Подтвердить мой выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить настройки')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить выбор')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Сохранить и закрыть')).to.equal('acknowledge');
+    });
+
+    it('matches Catalan acknowledge buttons', () => {
+        expect(classifyButtonTextRegex('Entenc')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Ho entenc')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entès!')).to.equal('acknowledge');
+        expect(classifyButtonTextRegex('Entesos')).to.equal('acknowledge');
+    });
+
+    it('matches Catalan necessary-only buttons as reject', () => {
+        expect(classifyButtonTextRegex('Només les necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Acceptar només les galetes necessàries')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només galetes tècniques')).to.equal('reject');
+        expect(classifyButtonTextRegex('Només les essencials')).to.equal('reject');
+        expect(classifyButtonTextRegex('Continuar sense acceptar')).to.equal('reject');
+    });
+
+    it('matches Catalan settings buttons', () => {
+        expect(classifyButtonTextRegex('Configuració')).to.equal('settings');
+        expect(classifyButtonTextRegex('Personalitzar')).to.equal('settings');
+        expect(classifyButtonTextRegex('Preferències')).to.equal('settings');
+        expect(classifyButtonTextRegex('Més opcions')).to.equal('settings');
+        expect(classifyButtonTextRegex('Configuració de galetes')).to.equal('settings');
+        expect(classifyButtonTextRegex('Gestionar les meves preferències')).to.equal('settings');
+        expect(classifyButtonTextRegex('Gestiona les galetes')).to.equal('settings');
+    });
+
+    it('does not treat Catalan save or accept buttons as settings or reject', () => {
+        expect(classifyButtonTextRegex('Desar preferències')).to.not.equal('settings');
+        expect(classifyButtonTextRegex('Acceptar')).to.equal('accept');
+    });
+
+    it('does not treat Russian subscription buttons as reject', () => {
+        expect(classifyButtonTextRegex('Отказаться от подписки')).to.equal('other');
+    });
+
+    it('matches Russian accept buttons', () => {
+        expect(classifyButtonTextRegex('Принять всё')).to.equal('accept');
+        expect(classifyButtonTextRegex('Принять все файлы cookie')).to.equal('accept');
+        expect(classifyButtonTextRegex('Разрешить куки')).to.equal('accept');
+        expect(classifyButtonTextRegex('Принять куки-файлы')).to.equal('accept');
+        expect(classifyButtonTextRegex('Я согласен')).to.equal('accept');
+    });
+
+    it('does not treat revoke links as reject buttons', () => {
+        expect(classifyButtonTextRegex('Widerrufen')).to.equal('other');
+    });
+
+    it('classifies accept-and-close buttons as accept', () => {
+        expect(classifyButtonTextRegex('Akzeptieren & Schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Akzeptieren und schließen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Zustimmen schliessen')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepter fermer')).to.equal('accept');
+        expect(classifyButtonTextRegex('Accepteren sluiten')).to.equal('accept');
+    });
+});
+
+describe('classifyPopup', () => {
+    function classify(texts: string[]) {
+        return classifyPopup(texts.map((text) => ({ text, regexClassification: classifyButtonTextRegex(text) })));
+    }
+
+    it('dismisses a Catalan notice-only banner as tier1', () => {
+        expect(classify(['Entenc'])).to.equal('tier1');
+    });
+
+    it('does not acknowledge a Catalan banner that offers necessary-only or settings', () => {
+        expect(classify(['Entès', 'Només les necessàries'])).to.equal('reject');
+        expect(classify(['Entès', 'Preferències'])).to.equal('none');
+        expect(classify(['Entès', 'Personalitzar'])).to.equal('none');
     });
 });
 
 describe('classifyButtons', () => {
     it('separates reject buttons from other buttons', () => {
-        const buttons = [
+        const buttons: ButtonData[] = [
             { text: 'Accept All', element: document.createElement('button') },
             { text: 'Reject All', element: document.createElement('button') },
             { text: 'Settings', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(1);
-        expect(rejectButtons[0].text).to.equal('Reject All');
-        expect(otherButtons).to.have.length(2);
+        expect(rejectButtons(buttons)).to.have.length(1);
+        expect(rejectButtons(buttons)[0].text).to.equal('Reject All');
+        expect(nonRejectButtons(buttons)).to.have.length(2);
     });
 
-    it('returns empty arrays for empty input', () => {
-        const { rejectButtons, otherButtons } = classifyButtons([]);
+    it('handles empty input', () => {
+        const buttons: ButtonData[] = [];
 
-        expect(rejectButtons).to.have.length(0);
-        expect(otherButtons).to.have.length(0);
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(nonRejectButtons(buttons)).to.have.length(0);
     });
 
     it('handles multiple reject buttons', () => {
-        const buttons = [
+        const buttons: ButtonData[] = [
             { text: 'Reject All', element: document.createElement('button') },
             { text: 'Deny', element: document.createElement('button') },
         ];
 
-        const { rejectButtons, otherButtons } = classifyButtons(buttons);
+        classifyButtons(buttons);
 
-        expect(rejectButtons).to.have.length(2);
-        expect(otherButtons).to.have.length(0);
+        expect(rejectButtons(buttons)).to.have.length(2);
+        expect(nonRejectButtons(buttons)).to.have.length(0);
+    });
+
+    it('sets regexClassification on all buttons', () => {
+        const buttons: ButtonData[] = [
+            { text: 'Accept All', element: document.createElement('button') },
+            { text: 'Reject All', element: document.createElement('button') },
+            { text: 'Settings', element: document.createElement('button') },
+        ];
+
+        classifyButtons(buttons);
+
+        expect(buttons.every((b) => b.regexClassification)).to.be.true;
+    });
+
+    it('classifies accept buttons', () => {
+        const buttons: ButtonData[] = [{ text: 'Accept All', element: document.createElement('button') }];
+
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(1);
+        expect(buttons[0].regexClassification).to.equal('accept');
+    });
+
+    it('classifies acknowledge buttons', () => {
+        const buttons: ButtonData[] = [
+            { text: 'OK', element: document.createElement('button') },
+            { text: 'I understand', element: document.createElement('button') },
+        ];
+
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(2);
+        expect(buttons.every((b) => b.regexClassification === 'acknowledge')).to.be.true;
+    });
+
+    it('classifies settings buttons', () => {
+        const buttons: ButtonData[] = [
+            { text: 'Settings', element: document.createElement('button') },
+            { text: 'Cookie preferences', element: document.createElement('button') },
+        ];
+
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(0);
+        expect(buttons).to.have.length(2);
+        expect(buttons.every((b) => b.regexClassification === 'settings')).to.be.true;
+    });
+
+    it('classifies reject buttons with regexClassification', () => {
+        const buttons: ButtonData[] = [{ text: 'Reject All', element: document.createElement('button') }];
+
+        classifyButtons(buttons);
+
+        expect(rejectButtons(buttons)).to.have.length(1);
+        expect(rejectButtons(buttons)[0].regexClassification).to.equal('reject');
     });
 });
 
@@ -239,6 +692,64 @@ describe('excludeContainers', () => {
 
         expect(result).to.have.length(1);
         expect(result[0]).to.equal(inner);
+    });
+    it('excludes a shadow host that contains another element in its shadow root', () => {
+        const host = document.createElement('div');
+        const inner = document.createElement('button');
+        host.attachShadow({ mode: 'open' }).appendChild(inner);
+
+        const result = excludeContainers([host, inner]);
+
+        expect(result).to.deep.equal([inner]);
+    });
+
+    it('keeps the reversed input order', () => {
+        const parent = document.createElement('div');
+        const a = document.createElement('button');
+        const b = document.createElement('button');
+        const c = document.createElement('button');
+        parent.append(a, b, c);
+
+        expect(excludeContainers([parent, a, b, c])).to.deep.equal([c, b, a]);
+    });
+
+    it('handles thousands of elements quickly', () => {
+        const parent = document.createElement('nav');
+        const links = Array.from({ length: 5000 }, () => parent.appendChild(document.createElement('a')));
+
+        const start = performance.now();
+        const result = excludeContainers([parent, ...links]);
+
+        expect(result).to.have.length(5000);
+        expect(performance.now() - start).to.be.below(200);
+    });
+});
+
+describe('getActionablePopups', () => {
+    let container: HTMLDivElement;
+
+    beforeEach(() => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+    });
+
+    afterEach(() => {
+        container.remove();
+    });
+
+    it('keeps text-bearing popups that contain decorative sticky children', () => {
+        container.innerHTML = `
+            <div style="position: fixed; display: block;">
+                <p>This website uses cookies to enhance your browsing experience.</p>
+                <div style="position: sticky;"></div>
+                <button>Essential Only</button>
+            </div>
+        `;
+
+        const popups = getActionablePopups('tier2');
+
+        expect(popups).to.have.length(1);
+        expect(popups[0].regexClassification).to.equal('reject');
     });
 });
 
