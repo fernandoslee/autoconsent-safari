@@ -12,9 +12,9 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     skipRegions: ['US'],
 });
 
-generateCMPTests('TrustArc-frame', ['https://www.wish.com/', 'https://www.usa.philips.com/'], {
+// in-page preference center (no "Decline" shortcut on the banner)
+generateCMPTests('TrustArc-top', ['https://www.ea.com/games/it-takes-two/it-takes-two', 'https://www.ea.com/'], {
     testOptOut: true,
-    testSelfTest: false,
-    testOptIn: false, // opt-in works, but is triggered by the top frame
-    skipRegions: ['US'],
+    testOptIn: false,
+    onlyRegions: ['CA', 'AU', 'JP'],
 });
