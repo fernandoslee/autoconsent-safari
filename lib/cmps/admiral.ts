@@ -1,7 +1,42 @@
 import AutoConsentCMPBase from './base';
+import { waitFor } from '../utils';
 
 export default class Admiral extends AutoConsentCMPBase {
     name = 'Admiral';
+
+    private readonly consentCardSelector =
+        'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]';
+
+    private getVrmNotice() {
+        return Array.from(document.querySelectorAll<HTMLElement>('body > div')).find((element) => {
+            const text = element.innerText || '';
+            const rect = element.getBoundingClientRect();
+            const style = getComputedStyle(element);
+
+            return (
+                style.position === 'fixed' &&
+                rect.width > 0 &&
+                rect.height > 0 &&
+                text.includes('Your Privacy') &&
+                text.includes('VRM') &&
+                text.includes('Admiral')
+            );
+        });
+    }
+
+    private isVisibleElement(element: HTMLElement) {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+
+        return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+    }
+
+    private getVrmCloseButton() {
+        const notice = this.getVrmNotice();
+        const closeButton = notice?.querySelector<HTMLElement>('button[aria-label="Close"]');
+
+        return closeButton && this.isVisibleElement(closeButton) ? closeButton : null;
+    }
 
     get hasSelfTest(): boolean {
         return false;
@@ -16,14 +51,11 @@ export default class Admiral extends AutoConsentCMPBase {
     }
 
     async detectCmp() {
-        return this.elementExists('div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]');
+        return (await this.elementExists(this.consentCardSelector)) || Boolean(this.getVrmNotice());
     }
 
     async detectPopup() {
-        return this.elementVisible(
-            'div > div[class*=Card] > div[class*=Frame] > div[class*=Pills] > button[class*=Pills__StyledPill]',
-            'any',
-        );
+        return (await this.elementVisible(this.consentCardSelector, 'any')) || Boolean(this.getVrmNotice());
     }
 
     async optOut() {
@@ -31,7 +63,21 @@ export default class Admiral extends AutoConsentCMPBase {
             "xpath///button[contains(., 'Afvis alle') or contains(., 'Reject all') or contains(., 'Odbaci sve') or contains(., 'Rechazar todo') or contains(., 'Atmesti visus') or contains(., 'Odmítnout vše') or contains(., 'Απόρριψη όλων') or contains(., 'Rejeitar tudo') or contains(., 'Tümünü reddet') or contains(., 'Отклонить все') or contains(., 'Noraidīt visu') or contains(., 'Avvisa alla') or contains(., 'Odrzuć wszystkie') or contains(., 'Alles afwijzen') or contains(., 'Отхвърляне на всички') or contains(., 'Rifiuta tutto') or contains(., 'Zavrni vse') or contains(., 'Az összes elutasítása') or contains(., 'Respingeți tot') or contains(., 'Alles ablehnen') or contains(., 'Tout rejeter') or contains(., 'Odmietnuť všetko') or contains(., 'Lükka kõik tagasi') or contains(., 'Hylkää kaikki')]";
 
         if (await this.waitForElement(rejectAllSelector, 500)) {
+            const rejectButton = this.elementSelector(rejectAllSelector)[0] as HTMLButtonElement;
+            if (rejectButton.disabled) {
+                // some configurations keep the buttons disabled until the card text is scrolled to the bottom
+                const cardBody = rejectButton.closest('div[class*=CardHeader]')?.parentElement?.querySelector('div[class*=CardBody]');
+                if (cardBody) {
+                    cardBody.scrollTop = cardBody.scrollHeight;
+                }
+                await waitFor(() => !rejectButton.disabled, 10, 200);
+            }
             return await this.click(rejectAllSelector);
+        }
+
+        const vrmCloseButton = this.getVrmCloseButton();
+        if (vrmCloseButton) {
+            return await this.clickElement(vrmCloseButton);
         }
 
         const purposesButtonSelector =
