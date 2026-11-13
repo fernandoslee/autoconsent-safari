@@ -4,7 +4,6 @@ generateCMPTests(
     'didomi',
     [
         'https://nothing.tech/',
-        'https://www.planet.fr/',
         'http://www.allocine.fr/',
         'https://www.boursorama.com/',
         'https://www.theoriginalshotels.com/en/hotels/la-villa-vicha',
@@ -15,7 +14,7 @@ generateCMPTests(
         // Self-test is disabled because some sites (e.g. planet.fr) navigate away
         // after clicking the disagree button, which destroys the Didomi state.
         testSelfTest: false,
-        skipRegions: ['US'],
+        onlyRegions: ['US', 'FR'],
     },
 );
 
@@ -26,4 +25,21 @@ generateCMPTests('didomi', ['https://newrepublic.com/article/162247/andreas-malm
     testOptIn: false,
     testSelfTest: true,
     onlyRegions: ['US'],
+});
+
+// Publisher wrapper (#acceptationCMPWall) that only unlocks the page on Didomi UI click events,
+// so the rule rejects via the preferences screen instead of the JS API.
+generateCMPTests('didomi', ['https://en.as.com/', 'https://cadenaser.com/'], {
+    testOptIn: true,
+    testSelfTest: true,
+    onlyRegions: ['US'],
+});
+
+// "Consent or pay" notices where the disagree button is a paid or subscription option: the rule must leave them to the user.
+generateCMPTests('didomi', ['https://www.elconfidencial.com/', 'https://www.20minutes.fr/', 'https://www.publico.es/'], {
+    expectPopupOpen: false,
+    testOptIn: false,
+    testOptOut: false,
+    testSelfTest: false,
+    onlyRegions: ['FR'],
 });
