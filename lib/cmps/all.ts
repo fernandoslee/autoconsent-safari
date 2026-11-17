@@ -1,5 +1,4 @@
 import TrustArcTop from './trustarc-top';
-import TrustArcFrame from './trustarc-frame';
 import CookieBot from './cookiebot';
 import SourcePointFrame from './sourcepoint-frame';
 import ConsentManager from './consentmanager';
@@ -9,12 +8,10 @@ import Klaro from './klaro';
 import Uniconsent from './uniconsent';
 import Conversant from './conversant';
 import Tiktok from './tiktok';
-import Tumblr from './tumblr-com';
 import Admiral from './admiral';
 
 export const dynamicCMPs = [
     TrustArcTop,
-    TrustArcFrame,
     CookieBot,
     SourcePointFrame,
     ConsentManager,
@@ -24,6 +21,5 @@ export const dynamicCMPs = [
     Uniconsent,
     Conversant,
     Tiktok,
-    Tumblr,
     Admiral,
 ];
