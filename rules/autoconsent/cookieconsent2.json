@@ -2,15 +2,15 @@
     "name": "cookieconsent2",
     "vendorUrl": "https://www.github.com/orestbida/cookieconsent",
     "comment": "supports v2.x.x of the library",
-    "prehideSelectors": ["#cc--main"],
+    "prehideSelectors": ["#cc--main", "#cc_div:has(#s-cnt)"],
     "detectCmp": [
         {
-            "exists": "#cc--main"
+            "exists": "#cc--main, #cc_div #s-cnt"
         }
     ],
     "detectPopup": [
         {
-            "exists": "html.show--consent #cm"
+            "exists": "html.show--consent #cm, html.show--settings #s-cnt"
         },
         {
             "exists": "#s-all-bn"
@@ -25,7 +25,12 @@
         {
             "if": { "exists": "#s-rall-bn" },
             "then": [{ "waitForThenClick": "#s-rall-bn" }],
-            "else": [{ "waitForThenClick": "#c-s-bn" }, { "wait": 500 }, { "waitForThenClick": "#s-sv-bn" }]
+            "else": [
+                { "waitForThenClick": "#c-s-bn" },
+                { "wait": 500 },
+                { "click": "#s-bl input.c-tgl:checked:not(:disabled)", "all": true, "optional": true },
+                { "waitForThenClick": "#s-sv-bn" }
+            ]
         }
     ],
     "test": [
