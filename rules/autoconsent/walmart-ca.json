@@ -1,0 +1,55 @@
+{
+    "name": "walmart-ca",
+    "vendorUrl": "https://www.walmart.ca/",
+    "cosmetic": false,
+    "runContext": {
+        "urlPattern": "^https?://(www\\.)?walmart\\.ca/"
+    },
+    "prehideSelectors": [],
+    "detectCmp": [
+        {
+            "exists": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]"
+        },
+        {
+            "waitForThenClick": "button[aria-label=\"acceptAll button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "button[data-dca-intent=\"open\"][role=\"link\"]",
+            "retry": 10,
+            "retryInterval": 1000
+        },
+        {
+            "waitFor": "#advertisingCookies"
+        },
+        {
+            "click": "#personalizationCookies:checked, #advertisingCookies:checked",
+            "all": true,
+            "optional": true
+        },
+        {
+            "waitForThenClick": "xpath///button[contains(., 'Save settings') or contains(., 'Enregistrer les paramètres')]"
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": "a[href=\"https://www.walmartcanada.ca/cookie-notice\"]",
+            "check": "none",
+            "timeout": 5000
+        },
+        {
+            "cookieContains": "&p13n=false&ads=false&"
+        }
+    ]
+}
