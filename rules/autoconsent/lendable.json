@@ -1,0 +1,53 @@
+{
+    "name": "lendable",
+    "runContext": {
+        "urlPattern": "^https?://([\\w-]+\\.)?lendable\\.co\\.uk/"
+    },
+    "prehideSelectors": ["section[aria-label=\"Cookie banner\"]"],
+    "detectCmp": [
+        {
+            "exists": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": "section[aria-label=\"Cookie banner\"]"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": "section[aria-label=\"Cookie banner\"] button[type=\"button\"]"
+        }
+    ],
+    "optOut": [
+        {
+            "waitForThenClick": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]",
+            "comment": "Manage cookies"
+        },
+        {
+            "any": [
+                {
+                    "waitForVisible": "[role=\"dialog\"] button[class*=\"_secondary_\"]",
+                    "timeout": 2000
+                },
+                {
+                    "click": "section[aria-label=\"Cookie banner\"] button[aria-haspopup=\"dialog\"]"
+                }
+            ],
+            "comment": "the first click can land before the handler is attached"
+        },
+        {
+            "waitForThenClick": "[role=\"dialog\"] button[class*=\"_secondary_\"]",
+            "comment": "Reject all"
+        },
+        {
+            "waitForVisible": "section[aria-label=\"Cookie banner\"]",
+            "check": "none"
+        }
+    ],
+    "test": [
+        {
+            "cookieContains": "%22marketing%22%3Afalse"
+        }
+    ]
+}

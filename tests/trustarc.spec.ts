@@ -12,9 +12,22 @@ generateCMPTests('TrustArc-top', ['https://www.garmin.com/de-DE/'], {
     skipRegions: ['US'],
 });
 
-generateCMPTests('TrustArc-frame', ['https://www.wish.com/', 'https://www.usa.philips.com/'], {
+// in-page preference center (no "Decline" shortcut on the banner)
+generateCMPTests('TrustArc-top', ['https://www.ea.com/games/it-takes-two/it-takes-two', 'https://www.ea.com/'], {
+    testOptOut: true,
+    testOptIn: false,
+    onlyRegions: ['CA', 'AU', 'JP'],
+});
+
+// Magento store with a hidden built-in cookie notice next to TrustArc
+generateCMPTests('TrustArc-top', ['https://shop.royalmail.com/garden-wildlife-stamp-set'], {
     testOptOut: true,
     testSelfTest: false,
-    testOptIn: false, // opt-in works, but is triggered by the top frame
-    skipRegions: ['US'],
+});
+
+// banner with a hidden, unwired "Reject All" shortcut (implied-consent regions)
+generateCMPTests('TrustArc-top', ['https://us.store.bambulab.com/'], {
+    testOptOut: true,
+    testSelfTest: false,
+    onlyRegions: ['US'],
 });
