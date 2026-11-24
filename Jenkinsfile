@@ -15,6 +15,30 @@ def runPlaywrightTests(resultDir, browser, testFiles) {
     }
 }
 
+// Rerun the tests that the local pass listed as blocked by a bot wall, one Oxylabs session at a time.
+def runOxylabsTests(candidatesFile, testFiles) {
+    def junitFile = "results-${env.REGION}-oxylabs.xml"
+    try {
+        // Playwright's --global-timeout ends the run first, so it still writes the JUnit XML
+        timeout(60) {
+            def testFilesArg = testFiles.join(' ')
+            withCredentials([usernamePassword(credentialsId: 'autoconsent-oxylabs', usernameVariable: 'OXYLABS_USER', passwordVariable: 'OXYLABS_PASSWORD')]) {
+                sh """
+                    OXYLABS=1 OXYLABS_CANDIDATES=${candidatesFile} PLAYWRIGHT_JUNIT_OUTPUT_NAME=${junitFile} npx playwright test ${testFilesArg} --project chrome --workers 1 --retries 1 --global-timeout 3300000 --reporter=junit,line || true
+                """
+            }
+        }
+    } catch (e) {
+        // e.g. missing credentials: keep the local results instead of failing the build
+        echo "Oxylabs pass failed: ${e}"
+    } finally {
+        def summary = junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, allowEmptyResults: true, testResults: junitFile
+        archiveArtifacts artifacts: "test-results/screenshots/oxylabs/**/*.jpg", fingerprint: true, allowEmptyArchive: true
+        archiveArtifacts artifacts: junitFile, fingerprint: true, allowEmptyArchive: true
+        return summary
+    }
+}
+
 def withEnvFile(envfile, Closure cb) {
     def props = readProperties(file: envfile)
     withEnv(props.collect{ entry -> "${entry.key}=${entry.value}" }) {
@@ -22,9 +46,10 @@ def withEnvFile(envfile, Closure cb) {
     }
 }
 
+// Diff against the merge base, so files merged to the target branch after Jenkins built the PR merge commit do not count as modified.
 def getModifiedFiles() {
     if (env.CHANGE_ID) {
-        def changedFiles = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET} HEAD", returnStdout: true).trim()
+        def changedFiles = sh(script: "git diff --name-only origin/${env.CHANGE_TARGET}...HEAD", returnStdout: true).trim()
         return changedFiles.split("\n")
     } else {
         return []
@@ -44,16 +69,11 @@ def getTestsToRun(modifiedFiles) {
 }
 
 pipeline {
-    agent { label 'autoconsent-crawler' }
+    agent { label 'autoconsent-crawler-noble' }
     parameters {
         string(name: 'TEST_RESULT_ROOT', defaultValue: '/mnt/efs/users/smacbeth/autoconsent/ci', description: 'Where test results and configuration are stored')
         choice(name: 'BROWSER', choices: ['chrome', 'webkit', 'iphoneSE', 'firefox'], description: 'Browser')
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch or PR to checkout (e.g. pr/123)')
-    }
-    environment {
-        NODENV_VERSION = "20.12.1"
-        NODENV_ROOT = "/opt/nodeenv"
-        PATH = "/opt/nodenv/shims:/opt/nodenv/bin:$PATH"
     }
     stages {
         stage('Checkout') {
@@ -67,6 +87,16 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]],
                     extensions: [[$class: 'LocalBranch']],
                     userRemoteConfigs: [[refspec: "+refs/pull/*/head:refs/remotes/origin/pr/*", credentialsId: 'autoconsent-rw', url: 'https://github.com/duckduckgo/autoconsent.git']]])
+            }
+        }
+
+        stage('Prepare Node') {
+            steps {
+                sh "fnm install"
+                script {
+                    def nodeBin = sh(returnStdout: true, script: "fnm exec -- node -e 'console.log(require(\"path\").dirname(process.execPath))'").trim()
+                    env.PATH = "${nodeBin}:${env.PATH}"
+                }
             }
         }
 
@@ -101,22 +131,27 @@ pipeline {
                     if (testsToRun.isEmpty()) {
                         echo "No tests to run for this change"
                     } else {
-                        def testEnvs = [
-                            "${params.TEST_RESULT_ROOT}/us.env",
-                            "${params.TEST_RESULT_ROOT}/gb.env",
-                            "${params.TEST_RESULT_ROOT}/au.env",
-                            "${params.TEST_RESULT_ROOT}/ca.env",
-                            "${params.TEST_RESULT_ROOT}/de.env",
-                            "${params.TEST_RESULT_ROOT}/fr.env",
-                            "${params.TEST_RESULT_ROOT}/nl.env",
-                            "${params.TEST_RESULT_ROOT}/ch.env",
-                            "${params.TEST_RESULT_ROOT}/no.env"
-                        ]
-                        for (testEnv in testEnvs) {
-                            withEnvFile(testEnv) {
-                                def summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
-                                testsFailed += summary.failCount
-                                testsTotal += summary.totalCount
+                        def regions = ['us', 'gb', 'au', 'ca', 'de', 'fr', 'nl', 'ch', 'no']
+                        // Skip optIn tests, and run each spec in at most 3 of these regions, seeded by the PR number (see playwright/runner.ts)
+                        def ciEnv = ["SKIP_OPT_IN=1", "CI_REGIONS=${regions.join(',').toUpperCase()}", "CI_SEED=${env.CHANGE_ID ?: env.BUILD_NUMBER}"]
+                        withEnv(ciEnv) {
+                            for (region in regions) {
+                                withEnvFile("${params.TEST_RESULT_ROOT}/${region}.env") {
+                                    def candidatesFile = "${env.WORKSPACE}/oxylabs-candidates-${env.REGION}.txt"
+                                    sh "rm -f '${candidatesFile}'"
+                                    def summary
+                                    withEnv(["OXYLABS_CANDIDATES=${candidatesFile}"]) {
+                                        summary = runPlaywrightTests(params.TEST_RESULT_ROOT, params.BROWSER, testsToRun)
+                                    }
+                                    testsFailed += summary.failCount
+                                    testsTotal += summary.totalCount
+                                    // Oxylabs browsers are Chromium only
+                                    if (params.BROWSER == 'chrome' && fileExists(candidatesFile)) {
+                                        def oxylabsSummary = runOxylabsTests(candidatesFile, testsToRun)
+                                        // a test that passes on Oxylabs no longer counts as failed
+                                        testsFailed -= oxylabsSummary.passCount
+                                    }
+                                }
                             }
                         }
                     }
@@ -137,8 +172,9 @@ pipeline {
                         }
                     }
 
-                    // Apply the status to the previous commit: We're assuming that there was a merge commit when Jenkins picked up the PR.
-                    def prCommitSha = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
+                    // Apply the status to the PR head commit. Jenkins merges the target branch into the PR head, so HEAD^1 is the PR head
+                    // when that made a merge commit. When the PR is already up to date with the target branch, there is no merge and HEAD is the PR head.
+                    def prCommitSha = sh(script: "if git rev-parse -q --verify HEAD^2 >/dev/null; then git rev-parse HEAD^1; else git rev-parse HEAD; fi", returnStdout: true).trim()
                     githubNotify(
                         account: 'duckduckgo',
                         repo: 'autoconsent',
