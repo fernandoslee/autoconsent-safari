@@ -1,0 +1,27 @@
+{
+    "cmp": "shopware5",
+    "tests": [
+        {
+            "sites": ["https://battlemerchant.com/", "https://koesener.de/", "https://esmog-shop.com/", "https://ebike-solutions.com/"]
+        },
+        {
+            "note": "Decline button hidden by the theme; saving the consent manager reloads the page before the self-test runs",
+            "sites": ["https://sportfits.de/", "https://zazo.de/", "https://outdoor-renner.de/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Banner without a decline button, rejected through the consent manager, which stays open after saving",
+            "sites": ["https://art-worx.de/"]
+        },
+        {
+            "note": "Banner without a decline button; saving the consent manager reloads the page before the self-test runs",
+            "sites": ["https://beamer24.de/", "https://sanbo.de/"],
+            "options": { "testSelfTest": false }
+        },
+        {
+            "note": "Theme shows the banner without a decline button in a modal (.js--modal.cookiePermissions); saving the consent manager reloads the page before the self-test runs",
+            "sites": ["https://www.autoland.de/"],
+            "options": { "testSelfTest": false }
+        }
+    ]
+}

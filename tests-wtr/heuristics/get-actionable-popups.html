@@ -92,5 +92,65 @@
             <button>Accept All</button>
             <button>Reject All</button>
         </dialog>
+
+        <div id="popup-accept-only" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+        </div>
+
+        <div id="popup-accept-with-empty-fixed-child" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Accept All</button>
+            <div style="position: fixed"></div>
+        </div>
+
+        <div id="popup-with-contentful-fixed-child" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Reject All</button>
+            <div id="contentful-fixed-child" style="position: fixed">
+                <p>We use cookies to improve your experience.</p>
+                <button>Accept All</button>
+            </div>
+        </div>
+
+        <div id="popup-acknowledge-only" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>OK</button>
+        </div>
+
+        <div id="popup-multiple-reject" class="popup">
+            <p>We use cookies to improve your experience.</p>
+            <button>Reject All</button>
+            <button>Deny</button>
+        </div>
+
+        <div id="popup-age-gate" class="popup" role="dialog">
+            <h2>Age verification &amp; content rules</h2>
+            <p>
+                This section may contain adult oriented material of a graphic and sexual nature. This material is INTENDED ONLY FOR PERSONS
+                OVER 18 YEARS OF AGE. This site uses cookies for logins, ads and other normal site function.
+            </p>
+            <button>I accept</button>
+            <button>I reject</button>
+        </div>
+
+        <div id="popup-turkish-reject" class="popup">
+            <p>Sitemizin işleyişi için zorunlu çerezler kullanmaktayız. Detaylı bilgi için Çerez Politikamızı inceleyebilirsiniz.</p>
+            <button>Reddet</button>
+            <button>Ayarlar</button>
+            <button>Kabul et</button>
+        </div>
+
+        <div id="popup-turkish-settings" class="popup">
+            <p>Size daha iyi bir deneyim sunmak için çerezler kullanıyoruz.</p>
+            <button>Kabul Et</button>
+            <button>Çerez Ayarları</button>
+        </div>
+
+        <div id="popup-turkish-snack" class="popup">
+            <p>Kuruyemiş ve çerez çeşitlerinde bu hafta %20 indirim var. Kuponu sepette kullanabilirsiniz.</p>
+            <button>Reddet</button>
+            <button>Kuponu al</button>
+        </div>
     </body>
 </html>
