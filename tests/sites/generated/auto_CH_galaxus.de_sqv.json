@@ -1,0 +1,13 @@
+{
+    "cmp": "auto_CH_galaxus.de_sqv",
+    "tests": [
+        {
+            "sites": ["https://www.galaxus.de/", "https://www.galaxus.fr/"],
+            "options": {
+                "testOptIn": false,
+                "testSelfTest": true,
+                "onlyRegions": ["CH"]
+            }
+        }
+    ]
+}

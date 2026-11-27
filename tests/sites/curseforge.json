@@ -1,0 +1,8 @@
+{
+    "cmp": "curseforge",
+    "tests": [
+        {
+            "sites": ["https://www.curseforge.com/", "https://support.curseforge.com/"]
+        }
+    ]
+}

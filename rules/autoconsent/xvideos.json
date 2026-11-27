@@ -1,13 +1,10 @@
 {
     "name": "xvideos",
     "vendorUrl": "https://xvideos.com",
-    "runContext": {
-        "urlPattern": "^https://[a-z]*\\.xvideos\\.com/"
-    },
     "prehideSelectors": [],
     "detectCmp": [
         {
-            "exists": ".disclaimer-opened #disclaimer-cookies"
+            "exists": ".disclaimer-opened #disclaimer-reject_cookies"
         }
     ],
     "detectPopup": [
