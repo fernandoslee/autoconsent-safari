@@ -1,7 +1,12 @@
 import { ElementSelector, HideMethod, VisibilityCheck } from './rules';
 import { DomActionsProvider } from './types';
-import { getStyleElement, hideElements, isElementVisible, waitFor } from './utils';
+import { getStyleElement, hideElements, appendStylesheetRule, isElementVisible, waitFor } from './utils';
 import AutoConsent from './web';
+
+// Default for the `retryInterval` option of `waitForThenClick`.
+export const DEFAULT_CLICK_RETRY_INTERVAL = 300;
+// How often we check if the element is gone while waiting out a `retryInterval`.
+const CLICK_RETRY_POLL_INTERVAL = 50;
 
 export class DomActions implements DomActionsProvider {
     constructor(public autoconsentInstance: AutoConsent) {}
@@ -21,7 +26,11 @@ export class DomActions implements DomActionsProvider {
 
         if (elements.length > 0) {
             if (all) {
-                elements.forEach((e) => e.click());
+                for (const e of elements) {
+                    e.click();
+                    // Let the page handle each click first: back-to-back clicks can overwrite each other's state updates.
+                    await new Promise((resolve) => setTimeout(resolve, 0));
+                }
             } else {
                 elements[0].click();
             }
@@ -66,9 +75,28 @@ export class DomActions implements DomActionsProvider {
         return waitFor(() => this.elementVisible(selector, check), times, interval);
     }
 
-    async waitForThenClick(selector: ElementSelector, timeout = 10000, all = false): Promise<boolean> {
+    async waitForThenClick(
+        selector: ElementSelector,
+        timeout = 10000,
+        all = false,
+        retries = 0,
+        retryInterval = DEFAULT_CLICK_RETRY_INTERVAL,
+    ): Promise<boolean> {
         await this.waitForElement(selector, timeout);
-        return await this.click(selector, all);
+        let clicked = await this.click(selector, all);
+        // Some CMPs insert the button before its click handler is attached, so the first click is
+        // silently dropped. There is usually no DOM signal for this, but a click that was handled
+        // makes the element go away: if it is still visible, we assume the click was lost and repeat it.
+        for (let attempt = 0; clicked && attempt < retries; attempt++) {
+            const pollTimes = Math.ceil(retryInterval / CLICK_RETRY_POLL_INTERVAL);
+            const isGone = await waitFor(() => !this.elementVisible(selector, 'any'), pollTimes, CLICK_RETRY_POLL_INTERVAL);
+            if (isGone) {
+                break;
+            }
+            this.autoconsentInstance.config.logs.rulesteps && console.log('[waitForThenClick] retrying click', selector);
+            clicked = await this.click(selector, all);
+        }
+        return clicked;
     }
 
     wait(ms: number): Promise<true> {
@@ -89,6 +117,12 @@ export class DomActions implements DomActionsProvider {
         this.autoconsentInstance.config.logs.rulesteps && console.log('[hide]', selector);
         const styleEl = getStyleElement();
         return hideElements(styleEl, selector, method);
+    }
+
+    stylesheet(cssRule: string, stylesheetId?: string): boolean {
+        this.autoconsentInstance.config.logs.rulesteps && console.log('[stylesheet]', cssRule, stylesheetId);
+        const styleEl = getStyleElement();
+        return appendStylesheetRule(styleEl, cssRule, stylesheetId);
     }
 
     removeClass(selector: ElementSelector, className: string): boolean {
@@ -148,7 +182,7 @@ export class DomActions implements DomActionsProvider {
         if (selector.startsWith('xpath/')) {
             const xpath = selector.slice(6);
             const result = document.evaluate(xpath, parent, null, XPathResult.ANY_TYPE, null);
-            let node: Node | null = null;
+            let node: Node | null;
             const elements: HTMLElement[] = [];
             while ((node = result.iterateNext())) {
                 elements.push(node as HTMLElement);

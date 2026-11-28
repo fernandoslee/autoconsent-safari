@@ -1,0 +1,23 @@
+{
+    "cmp": "cookies-info",
+    "tests": [
+        {
+            "note": "mobile Alza sites",
+            "sites": ["https://m.alza.sk/", "https://m.alza.cz/"],
+            "options": {
+                "mobile": true
+            }
+        },
+        {
+            "sites": [
+                "https://www.alza.cz/",
+                "https://www.alza.sk/",
+                "https://www.alza.hu/",
+                "https://www.peddy.cz/",
+                "https://www.narex.cz/",
+                "https://www.makita-eshop.cz/",
+                "https://www.alza.de/"
+            ]
+        }
+    ]
+}

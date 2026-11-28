@@ -1,0 +1,55 @@
+{
+    "name": "vendic-cookiebar",
+    "cosmetic": false,
+    "prehideSelectors": ["#cookie-bar-modal[x-data^=\"initCookieBar\"]", ".cookie-bar-wrapper:has(.allow-only-functional-cookie)"],
+    "detectCmp": [
+        {
+            "exists": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) .allow-only-functional-cookie, [x-data^=\"initCookieBar\"] #cookie-bar-customize"
+        }
+    ],
+    "detectPopup": [
+        {
+            "visible": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper.active) .allow-only-functional-cookie, [x-data^=\"initCookieBar\"] #cookie-bar-customize"
+        }
+    ],
+    "optIn": [
+        {
+            "waitForThenClick": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) :is(#cookie-bar-button, .allow-all-cookies-button)"
+        }
+    ],
+    "optOut": [
+        {
+            "if": {
+                "exists": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) .allow-only-functional-cookie"
+            },
+            "then": [
+                {
+                    "waitForThenClick": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper) .allow-only-functional-cookie"
+                }
+            ],
+            "else": [
+                {
+                    "waitForThenClick": "[x-data^=\"initCookieBar\"] #cookie-bar-customize"
+                },
+                {
+                    "waitForVisible": "[x-data^=\"initCookieBar\"] #cookie-allow-selection"
+                },
+                {
+                    "click": "[x-data^=\"initCookieBar\"] input[data-cookie-code]:checked:not(:disabled)",
+                    "all": true,
+                    "optional": true
+                },
+                {
+                    "waitForThenClick": "[x-data^=\"initCookieBar\"] #cookie-allow-selection"
+                }
+            ]
+        }
+    ],
+    "test": [
+        {
+            "waitForVisible": ":is([x-data^=\"initCookieBar\"], .cookie-bar-wrapper.active) .allow-only-functional-cookie, [x-data^=\"initCookieBar\"] :is(#cookie-bar-customize, #cookie-allow-selection)",
+            "check": "none",
+            "timeout": 3000
+        }
+    ]
+}
